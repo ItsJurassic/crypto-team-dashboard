@@ -10,16 +10,16 @@
  "trial_days": 30,
  "prices": {
   "BTC": {
-   "price": 80974,
-   "chg24": 0.52727
+   "price": 81236,
+   "chg24": 0.83626
   },
   "ETH": {
-   "price": 2353.38,
-   "chg24": 0.4947
+   "price": 2361.58,
+   "chg24": 0.88491
   }
  },
- "prices_as_of": "2:00 PM CT",
+ "prices_as_of": "2:35 PM CT",
  "last_trade": "No trades yet",
- "updated": "Oct 28, 2026, 2:02 PM CT",
+ "updated": "Oct 28, 2026, 2:38 PM CT",
  "url": "https://itsjurassic.github.io/crypto-team-dashboard/"
 }
