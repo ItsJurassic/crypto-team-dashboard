@@ -70,6 +70,24 @@ score = {"start_balance": 2000, "start": "2026-10-28", "end": "2026-11-27",
          "synced": datetime.datetime.now().astimezone().strftime("%b %-d, %Y, %-I:%M %p CT")}
 for name, obj in [("status", status), ("trades", trades), ("lessons", lessons), ("playbook", pb), ("scorecard", score), ("watchlist", watch)]:
     json.dump(obj, open(f"{out}/{name}.json", "w"), indent=1, ensure_ascii=False)
+# Widget summary (real data only)
+cg = load(f"{dash}/cg.json", [])
+px = {c["symbol"].upper(): {"price": c.get("current_price"), "chg24": c.get("price_change_percentage_24h")} for c in cg if isinstance(c, dict) and c.get("symbol") in ("btc", "eth")}
+colors = {"Watching": "#3b82f6", "Getting ready": "#f59e0b", "Buying": "#22c55e", "Selling": "#ef4444"}
+today = datetime.date.today(); d0 = datetime.date(2026, 10, 28)
+bal = round(2000 + score["pnl"], 2)
+lt = trades[-1] if trades else None
+last = None
+if lt:
+    last = " ".join(str(x) for x in [lt.get("side", "").upper(), lt.get("coin") or lt.get("symbol", ""), ("@ $" + str(lt["price"])) if lt.get("price") else "", lt.get("time", "")[:10]] if x)
+cgt = datetime.datetime.fromtimestamp(os.path.getmtime(f"{dash}/cg.json")).astimezone().strftime("%-I:%M %p CT") if os.path.exists(f"{dash}/cg.json") else None
+widget = {"state": status.get("state", "Unknown"), "color": colors.get(status.get("state"), "#9ca3af"),
+          "coin": status.get("coin", ""), "reason": status.get("reason", ""),
+          "balance": bal, "pnl": score["pnl"], "pnl_pct": round(score["pnl"] / 20, 2),
+          "trial_day": max(1, min(30, (today - d0).days + 1)), "trial_days": 30,
+          "prices": px, "prices_as_of": cgt, "last_trade": last or "No trades yet",
+          "updated": score["synced"], "url": "https://itsjurassic.github.io/crypto-team-dashboard/"}
+json.dump(widget, open(f"{out}/widget.json", "w"), indent=1, ensure_ascii=False)
 print("synced:", {k: (len(v) if isinstance(v, list) else "ok") for k, v in [("trades", trades), ("lessons", lessons), ("playbook", pb)]})
 PY
 [ "${1:-}" = "--no-push" ] && exit 0

@@ -1,0 +1,25 @@
+{
+ "state": "Watching",
+ "color": "#3b82f6",
+ "coin": "",
+ "reason": "All cash ($2,000). No trade yet; first scheduled check runs around noon CT.",
+ "balance": 2000,
+ "pnl": 0,
+ "pnl_pct": 0.0,
+ "trial_day": 1,
+ "trial_days": 30,
+ "prices": {
+  "BTC": {
+   "price": 80535,
+   "chg24": 0.43243
+  },
+  "ETH": {
+   "price": 2331.75,
+   "chg24": 0.14449
+  }
+ },
+ "prices_as_of": "9:53 AM CT",
+ "last_trade": "No trades yet",
+ "updated": "Oct 28, 2026, 10:28 AM CT",
+ "url": "https://itsjurassic.github.io/crypto-team-dashboard/"
+}
