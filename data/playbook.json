@@ -8,5 +8,6 @@
  "G7 Daily loss limit: stop opening trades after -3% equity in a day; weekly -6% -> pause and review.",
  "G8 Never widen a stop; only move it in the direction of the trade.",
  "G9 No leverage, no shorting in v1.",
- "G10 Journal every trade: strategy ID, timestamp, entry, stop, target, size, reason, fees, exit, R-multiple."
+ "G10 Journal every trade: strategy ID, timestamp, entry, stop, target, size, reason, fees, exit, R-multiple.",
+ "G11 Slippage events (checkable): a stop is a trigger, not a guaranteed price. Any exit filled more than 0.5R worse than the planned stop is logged as a \"slippage event\" with the candle's low. The G3 25% position cap is the hard limit on a single-trade loss; never lift it because a stop is in place. (Evidence: GDAX ETH flash crash to $0.10 on 2017-06-21; see 2026-10-28-s1-trend-backtest-eth-2017-2018.md.)"
 ]
