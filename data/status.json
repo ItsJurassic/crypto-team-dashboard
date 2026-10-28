@@ -1,6 +1,6 @@
 {
  "state": "Watching",
  "coin": "",
- "reason": "All cash ($2,000). 10:49 AM CT check: no playbook entry signal (S1 trend, S2 breakout, S3 pullback) on any top-20 coin. ETH and SOL are near their lower Bollinger Band above the 200-day average, so an S3 setup could form on a daily close below the band.",
- "updated": "Oct 28, 2026, 10:50 AM CT"
+ "reason": "No signal. Closest: ZEC S1 needs close >$1,316 (+0.7%); ETH/SOL S3 need RSI<30 or close below lower band; BCH S1 50d SMA 2.3% under 200d.",
+ "updated": "Oct 28, 2026, 11:18 AM CT"
 }
