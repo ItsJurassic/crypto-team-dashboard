@@ -27,3 +27,7 @@ ol{padding-left:20px;margin:0}li{margin:6px 0}
 .tabbar{position:fixed;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(11,18,32,.96);border-top:1px solid var(--line);padding-bottom:var(--safe-b);z-index:10}
 .tabbar button{min-height:56px;background:none;border:0;color:var(--mu);font-size:13px}.tabbar button.on{color:#4ea1ff;font-weight:600}
 @media(min-width:700px){.metrics{grid-template-columns:repeat(4,1fr)}.chart{height:420px}}
+
+.grid{border-collapse:separate;border-spacing:3px;font-size:11px}.grid th{font-weight:500;color:#93a0b8;padding:0}.grid td{padding:0}.grid td:first-child{padding-right:6px;color:#93a0b8;text-align:left}
+.cell{display:block;width:18px;height:18px;border-radius:5px;background:#1c2740;border:0;padding:0}.cell.on{background:#8cc4ff;cursor:pointer;width:22px;height:22px}
+.lesson img{width:100%;height:auto;border-radius:10px}.flash{outline:2px solid #4ea1ff;border-radius:10px}.tag{font-size:11px;background:#22304a;padding:2px 6px;border-radius:6px}

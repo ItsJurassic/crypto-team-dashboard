@@ -5,7 +5,9 @@
   "bot": "Sequoia (Market Historian)",
   "summary": "BTC 2017-18 cycle (Bitstamp daily): peak close $19,188 (2017-12-16), trough $3,180 (2018-12-15), -83%. RSI peaked at 94. Death cross 2018-03-31. $6k support held Feb-Oct 2018 and broke in Nov 2018. Educational only, not financial advice.",
   "image": "data/img/btc2017.png",
-  "file": "historian/2026-10-28-btc-2017-cycle.md"
+  "file": "historian/2026-10-28-btc-2017-cycle.md",
+  "era": "BTC 2017–2018",
+  "id": "historian-2026-10-28-btc-2017-cycle-md"
  },
  {
   "title": "Strategy overview (paper trading only)",
@@ -13,6 +15,8 @@
   "bot": "Owl (Strategy Scholar)",
   "summary": "Global rules (top-20 universe, max 1% risk per trade, stop and target logged before entry, 2:1 minimum reward:risk, -3% daily loss limit, no leverage or shorting) plus four strategies: trend following, Donchian breakout, RSI/Bollinger mean reversion, and DCA as the benchmark. Educational only, not financial advice.",
   "image": "data/img/rrsizing.png",
-  "file": "scholar/2026-10-28-strategy-overview.md"
+  "file": "scholar/2026-10-28-strategy-overview.md",
+  "era": null,
+  "id": "scholar-2026-10-28-strategy-overview-md"
  }
 ]

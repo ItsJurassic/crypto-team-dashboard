@@ -25,7 +25,35 @@ for l in lessons:
     src = imgmap.get(k) if k else None
     if src and os.path.exists(src):
         ext = os.path.splitext(src)[1]; shutil.copy(src, f"{out}/img/{k}{ext}"); l["image"] = f"data/img/{k}{ext}"
-    else: l["image"] = None
+    elif not (k and os.path.isabs(str(k))): l["image"] = None
+# Auto-discover lesson .md files (with matching .png) from Sequoia and Owl
+known = {l.get("file") for l in lessons}
+eras = {}
+idx = f"{learn}/historian/index.md"
+if os.path.exists(idx):
+    for row in open(idx):
+        m = re.match(r"\|\s*\d{4}-\d\d-\d\d\s*\|\s*\[[^\]]*\]\(([^)]+\.md)\)\s*\|[^|]*\|\s*([^|]+)\|", row)
+        if m: eras["historian/" + m.group(1)] = m.group(2).strip()
+for sub, bot in [("historian", "Sequoia (Market Historian)"), ("scholar", "Owl (Strategy Scholar)")]:
+    d = f"{learn}/{sub}"
+    if not os.path.isdir(d): continue
+    for f in sorted(os.listdir(d)):
+        m = re.match(r"(\d{4}-\d\d-\d\d)-(.+)\.md$", f)
+        rel = f"{sub}/{f}"
+        if not m or rel in known: continue
+        txt = open(f"{d}/{f}").read()
+        t = re.search(r"^#\s+(.+)$", txt, re.M)
+        paras = [p.strip() for p in re.split(r"\n\s*\n", txt) if p.strip() and not p.strip().startswith(("#", "*", "|", "!"))]
+        png = f"{d}/{f[:-3]}.png"
+        lessons.append({"title": t.group(1).strip() if t else m.group(2), "date": m.group(1), "bot": bot,
+                        "summary": (paras[0][:400] if paras else ""), "image": png if os.path.exists(png) else None, "file": rel})
+for l in lessons:
+    k = l.get("image")
+    if k and os.path.isabs(str(k)) and os.path.exists(k):
+        name = os.path.basename(k); shutil.copy(k, f"{out}/img/{name}"); l["image"] = f"data/img/{name}"
+    l.setdefault("era", eras.get(l.get("file")))
+    l["id"] = re.sub(r"[^a-z0-9]+", "-", (l.get("file") or l["title"]).lower()).strip("-")
+watch = [w for w in load(f"{dash}/watchlist.json", []) if w.get("symbol") and w.get("source_url")]
 pb = []
 pbf = f"{learn}/scholar/playbook.md"
 if os.path.exists(pbf):
@@ -40,7 +68,7 @@ score = {"start_balance": 2000, "start": "2026-10-28", "end": "2026-11-27",
          "wins": sum(1 for t in closed if t["pnl"] > 0),
          "largest_loss": min([t["pnl"] for t in closed], default=None),
          "synced": datetime.datetime.now().astimezone().strftime("%b %-d, %Y, %-I:%M %p CT")}
-for name, obj in [("status", status), ("trades", trades), ("lessons", lessons), ("playbook", pb), ("scorecard", score)]:
+for name, obj in [("status", status), ("trades", trades), ("lessons", lessons), ("playbook", pb), ("scorecard", score), ("watchlist", watch)]:
     json.dump(obj, open(f"{out}/{name}.json", "w"), indent=1, ensure_ascii=False)
 print("synced:", {k: (len(v) if isinstance(v, list) else "ok") for k, v in [("trades", trades), ("lessons", lessons), ("playbook", pb)]})
 PY

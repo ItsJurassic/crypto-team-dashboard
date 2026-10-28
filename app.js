@@ -1,5 +1,5 @@
 "use strict";
-const CB = ["BTC","ETH","SOL","XRP","DOGE"];
+let CB = ["BTC","ETH","SOL","XRP","DOGE"];  // + watchlist coins that Coinbase lists
 const IVS = {"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1D":86400,"1W":604800,"1M":2592000};
 const CG_DAYS = {"1m":1,"5m":1,"15m":1,"1h":2,"4h":7,"1D":90,"1W":365,"1M":"max"};
 const SCOL = {"Watching":"#4ea1ff","Getting ready to trade":"#f5a623","Buying":"#16c784","Selling":"#ea3943","Paused":"#9e9e9e","Unknown":"#9e9e9e"};
@@ -61,14 +61,38 @@ async function loadBotData() {
   } catch { $("#score").innerHTML = '<div class="empty">Scorecard not synced yet.</div>'; }
   try {
     const L = await getJSON("data/lessons.json");
-    $("#lessons").innerHTML = L.length ? L.sort((a,b)=>b.date.localeCompare(a.date)).map(l=>`<div class="lesson"><h2>${esc(l.title)}</h2>${l.image?`<img loading="lazy" src="${esc(l.image)}" alt="${esc(l.title)} chart">`:""}<div class="muted small">${esc(l.date)} · ${esc(l.bot)}</div><p>${esc(l.summary)}</p></div>`).join("")
+    $("#lessons").innerHTML = L.length ? L.sort((a,b)=>b.date.localeCompare(a.date)).map(l=>`<div class="lesson" id="L-${esc(l.id)}"><h2>${esc(l.title)}</h2>${l.image?`<img loading="lazy" src="${esc(l.image)}" alt="${esc(l.title)} chart">`:""}<div class="muted small">${esc(l.date)} · ${esc(l.bot)}</div><p>${esc(l.summary)}</p></div>`).join("")
       : '<div class="empty">No lessons yet.</div>';
+    state.lessons = L; drawGrid();
   } catch { $("#lessons").innerHTML = '<div class="empty">No lessons yet.</div>'; }
   try {
     const P = await getJSON("data/playbook.json");
     $("#playbook").outerHTML = P.length ? `<ol id="playbook">${P.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>` : '<div id="playbook" class="empty">Playbook not started.</div>';
   } catch {}
   setMarkers();
+}
+// ---------- Sequoia progress grid (tap a filled cell to open its chart) ----------
+function drawGrid() {
+  const L = (state.lessons||[]).filter(l=>l.era), Y0 = 2016, Y1 = new Date().getFullYear();
+  const top = state.top.length ? state.top.map(c=>c.symbol.toUpperCase()) : CB;
+  const cov = {};
+  for (const l of L) { const m = l.era.match(/^([A-Z0-9_]+)\s+(\d{4})(?:\D+(\d{4}))?/); if (!m) continue;
+    for (let y = +m[2]; y <= +(m[3]||m[2]); y++) (cov[m[1]+y] ||= []).push(l); }
+  const yrs = []; for (let y = Y0; y <= Y1; y++) yrs.push(y);
+  $("#grid").innerHTML = `<table class="grid"><thead><tr><th></th>${yrs.map(y=>`<th>${y%2?"":"’"+String(y).slice(2)}</th>`).join("")}</tr></thead><tbody>${
+    top.map(s=>`<tr><td>${esc(s)}</td>${yrs.map(y=>{const h=cov[s+y]; return h?`<td><button class="cell on" data-l="${esc(h[0].id)}" aria-label="${esc(s)} ${y}: ${esc(h[0].title)}"></button></td>`:`<td><span class="cell"></span></td>`}).join("")}</tr>`).join("")}</tbody></table>`;
+  document.querySelectorAll("#grid .cell.on").forEach(b => b.onclick = () => { const el = document.getElementById("L-"+b.dataset.l); if (el) { el.scrollIntoView({behavior:"smooth"}); el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),1500); } });
+}
+// ---------- news watchlist ----------
+async function loadWatch() {
+  let W = []; try { W = await getJSON("data/watchlist.json"); } catch {}
+  state.watch = W;
+  $("#watch").innerHTML = W.length ? W.map(w=>`<div class="lesson"><b>${esc(w.name)} <span class="muted">${esc(w.symbol)}</span></b> <span class="tag">${esc(w.status)}</span>
+    <div class="muted small">Added ${esc(w.added_at)} by ${esc(w.added_by)}</div><p>${esc(w.reason)}</p><a href="${esc(w.source_url)}" target="_blank" rel="noopener">Source</a> · <a href="#" data-sym="${esc(w.symbol)}" class="wchart">Chart</a></div>`).join("")
+    : '<div class="empty">No new coins on watch yet. When Lark (Crypto Pulse) finds a promising new coin in the news, it shows up here with the reason and source, and Seedling can paper-trade it.</div>';
+  document.querySelectorAll(".wchart").forEach(a => a.onclick = e => { e.preventDefault(); document.querySelector('[data-tab="overview"]').click(); setSym(a.dataset.sym); });
+  for (const w of W) { const s = w.symbol.toUpperCase(); if (CB.includes(s)) continue;
+    try { await getJSON(`https://api.exchange.coinbase.com/products/${s}-USD/ticker`); CB.push(s); } catch {} }
 }
 $("#team").innerHTML = TEAM.map(([n,d])=>`<div class="lesson"><b>${n}</b><div class="muted small">${d}</div></div>`).join("");
 
@@ -130,7 +154,7 @@ async function loadChart() {
       state.candles = c; ls.applyOptions({visible:false}); cs.applyOptions({visible:true}); ls.setData([]); cs.setData(c);
       note.textContent = `${sym}-USD ${iv} candles from Coinbase Exchange, live via websocket. ${iv==="4h"?"4h built from 1h candles. ":""}${iv==="1W"||iv==="1M"?"Built from daily candles (UTC). ":""}Times shown in CT.`;
     } else {
-      const id = (state.top.find(c=>c.symbol.toUpperCase()===sym)||{}).id;
+      const id = (state.top.find(c=>c.symbol.toUpperCase()===sym)||{}).id || ((state.watch||[]).find(w=>w.symbol.toUpperCase()===sym)||{}).coingecko_id;
       if (!id) throw new Error("no CoinGecko id");
       const r = await getJSON(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${CG_DAYS[iv]}`);
       if (sym !== state.sym || iv !== state.iv) return;
@@ -189,11 +213,11 @@ async function loadTop() {
     $("#top-note").textContent = "CoinGecko, updated " + ct(Date.now()) + " (every 60 s). Coinbase coins tick live. Tap a row to chart it.";
     document.querySelectorAll("#top tr.click").forEach(r => r.onclick = () => { setSym(r.dataset.sym); scrollTo({top:0,behavior:"smooth"}); });
     const sel = $("#coin"), cur = state.sym;
-    const syms = [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase())])];
-    sel.innerHTML = syms.map(s=>{const c=state.top.find(x=>x.symbol.toUpperCase()===s);return `<option value="${s}">${c?esc(c.name)+" ("+s+")":s}${CB.includes(s)?"":" · line"}</option>`}).join("");
+    const syms = [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase()), ...(state.watch||[]).map(w=>w.symbol.toUpperCase())])];
+    sel.innerHTML = syms.map(s=>{const c=state.top.find(x=>x.symbol.toUpperCase()===s);return `<option value="${s}">${(state.watch||[]).some(w=>w.symbol.toUpperCase()===s)?"👀 ":""}${c?esc(c.name)+" ("+s+")":s}${CB.includes(s)?"":" · line"}</option>`}).join("");
     sel.value = cur;
   } catch (e) { $("#top-note").innerHTML = `<span class="dn">Top-20 table unavailable (${esc(e.message)}); retrying in 60 s.</span>`; }
-  showPx();
+  showPx(); drawGrid();
 }
 function setSym(s) { state.sym = s; $("#coin").value = s; showPx(); loadChart(); }
 $("#coin").innerHTML = CB.map(s=>`<option>${s}</option>`).join("");
@@ -201,10 +225,11 @@ $("#coin").onchange = e => setSym(e.target.value);
 $("#ivs").innerHTML = Object.keys(IVS).map(k=>`<button data-iv="${k}" class="${k===state.iv?"on":""}">${k}</button>`).join("");
 document.querySelectorAll("#ivs button").forEach(b => b.onclick = () => { state.iv = b.dataset.iv; document.querySelectorAll("#ivs button").forEach(x=>x.classList.toggle("on",x===b)); loadChart(); });
 
-initChart(); loadStatus(); loadBotData(); loadTop().then(loadChart); connectWS();
+initChart(); loadStatus(); loadBotData(); loadWatch().then(loadTop).then(loadChart); connectWS();
 setInterval(pollCB, 5000);
 setInterval(loadStatus, 15000);
 setInterval(loadBotData, 60000);
 setInterval(loadTop, 60000);
+setInterval(loadWatch, 300000);
 setInterval(() => { if (!CB.includes(state.sym) || ["1m","5m"].includes(state.iv)) loadChart(); }, 60000);
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
