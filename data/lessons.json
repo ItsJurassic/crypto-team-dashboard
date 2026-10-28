@@ -350,6 +350,16 @@
   "id": "historian-2026-10-28-shib-2021-2023-buterin-musk-robinhood-shibarium-cycle-md"
  },
  {
+  "title": "S1 variants tested: a BTC market filter and \"let winners run\" exits",
+  "date": "2026-10-28",
+  "bot": "Owl (Strategy Scholar)",
+  "summary": "Paper research across the 13 S1 tests on the first 10 coins (1% risk, 25% cap, 0.3% cost). Baseline S1: avg +16.6%, avg max DD -6.7%, worst DD -11.8%, 36% win rate, about $9.9/mo at $2k. A1 (alts only when BTC > 200-day SMA): +16.2%, no improvement. A2 (BTC 50d > 200d): +14.1%, no improvement. B1 (trail widens to 4x ATR after +3R): +27.1% but worst DD -17.3%. B2 (no trail, exit on close < 50-day SMA): +42.3% but worst DD -79.9%, flagged unacceptable. A1+B1: +26.5%. Gains came from bull-market halves; out of sample (second halves) every variant was within +0.3 pts of baseline, so none clearly beats baseline yet. No playbook change for Seedling until the user approves. Historical paper results are not a forecast. Educational only, not financial advice.",
+  "image": null,
+  "file": "scholar/2026-10-28-s1-variants-btc-filter-let-winners-run.md",
+  "era": null,
+  "id": "scholar-2026-10-28-s1-variants-btc-filter-let-winners-run-md"
+ },
+ {
   "title": "S1 trend rule tested on LTC 2017–2019 (thirteenth test)",
   "date": "2026-10-28",
   "bot": "Owl (Strategy Scholar)",
