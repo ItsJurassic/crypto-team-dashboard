@@ -2,7 +2,7 @@
  "state": "Watching",
  "color": "#3b82f6",
  "coin": "",
- "reason": "All cash ($2,000). No trade yet; first scheduled check runs around noon CT.",
+ "reason": "All cash ($2,000). 10:49 AM CT check: no playbook entry signal (S1 trend, S2 breakout, S3 pullback) on any top-20 coin. ETH and SOL are near their lower Bollinger Band above the 200-day average, so an S3 setup could form on a daily close below the band.",
  "balance": 2000,
  "pnl": 0,
  "pnl_pct": 0.0,
@@ -10,16 +10,16 @@
  "trial_days": 30,
  "prices": {
   "BTC": {
-   "price": 80518,
-   "chg24": -0.0413
+   "price": 80426,
+   "chg24": -0.15819
   },
   "ETH": {
-   "price": 2331.77,
-   "chg24": -0.69227
+   "price": 2328.7,
+   "chg24": -0.8435
   }
  },
- "prices_as_of": "10:46 AM CT",
+ "prices_as_of": "10:52 AM CT",
  "last_trade": "No trades yet",
- "updated": "Oct 28, 2026, 10:48 AM CT",
+ "updated": "Oct 28, 2026, 10:57 AM CT",
  "url": "https://itsjurassic.github.io/crypto-team-dashboard/"
 }
