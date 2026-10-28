@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T18:48:45-05:00",
+ "updated": "2026-10-28T18:52:21-05:00",
  "start": 1000.0,
  "equity": 993.8,
  "cash": 993.8,
@@ -11,6 +11,10 @@
   [
    1793231325,
    993.8
+  ],
+  [
+   1793231541,
+   993.8
   ]
  ],
  "positions": {},
@@ -18,7 +22,9 @@
   "scanned": 6,
   "killed": 5,
   "passed": 1,
-  "trades": 1
+  "trades": 1,
+  "judged": 0,
+  "judge_rejected": 0
  },
  "last_run": {
   "scanned": 0,
@@ -27,12 +33,13 @@
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 0 new pairs (of 84 checked)",
+  "Scout": "Scouted 0 new pairs (of 85 checked)",
   "Filter": "0 passed all 8 rules",
   "Analyst": "Nothing to score",
+  "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Closed $DUBBLE -6.20",
-  "Logger": "Logged 0 kills, 1 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 0 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 1,
@@ -101,5 +108,7 @@
    "reason": "score 79, stop 0.00370924"
   }
  ],
+ "judge_rejections": [],
+ "calibration": [],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
 }
