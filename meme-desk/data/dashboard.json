@@ -1,0 +1,105 @@
+{
+ "updated": "2026-10-28T18:48:45-05:00",
+ "start": 1000.0,
+ "equity": 993.8,
+ "cash": 993.8,
+ "curve": [
+  [
+   1793231266,
+   1000.0
+  ],
+  [
+   1793231325,
+   993.8
+  ]
+ ],
+ "positions": {},
+ "counts": {
+  "scanned": 6,
+  "killed": 5,
+  "passed": 1,
+  "trades": 1
+ },
+ "last_run": {
+  "scanned": 0,
+  "killed": 0,
+  "passed": 0,
+  "traded": 0
+ },
+ "activity": {
+  "Scout": "Scouted 0 new pairs (of 84 checked)",
+  "Filter": "0 passed all 8 rules",
+  "Analyst": "Nothing to score",
+  "Executor": "No approved entries",
+  "Risk": "Closed $DUBBLE -6.20",
+  "Logger": "Logged 0 kills, 1 trade events"
+ },
+ "kill_rules": {
+  "Already +80% 1h": 1,
+  "1h vol <$50k": 1,
+  "Top 10 holders": 1,
+  "Score <70": 2
+ },
+ "kills": [
+  {
+   "time": "2026-10-28T18:47:46-05:00",
+   "symbol": "INVERSE",
+   "mint": "2gLhk8p2KvUFeUXur2hiF4hxjdRM1vBcbgo9Q7DMZfiw",
+   "rule": "Score <70",
+   "detail": "score 44"
+  },
+  {
+   "time": "2026-10-28T18:47:46-05:00",
+   "symbol": "FLOAT",
+   "mint": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
+   "rule": "Score <70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-28T18:47:46-05:00",
+   "symbol": "jeff",
+   "mint": "HAsTKXYvv65zM7J6Cu5o5PcZsiKMQYo5oz4WPjgqwP6k",
+   "rule": "Top 10 holders",
+   "detail": "top10 33.5%"
+  },
+  {
+   "time": "2026-10-28T18:47:46-05:00",
+   "symbol": "STONKLANA",
+   "mint": "GF74fBfcaeLjUiUwKpRiUbvMQtTvNyzMoo6KNyyqNyk6",
+   "rule": "1h vol <$50k",
+   "detail": "1h vol $48,216"
+  },
+  {
+   "time": "2026-10-28T18:47:46-05:00",
+   "symbol": "CATBOT",
+   "mint": "dyw5fDNv91eknniMG4tGCU1ZrzjuxbpsLiEzih6pump",
+   "rule": "Already +80% 1h",
+   "detail": "+97.16% 1h"
+  }
+ ],
+ "trades": [
+  {
+   "time": "2026-10-28T18:48:45-05:00",
+   "side": "SELL",
+   "symbol": "DUBBLE",
+   "mint": "FEXGegqeVm5vZurqyC7qsmkLqWspVV1ACb9bbLvcpump",
+   "price": "0.00364",
+   "qty": "20273.694880892042",
+   "usd": "73.8",
+   "pnl_usd": "-6.2",
+   "reason": "-6% hard stop"
+  },
+  {
+   "time": "2026-10-28T18:47:46-05:00",
+   "side": "BUY",
+   "symbol": "DUBBLE",
+   "mint": "FEXGegqeVm5vZurqyC7qsmkLqWspVV1ACb9bbLvcpump",
+   "price": "0.003946",
+   "qty": "20273.694880892042",
+   "usd": "80.0",
+   "pnl_usd": "",
+   "reason": "score 79, stop 0.00370924"
+  }
+ ],
+ "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
+}
