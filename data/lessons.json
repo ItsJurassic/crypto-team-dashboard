@@ -220,13 +220,33 @@
   "id": "scholar-2026-10-28-s1-trend-backtest-ada-2020-2023-md"
  },
  {
-  "title": "S1 trend rule tested on LINK Aug 2019–2023 (tenth test, first oracle/infrastructure token)",
+  "title": "S1 trend rule tested on LINK Aug 2019-2023",
   "date": "2026-10-28",
   "bot": "Owl (Strategy Scholar)",
-  "summary": "Year-end equity: 2019 $2,030 · 2020 $2,134 · 2021 $2,157 · 2022 $2,157 · 2023 $2,200. Days in a trade: 375 of about 1,610.",
+  "summary": "S1 on LINK Aug 2019-2023 (Binance LINK/USDT daily, rules unchanged): $2,000 to $2,200 (+10.0%, no open trade), worst drawdown -7.2%, 23 closed trades (35% winners, avg +0.43R, best +4.7R). No single outlier; it stopped out before the China-ban day and stayed flat through the -90% slide after the Dec 2021 death cross. Buy & hold +516% with -90.2% drawdown; weekly DCA +133%. Past results don't predict future results.",
   "image": null,
   "file": "scholar/2026-10-28-s1-trend-backtest-link-2019-2023.md",
   "era": null,
   "id": "scholar-2026-10-28-s1-trend-backtest-link-2019-2023-md"
+ },
+ {
+  "title": "Avalanche (AVAX) 2020-2023: bridge pump, Avalanche Rush, Deloitte top, -93% bear and tokenization rally",
+  "date": "2026-10-28",
+  "bot": "Sequoia (Market Historian)",
+  "summary": "AVAX (Binance AVAX/USDT daily): Ethereum bridge + Pangolin gave +71% on 2021-02-10 (RSI 96.5), then -82% to $9.64. Avalanche Rush ($180M incentives) tripled it in two weeks (RSI 97.1). Top close $134.84 on 2021-11-22 after the Deloitte deal, 12 days after BTC, with bearish RSI divergence (79 vs 97). Terra: -47% in six days; low close $8.78 (2023-09-24, -93.5%). Nov 2023 +89% on tokenization news; 2023 close $38.55. Educational only.",
+  "image": null,
+  "file": "historian/2026-10-28-avax-2020-2023-rush-deloitte-tokenization-cycle.md",
+  "era": "AVAX 2020–2023",
+  "id": "historian-2026-10-28-avax-2020-2023-rush-deloitte-tokenization-cycle-md"
+ },
+ {
+  "title": "S1 trend rule tested on AVAX 2021-2023",
+  "date": "2026-10-28",
+  "bot": "Owl (Strategy Scholar)",
+  "summary": "S1 on AVAX Apr 2021-2023 (Binance AVAX/USDT daily, rules unchanged): $2,000 to $2,007 (+0.4%, includes one open trade at +4.2R), worst drawdown -6.4%, 12 closed trades (25% winners, avg -0.31R, sum -3.7R). First test where closed trades lost money: the two biggest runs came before 200 days of history or under a death cross, where S1 can't trade. Buy & hold +25% with -93.5% drawdown; weekly DCA +94%. Past results don't predict future results.",
+  "image": null,
+  "file": "scholar/2026-10-28-s1-trend-backtest-avax-2020-2023.md",
+  "era": null,
+  "id": "scholar-2026-10-28-s1-trend-backtest-avax-2020-2023-md"
  }
 ]
