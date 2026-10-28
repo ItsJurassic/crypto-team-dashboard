@@ -41,7 +41,8 @@ async function loadStatus() {
     $("#st-state").textContent = "Seedling: " + (s.state === "Unknown" ? "No status yet" : s.state);
     $("#st-coin").textContent = s.coin ? "· " + s.coin : "";
     $("#st-reason").textContent = s.reason || "";
-    $("#st-upd").textContent = s.updated ? "Updated " + s.updated : "";
+    let chk = ""; try { const w = await getJSON("data/widget.json"); chk = w.updated || ""; } catch {}
+    $("#st-upd").textContent = (s.updated ? "Status since " + s.updated.replace(/^.*?, \d{4}, /, "") : "") + (chk ? " · Checked " + chk : "");
   } catch (e) { $("#st-state").textContent = "Status unavailable"; $("#st-reason").textContent = "Could not load data/status.json."; }
 }
 async function loadBotData() {
