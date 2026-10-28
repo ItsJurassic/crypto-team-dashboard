@@ -1,0 +1,12 @@
+[
+ "G1 Universe: only coins ranked top 20 by market cap at entry time; exclude stablecoins as trade targets.",
+ "G2 Risk per trade: max 1% of equity ($20 at $2,000) between entry and stop, including estimated fees+slippage.",
+ "G3 Position size = (equity x risk%) / (entry - stop). Cap any single position at 25% of equity; total open risk <= 5%.",
+ "G4 Every trade must have a stop and a target/exit rule logged BEFORE entry.",
+ "G5 Minimum planned reward:risk = 2:1 (after costs) for trend/breakout; 1.5:1 for mean reversion.",
+ "G6 Cost model: assume 0.10% fee per side (taker ~0.1-0.6% depending on venue) + 0.05% slippage (top-5 coins) / 0.15% (rank 6-20). Skip trades where round-trip cost > 20% of planned reward.",
+ "G7 Daily loss limit: stop opening trades after -3% equity in a day; weekly -6% -> pause and review.",
+ "G8 Never widen a stop; only move it in the direction of the trade.",
+ "G9 No leverage, no shorting in v1.",
+ "G10 Journal every trade: strategy ID, timestamp, entry, stop, target, size, reason, fees, exit, R-multiple."
+]
