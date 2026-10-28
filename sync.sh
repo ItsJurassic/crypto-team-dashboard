@@ -90,6 +90,7 @@ widget = {"state": status.get("state", "Unknown"), "color": colors.get(status.ge
 json.dump(widget, open(f"{out}/widget.json", "w"), indent=1, ensure_ascii=False)
 print("synced:", {k: (len(v) if isinstance(v, list) else "ok") for k, v in [("trades", trades), ("lessons", lessons), ("playbook", pb)]})
 PY
+cp -f "$DASH/candles_extra.json" "$SITE/data/candles_extra.json" 2>/dev/null || true  # fallback OHLC (TRX/XMR/LEO/WBT/RAIN/FIGR_HELOC)
 [ "${1:-}" = "--no-push" ] && exit 0
 cd "$SITE"
 git rev-parse --git-dir >/dev/null 2>&1 || git init -q -b main

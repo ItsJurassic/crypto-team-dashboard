@@ -143,6 +143,13 @@ async function cbCandles(sym, gran, pages=1) {
   const m = new Map(); for (const [t,l,h,o,c] of all) m.set(t,{time:t,open:o,high:h,low:l,close:c});
   return [...m.values()].sort((a,b)=>a.time-b.time);
 }
+async function extraCandles() {
+  if (!state.extra || Date.now() - (state.extraAt||0) > 120000) {
+    try { const r = await getJSON("data/candles_extra.json?t=" + Date.now()); state.extra = r.c || {}; state.extraAsOf = r.asOf; state.extraAt = Date.now(); }
+    catch { state.extra = state.extra || {}; }
+  }
+  return state.extra;
+}
 async function loadChart() {
   const sym = state.sym, iv = state.iv, note = $("#chart-note");
   try {
@@ -154,6 +161,18 @@ async function loadChart() {
       if (sym !== state.sym || iv !== state.iv) return;
       state.candles = c; ls.applyOptions({visible:false}); cs.applyOptions({visible:true}); ls.setData([]); cs.setData(c);
       note.textContent = `${sym}-USD ${iv} candles from Coinbase Exchange, live via websocket. ${iv==="4h"?"4h built from 1h candles. ":""}${iv==="1W"||iv==="1M"?"Built from daily candles (UTC). ":""}Times shown in CT.`;
+    } else if ((await extraCandles())[sym]) {
+      const d = state.extra[sym], k = d[iv];
+      if (sym !== state.sym || iv !== state.iv) return;
+      if (!k) {
+        cs.setData([]); ls.setData([]); state.candles = [];
+        const have = Object.keys(d).filter(x=>x!=="src").join(", ");
+        note.textContent = `${sym}: no ${iv} candles from ${d.src.split(";")[0]}. Available: ${have}.`; return;
+      }
+      const c = k.c.map((cl,i)=>({time: Array.isArray(k.t) ? k.t[i] : k.t + i*k.st, open:k.o[i], high:k.h[i], low:k.l[i], close:cl}));
+      state.candles = c; ls.applyOptions({visible:false}); cs.applyOptions({visible:true}); ls.setData([]); cs.setData(c);
+      const age = Math.round((Date.now()/1000 - state.extraAsOf)/60);
+      note.textContent = `${sym} ${iv} candles from ${d.src}. Not on Coinbase; snapshot refreshed by the bots (${age} min old). Times shown in CT.`;
     } else {
       const id = (state.top.find(c=>c.symbol.toUpperCase()===sym)||{}).id || ((state.watch||[]).find(w=>w.symbol.toUpperCase()===sym)||{}).coingecko_id;
       if (!id) throw new Error("no CoinGecko id");
