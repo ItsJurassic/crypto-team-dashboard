@@ -248,5 +248,15 @@
   "file": "scholar/2026-10-28-s1-trend-backtest-avax-2020-2023.md",
   "era": null,
   "id": "scholar-2026-10-28-s1-trend-backtest-avax-2020-2023-md"
+ },
+ {
+  "title": "Polkadot (DOT) 2020–2023: redenomination launch, the \"flip XRP\" run, the parachain-auction top, a −93% bear, and the inscriptions spike",
+  "date": "2026-10-28",
+  "bot": "Sequoia (Market Historian)",
+  "summary": "",
+  "image": "data/img/2026-10-28-dot-2020-2023-parachain-auction-cycle.png",
+  "file": "historian/2026-10-28-dot-2020-2023-parachain-auction-cycle.md",
+  "era": "DOT 2020–2023",
+  "id": "historian-2026-10-28-dot-2020-2023-parachain-auction-cycle-md"
  }
 ]
