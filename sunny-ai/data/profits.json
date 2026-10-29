@@ -1,16 +1,37 @@
 {
- "updated": "2026-10-29T09:57:45-05:00",
+ "updated": "2026-10-29T10:04:43-05:00",
  "start": 1000.0,
- "equity": 1106.44,
- "total_pnl": 106.44,
+ "equity": 1101.2,
+ "total_pnl": 101.2,
  "realized": 106.44,
- "unrealized": 0,
+ "unrealized": -5.24,
  "failed_tx_fees": 0.01,
- "fees_total": 24.95,
+ "fees_total": 26.12,
  "slippage_cost": 21.75,
  "by_source": {
-  "SIM-FEED": 123.23,
-  "REAL-DATA": -16.79
+  "SIM-FEED": 118.68,
+  "REAL-DATA": -16.79,
+  "MAJOR": -0.69
+ },
+ "by_lane": {
+  "SOLANA": {
+   "pnl": 101.89,
+   "realized": 106.44,
+   "unrealized": -4.55,
+   "closed": 24,
+   "wins": 8,
+   "open": 1,
+   "fees": 25.22
+  },
+  "MAJOR": {
+   "pnl": -0.69,
+   "realized": 0,
+   "unrealized": -0.69,
+   "closed": 0,
+   "wins": 0,
+   "open": 2,
+   "fees": 0.89
+  }
  },
  "closed": 24,
  "wins": 8,
@@ -18,6 +39,7 @@
  "failed_fills": 1,
  "rows": [
   {
+   "lane": "SOLANA",
    "symbol": "MOON",
    "source": "SIM-FEED",
    "venue": "Jupiter route \u2192 Raydium AMM",
@@ -34,6 +56,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "BEAR",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -50,6 +73,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "WIF",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -66,6 +90,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "CATS",
    "source": "SIM-FEED",
    "venue": "Jupiter route \u2192 Jupiter route",
@@ -82,6 +107,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "BONKBON",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Jupiter route",
@@ -98,6 +124,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "PEPEM",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -114,6 +141,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "BEART",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -130,6 +158,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "MEOWCA",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -146,6 +175,58 @@
    "status": "closed"
   },
   {
+   "lane": "MAJOR",
+   "symbol": "ZEC",
+   "source": "MAJOR",
+   "venue": "CEX book (sim)",
+   "entry": 1299.7659536717606,
+   "exit": 1303.38,
+   "entry_time": "2026-10-29T10:03:12-05:00",
+   "exit_time": null,
+   "size_usd": 88.49,
+   "slip_cost": null,
+   "fees": 0.42,
+   "pnl": -0.17,
+   "pnl_pct": -0.19,
+   "exit_reason": "open (marked to market)",
+   "status": "open"
+  },
+  {
+   "lane": "MAJOR",
+   "symbol": "BNB",
+   "source": "MAJOR",
+   "venue": "CEX book (sim)",
+   "entry": 748.2921741640586,
+   "exit": 747.88,
+   "entry_time": "2026-10-29T10:03:12-05:00",
+   "exit_time": null,
+   "size_usd": 88.49,
+   "slip_cost": null,
+   "fees": 0.47,
+   "pnl": -0.52,
+   "pnl_pct": -0.59,
+   "exit_reason": "open (marked to market)",
+   "status": "open"
+  },
+  {
+   "lane": "SOLANA",
+   "symbol": "DOGPEP",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "entry": 0.006509930773375266,
+   "exit": 0.00619522838663716,
+   "entry_time": "2026-10-29T10:00:48-05:00",
+   "exit_time": null,
+   "size_usd": 88.52,
+   "slip_cost": null,
+   "fees": 0.28,
+   "pnl": -4.55,
+   "pnl_pct": -5.15,
+   "exit_reason": "open (marked to market)",
+   "status": "open"
+  },
+  {
+   "lane": "SOLANA",
    "symbol": "MEOWGIG",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -162,6 +243,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "DUBBLE",
    "source": "REAL-DATA",
    "venue": "legacy (no fill sim)",
@@ -178,6 +260,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "BEARPU",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -194,6 +277,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "WIFPU",
    "source": "SIM-FEED",
    "venue": "Jupiter route \u2192 Raydium AMM",
@@ -210,6 +294,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "MEOW",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -226,6 +311,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "GIGAD",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -242,6 +328,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "BEAR",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -258,6 +345,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "MOONCH",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -274,6 +362,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "MEOWDOG",
    "source": "SIM-FEED",
    "venue": "Jupiter route \u2192 Raydium AMM",
@@ -290,6 +379,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "TOADA",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Jupiter route",
@@ -306,6 +396,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "FLOATER",
    "source": "REAL-DATA",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -322,6 +413,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "GIGAC",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -338,6 +430,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "YOLOCAT",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -354,6 +447,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "BONKYOL",
    "source": "SIM-FEED",
    "venue": "Pump.fun bonding curve \u2192 Pump.fun bonding curve",
@@ -370,6 +464,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "MOONBEA",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Jupiter route",
@@ -386,6 +481,7 @@
    "status": "closed"
   },
   {
+   "lane": "SOLANA",
    "symbol": "PUMP",
    "source": "SIM-FEED",
    "venue": "Raydium AMM \u2192 Raydium AMM",
@@ -402,6 +498,6 @@
    "status": "closed"
   }
  ],
- "explanation": "Sunny AI is up $106.44 (+10.6%) on paper, from $1,000 to $1,106.44. Closed trades made $+106.44 (8 winners of 24); the open positions add $+0.00 not yet locked in. Most of the result came from SIM-FEED (synthetic) tokens: $+123.23, versus $-16.79 from REAL tokens \u2014 so treat this as a test of the rules, not proof of real profit. The biggest winner was $MOON (SIM-FEED) at $+119.33 (+142.0%), exited by trail stop gap -3.6% vs stop. The biggest loser was $PUMP at $-58.70. The pattern: many small \u22126% stop losses, and a few trades that ran past +12% and rode the trailing stop for large gains. Some stops filled far below -6% because the price gapped down between checks (rug-style crashes). Costs so far: $24.95 in fees (incl. $0.01 on failed transactions) and about $21.75 lost to slippage.",
+ "explanation": "Sunny AI is up $101.20 (+10.1%) on paper, from $1,000 to $1,101.20. Closed trades made $+106.44 (8 winners of 24); the open positions add $-5.24 not yet locked in. Most of the result came from SIM-FEED (synthetic) tokens: $+118.68, versus $-16.79 from REAL tokens \u2014 so treat this as a test of the rules, not proof of real profit. The MAJOR lane (top large-caps on real CoinGecko/Coinbase prices, simulated fills) stands at $-0.69. The biggest winner was $MOON (SIM-FEED) at $+119.33 (+142.0%), exited by trail stop gap -3.6% vs stop. The biggest loser was $PUMP at $-58.70. The pattern in the SOLANA lane: many small \u22126% stop losses, and a few trades that ran past +12% and rode the trailing stop for large gains. Some stops filled far below -6% because the price gapped down between checks (rug-style crashes). Costs so far: $26.12 in fees (incl. $0.01 on failed transactions) and about $21.75 lost to slippage.",
  "reconcile_gap": 0.01
 }

@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T09:57:45-05:00",
+ "updated": "2026-10-29T10:04:43-05:00",
  "start": 1000.0,
- "equity": 1106.44,
- "cash": 1106.44,
+ "equity": 1101.2,
+ "cash": 839.77,
  "curve": [
   [
    1793231266,
@@ -571,15 +571,84 @@
   [
    1793285865,
    1106.44
+  ],
+  [
+   1793286048,
+   1105.28
+  ],
+  [
+   1793286229,
+   1106.75
+  ],
+  [
+   1793286283,
+   1101.2
   ]
  ],
- "positions": {},
+ "positions": {
+  "SIM00327DOGPEP": {
+   "symbol": "DOGPEP",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "entry": 0.006509930773375266,
+   "qty": 13596.981521841386,
+   "usd": 88.5154084340501,
+   "entry_fees": 0.2759,
+   "stop": 0.00611933492697275,
+   "high": 0.006618135170779124,
+   "last": 0.00619522838663716,
+   "trailing": false,
+   "time": "2026-10-29T10:00:48-05:00",
+   "score": 82,
+   "judge_p": 0.75
+  },
+  "MAJOR:binancecoin": {
+   "lane": "MAJOR",
+   "symbol": "BNB",
+   "source": "MAJOR",
+   "venue": "CEX book (sim)",
+   "entry": 748.2921741640586,
+   "qty": 0.11826040614805156,
+   "usd": 88.4933364340501,
+   "entry_fees": 0.4742,
+   "stop": 712.7421741640586,
+   "init_stop": 712.7421741640586,
+   "atr": 17.775,
+   "tp": 854.9421741640585,
+   "high": 748.2921741640586,
+   "last": 747.88,
+   "trailing": false,
+   "time": "2026-10-29T10:03:12-05:00",
+   "score": 77,
+   "judge_p": 1.0
+  },
+  "MAJOR:zcash": {
+   "lane": "MAJOR",
+   "symbol": "ZEC",
+   "source": "MAJOR",
+   "venue": "CEX book (sim)",
+   "entry": 1299.7659536717606,
+   "qty": 0.06808405481314674,
+   "usd": 88.4933364340501,
+   "entry_fees": 0.4158,
+   "stop": 1195.7846773780198,
+   "init_stop": 1195.7846773780198,
+   "atr": 103.411429,
+   "tp": 1611.7097825529831,
+   "high": 1303.38,
+   "last": 1303.38,
+   "trailing": false,
+   "time": "2026-10-29T10:03:12-05:00",
+   "score": 72,
+   "judge_p": 0.85
+  }
+ },
  "counts": {
-  "scanned": 305,
-  "killed": 280,
-  "passed": 35,
-  "trades": 24,
-  "judged": 34,
+  "scanned": 312,
+  "killed": 286,
+  "passed": 36,
+  "trades": 25,
+  "judged": 35,
   "judge_rejected": 10
  },
  "last_run": {
@@ -590,32 +659,369 @@
  },
  "activity": {
   "Scout": "Scouted 3 new pairs (of 90 checked)",
-  "Filter": "Filter killed $ZOOMBU - Liq <$40k",
-  "Analyst": "Nothing to score",
+  "Filter": "Filter killed $FROGF - Score <70",
+  "Analyst": "Best score 57 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 0 open, stops set",
+  "Risk": "Watching 3 open, stops set",
   "Logger": "Logged 3 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 6,
   "1h vol <$50k": 17,
   "Top 10 holders": 1,
-  "Score <70": 118,
+  "Score <70": 120,
   "LP not burned": 31,
-  "Mint/freeze": 54,
-  "Liq <$40k": 36,
+  "Mint/freeze": 55,
+  "Liq <$40k": 39,
   "Judge rejected": 10,
-  "Dev >3% / past rugs": 7
+  "Dev >3% / past rugs": 7,
+  "MAJOR: Stablecoin": 8,
+  "MAJOR: 24h vol < $50M": 3,
+  "MAJOR: Analyst < 70": 18
  },
  "kills": [
+  {
+   "time": "2026-10-29T10:04:43-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "FROGF",
+   "mint": "SIM00333FROGF",
+   "rule": "Score <70",
+   "detail": "score 57"
+  },
+  {
+   "time": "2026-10-29T10:04:43-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "DUCKWI",
+   "mint": "SIM00334DUCKWI",
+   "rule": "Liq <$40k",
+   "detail": "liq $13,999"
+  },
+  {
+   "time": "2026-10-29T10:04:43-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "FROGDUC",
+   "mint": "SIM00332FROGDUC",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T10:03:49-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BEAR",
+   "mint": "SIM00331BEAR",
+   "rule": "Liq <$40k",
+   "detail": "liq $32,622"
+  },
+  {
+   "time": "2026-10-29T10:03:49-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BASED",
+   "mint": "SIM00328BASED",
+   "rule": "Liq <$40k",
+   "detail": "liq $25,869"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "TRX",
+   "mint": "MAJOR:tron",
+   "rule": "Judge rejected",
+   "detail": "red flag: uptrend"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "HYPE",
+   "mint": "MAJOR:hyperliquid",
+   "rule": "Judge rejected",
+   "detail": "red flag: no_spike"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "HBAR",
+   "mint": "MAJOR:hedera-hashgraph",
+   "rule": "Analyst < 70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "XLM",
+   "mint": "MAJOR:stellar",
+   "rule": "Analyst < 70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "ADA",
+   "mint": "MAJOR:cardano",
+   "rule": "Analyst < 70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "XRP",
+   "mint": "MAJOR:ripple",
+   "rule": "Analyst < 70",
+   "detail": "score 26"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "SHIB",
+   "mint": "MAJOR:shiba-inu",
+   "rule": "Analyst < 70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "DOGE",
+   "mint": "MAJOR:dogecoin",
+   "rule": "Analyst < 70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "AVAX",
+   "mint": "MAJOR:avalanche-2",
+   "rule": "Analyst < 70",
+   "detail": "score 41"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "TAO",
+   "mint": "MAJOR:bittensor",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "BCH",
+   "mint": "MAJOR:bitcoin-cash",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "LINK",
+   "mint": "MAJOR:chainlink",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "SOL",
+   "mint": "MAJOR:solana",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "SUI",
+   "mint": "MAJOR:sui",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "LTC",
+   "mint": "MAJOR:litecoin",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "ETH",
+   "mint": "MAJOR:ethereum",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "NEAR",
+   "mint": "MAJOR:near",
+   "rule": "Analyst < 70",
+   "detail": "score 52"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "UNI",
+   "mint": "MAJOR:uniswap",
+   "rule": "Analyst < 70",
+   "detail": "score 62"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "BTC",
+   "mint": "MAJOR:bitcoin",
+   "rule": "Analyst < 70",
+   "detail": "score 67"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "XMR",
+   "mint": "MAJOR:monero",
+   "rule": "Analyst < 70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "PYUSD",
+   "mint": "MAJOR:paypal-usd",
+   "rule": "Stablecoin",
+   "detail": "PYUSD pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDG",
+   "mint": "MAJOR:global-dollar",
+   "rule": "Stablecoin",
+   "detail": "USDG pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "GRAM",
+   "mint": "MAJOR:the-open-network",
+   "rule": "24h vol < $50M",
+   "detail": "$23.8M"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USD1",
+   "mint": "MAJOR:usd1-wlfi",
+   "rule": "Stablecoin",
+   "detail": "USD1 pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "CC",
+   "mint": "MAJOR:canton-network",
+   "rule": "24h vol < $50M",
+   "detail": "$24.5M"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDE",
+   "mint": "MAJOR:ethena-usde",
+   "rule": "Stablecoin",
+   "detail": "USDE pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "RAIN",
+   "mint": "MAJOR:rain",
+   "rule": "24h vol < $50M",
+   "detail": "$13.6M"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "DAI",
+   "mint": "MAJOR:dai",
+   "rule": "Stablecoin",
+   "detail": "DAI pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDS",
+   "mint": "MAJOR:usds",
+   "rule": "Stablecoin",
+   "detail": "USDS pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDC",
+   "mint": "MAJOR:usd-coin",
+   "rule": "Stablecoin",
+   "detail": "USDC pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDT",
+   "mint": "MAJOR:tether",
+   "rule": "Stablecoin",
+   "detail": "USDT pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:00:48-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEARYO",
+   "mint": "SIM00326BEARYO",
+   "rule": "Score <70",
+   "detail": "score 67",
+   "lane": "SOLANA"
+  },
   {
    "time": "2026-10-29T09:57:45-05:00",
    "source": "SIM-FEED",
    "symbol": "ZOOMBU",
    "mint": "SIM00324ZOOMBU",
    "rule": "Liq <$40k",
-   "detail": "liq $8,934"
+   "detail": "liq $8,934",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:57:45-05:00",
@@ -623,7 +1029,8 @@
    "symbol": "SNEKMO",
    "mint": "SIM00323SNEKMO",
    "rule": "1h vol <$50k",
-   "detail": "1h vol $32,440"
+   "detail": "1h vol $32,440",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:57:45-05:00",
@@ -631,7 +1038,8 @@
    "symbol": "BEAR",
    "mint": "SIM00322BEAR",
    "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
+   "detail": "LP locked/burned 0%",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:36:02-05:00",
@@ -639,7 +1047,8 @@
    "symbol": "PEPEC",
    "mint": "SIM00321PEPEC",
    "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
+   "detail": "LP locked/burned 80%",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:36:02-05:00",
@@ -647,7 +1056,8 @@
    "symbol": "CHADF",
    "mint": "SIM00320CHADF",
    "rule": "Dev >3% / past rugs",
-   "detail": "dev 8.3%, past rugs 0"
+   "detail": "dev 8.3%, past rugs 0",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:33:01-05:00",
@@ -655,7 +1065,8 @@
    "symbol": "PUMP",
    "mint": "SIM00319PUMP",
    "rule": "Mint/freeze",
-   "detail": "authority not revoked"
+   "detail": "authority not revoked",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:29:42-05:00",
@@ -663,7 +1074,8 @@
    "symbol": "BASEDCA",
    "mint": "SIM00316BASEDCA",
    "rule": "Score <70",
-   "detail": "score 53"
+   "detail": "score 53",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:26:41-05:00",
@@ -671,7 +1083,8 @@
    "symbol": "ZOOMZO",
    "mint": "SIM00314ZOOMZO",
    "rule": "Score <70",
-   "detail": "score 40"
+   "detail": "score 40",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:24:36-05:00",
@@ -679,7 +1092,8 @@
    "symbol": "FROGPE",
    "mint": "SIM00313FROGPE",
    "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
+   "detail": "LP locked/burned 0%",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:24:36-05:00",
@@ -687,7 +1101,8 @@
    "symbol": "ZOOMD",
    "mint": "SIM00312ZOOMD",
    "rule": "LP not burned",
-   "detail": "LP locked/burned 40%"
+   "detail": "LP locked/burned 40%",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:23:38-05:00",
@@ -695,7 +1110,8 @@
    "symbol": "BONK",
    "mint": "SIM00310BONK",
    "rule": "Score <70",
-   "detail": "score 32"
+   "detail": "score 32",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:20:37-05:00",
@@ -703,7 +1119,8 @@
    "symbol": "MEOWZOO",
    "mint": "SIM00309MEOWZOO",
    "rule": "Score <70",
-   "detail": "score 38"
+   "detail": "score 38",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:20:37-05:00",
@@ -711,7 +1128,8 @@
    "symbol": "TOADFRO",
    "mint": "SIM00308TOADFRO",
    "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
+   "detail": "LP locked/burned 80%",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:20:37-05:00",
@@ -719,7 +1137,8 @@
    "symbol": "FROGSN",
    "mint": "SIM00307FROGSN",
    "rule": "Liq <$40k",
-   "detail": "liq $14,117"
+   "detail": "liq $14,117",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:17:36-05:00",
@@ -727,7 +1146,8 @@
    "symbol": "MOONME",
    "mint": "SIM00305MOONME",
    "rule": "Score <70",
-   "detail": "score 51"
+   "detail": "score 51",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:17:36-05:00",
@@ -735,7 +1155,8 @@
    "symbol": "BULL",
    "mint": "SIM00304BULL",
    "rule": "Mint/freeze",
-   "detail": "authority not revoked"
+   "detail": "authority not revoked",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:14:36-05:00",
@@ -743,7 +1164,8 @@
    "symbol": "MEOWM",
    "mint": "SIM00300MEOWM",
    "rule": "Score <70",
-   "detail": "score 51"
+   "detail": "score 51",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:14:36-05:00",
@@ -751,7 +1173,8 @@
    "symbol": "MEOW",
    "mint": "SIM00303MEOW",
    "rule": "Liq <$40k",
-   "detail": "liq $20,156"
+   "detail": "liq $20,156",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:14:36-05:00",
@@ -759,7 +1182,8 @@
    "symbol": "GIGABA",
    "mint": "SIM00302GIGABA",
    "rule": "Already +80% 1h",
-   "detail": "+87.84% 1h"
+   "detail": "+87.84% 1h",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:10:25-05:00",
@@ -767,7 +1191,8 @@
    "symbol": "BONK",
    "mint": "SIM00298BONK",
    "rule": "Score <70",
-   "detail": "score 45"
+   "detail": "score 45",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:10:25-05:00",
@@ -775,7 +1200,8 @@
    "symbol": "CHADFR",
    "mint": "SIM00297CHADFR",
    "rule": "Score <70",
-   "detail": "score 24"
+   "detail": "score 24",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:10:25-05:00",
@@ -783,7 +1209,8 @@
    "symbol": "PEPEMO",
    "mint": "SIM00299PEPEMO",
    "rule": "Mint/freeze",
-   "detail": "authority not revoked"
+   "detail": "authority not revoked",
+   "lane": "SOLANA"
   },
   {
    "time": "2026-10-29T09:10:25-05:00",
@@ -791,146 +1218,65 @@
    "symbol": "DOGBAS",
    "mint": "SIM00296DOGBAS",
    "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T09:07:23-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMB",
-   "mint": "SIM00294ZOOMB",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-29T09:07:23-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGAMO",
-   "mint": "SIM00295GIGAMO",
-   "rule": "Score <70",
-   "detail": "score 62"
-  },
-  {
-   "time": "2026-10-29T09:07:23-05:00",
-   "source": "SIM-FEED",
-   "symbol": "APEC",
-   "mint": "SIM00293APEC",
-   "rule": "Dev >3% / past rugs",
-   "detail": "dev 10.5%, past rugs 0"
-  },
-  {
-   "time": "2026-10-29T09:07:23-05:00",
-   "source": "REAL-DATA",
-   "symbol": "MMRUSH",
-   "mint": "GwaFUDzWgmG3WYNP8raitkosYtBrnFKe9DRTsVMMrush",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $276"
-  },
-  {
-   "time": "2026-10-29T08:37:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOG",
-   "mint": "SIM00289DOG",
-   "rule": "Score <70",
-   "detail": "score 39"
-  },
-  {
-   "time": "2026-10-29T08:37:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLOPE",
-   "mint": "SIM00292YOLOPE",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T08:37:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADDOG",
-   "mint": "SIM00291CHADDOG",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T08:37:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLOSNE",
-   "mint": "SIM00290YOLOSNE",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T08:37:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEAR",
-   "mint": "SIM00218BEAR",
-   "rule": "Liq <$40k",
-   "detail": "liq $33,762"
-  },
-  {
-   "time": "2026-10-29T08:34:44-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARSN",
-   "mint": "SIM00288BEARSN",
-   "rule": "Score <70",
-   "detail": "score 40"
-  },
-  {
-   "time": "2026-10-29T08:34:44-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEK",
-   "mint": "SIM00287SNEK",
-   "rule": "Dev >3% / past rugs",
-   "detail": "dev 9.9%, past rugs 0"
-  },
-  {
-   "time": "2026-10-29T08:18:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEAR",
-   "mint": "SIM00285BEAR",
-   "rule": "Score <70",
-   "detail": "score 43"
-  },
-  {
-   "time": "2026-10-29T08:18:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PUMPD",
-   "mint": "SIM00286PUMPD",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $47,339"
-  },
-  {
-   "time": "2026-10-29T08:15:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARBU",
-   "mint": "SIM00283BEARBU",
-   "rule": "Score <70",
-   "detail": "score 59"
-  },
-  {
-   "time": "2026-10-29T08:12:43-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOGCA",
-   "mint": "SIM00282DOGCA",
-   "rule": "Dev >3% / past rugs",
-   "detail": "dev 12.7%, past rugs 0"
-  },
-  {
-   "time": "2026-10-29T08:09:43-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARCA",
-   "mint": "SIM00281BEARCA",
-   "rule": "Score <70",
-   "detail": "score 68"
-  },
-  {
-   "time": "2026-10-29T08:06:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEKYOL",
-   "mint": "SIM00280SNEKYOL",
-   "rule": "Score <70",
-   "detail": "score 39"
+   "detail": "authority not revoked",
+   "lane": "SOLANA"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "side": "BUY",
+   "symbol": "ZEC",
+   "mint": "MAJOR:zcash",
+   "source": "MAJOR",
+   "venue": "CEX book (sim)",
+   "intended": "1298.66",
+   "filled": "1299.766",
+   "slip_pct": "0.085",
+   "delay_s": "0.86",
+   "fees_usd": "0.4158",
+   "status": "FILLED",
+   "qty": "0.06808405481314674",
+   "usd": "88.49",
+   "pnl_usd": "",
+   "reason": "score 72, stop 1195.78 (-8.0%), TP 1611.71"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "side": "BUY",
+   "symbol": "BNB",
+   "mint": "MAJOR:binancecoin",
+   "source": "MAJOR",
+   "venue": "CEX book (sim)",
+   "intended": "747.67",
+   "filled": "748.29217",
+   "slip_pct": "0.083",
+   "delay_s": "1.02",
+   "fees_usd": "0.4742",
+   "status": "FILLED",
+   "qty": "0.11826040614805156",
+   "usd": "88.49",
+   "pnl_usd": "",
+   "reason": "score 77, stop 712.742 (-4.8%), TP 854.942"
+  },
+  {
+   "time": "2026-10-29T10:00:48-05:00",
+   "side": "BUY",
+   "symbol": "DOGPEP",
+   "mint": "SIM00327DOGPEP",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.0065235548",
+   "filled": "0.0065099308",
+   "slip_pct": "-0.209",
+   "delay_s": "4.0",
+   "fees_usd": "0.2759",
+   "status": "FILLED",
+   "qty": "13596.981521841386",
+   "usd": "88.52",
+   "pnl_usd": "",
+   "reason": "score 82, stop 0.0061193349"
+  },
   {
    "time": "2026-10-29T09:24:36-05:00",
    "side": "SELL",
@@ -1650,12 +1996,156 @@
    "usd": "69.69",
    "pnl_usd": "-9.84",
    "reason": "-6% hard stop gap -6.2% vs stop"
+  },
+  {
+   "time": "2026-10-28T20:02:41-05:00",
+   "side": "BUY",
+   "symbol": "CATS",
+   "mint": "SIM00046CATS",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.0028827",
+   "filled": "0.0029243024",
+   "slip_pct": "1.443",
+   "delay_s": "2.49",
+   "fees_usd": "0.2565",
+   "status": "FILLED",
+   "qty": "26971.14592528255",
+   "usd": "78.87",
+   "pnl_usd": "",
+   "reason": "score 84, stop 0.0027488443"
+  },
+  {
+   "time": "2026-10-28T20:02:41-05:00",
+   "side": "BUY",
+   "symbol": "MEOWDOG",
+   "mint": "SIM00044MEOWDOG",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.0050272523",
+   "filled": "0.0050719704",
+   "slip_pct": "0.89",
+   "delay_s": "0.91",
+   "fees_usd": "0.25",
+   "status": "FILLED",
+   "qty": "15589.794294886082",
+   "usd": "79.07",
+   "pnl_usd": "",
+   "reason": "score 74, stop 0.0047676522"
+  },
+  {
+   "time": "2026-10-28T19:56:24-05:00",
+   "side": "SELL",
+   "symbol": "GIGAD",
+   "mint": "SIM00014GIGAD",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0051622501",
+   "filled": "0.0051875508",
+   "slip_pct": "-0.49",
+   "delay_s": "4.4",
+   "fees_usd": "0.757",
+   "status": "FILLED",
+   "qty": "14092.63802015519",
+   "usd": "73.11",
+   "pnl_usd": "-8.07",
+   "reason": "-6% hard stop gap -2.1% vs stop"
+  },
+  {
+   "time": "2026-10-28T19:55:52-05:00",
+   "side": "SELL",
+   "symbol": "WIFPU",
+   "mint": "SIM00013WIFPU",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.00028476135",
+   "filled": "0.00028517818",
+   "slip_pct": "-0.146",
+   "delay_s": "6.56",
+   "fees_usd": "0.2958",
+   "status": "FILLED",
+   "qty": "259115.68734870284",
+   "usd": "73.89",
+   "pnl_usd": "-6.51",
+   "reason": "-6% hard stop gap -1.4% vs stop"
+  },
+  {
+   "time": "2026-10-28T19:55:51-05:00",
+   "side": "BUY",
+   "symbol": "WIFPU",
+   "mint": "SIM00013WIFPU",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.00030165686",
+   "filled": "0.00030783873",
+   "slip_pct": "2.049",
+   "delay_s": "7.27",
+   "fees_usd": "0.3378",
+   "status": "FILLED",
+   "qty": "259115.68734870284",
+   "usd": "79.77",
+   "pnl_usd": "",
+   "reason": "score 74, stop 0.0002893684"
+  },
+  {
+   "time": "2026-10-28T19:55:50-05:00",
+   "side": "BUY",
+   "symbol": "GIGAD",
+   "mint": "SIM00014GIGAD",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0056345104",
+   "filled": "0.0056349025",
+   "slip_pct": "0.007",
+   "delay_s": "7.06",
+   "fees_usd": "1.0064",
+   "status": "FILLED",
+   "qty": "14092.63802015519",
+   "usd": "79.41",
+   "pnl_usd": "",
+   "reason": "score 71, stop 0.0052968084"
+  },
+  {
+   "time": "2026-10-28T19:55:49-05:00",
+   "side": "BUY",
+   "symbol": "WIF",
+   "mint": "SIM00008WIF",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0017181968",
+   "filled": "0.0017473324",
+   "slip_pct": "1.696",
+   "delay_s": "3.3",
+   "fees_usd": "0.9282",
+   "status": "FILLED",
+   "qty": "45500.04422202123",
+   "usd": "79.5",
+   "pnl_usd": "",
+   "reason": "score 74, stop 0.0016424924"
   }
  ],
  "failed_fills": 1,
- "fees_paid": 24.95,
- "sol_usd": 101.74,
+ "fees_paid": 26.12,
+ "sol_usd": 101.63,
  "judge_rejections": [
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "TRX",
+   "mint": "MAJOR:tron",
+   "rule": "Judge rejected",
+   "detail": "red flag: uptrend"
+  },
+  {
+   "time": "2026-10-29T10:03:12-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "HYPE",
+   "mint": "MAJOR:hyperliquid",
+   "rule": "Judge rejected",
+   "detail": "red flag: no_spike"
+  },
   {
    "time": "2026-10-29T09:07:23-05:00",
    "source": "SIM-FEED",
@@ -1923,5 +2413,346 @@
    "win": false
   }
  ],
- "recap": "SUNNY AI MORNING RECAP 2026-10-29 (PAPER TRADING - SIMULATED)\nEquity $1,126.85 (+12.68%), cash $1,126.85, open 0\nKills last 24h: 218\n  Score <70: 91\n  Mint/freeze: 42\n  Liq <$40k: 30\n  LP not burned: 25\n  1h vol <$50k: 13\n  Judge rejected: 9\n  Already +80% 1h: 4\n  Dev >3% / past rugs: 3\n  Top 10 holders: 1\nOpen positions:\n"
+ "recap": "SUNNY AI MORNING RECAP 2026-10-29 (PAPER TRADING - SIMULATED)\nEquity $1,126.85 (+12.68%), cash $1,126.85, open 0\nKills last 24h: 218\n  Score <70: 91\n  Mint/freeze: 42\n  Liq <$40k: 30\n  LP not burned: 25\n  1h vol <$50k: 13\n  Judge rejected: 9\n  Already +80% 1h: 4\n  Dev >3% / past rugs: 3\n  Top 10 holders: 1\nOpen positions:\n",
+ "lanes": {
+  "SOLANA": {
+   "realized": 106.44,
+   "unrealized": -4.55,
+   "pnl": 101.89,
+   "open": 1,
+   "open_value": 84.24,
+   "buys": 24,
+   "closed": 23
+  },
+  "MAJOR": {
+   "realized": 0,
+   "unrealized": -0.69,
+   "pnl": -0.69,
+   "open": 2,
+   "open_value": 177.18,
+   "buys": 2,
+   "closed": 0
+  }
+ },
+ "major": {
+  "last_scan": 1793286192.0869775,
+  "counts": {
+   "scanned": 33,
+   "killed": 29,
+   "passed": 4,
+   "judged": 4,
+   "judge_rejected": 2,
+   "trades": 2
+  },
+  "activity": {
+   "Risk": "Watching 2 MAJOR open (stop -4%..-8% / 2xATR, trail after +6%)",
+   "Scout": "Scouted top 25 majors by market cap (CoinGecko)",
+   "Filter": "Filter killed $HBAR - Analyst < 70",
+   "Analyst": "Top major $BNB 77/100, 4 passed 70+",
+   "Judge": "Judge passed 2/4 majors",
+   "Executor": "Bought $ZEC $88.49 slip 0.085%",
+   "Logger": "MAJOR scan logged 29 kills, 2 entries"
+  },
+  "traded": [
+   "MAJOR:binancecoin",
+   "MAJOR:zcash"
+  ],
+  "last_run": {
+   "time": "2026-10-29T10:03:12-05:00",
+   "scanned": 33,
+   "killed": 29,
+   "passed": 4,
+   "approved": 2,
+   "traded": 2,
+   "scores": [
+    {
+     "symbol": "BNB",
+     "score": 77,
+     "parts": {
+      "trend": 30,
+      "rsi": 12,
+      "macd": 10,
+      "volume": 10,
+      "breakout": 15
+     },
+     "rsi14": 52.0,
+     "judge_p": 1.0
+    },
+    {
+     "symbol": "HYPE",
+     "score": 74,
+     "parts": {
+      "trend": 30,
+      "rsi": 4,
+      "macd": 15,
+      "volume": 10,
+      "breakout": 15
+     },
+     "rsi14": 65.1,
+     "judge_p": 0.8
+    },
+    {
+     "symbol": "TRX",
+     "score": 72,
+     "parts": {
+      "trend": 20,
+      "rsi": 12,
+      "macd": 15,
+      "volume": 10,
+      "breakout": 15
+     },
+     "rsi14": 48.3,
+     "judge_p": 0.75
+    },
+    {
+     "symbol": "ZEC",
+     "score": 72,
+     "parts": {
+      "trend": 30,
+      "rsi": 12,
+      "macd": 20,
+      "volume": 5,
+      "breakout": 5
+     },
+     "rsi14": 54.1,
+     "judge_p": 0.85
+    },
+    {
+     "symbol": "XMR",
+     "score": 68,
+     "parts": {
+      "trend": 30,
+      "rsi": 8,
+      "macd": 15,
+      "volume": 5,
+      "breakout": 10
+     },
+     "rsi14": 57.2,
+     "judge_p": null
+    },
+    {
+     "symbol": "BTC",
+     "score": 67,
+     "parts": {
+      "trend": 30,
+      "rsi": 12,
+      "macd": 5,
+      "volume": 10,
+      "breakout": 10
+     },
+     "rsi14": 47.2,
+     "judge_p": null
+    },
+    {
+     "symbol": "UNI",
+     "score": 62,
+     "parts": {
+      "trend": 30,
+      "rsi": 12,
+      "macd": 15,
+      "volume": 0,
+      "breakout": 5
+     },
+     "rsi14": 47.7,
+     "judge_p": null
+    },
+    {
+     "symbol": "NEAR",
+     "score": 52,
+     "parts": {
+      "trend": 30,
+      "rsi": 12,
+      "macd": 10,
+      "volume": 0,
+      "breakout": 0
+     },
+     "rsi14": 46.7,
+     "judge_p": null
+    },
+    {
+     "symbol": "ETH",
+     "score": 51,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 5
+     },
+     "rsi14": 37.7,
+     "judge_p": null
+    },
+    {
+     "symbol": "LTC",
+     "score": 51,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 10,
+      "breakout": 0
+     },
+     "rsi14": 42.5,
+     "judge_p": null
+    },
+    {
+     "symbol": "SUI",
+     "score": 51,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 10,
+      "breakout": 0
+     },
+     "rsi14": 42.2,
+     "judge_p": null
+    },
+    {
+     "symbol": "SOL",
+     "score": 46,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 0
+     },
+     "rsi14": 38.7,
+     "judge_p": null
+    },
+    {
+     "symbol": "LINK",
+     "score": 46,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 0
+     },
+     "rsi14": 42.8,
+     "judge_p": null
+    },
+    {
+     "symbol": "BCH",
+     "score": 46,
+     "parts": {
+      "trend": 10,
+      "rsi": 6,
+      "macd": 10,
+      "volume": 15,
+      "breakout": 5
+     },
+     "rsi14": 49.4,
+     "judge_p": null
+    },
+    {
+     "symbol": "TAO",
+     "score": 46,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 0
+     },
+     "rsi14": 42.1,
+     "judge_p": null
+    },
+    {
+     "symbol": "AVAX",
+     "score": 41,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 0,
+      "breakout": 0
+     },
+     "rsi14": 36.5,
+     "judge_p": null
+    },
+    {
+     "symbol": "DOGE",
+     "score": 31,
+     "parts": {
+      "trend": 0,
+      "rsi": 6,
+      "macd": 15,
+      "volume": 5,
+      "breakout": 5
+     },
+     "rsi14": 42.9,
+     "judge_p": null
+    },
+    {
+     "symbol": "SHIB",
+     "score": 31,
+     "parts": {
+      "trend": 0,
+      "rsi": 6,
+      "macd": 15,
+      "volume": 10,
+      "breakout": 0
+     },
+     "rsi14": 41.5,
+     "judge_p": null
+    },
+    {
+     "symbol": "XRP",
+     "score": 26,
+     "parts": {
+      "trend": 0,
+      "rsi": 6,
+      "macd": 10,
+      "volume": 5,
+      "breakout": 5
+     },
+     "rsi14": 41.4,
+     "judge_p": null
+    },
+    {
+     "symbol": "ADA",
+     "score": 12,
+     "parts": {
+      "trend": 0,
+      "rsi": 2,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 0
+     },
+     "rsi14": 35.5,
+     "judge_p": null
+    },
+    {
+     "symbol": "XLM",
+     "score": 12,
+     "parts": {
+      "trend": 0,
+      "rsi": 2,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 0
+     },
+     "rsi14": 37.2,
+     "judge_p": null
+    },
+    {
+     "symbol": "HBAR",
+     "score": 12,
+     "parts": {
+      "trend": 0,
+      "rsi": 2,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 0
+     },
+     "rsi14": 32.2,
+     "judge_p": null
+    }
+   ]
+  },
+  "next_scan_in_s": 1107
+ }
 }
