@@ -1,7 +1,7 @@
 {
- "updated": "2026-10-29T01:33:49-05:00",
+ "updated": "2026-10-29T02:07:01-05:00",
  "start": 1000.0,
- "equity": 1016.29,
+ "equity": 1059.51,
  "cash": 820.85,
  "curve": [
   [
@@ -307,6 +307,14 @@
   [
    1793255629,
    1016.29
+  ],
+  [
+   1793255811,
+   1018.74
+  ],
+  [
+   1793257621,
+   1059.51
   ]
  ],
  "positions": {
@@ -318,9 +326,9 @@
    "qty": 74519.28230228355,
    "usd": 77.75615411786886,
    "entry_fees": 0.8087,
-   "stop": 0.0013973687251965514,
-   "high": 0.0014865624736133526,
-   "last": 0.0014865624736133526,
+   "stop": 0.0018523002874566285,
+   "high": 0.001970532220698541,
+   "last": 0.001970532220698541,
    "trailing": true,
    "time": "2026-10-29T00:15:47-05:00",
    "score": 78,
@@ -334,18 +342,18 @@
    "qty": 8019.0210800395635,
    "usd": 79.62885012361157,
    "entry_fees": 0.8041,
-   "stop": 0.009334196576999843,
-   "high": 0.010557926021485288,
-   "last": 0.010557926021485288,
-   "trailing": false,
+   "stop": 0.010762602635558387,
+   "high": 0.011449577271870626,
+   "last": 0.011449577271870626,
+   "trailing": true,
    "time": "2026-10-29T01:18:24-05:00",
    "score": 82,
    "judge_p": 0.75
   }
  },
  "counts": {
-  "scanned": 162,
-  "killed": 143,
+  "scanned": 166,
+  "killed": 147,
   "passed": 24,
   "trades": 18,
   "judged": 23,
@@ -358,9 +366,9 @@
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 85 checked)",
-  "Filter": "Filter killed $SNEKY - Score <70",
-  "Analyst": "Best score 54 - none 70+",
+  "Scout": "Scouted 1 new pairs (of 86 checked)",
+  "Filter": "Filter killed $FROGB - Mint/freeze",
+  "Analyst": "Nothing to score",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 2 open, stops set",
@@ -370,14 +378,46 @@
   "Already +80% 1h": 3,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 60,
+  "Score <70": 62,
   "LP not burned": 14,
-  "Mint/freeze": 26,
+  "Mint/freeze": 28,
   "Liq <$40k": 20,
   "Judge rejected": 5,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T02:07:01-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGB",
+   "mint": "SIM00171FROGB",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T01:36:51-05:00",
+   "source": "SIM-FEED",
+   "symbol": "WIFZO",
+   "mint": "SIM00170WIFZO",
+   "rule": "Score <70",
+   "detail": "score 49"
+  },
+  {
+   "time": "2026-10-29T01:36:51-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BULLBUL",
+   "mint": "SIM00168BULLBUL",
+   "rule": "Score <70",
+   "detail": "score 62"
+  },
+  {
+   "time": "2026-10-29T01:36:51-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADMO",
+   "mint": "SIM00169CHADMO",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-29T01:33:49-05:00",
    "source": "SIM-FEED",
@@ -665,38 +705,6 @@
    "mint": "SIM00123MOOND",
    "rule": "LP not burned",
    "detail": "LP locked/burned 0%"
-  },
-  {
-   "time": "2026-10-28T23:06:14-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOM",
-   "mint": "SIM00121ZOOM",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-28T23:06:14-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADPUM",
-   "mint": "SIM00122TOADPUM",
-   "rule": "Score <70",
-   "detail": "score 60"
-  },
-  {
-   "time": "2026-10-28T23:02:49-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLOAPE",
-   "mint": "SIM00120YOLOAPE",
-   "rule": "Liq <$40k",
-   "detail": "liq $15,206"
-  },
-  {
-   "time": "2026-10-28T23:02:49-05:00",
-   "source": "REAL-DATA",
-   "symbol": "CPU",
-   "mint": "5JbRYEz844bwnKbGx4dRHhrJ6zjrJ194CKdDXtzwgaXo",
-   "rule": "Already +80% 1h",
-   "detail": "+110% 1h"
   }
  ],
  "trades": [
@@ -1297,7 +1305,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 16.19,
- "sol_usd": 100.099,
+ "sol_usd": 99.86,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
