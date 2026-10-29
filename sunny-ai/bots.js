@@ -5,11 +5,11 @@ const S=(d)=>`<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stro
 const B={
  Sunny:  {c:"#F5A524",t:"#F7B544",role:"Desk lead",icon:S('<circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>')},
  Seedling:{c:"#3FB950",t:"#56C764",role:"Major-coin swing trader",icon:S('<path d="M12 21v-8"/><path d="M12 13c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 15c0-3-2.5-5-7-5 0 3 2.5 5 7 5z"/>')},
- Willow: {c:"#5FB3A1",t:"#72C2B1",role:"Team bot",icon:S('<path d="M12 3v18"/><path d="M12 6c-3 1-5 4-5.5 9M12 6c3 1 5 4 5.5 9M12 9c-2 1.5-3 4-3 8M12 9c2 1.5 3 4 3 8"/>')},
+ Willow: {c:"#5FB3A1",t:"#72C2B1",role:"Trade reviewer & coach",icon:S('<path d="M12 3v18"/><path d="M12 6c-3 1-5 4-5.5 9M12 6c3 1 5 4 5.5 9M12 9c-2 1.5-3 4-3 8M12 9c2 1.5 3 4 3 8"/>')},
  Owl:    {c:"#4C6EF5",t:"#8098F8",role:"Strategy scholar",icon:S('<path d="M5 4l3 3h8l3-3v9a7 7 0 0 1-14 0z"/><circle cx="9.5" cy="11" r="1.8"/><circle cx="14.5" cy="11" r="1.8"/><path d="M11 15l1 1.2 1-1.2"/>')},
- Lark:   {c:"#74C0FC",t:"#8CCBFD",role:"Team bot",icon:S('<path d="M3 13c3-1 5-4 9-4 3 0 5 2 6 4l3-1-2 3c-1 3-4 5-8 5-3 0-6-2-8-7z"/><path d="M9 9l2-4 2 4"/><circle cx="16" cy="12" r=".6" fill="currentColor"/>')},
- Heron:  {c:"#6C9BA8",t:"#8DB3BE",role:"Team bot",icon:S('<path d="M14 3c2 0 3 1.5 3 3l3 .5-3 .8c-.5 1.5-2 2.2-3 3.2-1.5 1.5-1 4 1 5.5H8c-2-1-3-3-2-5"/><path d="M11 16v5M14 16l1 5"/>')},
- Petrel: {c:"#1C7ED6",t:"#4DA3F0",role:"Team bot",icon:S('<path d="M2 17c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M4 9c3 0 5-3 8-3 3 0 5 3 8 3M12 6v3"/>')},
+ Lark:   {c:"#74C0FC",t:"#8CCBFD",role:"News digest (every 4h)",icon:S('<path d="M3 13c3-1 5-4 9-4 3 0 5 2 6 4l3-1-2 3c-1 3-4 5-8 5-3 0-6-2-8-7z"/><path d="M9 9l2-4 2 4"/><circle cx="16" cy="12" r=".6" fill="currentColor"/>')},
+ Heron:  {c:"#6C9BA8",t:"#8DB3BE",role:"Price watcher (top 20)",icon:S('<path d="M14 3c2 0 3 1.5 3 3l3 .5-3 .8c-.5 1.5-2 2.2-3 3.2-1.5 1.5-1 4 1 5.5H8c-2-1-3-3-2-5"/><path d="M11 16v5M14 16l1 5"/>')},
+ Petrel: {c:"#1C7ED6",t:"#4DA3F0",role:"Macro events tracker",icon:S('<path d="M2 17c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M4 9c3 0 5-3 8-3 3 0 5 3 8 3M12 6v3"/>')},
  Sequoia:{c:"#A0522D",t:"#D07A4E",c2:"#2F7D4F",role:"Market historian",icon:S('<path d="M12 2l-4 6h2.5L7 13h3l-4 5h12l-4-5h3l-3.5-5H16z"/><path d="M12 18v4"/>')}};
 window.SUNNY_BOTS=B;
 const css=Object.entries(B).map(([n,b])=>`--bot-${n.toLowerCase()}:${b.c};--bot-${n.toLowerCase()}-t:${b.t};`).join("");
