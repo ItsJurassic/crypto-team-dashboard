@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T21:38:26-05:00",
+ "updated": "2026-10-28T22:01:37-05:00",
  "start": 1000.0,
- "equity": 1042.99,
- "cash": 961.29,
+ "equity": 1035.92,
+ "cash": 1035.92,
  "curve": [
   [
    1793231266,
@@ -167,33 +167,24 @@
   [
    1793241506,
    1042.99
+  ],
+  [
+   1793241689,
+   1035.92
+  ],
+  [
+   1793242897,
+   1035.92
   ]
  ],
- "positions": {
-  "SIM00086TOADA": {
-   "symbol": "TOADA",
-   "source": "SIM-FEED",
-   "venue": "Raydium AMM",
-   "entry": 0.0019418616033951236,
-   "qty": 43376.20164447269,
-   "usd": 84.23058047452594,
-   "entry_fees": 0.2507,
-   "stop": 0.0018253499071914162,
-   "high": 0.0019418616033951236,
-   "last": 0.001883337479704736,
-   "trailing": false,
-   "time": "2026-10-28T21:18:14-05:00",
-   "score": 92,
-   "judge_p": 0.75
-  }
- },
+ "positions": {},
  "counts": {
-  "scanned": 88,
-  "killed": 77,
-  "passed": 14,
+  "scanned": 92,
+  "killed": 81,
+  "passed": 15,
   "trades": 10,
-  "judged": 13,
-  "judge_rejected": 3
+  "judged": 14,
+  "judge_rejected": 4
  },
  "last_run": {
   "scanned": 3,
@@ -203,25 +194,57 @@
  },
  "activity": {
   "Scout": "Scouted 3 new pairs (of 88 checked)",
-  "Filter": "Filter killed $CHADZO - Score <70",
-  "Analyst": "Best score 60 - none 70+",
-  "Judge": "Nothing to judge",
+  "Filter": "Filter killed $CHADDO - Judge rejected",
+  "Analyst": "Approved $CHADDO score 74",
+  "Judge": "Judge rejected $CHADDO - red flag: lp_99",
   "Executor": "No approved entries",
-  "Risk": "Closed $MEOW -6.77",
-  "Logger": "Logged 3 kills, 1 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 3 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 2,
   "1h vol <$50k": 8,
   "Top 10 holders": 1,
-  "Score <70": 35,
+  "Score <70": 37,
   "LP not burned": 9,
   "Mint/freeze": 11,
-  "Liq <$40k": 7,
-  "Judge rejected": 3,
+  "Liq <$40k": 8,
+  "Judge rejected": 4,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T22:01:37-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADDO",
+   "mint": "SIM00093CHADDO",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
+  {
+   "time": "2026-10-28T22:01:37-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOBAS",
+   "mint": "SIM00092YOLOBAS",
+   "rule": "Score <70",
+   "detail": "score 48"
+  },
+  {
+   "time": "2026-10-28T22:01:37-05:00",
+   "source": "SIM-FEED",
+   "symbol": "TOAD",
+   "mint": "SIM00068TOAD",
+   "rule": "Liq <$40k",
+   "detail": "liq $8,527"
+  },
+  {
+   "time": "2026-10-28T21:41:29-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWWIF",
+   "mint": "SIM00091MEOWWIF",
+   "rule": "Score <70",
+   "detail": "score 52"
+  },
   {
    "time": "2026-10-28T21:38:26-05:00",
    "source": "SIM-FEED",
@@ -509,41 +532,27 @@
    "mint": "SIM00047ZOOMAPE",
    "rule": "Liq <$40k",
    "detail": "liq $37,433"
-  },
-  {
-   "time": "2026-10-28T20:02:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADWIF",
-   "mint": "SIM00045CHADWIF",
-   "rule": "Score <70",
-   "detail": "score 61"
-  },
-  {
-   "time": "2026-10-28T20:02:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDBU",
-   "mint": "SIM00021BASEDBU",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T20:02:32-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARCH",
-   "mint": "SIM00041BEARCH",
-   "rule": "Score <70",
-   "detail": "score 58"
-  },
-  {
-   "time": "2026-10-28T20:02:27-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BULLWIF",
-   "mint": "SIM00040BULLWIF",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T21:41:29-05:00",
+   "side": "SELL",
+   "symbol": "TOADA",
+   "mint": "SIM00086TOADA",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.0017144186",
+   "filled": "0.0017251405",
+   "slip_pct": "-0.625",
+   "delay_s": "7.12",
+   "fees_usd": "0.2061",
+   "status": "FILLED",
+   "qty": "43376.20164447269",
+   "usd": "74.83",
+   "pnl_usd": "-9.86",
+   "reason": "-6% hard stop gap -5.5% vs stop"
+  },
   {
    "time": "2026-10-28T21:38:26-05:00",
    "side": "SELL",
@@ -870,9 +879,17 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 8.98,
- "sol_usd": 99.26,
+ "fees_paid": 9.19,
+ "sol_usd": 99.96,
  "judge_rejections": [
+  {
+   "time": "2026-10-28T22:01:37-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADDO",
+   "mint": "SIM00093CHADDO",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
   {
    "time": "2026-10-28T20:24:11-05:00",
    "source": "SIM-FEED",
@@ -961,6 +978,14 @@
    "mint": "SIM00081MEOW",
    "judge_p": 0.65,
    "pnl": -6.77,
+   "win": false
+  },
+  {
+   "time": "2026-10-28T21:41:29-05:00",
+   "symbol": "TOADA",
+   "mint": "SIM00086TOADA",
+   "judge_p": 0.75,
+   "pnl": -9.86,
    "win": false
   }
  ],
