@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T21:18:14-05:00",
+ "updated": "2026-10-28T21:38:26-05:00",
  "start": 1000.0,
- "equity": 1052.63,
- "cash": 883.57,
+ "equity": 1042.99,
+ "cash": 961.29,
  "curve": [
   [
    1793231266,
@@ -159,25 +159,17 @@
   [
    1793240294,
    1052.63
+  ],
+  [
+   1793240476,
+   1044.64
+  ],
+  [
+   1793241506,
+   1042.99
   ]
  ],
  "positions": {
-  "SIM00081MEOW": {
-   "symbol": "MEOW",
-   "source": "SIM-FEED",
-   "venue": "Raydium AMM",
-   "entry": 0.012611527147918284,
-   "qty": 6676.6910062259285,
-   "usd": 84.20326988328014,
-   "entry_fees": 0.2857,
-   "stop": 0.011854835519043186,
-   "high": 0.012705448281903339,
-   "last": 0.012705448281903339,
-   "trailing": false,
-   "time": "2026-10-28T21:04:36-05:00",
-   "score": 92,
-   "judge_p": 0.65
-  },
   "SIM00086TOADA": {
    "symbol": "TOADA",
    "source": "SIM-FEED",
@@ -188,7 +180,7 @@
    "entry_fees": 0.2507,
    "stop": 0.0018253499071914162,
    "high": 0.0019418616033951236,
-   "last": 0.0019418616033951236,
+   "last": 0.001883337479704736,
    "trailing": false,
    "time": "2026-10-28T21:18:14-05:00",
    "score": 92,
@@ -196,8 +188,8 @@
   }
  },
  "counts": {
-  "scanned": 81,
-  "killed": 70,
+  "scanned": 88,
+  "killed": 77,
   "passed": 14,
   "trades": 10,
   "judged": 13,
@@ -205,31 +197,87 @@
  },
  "last_run": {
   "scanned": 3,
-  "killed": 2,
-  "passed": 1,
-  "traded": 1
+  "killed": 3,
+  "passed": 0,
+  "traded": 0
  },
  "activity": {
   "Scout": "Scouted 3 new pairs (of 88 checked)",
-  "Filter": "Filter killed $MOONM - Score <70",
-  "Analyst": "Approved $TOADA score 92",
-  "Judge": "Judge passed $TOADA p=0.75",
-  "Executor": "Bought $TOADA $84.23 via Raydium AMM slip 0.062%",
-  "Risk": "Watching 2 open, stops set",
-  "Logger": "Logged 2 kills, 1 trade events"
+  "Filter": "Filter killed $CHADZO - Score <70",
+  "Analyst": "Best score 60 - none 70+",
+  "Judge": "Nothing to judge",
+  "Executor": "No approved entries",
+  "Risk": "Closed $MEOW -6.77",
+  "Logger": "Logged 3 kills, 1 trade events"
  },
  "kill_rules": {
-  "Already +80% 1h": 1,
-  "1h vol <$50k": 7,
+  "Already +80% 1h": 2,
+  "1h vol <$50k": 8,
   "Top 10 holders": 1,
-  "Score <70": 31,
+  "Score <70": 35,
   "LP not burned": 9,
-  "Mint/freeze": 10,
+  "Mint/freeze": 11,
   "Liq <$40k": 7,
   "Judge rejected": 3,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T21:38:26-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADZO",
+   "mint": "SIM00090CHADZO",
+   "rule": "Score <70",
+   "detail": "score 60"
+  },
+  {
+   "time": "2026-10-28T21:38:26-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PEPEBA",
+   "mint": "SIM00071PEPEBA",
+   "rule": "Score <70",
+   "detail": "score 36"
+  },
+  {
+   "time": "2026-10-28T21:38:26-05:00",
+   "source": "REAL-DATA",
+   "symbol": "SLEGO",
+   "mint": "HYv2VeLzVpGiGoBPbPmHDjJXNjBWsqz1axvZCv7Qpump",
+   "rule": "Already +80% 1h",
+   "detail": "+139% 1h"
+  },
+  {
+   "time": "2026-10-28T21:21:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADTOA",
+   "mint": "SIM00089CHADTOA",
+   "rule": "Score <70",
+   "detail": "score 60"
+  },
+  {
+   "time": "2026-10-28T21:21:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMTOA",
+   "mint": "SIM00042ZOOMTOA",
+   "rule": "Score <70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-28T21:21:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BONK",
+   "mint": "SIM00088BONK",
+   "rule": "1h vol <$50k",
+   "detail": "1h vol $30,147"
+  },
+  {
+   "time": "2026-10-28T21:21:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PUMPBEA",
+   "mint": "SIM00087PUMPBEA",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-28T21:18:14-05:00",
    "source": "SIM-FEED",
@@ -493,65 +541,27 @@
    "mint": "SIM00040BULLWIF",
    "rule": "LP not burned",
    "detail": "LP locked/burned 0%"
-  },
-  {
-   "time": "2026-10-28T20:02:27-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDSNE",
-   "mint": "SIM00006BASEDSNE",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T19:59:26-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLOBAS",
-   "mint": "SIM00038YOLOBAS",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T19:59:26-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMWI",
-   "mint": "SIM00020ZOOMWI",
-   "rule": "Liq <$40k",
-   "detail": "liq $10,321"
-  },
-  {
-   "time": "2026-10-28T19:56:24-05:00",
-   "source": "SIM-FEED",
-   "symbol": "APEDOG",
-   "mint": "SIM00036APEDOG",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $8,418"
-  },
-  {
-   "time": "2026-10-28T19:56:24-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADW",
-   "mint": "SIM00034TOADW",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $35,237"
-  },
-  {
-   "time": "2026-10-28T19:55:54-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PUMP",
-   "mint": "SIM00032PUMP",
-   "rule": "Score <70",
-   "detail": "score 53"
-  },
-  {
-   "time": "2026-10-28T19:55:54-05:00",
-   "source": "SIM-FEED",
-   "symbol": "WIFCH",
-   "mint": "SIM00033WIFCH",
-   "rule": "Liq <$40k",
-   "detail": "liq $34,813"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T21:38:26-05:00",
+   "side": "SELL",
+   "symbol": "MEOW",
+   "mint": "SIM00081MEOW",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.011715361",
+   "filled": "0.011674773",
+   "slip_pct": "0.346",
+   "delay_s": "1.18",
+   "fees_usd": "0.2254",
+   "status": "FILLED",
+   "qty": "6676.6910062259285",
+   "usd": "77.95",
+   "pnl_usd": "-6.77",
+   "reason": "-6% hard stop gap -1.5% vs stop"
+  },
   {
    "time": "2026-10-28T21:18:14-05:00",
    "side": "BUY",
@@ -860,8 +870,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 8.76,
- "sol_usd": 99.57,
+ "fees_paid": 8.98,
+ "sol_usd": 99.26,
  "judge_rejections": [
   {
    "time": "2026-10-28T20:24:11-05:00",
@@ -943,6 +953,14 @@
    "mint": "J7cqsaTuXUavwA3sp238tSpartUfYwDrJAaHuDvypump",
    "judge_p": 0.75,
    "pnl": -10.59,
+   "win": false
+  },
+  {
+   "time": "2026-10-28T21:38:26-05:00",
+   "symbol": "MEOW",
+   "mint": "SIM00081MEOW",
+   "judge_p": 0.65,
+   "pnl": -6.77,
    "win": false
   }
  ],
