@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T23:15:17-05:00",
+ "updated": "2026-10-28T23:34:23-05:00",
  "start": 1000.0,
- "equity": 990.36,
- "cash": 911.11,
+ "equity": 977.71,
+ "cash": 899.46,
  "curve": [
   [
    1793231266,
@@ -239,48 +239,52 @@
   [
    1793247317,
    990.36
+  ],
+  [
+   1793248463,
+   977.71
   ]
  ],
  "positions": {
-  "SIM00131YOLOCAT": {
-   "symbol": "YOLOCAT",
+  "SIM00130MEOWGIG": {
+   "symbol": "MEOWGIG",
    "source": "SIM-FEED",
    "venue": "Raydium AMM",
-   "entry": 0.002014859437873326,
-   "qty": 39332.7065758035,
-   "usd": 79.24987506135992,
-   "entry_fees": 0.2632,
-   "stop": 0.0018939678716009263,
-   "high": 0.002014859437873326,
-   "last": 0.002014859437873326,
+   "entry": 0.0004402592202700298,
+   "qty": 177721.61450246046,
+   "usd": 78.24357942598407,
+   "entry_fees": 0.3367,
+   "stop": 0.000413843667053828,
+   "high": 0.0004402592202700298,
+   "last": 0.0004402592202700298,
    "trailing": false,
-   "time": "2026-10-28T23:15:17-05:00",
-   "score": 87,
+   "time": "2026-10-28T23:34:23-05:00",
+   "score": 77,
    "judge_p": 0.75
   }
  },
  "counts": {
-  "scanned": 127,
-  "killed": 112,
-  "passed": 20,
-  "trades": 14,
-  "judged": 19,
+  "scanned": 131,
+  "killed": 115,
+  "passed": 21,
+  "trades": 15,
+  "judged": 20,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 1,
+  "scanned": 4,
+  "killed": 3,
   "passed": 1,
   "traded": 1
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 87 checked)",
-  "Filter": "Filter killed $CHADCHA - Liq <$40k",
-  "Analyst": "Approved $YOLOCAT score 87",
-  "Judge": "Judge passed $YOLOCAT p=0.75",
-  "Executor": "Bought $YOLOCAT $79.25 via Raydium AMM slip 0.739%",
-  "Risk": "Closed $BEARPU -6.35",
-  "Logger": "Logged 1 kills, 2 trade events"
+  "Scout": "Scouted 4 new pairs (of 85 checked)",
+  "Filter": "Filter killed $PUMPB - Mint/freeze",
+  "Analyst": "Approved $MEOWGIG score 77",
+  "Judge": "Judge passed $MEOWGIG p=0.75",
+  "Executor": "Bought $MEOWGIG $78.24 via Raydium AMM slip 1.235%",
+  "Risk": "Closed $YOLOCAT -12.58",
+  "Logger": "Logged 3 kills, 2 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
@@ -288,12 +292,36 @@
   "Top 10 holders": 1,
   "Score <70": 49,
   "LP not burned": 12,
-  "Mint/freeze": 18,
-  "Liq <$40k": 14,
+  "Mint/freeze": 20,
+  "Liq <$40k": 15,
   "Judge rejected": 5,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:34:23-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PUMPB",
+   "mint": "SIM00134PUMPB",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-28T23:34:23-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGME",
+   "mint": "SIM00133FROGME",
+   "rule": "Liq <$40k",
+   "detail": "liq $11,779"
+  },
+  {
+   "time": "2026-10-28T23:34:23-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEK",
+   "mint": "SIM00132SNEK",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-28T23:15:17-05:00",
    "source": "SIM-FEED",
@@ -589,33 +617,45 @@
    "mint": "SIM00071PEPEBA",
    "rule": "Score <70",
    "detail": "score 36"
-  },
-  {
-   "time": "2026-10-28T21:38:26-05:00",
-   "source": "REAL-DATA",
-   "symbol": "SLEGO",
-   "mint": "HYv2VeLzVpGiGoBPbPmHDjJXNjBWsqz1axvZCv7Qpump",
-   "rule": "Already +80% 1h",
-   "detail": "+139% 1h"
-  },
-  {
-   "time": "2026-10-28T21:21:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADTOA",
-   "mint": "SIM00089CHADTOA",
-   "rule": "Score <70",
-   "detail": "score 60"
-  },
-  {
-   "time": "2026-10-28T21:21:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMTOA",
-   "mint": "SIM00042ZOOMTOA",
-   "rule": "Score <70",
-   "detail": "score 12"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T23:34:23-05:00",
+   "side": "BUY",
+   "symbol": "MEOWGIG",
+   "mint": "SIM00130MEOWGIG",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.00043488756",
+   "filled": "0.00044025922",
+   "slip_pct": "1.235",
+   "delay_s": "3.01",
+   "fees_usd": "0.3367",
+   "status": "FILLED",
+   "qty": "177721.61450246046",
+   "usd": "78.24",
+   "pnl_usd": "",
+   "reason": "score 77, stop 0.00041384367"
+  },
+  {
+   "time": "2026-10-28T23:34:23-05:00",
+   "side": "SELL",
+   "symbol": "YOLOCAT",
+   "mint": "SIM00131YOLOCAT",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.0017439529",
+   "filled": "0.0017084326",
+   "slip_pct": "2.037",
+   "delay_s": "7.9",
+   "fees_usd": "0.2629",
+   "status": "FILLED",
+   "qty": "39332.7065758035",
+   "usd": "67.2",
+   "pnl_usd": "-12.58",
+   "reason": "-6% hard stop gap -9.8% vs stop"
+  },
   {
    "time": "2026-10-28T23:15:17-05:00",
    "side": "BUY",
@@ -1086,8 +1126,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 12.0,
- "sol_usd": 99.59,
+ "fees_paid": 12.6,
+ "sol_usd": 99.67,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
@@ -1225,6 +1265,14 @@
    "mint": "SIM00125BEARPU",
    "judge_p": 0.75,
    "pnl": -6.35,
+   "win": false
+  },
+  {
+   "time": "2026-10-28T23:34:23-05:00",
+   "symbol": "YOLOCAT",
+   "mint": "SIM00131YOLOCAT",
+   "judge_p": 0.75,
+   "pnl": -12.58,
    "win": false
   }
  ],
