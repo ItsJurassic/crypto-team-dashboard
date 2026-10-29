@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T02:37:07-05:00",
+ "updated": "2026-10-29T03:02:40-05:00",
  "start": 1000.0,
  "equity": 1058.49,
  "cash": 1058.49,
@@ -343,37 +343,41 @@
   [
    1793259427,
    1058.49
+  ],
+  [
+   1793260960,
+   1058.49
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 184,
-  "killed": 165,
+  "scanned": 185,
+  "killed": 166,
   "passed": 25,
   "trades": 18,
   "judged": 24,
   "judge_rejected": 6
  },
  "last_run": {
-  "scanned": 4,
-  "killed": 4,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 4 new pairs (of 85 checked)",
-  "Filter": "Filter killed $DOGAPE - Score <70",
-  "Analyst": "Best score 65 - none 70+",
+  "Scout": "Scouted 1 new pairs (of 87 checked)",
+  "Filter": "Filter killed $CHADPU - Score <70",
+  "Analyst": "Best score 42 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 4 kills, 0 trade events"
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 70,
+  "Score <70": 71,
   "LP not burned": 19,
   "Mint/freeze": 30,
   "Liq <$40k": 21,
@@ -381,6 +385,14 @@
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T03:02:40-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADPU",
+   "mint": "SIM00190CHADPU",
+   "rule": "Score <70",
+   "detail": "score 42"
+  },
   {
    "time": "2026-10-29T02:37:07-05:00",
    "source": "SIM-FEED",
@@ -692,14 +704,6 @@
    "mint": "SIM00148ZOOMY",
    "rule": "1h vol <$50k",
    "detail": "1h vol $7,579"
-  },
-  {
-   "time": "2026-10-29T00:11:43-05:00",
-   "source": "SIM-FEED",
-   "symbol": "APE",
-   "mint": "SIM00146APE",
-   "rule": "Liq <$40k",
-   "detail": "liq $29,025"
   }
  ],
  "trades": [
@@ -1336,7 +1340,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 18.71,
- "sol_usd": 99.75,
+ "sol_usd": 99.78,
  "judge_rejections": [
   {
    "time": "2026-10-29T02:10:04-05:00",
