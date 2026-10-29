@@ -1,6 +1,6 @@
 {
- "state": "Watching",
- "coin": "",
- "reason": "No signal. Closest: ZEC S1 needs close >$1,316 (+0.7%); ETH/SOL S3 need RSI<30 or close below lower band; BCH S1 50d SMA 2.3% under 200d.",
- "updated": "Oct 28, 2026, 11:18 AM CT"
+ "state": "Buying",
+ "coin": "BNB",
+ "reason": "S1 trend signal on the Oct 28 daily close ($758.84 above 50d SMA $749.6, 50d above 200d, new 20-day closing high). Paper-bought 0.4082 BNB at $760.44, stop $721.06, target $868.31.",
+ "updated": "Oct 28, 2026, 7:10 PM CT"
 }

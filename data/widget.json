@@ -1,8 +1,8 @@
 {
- "state": "Watching",
- "color": "#3b82f6",
- "coin": "",
- "reason": "No signal. Closest: ZEC S1 needs close >$1,316 (+0.7%); ETH/SOL S3 need RSI<30 or close below lower band; BCH S1 50d SMA 2.3% under 200d.",
+ "state": "Buying",
+ "color": "#22c55e",
+ "coin": "BNB",
+ "reason": "S1 trend signal on the Oct 28 daily close ($758.84 above 50d SMA $749.6, 50d above 200d, new 20-day closing high). Paper-bought 0.4082 BNB at $760.44, stop $721.06, target $868.31.",
  "balance": 2000,
  "pnl": 0,
  "pnl_pct": 0.0,
@@ -19,7 +19,7 @@
   }
  },
  "prices_as_of": "5:11 PM CT",
- "last_trade": "No trades yet",
- "updated": "Oct 28, 2026, 6:08 PM CT",
+ "last_trade": "BUY BNB @ $760.44 2026-10-28",
+ "updated": "Oct 28, 2026, 7:09 PM CT",
  "url": "https://itsjurassic.github.io/crypto-team-dashboard/"
 }
