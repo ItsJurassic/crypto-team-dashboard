@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T23:12:16-05:00",
+ "updated": "2026-10-28T23:15:17-05:00",
  "start": 1000.0,
- "equity": 996.14,
- "cash": 916.38,
+ "equity": 990.36,
+ "cash": 911.11,
  "curve": [
   [
    1793231266,
@@ -235,48 +235,52 @@
   [
    1793247136,
    996.14
+  ],
+  [
+   1793247317,
+   990.36
   ]
  ],
  "positions": {
-  "SIM00125BEARPU": {
-   "symbol": "BEARPU",
+  "SIM00131YOLOCAT": {
+   "symbol": "YOLOCAT",
    "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "entry": 0.0016571956615044877,
-   "qty": 48128.039959227506,
-   "usd": 79.75757901714644,
-   "entry_fees": 0.8314,
-   "stop": 0.0015577639218142183,
-   "high": 0.0016571956615044877,
-   "last": 0.0016571956615044877,
+   "venue": "Raydium AMM",
+   "entry": 0.002014859437873326,
+   "qty": 39332.7065758035,
+   "usd": 79.24987506135992,
+   "entry_fees": 0.2632,
+   "stop": 0.0018939678716009263,
+   "high": 0.002014859437873326,
+   "last": 0.002014859437873326,
    "trailing": false,
-   "time": "2026-10-28T23:12:16-05:00",
-   "score": 73,
+   "time": "2026-10-28T23:15:17-05:00",
+   "score": 87,
    "judge_p": 0.75
   }
  },
  "counts": {
-  "scanned": 125,
-  "killed": 111,
-  "passed": 19,
-  "trades": 13,
-  "judged": 18,
+  "scanned": 127,
+  "killed": 112,
+  "passed": 20,
+  "trades": 14,
+  "judged": 19,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 4,
-  "killed": 3,
+  "scanned": 2,
+  "killed": 1,
   "passed": 1,
   "traded": 1
  },
  "activity": {
-  "Scout": "Scouted 4 new pairs (of 87 checked)",
-  "Filter": "Filter killed $WIFMOO - LP not burned",
-  "Analyst": "Approved $BEARPU score 73",
-  "Judge": "Judge passed $BEARPU p=0.75",
-  "Executor": "Bought $BEARPU $79.76 via Pump.fun bonding curve slip -0.758%",
-  "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 3 kills, 1 trade events"
+  "Scout": "Scouted 2 new pairs (of 87 checked)",
+  "Filter": "Filter killed $CHADCHA - Liq <$40k",
+  "Analyst": "Approved $YOLOCAT score 87",
+  "Judge": "Judge passed $YOLOCAT p=0.75",
+  "Executor": "Bought $YOLOCAT $79.25 via Raydium AMM slip 0.739%",
+  "Risk": "Closed $BEARPU -6.35",
+  "Logger": "Logged 1 kills, 2 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
@@ -285,11 +289,19 @@
   "Score <70": 49,
   "LP not burned": 12,
   "Mint/freeze": 18,
-  "Liq <$40k": 13,
+  "Liq <$40k": 14,
   "Judge rejected": 5,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:15:17-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADCHA",
+   "mint": "SIM00129CHADCHA",
+   "rule": "Liq <$40k",
+   "detail": "liq $37,630"
+  },
   {
    "time": "2026-10-28T23:12:16-05:00",
    "source": "SIM-FEED",
@@ -601,17 +613,45 @@
    "mint": "SIM00042ZOOMTOA",
    "rule": "Score <70",
    "detail": "score 12"
-  },
-  {
-   "time": "2026-10-28T21:21:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BONK",
-   "mint": "SIM00088BONK",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $30,147"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T23:15:17-05:00",
+   "side": "BUY",
+   "symbol": "YOLOCAT",
+   "mint": "SIM00131YOLOCAT",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.0020000732",
+   "filled": "0.0020148594",
+   "slip_pct": "0.739",
+   "delay_s": "1.88",
+   "fees_usd": "0.2632",
+   "status": "FILLED",
+   "qty": "39332.7065758035",
+   "usd": "79.25",
+   "pnl_usd": "",
+   "reason": "score 87, stop 0.0018939679"
+  },
+  {
+   "time": "2026-10-28T23:15:17-05:00",
+   "side": "SELL",
+   "symbol": "BEARPU",
+   "mint": "SIM00125BEARPU",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0015524781",
+   "filled": "0.0015583593",
+   "slip_pct": "-0.379",
+   "delay_s": "1.6",
+   "fees_usd": "0.7581",
+   "status": "FILLED",
+   "qty": "48128.039959227506",
+   "usd": "75.0",
+   "pnl_usd": "-6.35",
+   "reason": "-6% hard stop gap +0.0% vs stop"
+  },
   {
    "time": "2026-10-28T23:12:16-05:00",
    "side": "BUY",
@@ -1046,8 +1086,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 10.98,
- "sol_usd": 99.48,
+ "fees_paid": 12.0,
+ "sol_usd": 99.59,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
@@ -1178,6 +1218,14 @@
    "judge_p": 0.75,
    "pnl": 19.75,
    "win": true
+  },
+  {
+   "time": "2026-10-28T23:15:17-05:00",
+   "symbol": "BEARPU",
+   "mint": "SIM00125BEARPU",
+   "judge_p": 0.75,
+   "pnl": -6.35,
+   "win": false
   }
  ],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
