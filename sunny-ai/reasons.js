@@ -17,3 +17,20 @@ window.whyHTML=function(r,open){
   det+=`<div class="m wn">${E(r.lane)} lane · ${E(r.recorded||"")} · paper trade</div>`;
   return `<details class="why"${open?" open":""}><summary><span class=wq>Why:</span> ${E(r.summary)}</summary><div class=wd>${det}</div></details>`;
 };})();
+/* BUY / SELL / FAILED / OPEN pill badges */
+window.sideBadge=function(t){if(t.status&&t.status!="FILLED")return `<span class="pill pf">FAILED</span>`;return t.side=="SELL"?`<span class="pill ps">▼ SELL</span>`:`<span class="pill pb">▲ BUY</span>`};
+window.openBadge=()=>`<span class="pill pb">OPEN · BUY</span>`;
+window.feedHTML=function(d,inL,LT,f,esc,n){
+  const T=(d.trades||[]).filter(inL);const out=[];
+  for(const r of Object.values(d.reasons||{}))if(inL(r))out.push({k:"B",time:r.time,r});
+  for(const t of T)if(t.side=="SELL"||t.status!="FILLED")out.push({k:t.side=="SELL"&&t.status=="FILLED"?"S":"F",time:t.time,t});
+  out.sort((a,b)=>Date.parse(b.time)-Date.parse(a.time));
+  const tm=x=>new Date(x).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  return out.slice(0,n||12).map(e=>{
+    if(e.k=="B"){const r=e.r;return `<div class="rb lb-b"><div class=rbh><span><span class="pill pb">▲ BUY</span> <b>$${esc(r.symbol)}</b> ${LT(r.lane)}</span><span class=m>${tm(r.time)}${r.fill&&r.fill.usd?" · "+f(r.fill.usd):""}</span></div>${whyHTML(r)}</div>`}
+    const t=e.t,lane=t.lane||(t.source=="MAJOR"?"MAJOR":"SOLANA");
+    if(e.k=="F")return `<div class="rb lb-f"><div class=rbh><span><span class="pill pf">FAILED</span> <b>$${esc(t.symbol)}</b> ${LT(lane)} <span class=m>${esc(t.side)}</span></span><span class=m>${tm(t.time)}</span></div><div class="why m">${esc(t.status)} · ${esc(t.reason)}</div></div>`;
+    const buy=T.filter(b=>b.side=="BUY"&&b.status=="FILLED"&&b.mint==t.mint&&Date.parse(b.time)<=Date.parse(t.time)).pop();
+    const pnl=+t.pnl_usd,pct=buy&&+buy.usd?pnl/+buy.usd*100:null,fast=/\[fast\]/.test(t.reason||""),rs=(t.reason||"").replace(/\s*\[fast\]/,"");
+    return `<div class="rb lb-s"><div class=rbh><span><span class="pill ps">▼ SELL</span> <b>$${esc(t.symbol)}</b> ${LT(lane)}${fast?' <span class="pill pk">[fast]</span>':""}</span><span class=m>${tm(t.time)} · ${f(t.usd)}</span></div><div class=why><span class=wq>Exit:</span> ${esc(rs)} · <b class="${pnl>=0?"g":"r"}">${pnl>=0?"+":"−"}$${Math.abs(pnl).toFixed(2)}${pct!=null?` (${pct>=0?"+":"−"}${Math.abs(pct).toFixed(1)}%)`:""}</b></div></div>`}).join("")||"<div class=m>No trades yet</div>";
+};
