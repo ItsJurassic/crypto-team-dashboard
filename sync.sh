@@ -61,12 +61,35 @@ if os.path.exists(pbf):
 if not pb:
     m = re.search(r"\[(.*)\]", open(f"{dash}/consts/playbook.ts").read()) if os.path.exists(f"{dash}/consts/playbook.ts") else None
     pb = json.loads("[" + m.group(1) + "]") if m else []
+# Seedling's real paper ledger (source of truth) from /workspace/paper-trades
+import csv as _csv
+PT="/workspace/paper-trades"
+pf = load(f"{PT}/portfolio.json", {})
+try: rows = list(_csv.DictReader(open(f"{PT}/trades.csv")))
+except Exception: rows = []
+if rows:
+    byid = {t.get("id"): t for t in trades}
+    for r in rows:
+        tid = r["trade_id"] + ("" if r["side"] == "buy" else "-" + r["side"])
+        t = byid.get(tid) or byid.get(r["trade_id"]) if r["side"] == "buy" else byid.get(tid)
+        if t is None:
+            t = {"id": tid, "time": r["timestamp_ct"], "coin": r["coin"], "side": r["side"], "price": float(r["price_usd"]), "qty": float(r["size"]), "reason": r["reasoning"][:300]}
+            t["t"] = int(datetime.datetime.fromisoformat(r["timestamp_ct"]).replace(tzinfo=datetime.datetime.now().astimezone().tzinfo).timestamp()); trades.append(t)
+        if r.get("realized_pnl_usd"): t["pnl"] = float(r["realized_pnl_usd"])
+cgl = load(f"{dash}/cg.json", [])
+mark = {c["symbol"].upper(): c.get("current_price") for c in cgl if isinstance(c, dict)}
+positions = []
+for sym, p in (pf.get("positions") or {}).items():
+    m = mark.get(sym) or p["entry"]
+    positions.append({"coin": sym, "qty": p["qty"], "entry": p["entry"], "mark": m, "stop": p.get("stop"), "target": p.get("target"), "value": round(p["qty"] * m, 2), "upnl": round(p["qty"] * (m - p["entry"]), 2)})
 closed = [t for t in trades if t.get("pnl") is not None]
 score = {"start_balance": 2000, "start": "2026-10-28", "end": "2026-11-27",
          "trades": len(trades), "closed": len(closed),
          "pnl": round(sum(t["pnl"] for t in closed), 2) if closed else 0,
          "wins": sum(1 for t in closed if t["pnl"] > 0),
          "largest_loss": min([t["pnl"] for t in closed], default=None),
+         "cash": pf.get("cash_usd"), "positions": positions,
+         "equity": round((pf.get("cash_usd") or 0) + sum(p["value"] for p in positions), 2) if pf else None,
          "synced": datetime.datetime.now().astimezone().strftime("%b %-d, %Y, %-I:%M %p CT")}
 for name, obj in [("status", status), ("trades", trades), ("lessons", lessons), ("playbook", pb), ("scorecard", score), ("watchlist", watch)]:
     json.dump(obj, open(f"{out}/{name}.json", "w"), indent=1, ensure_ascii=False)
@@ -75,7 +98,7 @@ cg = load(f"{dash}/cg.json", [])
 px = {c["symbol"].upper(): {"price": c.get("current_price"), "chg24": c.get("price_change_percentage_24h")} for c in cg if isinstance(c, dict) and c.get("symbol") in ("btc", "eth")}
 colors = {"Watching": "#3b82f6", "Getting ready": "#f59e0b", "Buying": "#22c55e", "Selling": "#ef4444"}
 today = datetime.date.today(); d0 = datetime.date(2026, 10, 28)
-bal = round(2000 + score["pnl"], 2)
+bal = score["equity"] if score.get("equity") is not None else round(2000 + score["pnl"], 2)
 lt = trades[-1] if trades else None
 last = None
 if lt:

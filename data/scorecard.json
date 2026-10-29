@@ -7,5 +7,19 @@
  "pnl": 0,
  "wins": 0,
  "largest_loss": null,
- "synced": "Oct 28, 2026, 8:01 PM CT"
+ "cash": 1687.73,
+ "positions": [
+  {
+   "coin": "BNB",
+   "qty": 0.4082,
+   "entry": 760.44,
+   "mark": 755.4,
+   "stop": 721.06,
+   "target": 868.31,
+   "value": 308.35,
+   "upnl": -2.06
+  }
+ ],
+ "equity": 1996.08,
+ "synced": "Oct 28, 2026, 8:03 PM CT"
 }

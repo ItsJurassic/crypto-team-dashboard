@@ -3,7 +3,7 @@
  "color": "#22c55e",
  "coin": "BNB",
  "reason": "S1 trend signal on the Oct 28 daily close ($758.84 above 50d SMA $749.6, 50d above 200d, new 20-day closing high). Paper-bought 0.4082 BNB at $760.44, stop $721.06, target $868.31.",
- "balance": 2000,
+ "balance": 1996.08,
  "pnl": 0,
  "pnl_pct": 0.0,
  "trial_day": 1,
@@ -20,6 +20,6 @@
  },
  "prices_as_of": "8:01 PM CT",
  "last_trade": "BUY BNB @ $760.44 2026-10-28",
- "updated": "Oct 28, 2026, 8:01 PM CT",
+ "updated": "Oct 28, 2026, 8:03 PM CT",
  "url": "https://itsjurassic.github.io/crypto-team-dashboard/"
 }

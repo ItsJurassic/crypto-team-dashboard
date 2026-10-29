@@ -57,8 +57,10 @@ async function loadBotData() {
     const el = Math.max(0, Math.min(30, Math.floor((now - st) / 864e5))), rem = Math.max(0, Math.ceil((en - now) / 864e5));
     const m = [[el,"Days elapsed"],[rem,"Days remaining"],[(s.pnl>=0?"$":"-$")+Math.abs(s.pnl).toFixed(2),"P&L vs $"+s.start_balance.toLocaleString()+" start"],
       [s.closed ? Math.round(100*s.wins/s.closed)+"%" : "n/a","Win rate"],[s.largest_loss!=null ? fp(-s.largest_loss).replace("$","-$") : "n/a","Largest loss"],[s.trades,"Trades logged"]];
+    if (s.equity!=null) m.unshift([fp(s.equity),"Portfolio value"],[fp(s.cash),"Cash"],[(s.positions||[]).length,"Open positions"]);
     $("#score").innerHTML = m.map(([v,l])=>`<div class="metric"><b>${v}</b><span class="muted small">${l}</span></div>`).join("");
-    $("#score-note").textContent = `Trial ${s.start} to ${s.end}. Data synced ${s.synced}.`;
+    const P=(s.positions||[]).map(p=>`${p.coin} ${p.qty} @ ${fp(p.entry)} → ${fp(p.mark)} (${p.upnl>=0?"+":"-"}$${Math.abs(p.upnl).toFixed(2)}), stop ${fp(p.stop)}`).join(" · ");
+    $("#score-note").textContent = (P?"Open: "+P+". ":"") + `Trial ${s.start} to ${s.end}. Data synced ${s.synced}.`;
   } catch { $("#score").innerHTML = '<div class="empty">Scorecard not synced yet.</div>'; }
   try {
     const L = await getJSON("data/lessons.json");
