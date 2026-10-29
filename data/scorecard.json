@@ -13,13 +13,13 @@
    "coin": "BNB",
    "qty": 0.4082,
    "entry": 760.44,
-   "mark": 755.4,
+   "mark": 749.61,
    "stop": 721.06,
    "target": 868.31,
-   "value": 308.35,
-   "upnl": -2.06
+   "value": 305.99,
+   "upnl": -4.42
   }
  ],
- "equity": 1996.08,
- "synced": "Oct 28, 2026, 8:03 PM CT"
+ "equity": 1993.72,
+ "synced": "Oct 28, 2026, 10:08 PM CT"
 }
