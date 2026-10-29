@@ -131,7 +131,7 @@ git remote get-url origin >/dev/null 2>&1 || git remote add origin "$REMOTE"
 if true; then
   git add -A sunny-ai/team data/widget.json
   git diff --cached --quiet || git commit -qm "Sync bot data $(date '+%F %H:%M %Z')"
-  git pull -q --rebase origin main || { git rebase --abort; git pull -q --no-rebase -X ours origin main; }
+  git pull -q --rebase --autostash origin main || { git rebase --abort; git pull -q --no-rebase -X ours origin main; }
   git push -q origin HEAD:main
   echo "pushed"
 else
