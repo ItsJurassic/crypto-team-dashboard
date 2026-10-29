@@ -11,12 +11,16 @@ const fmc = v => v >= 1e12 ? "$"+(v/1e12).toFixed(2)+"T" : v >= 1e9 ? "$"+(v/1e9
 const ct = (d, o) => new Date(d).toLocaleString("en-US", Object.assign({timeZone:"America/Chicago"}, o||{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})) + " CT";
 const getJSON = async (u) => { const r = await fetch(u, {cache:"no-store"}); if (!r.ok) throw new Error(r.status + " " + u); return r.json(); };
 
+// GUARD: practice/simulator coins (simfeed "SIM..." mints, SIM-FEED source) never render here. Real market data only.
+const isSim = x => { if (!x) return false; if (typeof x === "string") return /^SIM/i.test(x) || /SIM-?FEED|simulat|synthetic/i.test(x);
+  return ["mint","id","coin","symbol","pair","source","src","lane","coingecko_id"].some(k => x[k] != null && (/^SIM/i.test(String(x[k])) || /SIM-?FEED|simulat|synthetic/i.test(String(x[k])))); };
+const SRC_TAG = s => `<span class="rmd">Real market data · ${esc(s)}</span>`;
 let state = {sym:"BTC", iv:"1h", top:[], trades:[], candles:[], ws:null};
 let chart, cs, ls;
-async function loadTrades(){ try { state.trades = await getJSON("team/trades.json"); } catch { state.trades = []; } setMarkers(); }
+async function loadTrades(){ try { state.trades = (await getJSON("team/trades.json")).filter(t => !isSim(t)); } catch { state.trades = []; } setMarkers(); }
 async function loadWatch() {
   let W = []; try { W = await getJSON("team/watchlist.json"); } catch {}
-  state.watch = W;
+  W = W.filter(w => !isSim(w)); state.watch = W;
   $("#watch").innerHTML = W.length ? W.map(w=>`<div class="lesson"><b>${esc(w.name)} <span class="muted">${esc(w.symbol)}</span></b> <span class="tag">${esc(w.status)}</span>
     <div class="muted small">Added ${esc(w.added_at)} by ${esc(w.added_by)}</div><p>${esc(w.reason)}</p><a href="${esc(w.source_url)}" target="_blank" rel="noopener">Source</a> · <a href="#" data-sym="${esc(w.symbol)}" class="wchart">Chart</a></div>`).join("")
     : '<div class="empty">No new coins on watch yet. When Lark (Crypto Pulse) finds a promising new coin in the news, it shows up here with the reason and source, and Seedling can paper-trade it.</div>';
@@ -35,19 +39,19 @@ function initChart() {
   chart.subscribeCrosshairMove(p => {
     if (!p.time) return showTradeNote();
     const hit = state.trades.filter(t => t.coin === state.sym && bucket(t.t) === p.time);
-    if (hit.length) $("#trade-note").innerHTML = hit.map(t=>`<b class="${t.side==="buy"?"up":"dn"}">${t.side.toUpperCase()}</b> ${esc(t.coin)} at ${fp(t.price)}, ${ct(t.t*1000)}. Why: ${esc(t.reason)}`).join("<br>");
+    if (hit.length) $("#trade-note").innerHTML = hit.map(t=>`<span class="rmd ptag">Paper trade</span> <b class="${t.side==="buy"?"up":"dn"}">${t.side.toUpperCase()}</b> ${esc(t.coin)} at ${fp(t.price)}, ${ct(t.t*1000)}. Why: ${esc(t.reason)}`).join("<br>");
     else showTradeNote();
   });
 }
 function bucket(t) { const c = state.candles; for (let i = c.length-1; i >= 0; i--) if (t >= c[i].time) return (i===c.length-1 && t - c[i].time > IVS[state.iv]*1.5) ? null : c[i].time; return null; }
 function showTradeNote() {
   const n = state.trades.filter(t=>t.coin===state.sym).length;
-  $("#trade-note").textContent = n ? `${n} ${state.sym} trade(s). Green ▲ = buy, red ▼ = sell. Tap a marker's candle to read why.` : `No trades yet for ${state.sym}. Seedling's buys will show as green ▲ and sells as red ▼ on the chart.`;
+  $("#trade-note").textContent = n ? `${n} ${state.sym} paper trade(s). Legend: green ▲ = Paper trade buy, red ▼ = Paper trade sell (simulated, not real orders). Tap a marker's candle to read why.` : `No trades yet for ${state.sym}. Paper trade buys show as green ▲ and paper trade sells as red ▼ on the chart (simulated, not real orders).`;
 }
 function setMarkers() {
   if (!cs) return;
   const mk = state.trades.filter(t=>t.coin===state.sym).map(t=>({t,b:bucket(t.t)})).filter(x=>x.b!=null).sort((a,b)=>a.b-b.b)
-    .map(({t,b})=>({time:b, position:t.side==="buy"?"belowBar":"aboveBar", color:t.side==="buy"?"#16c784":"#ea3943", shape:t.side==="buy"?"arrowUp":"arrowDown", text:(t.side==="buy"?"B ":"S ")+fp(t.price)}));
+    .map(({t,b})=>({time:b, position:t.side==="buy"?"belowBar":"aboveBar", color:t.side==="buy"?"#16c784":"#ea3943", shape:t.side==="buy"?"arrowUp":"arrowDown", text:"Paper trade · "+(t.side==="buy"?"Buy ":"Sell ")+fp(t.price)}));
   (ls.options().visible ? ls : cs).setMarkers(mk); showTradeNote();
 }
 function agg(c, iv) {
@@ -72,7 +76,7 @@ async function cbCandles(sym, gran, pages=1) {
 }
 async function extraCandles() {
   if (!state.extra || Date.now() - (state.extraAt||0) > 120000) {
-    try { const r = await getJSON("team/candles_extra.json?t=" + Date.now()); state.extra = r.c || {}; state.extraAsOf = r.asOf; state.extraAt = Date.now(); }
+    try { const r = await getJSON("team/candles_extra.json?t=" + Date.now()); state.extra = Object.fromEntries(Object.entries(r.c || {}).filter(([k,v]) => !isSim(k) && !isSim(v && v.src))); state.extraAsOf = r.asOf; state.extraAt = Date.now(); }
     catch { state.extra = state.extra || {}; }
   }
   return state.extra;
@@ -80,6 +84,7 @@ async function extraCandles() {
 async function loadChart() {
   const sym = state.sym, iv = state.iv, note = $("#chart-note");
   try {
+    if (isSim(sym)) throw new Error("practice/simulator coin blocked on Charts");
     if (CB.includes(sym)) {
       let c;
       if (iv === "4h") c = agg(await cbCandles(sym,3600,2),"4h");
@@ -87,7 +92,7 @@ async function loadChart() {
       else c = await cbCandles(sym, IVS[iv]);
       if (sym !== state.sym || iv !== state.iv) return;
       state.candles = c; ls.applyOptions({visible:false}); cs.applyOptions({visible:true}); ls.setData([]); cs.setData(c);
-      note.textContent = `${sym}-USD ${iv} candles from Coinbase Exchange, live via websocket. ${iv==="4h"?"4h built from 1h candles. ":""}${iv==="1W"||iv==="1M"?"Built from daily candles (UTC). ":""}Times shown in CT.`;
+      note.textContent = `${sym}-USD ${iv} candles from Coinbase Exchange, live via websocket. ${iv==="4h"?"4h built from 1h candles. ":""}${iv==="1W"||iv==="1M"?"Built from daily candles (UTC). ":""}Times shown in CT.`; $("#src-tag").innerHTML = SRC_TAG("Coinbase Exchange");
     } else if ((await extraCandles())[sym]) {
       const d = state.extra[sym], k = d[iv];
       if (sym !== state.sym || iv !== state.iv) return;
@@ -99,7 +104,7 @@ async function loadChart() {
       const c = k.c.map((cl,i)=>({time: Array.isArray(k.t) ? k.t[i] : k.t + i*k.st, open:k.o[i], high:k.h[i], low:k.l[i], close:cl}));
       state.candles = c; ls.applyOptions({visible:false}); cs.applyOptions({visible:true}); ls.setData([]); cs.setData(c);
       const age = Math.round((Date.now()/1000 - state.extraAsOf)/60);
-      note.textContent = `${sym} ${iv} candles from ${d.src}. Not on Coinbase; snapshot refreshed by the bots (${age} min old). Times shown in CT.`;
+      note.textContent = `${sym} ${iv} candles from ${d.src}. Not on Coinbase; snapshot refreshed by the bots (${age} min old). Times shown in CT.`; $("#src-tag").innerHTML = SRC_TAG(d.src.split(";")[0].split(" (")[0]);
     } else {
       const id = (state.top.find(c=>c.symbol.toUpperCase()===sym)||{}).id || ((state.watch||[]).find(w=>w.symbol.toUpperCase()===sym)||{}).coingecko_id;
       if (!id) throw new Error("no CoinGecko id");
@@ -108,11 +113,11 @@ async function loadChart() {
       const m = new Map(); for (const [t,v] of r.prices) m.set(Math.floor(t/1000), v);
       const pts = [...m].map(([time,value])=>({time,value})).sort((a,b)=>a.time-b.time);
       state.candles = pts.map(p=>({time:p.time})); cs.setData([]); cs.applyOptions({visible:false}); ls.applyOptions({visible:true}); ls.setData(pts);
-      note.textContent = `${sym} is not on Coinbase Exchange in this set; showing a CoinGecko price line (${CG_DAYS[iv]} day${CG_DAYS[iv]===1?"":"s"}), refreshed every 60 s. Times in CT.`;
+      note.textContent = `${sym} is not on Coinbase Exchange in this set; showing a CoinGecko price line (${CG_DAYS[iv]} day${CG_DAYS[iv]===1?"":"s"}), refreshed every 60 s. Times in CT.`; $("#src-tag").innerHTML = SRC_TAG("CoinGecko");
     }
     chart.timeScale().fitContent(); setMarkers();
   } catch (e) {
-    cs.setData([]); ls.setData([]); state.candles = [];
+    cs.setData([]); ls.setData([]); state.candles = []; $("#src-tag").innerHTML = "";
     note.innerHTML = `<span class="dn">Chart data unavailable right now (${esc(e.message)}). Retrying shortly.</span>`;
   }
 }
@@ -155,12 +160,12 @@ async function pollCB() {  // REST backup for prices in case the websocket is bl
 }
 async function loadTop() {
   try {
-    state.top = await getJSON("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&price_change_percentage=24h,7d");
+    state.top = (await getJSON("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&price_change_percentage=24h,7d")).filter(c => !isSim(c));
     $("#top tbody").innerHTML = state.top.map((c,i)=>{const s=c.symbol.toUpperCase(); return `<tr class="click" data-sym="${esc(s)}"><td>${i+1}</td><td>${esc(c.name)} <span class="muted">${esc(s)}</span></td><td data-px="${esc(s)}">${fp(live[s]?live[s].price:c.current_price)}</td><td>${pc(c.price_change_percentage_24h_in_currency)}</td><td>${pc(c.price_change_percentage_7d_in_currency)}</td><td>${fmc(c.market_cap)}</td></tr>`;}).join("");
     $("#top-note").textContent = "CoinGecko, updated " + ct(Date.now()) + " (every 60 s). Coinbase coins tick live. Tap a row to chart it.";
     document.querySelectorAll("#top tr.click").forEach(r => r.onclick = () => { setSym(r.dataset.sym); scrollTo({top:0,behavior:"smooth"}); });
     const sel = $("#coin"), cur = state.sym;
-    const syms = [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase()), ...(state.watch||[]).map(w=>w.symbol.toUpperCase())])];
+    const syms = [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase()), ...(state.watch||[]).map(w=>w.symbol.toUpperCase())])].filter(x => !isSim(x));
     sel.innerHTML = syms.map(s=>{const c=state.top.find(x=>x.symbol.toUpperCase()===s);return `<option value="${s}">${(state.watch||[]).some(w=>w.symbol.toUpperCase()===s)?"👀 ":""}${c?esc(c.name)+" ("+s+")":s}${CB.includes(s)?"":" · line"}</option>`}).join("");
     sel.value = cur;
   } catch (e) { $("#top-note").innerHTML = `<span class="dn">Top-20 table unavailable (${esc(e.message)}); retrying in 60 s.</span>`; }
@@ -172,6 +177,7 @@ $("#coin").onchange = e => setSym(e.target.value);
 $("#ivs").innerHTML = Object.keys(IVS).map(k=>`<button data-iv="${k}" class="${k===state.iv?"on":""}">${k}</button>`).join("");
 document.querySelectorAll("#ivs button").forEach(b => b.onclick = () => { state.iv = b.dataset.iv; document.querySelectorAll("#ivs button").forEach(x=>x.classList.toggle("on",x===b)); loadChart(); });
 
+{ const st = document.createElement("style"); st.textContent = ".rmd{display:inline-block;font-size:11px;padding:2px 7px;border-radius:999px;border:1px solid #2f6f55;color:#6fd3a6;background:rgba(22,199,132,.08);margin:2px 4px 2px 0}.rmd.ptag{border-color:#7a5a1e;color:#f5c26b;background:rgba(245,166,35,.08)}"; document.head.appendChild(st); }
 initChart(); loadTrades(); loadWatch().then(loadTop).then(loadChart); connectWS();
 setInterval(pollCB, 5000);
 setInterval(loadTrades, 120000);
