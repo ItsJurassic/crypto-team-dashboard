@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T07:37:03-05:00",
+ "updated": "2026-10-29T07:57:36-05:00",
  "start": 1000.0,
  "equity": 1118.25,
  "cash": 1118.25,
@@ -479,44 +479,68 @@
   [
    1793277423,
    1118.25
+  ],
+  [
+   1793277606,
+   1118.25
+  ],
+  [
+   1793278656,
+   1118.25
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 255,
-  "killed": 231,
+  "scanned": 257,
+  "killed": 233,
   "passed": 33,
   "trades": 23,
   "judged": 32,
   "judge_rejected": 9
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 84 checked)",
-  "Filter": "Filter killed $APEFR - Score <70",
-  "Analyst": "Best score 57 - none 70+",
+  "Scout": "Scouted 1 new pairs (of 85 checked)",
+  "Filter": "Filter killed $BASEDFR - Score <70",
+  "Analyst": "Best score 53 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Closed $MOONCH -8.60",
-  "Logger": "Logged 2 kills, 1 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 14,
   "Top 10 holders": 1,
-  "Score <70": 100,
+  "Score <70": 101,
   "LP not burned": 26,
   "Mint/freeze": 44,
-  "Liq <$40k": 30,
+  "Liq <$40k": 31,
   "Judge rejected": 9,
   "Dev >3% / past rugs": 3
  },
  "kills": [
+  {
+   "time": "2026-10-29T07:57:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BASEDFR",
+   "mint": "SIM00274BASEDFR",
+   "rule": "Score <70",
+   "detail": "score 53"
+  },
+  {
+   "time": "2026-10-29T07:40:06-05:00",
+   "source": "SIM-FEED",
+   "symbol": "DOG",
+   "mint": "SIM00273DOG",
+   "rule": "Liq <$40k",
+   "detail": "liq $34,354"
+  },
   {
    "time": "2026-10-29T07:37:03-05:00",
    "source": "SIM-FEED",
@@ -820,22 +844,6 @@
    "mint": "SIM00232DUCKPUM",
    "rule": "Mint/freeze",
    "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T04:40:18-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGF",
-   "mint": "SIM00231FROGF",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
-  },
-  {
-   "time": "2026-10-29T04:37:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEAR",
-   "mint": "SIM00222BEAR",
-   "rule": "Score <70",
-   "detail": "score 40"
   }
  ],
  "trades": [
@@ -1562,7 +1570,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 23.2,
- "sol_usd": 100.24,
+ "sol_usd": 100.38,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
