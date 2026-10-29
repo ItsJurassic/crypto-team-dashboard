@@ -1,32 +1,32 @@
 {
- "updated": "2026-10-29T10:04:43-05:00",
+ "updated": "2026-10-29T10:05:33-05:00",
  "start": 1000.0,
- "equity": 1101.2,
- "total_pnl": 101.2,
+ "equity": 1102.87,
+ "total_pnl": 102.87,
  "realized": 106.44,
- "unrealized": -5.24,
+ "unrealized": -3.57,
  "failed_tx_fees": 0.01,
  "fees_total": 26.12,
  "slippage_cost": 21.75,
  "by_source": {
-  "SIM-FEED": 118.68,
+  "SIM-FEED": 120.24,
   "REAL-DATA": -16.79,
-  "MAJOR": -0.69
+  "MAJOR": -0.58
  },
  "by_lane": {
   "SOLANA": {
-   "pnl": 101.89,
+   "pnl": 103.45,
    "realized": 106.44,
-   "unrealized": -4.55,
+   "unrealized": -2.99,
    "closed": 24,
    "wins": 8,
    "open": 1,
    "fees": 25.22
   },
   "MAJOR": {
-   "pnl": -0.69,
+   "pnl": -0.58,
    "realized": 0,
-   "unrealized": -0.69,
+   "unrealized": -0.58,
    "closed": 0,
    "wins": 0,
    "open": 2,
@@ -180,14 +180,14 @@
    "source": "MAJOR",
    "venue": "CEX book (sim)",
    "entry": 1299.7659536717606,
-   "exit": 1303.38,
+   "exit": 1305.31,
    "entry_time": "2026-10-29T10:03:12-05:00",
    "exit_time": null,
    "size_usd": 88.49,
    "slip_cost": null,
    "fees": 0.42,
-   "pnl": -0.17,
-   "pnl_pct": -0.19,
+   "pnl": -0.04,
+   "pnl_pct": -0.04,
    "exit_reason": "open (marked to market)",
    "status": "open"
   },
@@ -197,14 +197,14 @@
    "source": "MAJOR",
    "venue": "CEX book (sim)",
    "entry": 748.2921741640586,
-   "exit": 747.88,
+   "exit": 747.7,
    "entry_time": "2026-10-29T10:03:12-05:00",
    "exit_time": null,
    "size_usd": 88.49,
    "slip_cost": null,
    "fees": 0.47,
-   "pnl": -0.52,
-   "pnl_pct": -0.59,
+   "pnl": -0.54,
+   "pnl_pct": -0.61,
    "exit_reason": "open (marked to market)",
    "status": "open"
   },
@@ -214,14 +214,14 @@
    "source": "SIM-FEED",
    "venue": "Raydium AMM",
    "entry": 0.006509930773375266,
-   "exit": 0.00619522838663716,
+   "exit": 0.0063106813051043605,
    "entry_time": "2026-10-29T10:00:48-05:00",
    "exit_time": null,
    "size_usd": 88.52,
    "slip_cost": null,
    "fees": 0.28,
-   "pnl": -4.55,
-   "pnl_pct": -5.15,
+   "pnl": -2.99,
+   "pnl_pct": -3.37,
    "exit_reason": "open (marked to market)",
    "status": "open"
   },
@@ -498,6 +498,43 @@
    "status": "closed"
   }
  ],
- "explanation": "Sunny AI is up $101.20 (+10.1%) on paper, from $1,000 to $1,101.20. Closed trades made $+106.44 (8 winners of 24); the open positions add $-5.24 not yet locked in. Most of the result came from SIM-FEED (synthetic) tokens: $+118.68, versus $-16.79 from REAL tokens \u2014 so treat this as a test of the rules, not proof of real profit. The MAJOR lane (top large-caps on real CoinGecko/Coinbase prices, simulated fills) stands at $-0.69. The biggest winner was $MOON (SIM-FEED) at $+119.33 (+142.0%), exited by trail stop gap -3.6% vs stop. The biggest loser was $PUMP at $-58.70. The pattern in the SOLANA lane: many small \u22126% stop losses, and a few trades that ran past +12% and rode the trailing stop for large gains. Some stops filled far below -6% because the price gapped down between checks (rug-style crashes). Costs so far: $26.12 in fees (incl. $0.01 on failed transactions) and about $21.75 lost to slippage.",
+ "bank": {
+  "rate": 0.2,
+  "start": 1000.0,
+  "gross": 153.11,
+  "trade_fees": 24.94,
+  "slippage": 21.73,
+  "failed_costs": 0.01,
+  "net": 106.43,
+  "banked": 63.88,
+  "closed": 24,
+  "total_costs": 46.68,
+  "working_capital": 1042.55,
+  "lanes": {
+   "SOLANA": {
+    "gross": 153.11,
+    "trade_fees": 24.94,
+    "slippage": 21.73,
+    "failed_costs": 0.01,
+    "net": 106.43,
+    "banked": 63.88,
+    "closed": 24,
+    "total_costs": 46.68
+   },
+   "MAJOR": {
+    "gross": 0.0,
+    "trade_fees": 0.0,
+    "slippage": 0.0,
+    "failed_costs": 0.0,
+    "net": 0.0,
+    "banked": 0.0,
+    "closed": 0,
+    "total_costs": 0.0
+   }
+  },
+  "note": "Banking = 20% of net profit (gains minus all fees). Tell Sunny if you meant something different.",
+  "paper_only": true
+ },
+ "explanation": "Sunny AI is up $102.87 (+10.3%) on paper, from $1,000 to $1,102.87. Closed trades made $+106.44 (8 winners of 24); the open positions add $-3.57 not yet locked in. Most of the result came from SIM-FEED (synthetic) tokens: $+120.24, versus $-16.79 from REAL tokens \u2014 so treat this as a test of the rules, not proof of real profit. The MAJOR lane (top large-caps on real CoinGecko/Coinbase prices, simulated fills) stands at $-0.58. The biggest winner was $MOON (SIM-FEED) at $+119.33 (+142.0%), exited by trail stop gap -3.6% vs stop. The biggest loser was $PUMP at $-58.70. The pattern in the SOLANA lane: many small \u22126% stop losses, and a few trades that ran past +12% and rode the trailing stop for large gains. Some stops filled far below -6% because the price gapped down between checks (rug-style crashes). Costs so far: $26.12 in fees (incl. $0.01 on failed transactions) and about $21.75 lost to slippage.",
  "reconcile_gap": 0.01
 }
