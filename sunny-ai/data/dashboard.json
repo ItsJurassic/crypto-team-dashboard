@@ -1,7 +1,7 @@
 {
- "updated": "2026-10-28T22:16:43-05:00",
+ "updated": "2026-10-28T22:22:04-05:00",
  "start": 1000.0,
- "equity": 984.27,
+ "equity": 989.22,
  "cash": 898.8,
  "curve": [
   [
@@ -195,6 +195,10 @@
   [
    1793243803,
    984.27
+  ],
+  [
+   1793244124,
+   989.22
   ]
  ],
  "positions": {
@@ -206,37 +210,37 @@
    "qty": 94786.47983829367,
    "usd": 78.17757802644775,
    "entry_fees": 0.2382,
-   "stop": 0.0007752890862729583,
-   "high": 0.0009016905010010334,
-   "last": 0.0009016905010010334,
-   "trailing": false,
+   "stop": 0.0008966888881289545,
+   "high": 0.0009539243490733559,
+   "last": 0.0009539243490733559,
+   "trailing": true,
    "time": "2026-10-28T22:10:41-05:00",
    "score": 86,
    "judge_p": 0.75
   }
  },
  "counts": {
-  "scanned": 104,
-  "killed": 91,
+  "scanned": 106,
+  "killed": 93,
   "passed": 17,
   "trades": 12,
   "judged": 16,
   "judge_rejected": 4
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
+  "scanned": 2,
+  "killed": 2,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 88 checked)",
-  "Filter": "Filter killed $APEZOO - Score <70",
-  "Analyst": "Best score 45 - none 70+",
+  "Scout": "Scouted 2 new pairs (of 88 checked)",
+  "Filter": "Filter killed $BASEDWIF - Liq <$40k",
+  "Analyst": "Nothing to score",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Logger": "Logged 2 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 2,
@@ -244,12 +248,28 @@
   "Top 10 holders": 1,
   "Score <70": 43,
   "LP not burned": 9,
-  "Mint/freeze": 13,
-  "Liq <$40k": 9,
+  "Mint/freeze": 14,
+  "Liq <$40k": 10,
   "Judge rejected": 4,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T22:22:04-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BASEDWIF",
+   "mint": "SIM00108BASEDWIF",
+   "rule": "Liq <$40k",
+   "detail": "liq $24,013"
+  },
+  {
+   "time": "2026-10-28T22:22:04-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLO",
+   "mint": "SIM00107YOLO",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-28T22:16:43-05:00",
    "source": "SIM-FEED",
@@ -553,22 +573,6 @@
    "mint": "SIM00061BONKYOL",
    "rule": "Score <70",
    "detail": "score 50"
-  },
-  {
-   "time": "2026-10-28T20:05:28-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MOONC",
-   "mint": "SIM00039MOONC",
-   "rule": "Score <70",
-   "detail": "score 29"
-  },
-  {
-   "time": "2026-10-28T20:02:44-05:00",
-   "source": "SIM-FEED",
-   "symbol": "WIFPE",
-   "mint": "SIM00058WIFPE",
-   "rule": "Score <70",
-   "detail": "score 66"
   }
  ],
  "trades": [
@@ -971,7 +975,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 9.73,
- "sol_usd": 99.83,
+ "sol_usd": 99.67,
  "judge_rejections": [
   {
    "time": "2026-10-28T22:01:37-05:00",
