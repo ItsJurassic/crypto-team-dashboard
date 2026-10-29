@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T23:09:15-05:00",
+ "updated": "2026-10-28T23:12:16-05:00",
  "start": 1000.0,
- "equity": 996.97,
- "cash": 996.97,
+ "equity": 996.14,
+ "cash": 916.38,
  "curve": [
   [
    1793231266,
@@ -231,44 +231,89 @@
   [
    1793246955,
    996.97
+  ],
+  [
+   1793247136,
+   996.14
   ]
  ],
- "positions": {},
+ "positions": {
+  "SIM00125BEARPU": {
+   "symbol": "BEARPU",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "entry": 0.0016571956615044877,
+   "qty": 48128.039959227506,
+   "usd": 79.75757901714644,
+   "entry_fees": 0.8314,
+   "stop": 0.0015577639218142183,
+   "high": 0.0016571956615044877,
+   "last": 0.0016571956615044877,
+   "trailing": false,
+   "time": "2026-10-28T23:12:16-05:00",
+   "score": 73,
+   "judge_p": 0.75
+  }
+ },
  "counts": {
-  "scanned": 121,
-  "killed": 108,
-  "passed": 18,
-  "trades": 12,
-  "judged": 17,
+  "scanned": 125,
+  "killed": 111,
+  "passed": 19,
+  "trades": 13,
+  "judged": 18,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
-  "passed": 0,
-  "traded": 0
+  "scanned": 4,
+  "killed": 3,
+  "passed": 1,
+  "traded": 1
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 87 checked)",
-  "Filter": "Filter killed $MOOND - LP not burned",
-  "Analyst": "Nothing to score",
-  "Judge": "Nothing to judge",
-  "Executor": "No approved entries",
-  "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Scout": "Scouted 4 new pairs (of 87 checked)",
+  "Filter": "Filter killed $WIFMOO - LP not burned",
+  "Analyst": "Approved $BEARPU score 73",
+  "Judge": "Judge passed $BEARPU p=0.75",
+  "Executor": "Bought $BEARPU $79.76 via Pump.fun bonding curve slip -0.758%",
+  "Risk": "Watching 1 open, stops set",
+  "Logger": "Logged 3 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
   "Score <70": 49,
-  "LP not burned": 11,
-  "Mint/freeze": 17,
-  "Liq <$40k": 12,
+  "LP not burned": 12,
+  "Mint/freeze": 18,
+  "Liq <$40k": 13,
   "Judge rejected": 5,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:12:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "WIFMOO",
+   "mint": "SIM00127WIFMOO",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 40%"
+  },
+  {
+   "time": "2026-10-28T23:12:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOCAT",
+   "mint": "SIM00126YOLOCAT",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-28T23:12:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMS",
+   "mint": "SIM00124ZOOMS",
+   "rule": "Liq <$40k",
+   "detail": "liq $19,540"
+  },
   {
    "time": "2026-10-28T23:09:15-05:00",
    "source": "SIM-FEED",
@@ -564,33 +609,27 @@
    "mint": "SIM00088BONK",
    "rule": "1h vol <$50k",
    "detail": "1h vol $30,147"
-  },
-  {
-   "time": "2026-10-28T21:21:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PUMPBEA",
-   "mint": "SIM00087PUMPBEA",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T21:18:14-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MOONM",
-   "mint": "SIM00084MOONM",
-   "rule": "Score <70",
-   "detail": "score 67"
-  },
-  {
-   "time": "2026-10-28T21:18:14-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARBA",
-   "mint": "SIM00085BEARBA",
-   "rule": "Liq <$40k",
-   "detail": "liq $13,298"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T23:12:16-05:00",
+   "side": "BUY",
+   "symbol": "BEARPU",
+   "mint": "SIM00125BEARPU",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0016698481",
+   "filled": "0.0016571957",
+   "slip_pct": "-0.758",
+   "delay_s": "6.09",
+   "fees_usd": "0.8314",
+   "status": "FILLED",
+   "qty": "48128.039959227506",
+   "usd": "79.76",
+   "pnl_usd": "",
+   "reason": "score 73, stop 0.0015577639"
+  },
   {
    "time": "2026-10-28T22:34:56-05:00",
    "side": "SELL",
@@ -1007,8 +1046,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 10.15,
- "sol_usd": 99.36,
+ "fees_paid": 10.98,
+ "sol_usd": 99.48,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
