@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T22:59:48-05:00",
+ "updated": "2026-10-28T23:02:49-05:00",
  "start": 1000.0,
  "equity": 996.97,
  "cash": 996.97,
@@ -219,44 +219,64 @@
   [
    1793246388,
    996.97
+  ],
+  [
+   1793246569,
+   996.97
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 116,
-  "killed": 103,
+  "scanned": 118,
+  "killed": 105,
   "passed": 17,
   "trades": 12,
   "judged": 16,
   "judge_rejected": 4
  },
  "last_run": {
-  "scanned": 4,
-  "killed": 4,
+  "scanned": 2,
+  "killed": 2,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 4 new pairs (of 87 checked)",
-  "Filter": "Filter killed $SNEK - Score <70",
-  "Analyst": "Best score 47 - none 70+",
+  "Scout": "Scouted 2 new pairs (of 87 checked)",
+  "Filter": "Filter killed $YOLOAPE - Liq <$40k",
+  "Analyst": "Nothing to score",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 4 kills, 0 trade events"
+  "Logger": "Logged 2 kills, 0 trade events"
  },
  "kill_rules": {
-  "Already +80% 1h": 2,
+  "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
   "Score <70": 48,
   "LP not burned": 10,
   "Mint/freeze": 17,
-  "Liq <$40k": 11,
+  "Liq <$40k": 12,
   "Judge rejected": 4,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:02:49-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOAPE",
+   "mint": "SIM00120YOLOAPE",
+   "rule": "Liq <$40k",
+   "detail": "liq $15,206"
+  },
+  {
+   "time": "2026-10-28T23:02:49-05:00",
+   "source": "REAL-DATA",
+   "symbol": "CPU",
+   "mint": "5JbRYEz844bwnKbGx4dRHhrJ6zjrJ194CKdDXtzwgaXo",
+   "rule": "Already +80% 1h",
+   "detail": "+110% 1h"
+  },
   {
    "time": "2026-10-28T22:59:48-05:00",
    "source": "SIM-FEED",
@@ -560,22 +580,6 @@
    "mint": "SIM00064ZOOMTO",
    "rule": "Score <70",
    "detail": "score 56"
-  },
-  {
-   "time": "2026-10-28T20:42:44-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADSNE",
-   "mint": "SIM00077CHADSNE",
-   "rule": "Score <70",
-   "detail": "score 56"
-  },
-  {
-   "time": "2026-10-28T20:42:44-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEKPEP",
-   "mint": "SIM00079SNEKPEP",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $48,037"
   }
  ],
  "trades": [
@@ -996,7 +1000,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 10.15,
- "sol_usd": 99.61,
+ "sol_usd": 99.44,
  "judge_rejections": [
   {
    "time": "2026-10-28T22:01:37-05:00",
