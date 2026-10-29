@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T06:40:59-05:00",
+ "updated": "2026-10-29T06:55:30-05:00",
  "start": 1000.0,
- "equity": 1149.02,
- "cash": 1060.55,
+ "equity": 1126.85,
+ "cash": 1126.85,
  "curve": [
   [
    1793231266,
@@ -447,61 +447,72 @@
   [
    1793274059,
    1149.02
+  ],
+  [
+   1793274930,
+   1126.85
   ]
  ],
- "positions": {
-  "SIM00249MOONBEA": {
-   "symbol": "MOONBEA",
-   "source": "SIM-FEED",
-   "venue": "Raydium AMM",
-   "entry": 0.015272893161307073,
-   "qty": 6039.857491129265,
-   "usd": 92.24609817153745,
-   "entry_fees": 0.2787,
-   "stop": 0.014356519571628647,
-   "high": 0.015272893161307073,
-   "last": 0.014647185383096192,
-   "trailing": false,
-   "time": "2026-10-29T06:28:35-05:00",
-   "score": 85,
-   "judge_p": 0.65
-  }
- },
+ "positions": {},
  "counts": {
-  "scanned": 235,
-  "killed": 212,
+  "scanned": 238,
+  "killed": 215,
   "passed": 32,
   "trades": 22,
   "judged": 31,
   "judge_rejected": 9
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
+  "scanned": 3,
+  "killed": 3,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 81 checked)",
-  "Filter": "Filter killed $YOLOY - Score <70",
-  "Analyst": "Best score 61 - none 70+",
+  "Scout": "Scouted 3 new pairs (of 81 checked)",
+  "Filter": "Filter killed $YOLOPE - Score <70",
+  "Analyst": "Best score 44 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 2 kills, 0 trade events"
+  "Risk": "Closed $MOONBEA -26.23",
+  "Logger": "Logged 3 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 13,
   "Top 10 holders": 1,
-  "Score <70": 88,
+  "Score <70": 89,
   "LP not burned": 25,
   "Mint/freeze": 41,
-  "Liq <$40k": 29,
+  "Liq <$40k": 30,
   "Judge rejected": 9,
-  "Dev >3% / past rugs": 2
+  "Dev >3% / past rugs": 3
  },
  "kills": [
+  {
+   "time": "2026-10-29T06:55:30-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOPE",
+   "mint": "SIM00255YOLOPE",
+   "rule": "Score <70",
+   "detail": "score 44"
+  },
+  {
+   "time": "2026-10-29T06:55:30-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BONKZOO",
+   "mint": "SIM00254BONKZOO",
+   "rule": "Liq <$40k",
+   "detail": "liq $6,315"
+  },
+  {
+   "time": "2026-10-29T06:55:30-05:00",
+   "source": "SIM-FEED",
+   "symbol": "DOGP",
+   "mint": "SIM00253DOGP",
+   "rule": "Dev >3% / past rugs",
+   "detail": "dev 10.3%, past rugs 0"
+  },
   {
    "time": "2026-10-29T06:40:59-05:00",
    "source": "SIM-FEED",
@@ -797,33 +808,27 @@
    "mint": "SIM00204SNEKFR",
    "rule": "Mint/freeze",
    "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T03:23:08-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGM",
-   "mint": "SIM00202FROGM",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-29T03:23:08-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPESNE",
-   "mint": "SIM00201PEPESNE",
-   "rule": "Score <70",
-   "detail": "score 45"
-  },
-  {
-   "time": "2026-10-29T03:20:07-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGY",
-   "mint": "SIM00200FROGY",
-   "rule": "Score <70",
-   "detail": "score 65"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T06:55:30-05:00",
+   "side": "SELL",
+   "symbol": "MOONBEA",
+   "mint": "SIM00249MOONBEA",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.011047681",
+   "filled": "0.011010553",
+   "slip_pct": "0.336",
+   "delay_s": "4.28",
+   "fees_usd": "0.2038",
+   "status": "FILLED",
+   "qty": "6039.857491129265",
+   "usd": "66.5",
+   "pnl_usd": "-26.23",
+   "reason": "-6% hard stop gap -23.3% vs stop"
+  },
   {
    "time": "2026-10-29T06:28:35-05:00",
    "side": "BUY",
@@ -1525,29 +1530,11 @@
    "usd": "73.89",
    "pnl_usd": "-6.51",
    "reason": "-6% hard stop gap -1.4% vs stop"
-  },
-  {
-   "time": "2026-10-28T19:55:51-05:00",
-   "side": "BUY",
-   "symbol": "WIFPU",
-   "mint": "SIM00013WIFPU",
-   "source": "SIM-FEED",
-   "venue": "Jupiter route",
-   "intended": "0.00030165686",
-   "filled": "0.00030783873",
-   "slip_pct": "2.049",
-   "delay_s": "7.27",
-   "fees_usd": "0.3378",
-   "status": "FILLED",
-   "qty": "259115.68734870284",
-   "usd": "79.77",
-   "pnl_usd": "",
-   "reason": "score 74, stop 0.0002893684"
   }
  ],
  "failed_fills": 1,
- "fees_paid": 22.4,
- "sol_usd": 100.32,
+ "fees_paid": 22.61,
+ "sol_usd": 100.37,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
@@ -1782,6 +1769,14 @@
    "judge_p": 0.75,
    "pnl": 119.33,
    "win": true
+  },
+  {
+   "time": "2026-10-29T06:55:30-05:00",
+   "symbol": "MOONBEA",
+   "mint": "SIM00249MOONBEA",
+   "judge_p": 0.65,
+   "pnl": -26.23,
+   "win": false
   }
  ],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
