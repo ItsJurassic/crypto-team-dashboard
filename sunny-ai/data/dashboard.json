@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T02:22:07-05:00",
+ "updated": "2026-10-29T02:37:07-05:00",
  "start": 1000.0,
- "equity": 1073.95,
- "cash": 901.58,
+ "equity": 1058.49,
+ "cash": 1058.49,
  "curve": [
   [
    1793231266,
@@ -335,61 +335,116 @@
   [
    1793258527,
    1073.95
+  ],
+  [
+   1793258710,
+   1058.49
+  ],
+  [
+   1793259427,
+   1058.49
   ]
  ],
- "positions": {
-  "SIM00150BEAR": {
-   "symbol": "BEAR",
-   "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "entry": 0.0010434367014225273,
-   "qty": 74519.28230228355,
-   "usd": 77.75615411786886,
-   "entry_fees": 0.8087,
-   "stop": 0.002174374323247662,
-   "high": 0.0023131641736677255,
-   "last": 0.0023131641736677255,
-   "trailing": true,
-   "time": "2026-10-29T00:15:47-05:00",
-   "score": 78,
-   "judge_p": 0.75
-  }
- },
+ "positions": {},
  "counts": {
-  "scanned": 176,
-  "killed": 157,
+  "scanned": 184,
+  "killed": 165,
   "passed": 25,
   "trades": 18,
   "judged": 24,
   "judge_rejected": 6
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
+  "scanned": 4,
+  "killed": 4,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 86 checked)",
-  "Filter": "Filter killed $WIF - LP not burned",
-  "Analyst": "Nothing to score",
+  "Scout": "Scouted 4 new pairs (of 85 checked)",
+  "Filter": "Filter killed $DOGAPE - Score <70",
+  "Analyst": "Best score 65 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 4 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 66,
-  "LP not burned": 18,
-  "Mint/freeze": 28,
-  "Liq <$40k": 20,
+  "Score <70": 70,
+  "LP not burned": 19,
+  "Mint/freeze": 30,
+  "Liq <$40k": 21,
   "Judge rejected": 6,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T02:37:07-05:00",
+   "source": "SIM-FEED",
+   "symbol": "DOGAPE",
+   "mint": "SIM00187DOGAPE",
+   "rule": "Score <70",
+   "detail": "score 65"
+  },
+  {
+   "time": "2026-10-29T02:37:07-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BULLGIG",
+   "mint": "SIM00189BULLGIG",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T02:37:07-05:00",
+   "source": "SIM-FEED",
+   "symbol": "GIGA",
+   "mint": "SIM00188GIGA",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T02:37:07-05:00",
+   "source": "SIM-FEED",
+   "symbol": "TOAD",
+   "mint": "SIM00181TOAD",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 80%"
+  },
+  {
+   "time": "2026-10-29T02:25:10-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MOONBE",
+   "mint": "SIM00186MOONBE",
+   "rule": "Score <70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-29T02:25:10-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOP",
+   "mint": "SIM00185YOLOP",
+   "rule": "Score <70",
+   "detail": "score 59"
+  },
+  {
+   "time": "2026-10-29T02:25:10-05:00",
+   "source": "SIM-FEED",
+   "symbol": "GIGAD",
+   "mint": "SIM00184GIGAD",
+   "rule": "Score <70",
+   "detail": "score 57"
+  },
+  {
+   "time": "2026-10-29T02:25:10-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGDO",
+   "mint": "SIM00183FROGDO",
+   "rule": "Liq <$40k",
+   "detail": "liq $12,194"
+  },
   {
    "time": "2026-10-29T02:22:07-05:00",
    "source": "SIM-FEED",
@@ -645,73 +700,27 @@
    "mint": "SIM00146APE",
    "rule": "Liq <$40k",
    "detail": "liq $29,025"
-  },
-  {
-   "time": "2026-10-29T00:08:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "WIFCHA",
-   "mint": "SIM00145WIFCHA",
-   "rule": "Score <70",
-   "detail": "score 63"
-  },
-  {
-   "time": "2026-10-29T00:08:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BULLTO",
-   "mint": "SIM00136BULLTO",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T00:05:40-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CATZO",
-   "mint": "SIM00144CATZO",
-   "rule": "Score <70",
-   "detail": "score 48"
-  },
-  {
-   "time": "2026-10-29T00:02:39-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADG",
-   "mint": "SIM00143TOADG",
-   "rule": "Score <70",
-   "detail": "score 31"
-  },
-  {
-   "time": "2026-10-29T00:02:39-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGABU",
-   "mint": "SIM00142GIGABU",
-   "rule": "Score <70",
-   "detail": "score 64"
-  },
-  {
-   "time": "2026-10-28T23:59:38-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BONK",
-   "mint": "SIM00138BONK",
-   "rule": "Score <70",
-   "detail": "score 68"
-  },
-  {
-   "time": "2026-10-28T23:59:38-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDC",
-   "mint": "SIM00140BASEDC",
-   "rule": "Liq <$40k",
-   "detail": "liq $30,663"
-  },
-  {
-   "time": "2026-10-28T23:59:38-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADMOO",
-   "mint": "SIM00139TOADMOO",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T02:25:10-05:00",
+   "side": "SELL",
+   "symbol": "BEAR",
+   "mint": "SIM00150BEAR",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0021731696",
+   "filled": "0.0021281417",
+   "slip_pct": "2.072",
+   "delay_s": "4.45",
+   "fees_usd": "1.6716",
+   "status": "FILLED",
+   "qty": "74519.28230228355",
+   "usd": "158.59",
+   "pnl_usd": "78.35",
+   "reason": "trail stop gap -2.1% vs stop"
+  },
   {
    "time": "2026-10-29T02:10:04-05:00",
    "side": "SELL",
@@ -1326,8 +1335,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 17.04,
- "sol_usd": 99.88,
+ "fees_paid": 18.71,
+ "sol_usd": 99.75,
  "judge_rejections": [
   {
    "time": "2026-10-29T02:10:04-05:00",
@@ -1505,6 +1514,14 @@
    "mint": "SIM00164MEOWCA",
    "judge_p": 0.75,
    "pnl": 0.3,
+   "win": true
+  },
+  {
+   "time": "2026-10-29T02:25:10-05:00",
+   "symbol": "BEAR",
+   "mint": "SIM00150BEAR",
+   "judge_p": 0.75,
+   "pnl": 78.35,
    "win": true
   }
  ],
