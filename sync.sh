@@ -42,6 +42,7 @@ for sub, bot in [("historian", "Sequoia (Market Historian)"), ("scholar", "Owl (
         rel = f"{sub}/{f}"
         if not m or rel in known: continue
         txt = open(f"{d}/{f}").read()
+        txt = re.sub(r"\A---\s*\n.*?\n---\s*\n", "", txt, flags=re.S)  # drop frontmatter from summary
         t = re.search(r"^#\s+(.+)$", txt, re.M)
         paras = [p.strip() for p in re.split(r"\n\s*\n", txt) if p.strip() and not p.strip().startswith(("#", "*", "|", "!"))]
         png = f"{d}/{f[:-3]}.png"
@@ -52,6 +53,14 @@ for l in lessons:
     if k and os.path.isabs(str(k)) and os.path.exists(k):
         name = os.path.basename(k); shutil.copy(k, f"{out}/img/{name}"); l["image"] = f"team/img/{name}"
     l.setdefault("era", eras.get(l.get("file")))
+    # market from frontmatter `market: stocks|crypto` (untagged = crypto)
+    mk = "crypto"; fp_ = f"{learn}/{l['file']}" if l.get("file") else None
+    if fp_ and os.path.exists(fp_):
+        fm = re.match(r"\A---\s*\n(.*?)\n---", open(fp_).read(), re.S)
+        mm = re.search(r"^market:\s*['\"]?(stocks?|crypto)", fm.group(1), re.M | re.I) if fm else None
+        if mm: mk = "stocks" if mm.group(1).lower().startswith("stock") else "crypto"
+    elif str(l.get("market", "")).lower().startswith("stock"): mk = "stocks"
+    l["market"] = "Stocks" if mk == "stocks" else "Crypto"
     l["id"] = re.sub(r"[^a-z0-9]+", "-", (l.get("file") or l["title"]).lower()).strip("-")
 watch = [w for w in load(f"{dash}/watchlist.json", []) if w.get("symbol") and w.get("source_url")]
 pb = []
