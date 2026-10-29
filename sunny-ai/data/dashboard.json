@@ -1,8 +1,15 @@
 {
+<<<<<<< Updated upstream
  "updated": "2026-10-29T10:28:32-05:00",
  "start": 1000.0,
  "equity": 1089.77,
  "cash": 823.33,
+=======
+ "updated": "2026-10-29T10:29:23-05:00",
+ "start": 1000.0,
+ "equity": 1101.91,
+ "cash": 832.3,
+>>>>>>> Stashed changes
  "curve": [
   [
    1793231266,
@@ -617,8 +624,13 @@
    1099.7
   ],
   [
+<<<<<<< Updated upstream
    1793287712,
    1089.77
+=======
+   1793287763,
+   1101.91
+>>>>>>> Stashed changes
   ]
  ],
  "positions": {
@@ -632,7 +644,11 @@
    "entry_fees": 0.2759,
    "stop": 0.00611933492697275,
    "high": 0.0067853435433477,
+<<<<<<< Updated upstream
    "last": 0.00646401942120163,
+=======
+   "last": 0.006698061626336637,
+>>>>>>> Stashed changes
    "trailing": false,
    "time": "2026-10-29T10:00:48-05:00",
    "score": 82,
@@ -652,7 +668,11 @@
    "atr": 17.775,
    "tp": 854.9421741640585,
    "high": 751.38,
+<<<<<<< Updated upstream
    "last": 750.99,
+=======
+   "last": 750.89,
+>>>>>>> Stashed changes
    "trailing": false,
    "time": "2026-10-29T10:03:12-05:00",
    "score": 77,
@@ -672,7 +692,11 @@
    "atr": 103.411429,
    "tp": 1611.7097825529831,
    "high": 1320.69,
+<<<<<<< Updated upstream
    "last": 1318.0,
+=======
+   "last": 1317.93,
+>>>>>>> Stashed changes
    "trailing": false,
    "time": "2026-10-29T10:03:12-05:00",
    "score": 72,
@@ -680,20 +704,31 @@
   }
  },
  "counts": {
+<<<<<<< Updated upstream
   "scanned": 332,
   "killed": 305,
+=======
+  "scanned": 335,
+  "killed": 308,
+>>>>>>> Stashed changes
   "passed": 39,
   "trades": 26,
   "judged": 38,
   "judge_rejected": 12
  },
  "last_run": {
+<<<<<<< Updated upstream
   "scanned": 0,
   "killed": 0,
+=======
+  "scanned": 3,
+  "killed": 3,
+>>>>>>> Stashed changes
   "passed": 0,
   "traded": 0
  },
  "activity": {
+<<<<<<< Updated upstream
   "Scout": "Scouted 0 new pairs (of 90 checked)",
   "Filter": "0 passed all 8 rules",
   "Analyst": "Nothing to score",
@@ -701,23 +736,70 @@
   "Executor": "No approved entries",
   "Risk": "Closed $FROG -16.42",
   "Logger": "Logged 0 kills, 1 trade events"
+=======
+  "Scout": "Scouted 3 new pairs (of 90 checked)",
+  "Filter": "Filter killed $DUCKYOL - Score <70",
+  "Analyst": "Best score 45 - none 70+",
+  "Judge": "Nothing to judge",
+  "Executor": "No approved entries",
+  "Risk": "Closed $FROG -7.44",
+  "Logger": "Logged 3 kills, 1 trade events"
+>>>>>>> Stashed changes
  },
  "kill_rules": {
   "Already +80% 1h": 6,
   "1h vol <$50k": 17,
   "Top 10 holders": 1,
+<<<<<<< Updated upstream
   "Score <70": 131,
+=======
+  "Score <70": 133,
+>>>>>>> Stashed changes
   "LP not burned": 33,
   "Mint/freeze": 56,
   "Liq <$40k": 42,
   "Judge rejected": 12,
+<<<<<<< Updated upstream
   "Dev >3% / past rugs": 7,
+=======
+  "Dev >3% / past rugs": 8,
+>>>>>>> Stashed changes
   "MAJOR: Stablecoin": 16,
   "MAJOR: 24h vol < $50M": 6,
   "MAJOR: Analyst < 70": 36
  },
  "kills": [
   {
+<<<<<<< Updated upstream
+=======
+   "time": "2026-10-29T10:29:23-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "DUCKYOL",
+   "mint": "SIM00358DUCKYOL",
+   "rule": "Score <70",
+   "detail": "score 45"
+  },
+  {
+   "time": "2026-10-29T10:29:23-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BASED",
+   "mint": "SIM00356BASED",
+   "rule": "Score <70",
+   "detail": "score 43"
+  },
+  {
+   "time": "2026-10-29T10:29:23-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMBUL",
+   "mint": "SIM00357ZOOMBUL",
+   "rule": "Dev >3% / past rugs",
+   "detail": "dev 13.9%, past rugs 0"
+  },
+  {
+>>>>>>> Stashed changes
    "time": "2026-10-29T10:25:05-05:00",
    "lane": "MAJOR",
    "source": "MAJOR",
@@ -1229,6 +1311,7 @@
    "mint": "MAJOR:hyperliquid",
    "rule": "Judge rejected",
    "detail": "red flag: no_spike"
+<<<<<<< Updated upstream
   },
   {
    "time": "2026-10-29T10:03:12-05:00",
@@ -1256,16 +1339,23 @@
    "mint": "MAJOR:cardano",
    "rule": "Analyst < 70",
    "detail": "score 12"
+=======
+>>>>>>> Stashed changes
   }
  ],
  "trades": [
   {
+<<<<<<< Updated upstream
    "time": "2026-10-29T10:28:32-05:00",
+=======
+   "time": "2026-10-29T10:29:23-05:00",
+>>>>>>> Stashed changes
    "side": "SELL",
    "symbol": "FROG",
    "mint": "SIM00352FROG",
    "source": "SIM-FEED",
    "venue": "Raydium AMM",
+<<<<<<< Updated upstream
    "intended": "0.0027029389",
    "filled": "0.002689025",
    "slip_pct": "0.515",
@@ -1276,6 +1366,18 @@
    "usd": "67.57",
    "pnl_usd": "-16.42",
    "reason": "-6% hard stop gap -13.8% vs stop"
+=======
+   "intended": "0.0030947138",
+   "filled": "0.0030465877",
+   "slip_pct": "1.555",
+   "delay_s": "2.27",
+   "fees_usd": "0.238",
+   "status": "FILLED",
+   "qty": "25126.227973854075",
+   "usd": "76.55",
+   "pnl_usd": "-7.44",
+   "reason": "-6% hard stop gap -2.4% vs stop"
+>>>>>>> Stashed changes
   },
   {
    "time": "2026-10-29T10:24:57-05:00",
@@ -2215,8 +2317,13 @@
   }
  ],
  "failed_fills": 2,
+<<<<<<< Updated upstream
  "fees_paid": 26.72,
  "sol_usd": 101.96,
+=======
+ "fees_paid": 26.73,
+ "sol_usd": 102.014,
+>>>>>>> Stashed changes
  "judge_rejections": [
   {
    "time": "2026-10-29T10:25:05-05:00",
@@ -2531,11 +2638,19 @@
    "win": false
   },
   {
+<<<<<<< Updated upstream
    "time": "2026-10-29T10:28:32-05:00",
    "symbol": "FROG",
    "mint": "SIM00352FROG",
    "judge_p": 0.65,
    "pnl": -16.42,
+=======
+   "time": "2026-10-29T10:29:23-05:00",
+   "symbol": "FROG",
+   "mint": "SIM00352FROG",
+   "judge_p": 0.65,
+   "pnl": -7.44,
+>>>>>>> Stashed changes
    "win": false
   }
  ],
@@ -2543,6 +2658,7 @@
  "bank": {
   "rate": 0.2,
   "start": 1000.0,
+<<<<<<< Updated upstream
   "gross": 139.03,
   "trade_fees": 25.52,
   "slippage": 23.49,
@@ -2563,6 +2679,28 @@
     "closed": 25,
     "total_costs": 49.05,
     "pnl_open": -0.9
+=======
+  "gross": 148.87,
+  "trade_fees": 25.52,
+  "slippage": 24.35,
+  "failed_costs": 0.04,
+  "net": 98.96,
+  "banked": 63.88,
+  "closed": 25,
+  "total_costs": 49.91,
+  "working_capital": 1035.08,
+  "lanes": {
+   "SOLANA": {
+    "gross": 148.87,
+    "trade_fees": 25.52,
+    "slippage": 24.35,
+    "failed_costs": 0.04,
+    "net": 98.96,
+    "banked": 63.88,
+    "closed": 25,
+    "total_costs": 49.91,
+    "pnl_open": 2.28
+>>>>>>> Stashed changes
    },
    "MAJOR": {
     "gross": 0.0,
@@ -2573,7 +2711,11 @@
     "banked": 0.0,
     "closed": 0,
     "total_costs": 0.0,
+<<<<<<< Updated upstream
     "pnl_open": 0.67
+=======
+    "pnl_open": 0.65
+>>>>>>> Stashed changes
    }
   },
   "note": "Banking = 20% of net profit (gains minus all fees). Tell Sunny if you meant something different.",
@@ -2581,20 +2723,35 @@
  },
  "lanes": {
   "SOLANA": {
+<<<<<<< Updated upstream
    "realized": 90.02,
    "unrealized": -0.9,
    "pnl": 89.12,
    "open": 1,
    "open_value": 87.89,
+=======
+   "realized": 99.0,
+   "unrealized": 2.28,
+   "pnl": 101.28,
+   "open": 1,
+   "open_value": 91.07,
+>>>>>>> Stashed changes
    "buys": 25,
    "closed": 24
   },
   "MAJOR": {
    "realized": 0,
+<<<<<<< Updated upstream
    "unrealized": 0.67,
    "pnl": 0.67,
    "open": 2,
    "open_value": 178.55,
+=======
+   "unrealized": 0.65,
+   "pnl": 0.65,
+   "open": 2,
+   "open_value": 178.53,
+>>>>>>> Stashed changes
    "buys": 2,
    "closed": 0
   }
@@ -2918,6 +3075,10 @@
     }
    ]
   },
+<<<<<<< Updated upstream
   "next_scan_in_s": 992
+=======
+  "next_scan_in_s": 941
+>>>>>>> Stashed changes
  }
 }
