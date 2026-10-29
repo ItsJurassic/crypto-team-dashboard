@@ -3,15 +3,6 @@ let CB = ["BTC","ETH","SOL","XRP","DOGE"];  // + watchlist coins that Coinbase l
 const IVS = {"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1D":86400,"1W":604800,"1M":2592000};
 const CG_DAYS = {"1m":1,"5m":1,"15m":1,"1h":2,"4h":7,"1D":90,"1W":365,"1M":"max"};
 const SCOL = {"Watching":"#4ea1ff","Getting ready to trade":"#f5a623","Buying":"#16c784","Selling":"#ea3943","Paused":"#9e9e9e","Unknown":"#9e9e9e"};
-const TEAM = [
- ["Sunny (main assistant)","Your general assistant; coordinates the team and refreshes this dashboard"],
- ["Heron (Crypto Watcher)","Alerts on big moves, volume spikes and your price levels, 24/7"],
- ["Lark (Crypto Pulse, news)","News, X sentiment and on-chain digest every 4 hours"],
- ["Petrel (Macro Watcher)","Heads-up before Fed, CPI, jobs and other events, plus a recap after"],
- ["Seedling (Paper Trader)","Logs each simulated trade and explains the reasoning and signals"],
- ["Willow (Trade Journal Coach)","Reviews each closed trade (mistake or bad luck) and sends a weekly recap"],
- ["Sequoia (Market Historian)","Studies 10 years of top-20 chart history and saves dated lessons"],
- ["Owl (Strategy Scholar)","Studies how people trade and keeps the playbook the other bots use"]];
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fp = v => v == null ? "n/a" : v >= 1000 ? "$" + v.toLocaleString("en-US",{maximumFractionDigits:0}) : v >= 1 ? "$" + v.toFixed(2) : "$" + v.toPrecision(4);
@@ -22,83 +13,17 @@ const getJSON = async (u) => { const r = await fetch(u, {cache:"no-store"}); if 
 
 let state = {sym:"BTC", iv:"1h", top:[], trades:[], candles:[], ws:null};
 let chart, cs, ls;
-
-// ---------- tabs ----------
-document.querySelectorAll(".tabbar button").forEach(b => b.onclick = () => {
-  document.querySelectorAll(".tabbar button").forEach(x => x.classList.toggle("on", x === b));
-  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.id === "tab-" + b.dataset.tab));
-  if (b.dataset.tab === "overview" && chart) chart.applyOptions({width: $("#chart").clientWidth});
-  scrollTo(0,0);
-});
-
-// ---------- bot data ----------
-async function loadStatus() {
-  try {
-    const s = await getJSON("data/status.json");
-    const col = SCOL[s.state] || "#9e9e9e", dot = $("#dot");
-    dot.style.background = col; dot.style.color = col;
-    dot.classList.toggle("live", s.state !== "Paused" && s.state !== "Unknown");
-    $("#st-state").textContent = "Seedling: " + (s.state === "Unknown" ? "No status yet" : s.state);
-    $("#st-coin").textContent = s.coin ? "· " + s.coin : "";
-    $("#st-reason").textContent = s.reason || "";
-    let chk = ""; try { const w = await getJSON("data/widget.json"); chk = w.updated || ""; } catch {}
-    $("#st-upd").textContent = (s.updated ? "Status since " + s.updated.replace(/^.*?, \d{4}, /, "") : "") + (chk ? " · Checked " + chk : "");
-  } catch (e) { $("#st-state").textContent = "Status unavailable"; $("#st-reason").textContent = "Could not load data/status.json."; }
-}
-async function loadBotData() {
-  try { state.trades = await getJSON("data/trades.json"); } catch { state.trades = []; }
-  const tl = $("#trades");
-  tl.innerHTML = state.trades.length ? `<div class="tablewrap"><table><thead><tr><th>Time</th><th>Coin</th><th>Side</th><th>Price</th><th>Qty</th><th style="text-align:left">Why</th></tr></thead><tbody>${
-    [...state.trades].sort((a,b)=>b.t-a.t).map(t=>`<tr><td>${ct(t.t*1000)}</td><td>${esc(t.coin)}</td><td class="${t.side==="buy"?"up":"dn"}">${t.side==="buy"?"Buy":"Sell"}</td><td>${fp(t.price)}</td><td>${esc(t.qty)}</td><td style="text-align:left;white-space:normal">${esc(t.reason)}</td></tr>`).join("")}</tbody></table></div>`
-    : `<div class="empty"><b>No trades yet.</b> The log fills in as Seedling (Paper Trader) records each simulated trade and Willow (Trade Journal Coach) reviews it.</div>`;
-  try {
-    const s = await getJSON("data/scorecard.json");
-    const now = new Date(), st = new Date(s.start + "T00:00:00-05:00"), en = new Date(s.end + "T23:59:59-06:00");
-    const el = Math.max(0, Math.min(30, Math.floor((now - st) / 864e5))), rem = Math.max(0, Math.ceil((en - now) / 864e5));
-    const m = [[el,"Days elapsed"],[rem,"Days remaining"],[(s.pnl>=0?"$":"-$")+Math.abs(s.pnl).toFixed(2),"P&L vs $"+s.start_balance.toLocaleString()+" start"],
-      [s.closed ? Math.round(100*s.wins/s.closed)+"%" : "n/a","Win rate"],[s.largest_loss!=null ? fp(-s.largest_loss).replace("$","-$") : "n/a","Largest loss"],[s.trades,"Trades logged"]];
-    if (s.equity!=null) m.unshift([fp(s.equity),"Portfolio value"],[fp(s.cash),"Cash"],[(s.positions||[]).length,"Open positions"]);
-    $("#score").innerHTML = m.map(([v,l])=>`<div class="metric"><b>${v}</b><span class="muted small">${l}</span></div>`).join("");
-    const P=(s.positions||[]).map(p=>`${p.coin} ${p.qty} @ ${fp(p.entry)} → ${fp(p.mark)} (${p.upnl>=0?"+":"-"}$${Math.abs(p.upnl).toFixed(2)}), stop ${fp(p.stop)}`).join(" · ");
-    $("#score-note").textContent = (P?"Open: "+P+". ":"") + `Trial ${s.start} to ${s.end}. Data synced ${s.synced}.`;
-  } catch { $("#score").innerHTML = '<div class="empty">Scorecard not synced yet.</div>'; }
-  try {
-    const L = await getJSON("data/lessons.json");
-    $("#lessons").innerHTML = L.length ? L.sort((a,b)=>b.date.localeCompare(a.date)).map(l=>`<div class="lesson" id="L-${esc(l.id)}"><h2>${esc(l.title)}</h2>${l.image?`<img loading="lazy" src="${esc(l.image)}" alt="${esc(l.title)} chart">`:""}<div class="muted small">${esc(l.date)} · ${esc(l.bot)}</div><p>${esc(l.summary)}</p></div>`).join("")
-      : '<div class="empty">No lessons yet.</div>';
-    state.lessons = L; drawGrid();
-  } catch { $("#lessons").innerHTML = '<div class="empty">No lessons yet.</div>'; }
-  try {
-    const P = await getJSON("data/playbook.json");
-    $("#playbook").outerHTML = P.length ? `<ol id="playbook">${P.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>` : '<div id="playbook" class="empty">Playbook not started.</div>';
-  } catch {}
-  setMarkers();
-}
-// ---------- Sequoia progress grid (tap a filled cell to open its chart) ----------
-function drawGrid() {
-  const L = (state.lessons||[]).filter(l=>l.era), Y0 = 2016, Y1 = new Date().getFullYear();
-  const top = state.top.length ? state.top.map(c=>c.symbol.toUpperCase()) : CB;
-  const cov = {};
-  for (const l of L) { const m = l.era.match(/^([A-Z0-9_]+)\s+(\d{4})(?:\D+(\d{4}))?/); if (!m) continue;
-    for (let y = +m[2]; y <= +(m[3]||m[2]); y++) (cov[m[1]+y] ||= []).push(l); }
-  const yrs = []; for (let y = Y0; y <= Y1; y++) yrs.push(y);
-  $("#grid").innerHTML = `<table class="grid"><thead><tr><th></th>${yrs.map(y=>`<th>${y%2?"":"’"+String(y).slice(2)}</th>`).join("")}</tr></thead><tbody>${
-    top.map(s=>`<tr><td>${esc(s)}</td>${yrs.map(y=>{const h=cov[s+y]; return h?`<td><button class="cell on" data-l="${esc(h[0].id)}" aria-label="${esc(s)} ${y}: ${esc(h[0].title)}"></button></td>`:`<td><span class="cell"></span></td>`}).join("")}</tr>`).join("")}</tbody></table>`;
-  document.querySelectorAll("#grid .cell.on").forEach(b => b.onclick = () => { const el = document.getElementById("L-"+b.dataset.l); if (el) { el.scrollIntoView({behavior:"smooth"}); el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),1500); } });
-}
-// ---------- news watchlist ----------
+async function loadTrades(){ try { state.trades = await getJSON("team/trades.json"); } catch { state.trades = []; } setMarkers(); }
 async function loadWatch() {
-  let W = []; try { W = await getJSON("data/watchlist.json"); } catch {}
+  let W = []; try { W = await getJSON("team/watchlist.json"); } catch {}
   state.watch = W;
   $("#watch").innerHTML = W.length ? W.map(w=>`<div class="lesson"><b>${esc(w.name)} <span class="muted">${esc(w.symbol)}</span></b> <span class="tag">${esc(w.status)}</span>
     <div class="muted small">Added ${esc(w.added_at)} by ${esc(w.added_by)}</div><p>${esc(w.reason)}</p><a href="${esc(w.source_url)}" target="_blank" rel="noopener">Source</a> · <a href="#" data-sym="${esc(w.symbol)}" class="wchart">Chart</a></div>`).join("")
     : '<div class="empty">No new coins on watch yet. When Lark (Crypto Pulse) finds a promising new coin in the news, it shows up here with the reason and source, and Seedling can paper-trade it.</div>';
-  document.querySelectorAll(".wchart").forEach(a => a.onclick = e => { e.preventDefault(); document.querySelector('[data-tab="overview"]').click(); setSym(a.dataset.sym); });
+  document.querySelectorAll(".wchart").forEach(a => a.onclick = e => { e.preventDefault(); setSym(a.dataset.sym); });
   for (const w of W) { const s = w.symbol.toUpperCase(); if (CB.includes(s)) continue;
     try { await getJSON(`https://api.exchange.coinbase.com/products/${s}-USD/ticker`); CB.push(s); } catch {} }
 }
-$("#team").innerHTML = TEAM.map(([n,d])=>`<div class="lesson"><b>${n}</b><div class="muted small">${d}</div></div>`).join("");
-
 // ---------- chart ----------
 function initChart() {
   chart = LightweightCharts.createChart($("#chart"), {autoSize:true, layout:{background:{color:"transparent"},textColor:"#93a0b8"},
@@ -147,7 +72,7 @@ async function cbCandles(sym, gran, pages=1) {
 }
 async function extraCandles() {
   if (!state.extra || Date.now() - (state.extraAt||0) > 120000) {
-    try { const r = await getJSON("data/candles_extra.json?t=" + Date.now()); state.extra = r.c || {}; state.extraAsOf = r.asOf; state.extraAt = Date.now(); }
+    try { const r = await getJSON("team/candles_extra.json?t=" + Date.now()); state.extra = r.c || {}; state.extraAsOf = r.asOf; state.extraAt = Date.now(); }
     catch { state.extra = state.extra || {}; }
   }
   return state.extra;
@@ -239,7 +164,7 @@ async function loadTop() {
     sel.innerHTML = syms.map(s=>{const c=state.top.find(x=>x.symbol.toUpperCase()===s);return `<option value="${s}">${(state.watch||[]).some(w=>w.symbol.toUpperCase()===s)?"👀 ":""}${c?esc(c.name)+" ("+s+")":s}${CB.includes(s)?"":" · line"}</option>`}).join("");
     sel.value = cur;
   } catch (e) { $("#top-note").innerHTML = `<span class="dn">Top-20 table unavailable (${esc(e.message)}); retrying in 60 s.</span>`; }
-  showPx(); drawGrid();
+  showPx(); 
 }
 function setSym(s) { state.sym = s; $("#coin").value = s; showPx(); loadChart(); }
 $("#coin").innerHTML = CB.map(s=>`<option>${s}</option>`).join("");
@@ -247,11 +172,9 @@ $("#coin").onchange = e => setSym(e.target.value);
 $("#ivs").innerHTML = Object.keys(IVS).map(k=>`<button data-iv="${k}" class="${k===state.iv?"on":""}">${k}</button>`).join("");
 document.querySelectorAll("#ivs button").forEach(b => b.onclick = () => { state.iv = b.dataset.iv; document.querySelectorAll("#ivs button").forEach(x=>x.classList.toggle("on",x===b)); loadChart(); });
 
-initChart(); loadStatus(); loadBotData(); loadWatch().then(loadTop).then(loadChart); connectWS();
+initChart(); loadTrades(); loadWatch().then(loadTop).then(loadChart); connectWS();
 setInterval(pollCB, 5000);
-setInterval(loadStatus, 15000);
-setInterval(loadBotData, 60000);
+setInterval(loadTrades, 120000);
 setInterval(loadTop, 60000);
 setInterval(loadWatch, 300000);
 setInterval(() => { if (!CB.includes(state.sym) || ["1m","5m"].includes(state.iv)) loadChart(); }, 60000);
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});

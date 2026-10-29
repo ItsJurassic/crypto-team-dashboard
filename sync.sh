@@ -10,7 +10,7 @@ LEARN=/workspace/crypto-learning
 python3 - "$SITE" "$DASH" "$LEARN" <<'PY'
 import json, sys, os, re, shutil, datetime
 site, dash, learn = sys.argv[1:4]
-out = os.path.join(site, "data"); os.makedirs(os.path.join(out, "img"), exist_ok=True)
+out = os.path.join(site, "sunny-ai", "team"); os.makedirs(os.path.join(out, "img"), exist_ok=True)
 def load(p, default):
     try: return json.load(open(p))
     except Exception: return default
@@ -24,7 +24,7 @@ for l in lessons:
     k = l.get("image")
     src = imgmap.get(k) if k else None
     if src and os.path.exists(src):
-        ext = os.path.splitext(src)[1]; shutil.copy(src, f"{out}/img/{k}{ext}"); l["image"] = f"data/img/{k}{ext}"
+        ext = os.path.splitext(src)[1]; shutil.copy(src, f"{out}/img/{k}{ext}"); l["image"] = f"team/img/{k}{ext}"
     elif not (k and os.path.isabs(str(k))): l["image"] = None
 # Auto-discover lesson .md files (with matching .png) from Sequoia and Owl
 known = {l.get("file") for l in lessons}
@@ -50,7 +50,7 @@ for sub, bot in [("historian", "Sequoia (Market Historian)"), ("scholar", "Owl (
 for l in lessons:
     k = l.get("image")
     if k and os.path.isabs(str(k)) and os.path.exists(k):
-        name = os.path.basename(k); shutil.copy(k, f"{out}/img/{name}"); l["image"] = f"data/img/{name}"
+        name = os.path.basename(k); shutil.copy(k, f"{out}/img/{name}"); l["image"] = f"team/img/{name}"
     l.setdefault("era", eras.get(l.get("file")))
     l["id"] = re.sub(r"[^a-z0-9]+", "-", (l.get("file") or l["title"]).lower()).strip("-")
 watch = [w for w in load(f"{dash}/watchlist.json", []) if w.get("symbol") and w.get("source_url")]
@@ -109,18 +109,29 @@ widget = {"state": status.get("state", "Unknown"), "color": colors.get(status.ge
           "balance": bal, "pnl": score["pnl"], "pnl_pct": round(score["pnl"] / 20, 2),
           "trial_day": max(1, min(30, (today - d0).days + 1)), "trial_days": 30,
           "prices": px, "prices_as_of": cgt, "last_trade": last or "No trades yet",
-          "updated": score["synced"], "url": "https://itsjurassic.github.io/crypto-team-dashboard/"}
+          "updated": score["synced"], "url": "https://itsjurassic.github.io/crypto-team-dashboard/sunny-ai/seedling.html"}
 json.dump(widget, open(f"{out}/widget.json", "w"), indent=1, ensure_ascii=False)
+os.makedirs(os.path.join(site, "data"), exist_ok=True)  # legacy widget path kept for installed iPhone widgets
+json.dump(widget, open(os.path.join(site, "data", "widget.json"), "w"), indent=1, ensure_ascii=False)
+if os.path.exists(pbf): shutil.copy(pbf, f"{out}/playbook.md")
+# Seedling extras: raw portfolio, shadow DCA account, USDC yield log, CoinGecko marks
+for n in ("portfolio.json", "shadow.json"):
+    if os.path.exists(f"{PT}/{n}"): shutil.copy(f"{PT}/{n}", f"{out}/{n}")
+for n in ("yield.csv", "shadow_trades.csv"):
+    try: json.dump(list(_csv.DictReader(open(f"{PT}/{n}"))), open(f"{out}/{n[:-4]}.json", "w"), indent=1)
+    except Exception: pass
+if cg: json.dump([{k: c.get(k) for k in ("id","symbol","name","current_price","market_cap","price_change_percentage_24h")} for c in cg if isinstance(c, dict)], open(f"{out}/cg.json", "w"))
 print("synced:", {k: (len(v) if isinstance(v, list) else "ok") for k, v in [("trades", trades), ("lessons", lessons), ("playbook", pb)]})
 PY
-cp -f "$DASH/candles_extra.json" "$SITE/data/candles_extra.json" 2>/dev/null || true  # fallback OHLC (TRX/XMR/LEO/WBT/RAIN/FIGR_HELOC)
+cp -f "$DASH/candles_extra.json" "$SITE/sunny-ai/team/candles_extra.json" 2>/dev/null || true  # fallback OHLC (TRX/XMR/LEO/WBT/RAIN/FIGR_HELOC)
 [ "${1:-}" = "--no-push" ] && exit 0
 cd "$SITE"
 git rev-parse --git-dir >/dev/null 2>&1 || git init -q -b main
 git remote get-url origin >/dev/null 2>&1 || git remote add origin "$REMOTE"
 if true; then
-  git add -A data
+  git add -A sunny-ai/team data/widget.json
   git diff --cached --quiet || git commit -qm "Sync bot data $(date '+%F %H:%M %Z')"
+  git pull -q --rebase origin main || { git rebase --abort; git pull -q --no-rebase -X ours origin main; }
   git push -q origin HEAD:main
   echo "pushed"
 else

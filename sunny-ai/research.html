@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="team.css"><title>Sunny AI · Research (paper)</title></head><body><div class="wrap"><div class="banner">⚠ PAPER / SIMULATED ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
+<h1>📚 Research · Sequoia &amp; Owl</h1><div class="m s">Sequoia (Market Historian) studies 10 years of top-20 chart history. Owl (Strategy Scholar) turns it into the playbook Seedling trades by.</div><div class="nav"><a href="./">☀️ Desk</a><a href="profits.html">💰 Profits</a><a href="seedling.html" id="n-seedling">🌱 Seedling</a><a href="research.html" id="n-research">📚 Research</a><a href="charts.html" id="n-charts">📈 Charts</a></div>
+<div class="card"><div class="hd"><span>Owl's playbook rules</span><span id="pc"></span></div><ol id="pb" style="padding-left:20px"></ol><details><summary class="m s" style="cursor:pointer">Full playbook (strategies S1–S4, checks, evidence)</summary><pre id="md" style="margin-top:8px"></pre></details></div>
+<div class="card"><div class="hd"><span>Lessons</span><span id="lc"></span></div><div class="chips" id="flt"></div><div id="ls"></div></div>
+<p class="m s" style="text-align:center">PAPER / SIMULATED ONLY. Research, not financial advice.</p></div>
+<script>const $=i=>document.getElementById(i),esc=s=>String(s??"").replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;","\"":"&quot;"}[c])),f=(n,d=2)=>n==null?"n/a":(n<0?"-$":"$")+Math.abs(+n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d}),fp=v=>v==null?"n/a":v>=1000?f(v,0):v>=1?f(v):"$"+(+v).toPrecision(4),cl=v=>v>=0?"g":"r",J=u=>fetch(u+"?t="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw r.status;return r.json()});
+$("n-research").className="on";let L=[],B="All";
+function draw(){const x=L.filter(l=>B=="All"||l.bot.startsWith(B));$("lc").textContent=x.length+" lessons";
+$("ls").innerHTML=x.map(l=>'<div class="ls"><h3>'+esc(l.title)+'</h3><div class="m s">'+esc(l.date)+" · "+esc(l.bot)+(l.era?" · "+esc(l.era):"")+"</div>"+(l.image?'<img loading="lazy" src="'+esc(l.image)+'" alt="">':"")+"<div>"+esc(l.summary)+"</div></div>").join("")}
+(async()=>{const P=await J("team/playbook.json").catch(()=>[]);$("pc").textContent=P.length+" rules";$("pb").innerHTML=P.map(r=>"<li>"+esc(r)+"</li>").join("");
+fetch("team/playbook.md?t="+Date.now()).then(r=>r.ok?r.text():"").then(t=>$("md").textContent=t);
+L=(await J("team/lessons.json").catch(()=>[])).sort((a,b)=>b.date.localeCompare(a.date));
+$("flt").innerHTML=["All","Sequoia","Owl"].map(b=>'<button data-b="'+b+'" class="'+(b==B?"on":"")+'">'+b+"</button>").join("");
+document.querySelectorAll("#flt button").forEach(b=>b.onclick=()=>{B=b.dataset.b;document.querySelectorAll("#flt button").forEach(y=>y.classList.toggle("on",y==b));draw()});draw()})();
+</script></body></html>

@@ -1,6 +1,7 @@
 // Crypto Team widget for Scriptable (small + medium)
 const SITE = "https://itsjurassic.github.io/crypto-team-dashboard/";
-const DATA = SITE + "data/widget.json";
+const OPEN = SITE + "sunny-ai/seedling.html";
+const DATA = SITE + "sunny-ai/team/widget.json";
 const fm = FileManager.local();
 const cache = fm.joinPath(fm.documentsDirectory(), "crypto-widget-cache.json");
 
@@ -22,7 +23,7 @@ async function build(size) {
   const d = await getData();
   const w = new ListWidget();
   const g = new LinearGradient(); g.colors = [new Color("#0f172a"), new Color("#020617")]; g.locations = [0, 1]; w.backgroundGradient = g;
-  w.setPadding(12, 14, 12, 14); w.url = SITE;
+  w.setPadding(12, 14, 12, 14); w.url = OPEN;
   w.refreshAfterDate = new Date(Date.now() + 5 * 60 * 1000);
   if (!d) { txt(w, "Crypto Team", 14, null, true); w.addSpacer(6); txt(w, "Offline - no data yet", 12, dim); return w; }
 

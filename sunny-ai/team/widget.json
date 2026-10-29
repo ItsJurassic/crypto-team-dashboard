@@ -1,0 +1,25 @@
+{
+ "state": "Buying",
+ "color": "#22c55e",
+ "coin": "BNB",
+ "reason": "S1 trend signal on the Oct 28 daily close ($758.84 above 50d SMA $749.6, 50d above 200d, new 20-day closing high). Paper-bought 0.4082 BNB at $760.44, stop $721.06, target $868.31.",
+ "balance": 1996.62,
+ "pnl": 0,
+ "pnl_pct": 0.0,
+ "trial_day": 2,
+ "trial_days": 30,
+ "prices": {
+  "BTC": {
+   "price": 80238,
+   "chg24": -0.70937
+  },
+  "ETH": {
+   "price": 2322.99,
+   "chg24": -1.14077
+  }
+ },
+ "prices_as_of": "12:07 AM CT",
+ "last_trade": "BUY BNB @ $760.44 2026-10-28",
+ "updated": "Oct 29, 2026, 10:07 AM CT",
+ "url": "https://itsjurassic.github.io/crypto-team-dashboard/sunny-ai/seedling.html"
+}

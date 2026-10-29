@@ -1,0 +1,38 @@
+[
+ {
+  "trade_id": "SB-1-BTC",
+  "timestamp_ct": "2026-10-28T14:37",
+  "sleeve": "steady-base",
+  "coin": "BTC",
+  "side": "buy",
+  "qty": "0.00073355",
+  "fill_price_usd": "81303.20",
+  "notional_usd": "60.00",
+  "fee_usd": "0.36",
+  "notes": "weekly DCA 1/5 (Coinbase ask 81221.98 +0.1% slippage; 0.6% fee)"
+ },
+ {
+  "trade_id": "SB-1-ETH",
+  "timestamp_ct": "2026-10-28T14:37",
+  "sleeve": "steady-base",
+  "coin": "ETH",
+  "side": "buy",
+  "qty": "0.02524808",
+  "fill_price_usd": "2362.16",
+  "notional_usd": "60.00",
+  "fee_usd": "0.36",
+  "notes": "weekly DCA 1/5 (Coinbase ask 2359.8 +0.1% slippage; 0.6% fee)"
+ },
+ {
+  "trade_id": "MIR-M1",
+  "timestamp_ct": "2026-10-28T19:08",
+  "sleeve": "strategy-sleeve",
+  "coin": "BNB",
+  "side": "buy",
+  "qty": "0.2857",
+  "fill_price_usd": "760.44",
+  "notional_usd": "217.26",
+  "fee_usd": "1.30",
+  "notes": "mirror of M1 at 0.7x (S1 BNB entry; stop 721.06; target 868.31)"
+ }
+]
