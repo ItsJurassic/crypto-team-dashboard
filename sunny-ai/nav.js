@@ -1,5 +1,6 @@
 /* Shared Sunny AI bottom nav. PAPER / SIMULATED ONLY. */
 (function(){
+if(!window.SUNNY_BOTS&&!document.querySelector('script[src="bots.js"]')){const b=document.createElement('script');b.src='bots.js';document.head.appendChild(b)}
 const P='<path d="',E='"/>',I={
 desk:P+'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z'+E,
 profits:P+'M3 17l6-6 4 4 8-8'+E+P+'M15 7h6v6'+E,
