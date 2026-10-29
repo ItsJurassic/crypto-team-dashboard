@@ -28,17 +28,16 @@ const signed={};async function fix(img){const s=img.getAttribute("src")||"";cons
   if(signed[k])img.src=signed[k]}
 new MutationObserver(ms=>ms.forEach(m=>{(m.type=="attributes"?[m.target]:[...m.addedNodes]).forEach(n=>{if(n.nodeType!=1)return;if(n.tagName=="IMG")fix(n);n.querySelectorAll&&n.querySelectorAll("img").forEach(fix)})})).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["src"]});
 function login(msg){if(document.getElementById("sa-login"))return;const d=document.createElement("div");d.id="sa-login";
-  d.innerHTML=`<div class=bx><h1>Sunny AI</h1><p>Sign in to view the paper-trading desk. Access is limited to the owner's email.</p>
-  <form><input type=email required autocomplete=email placeholder="you@example.com"><button>Send magic link</button></form><div class=msg>${msg||""}</div><div class=pb>PAPER / SIMULATED ONLY</div></div>`;
-  document.body.appendChild(d);const f=d.querySelector("form"),i=d.querySelector("input"),b=d.querySelector("button"),mm=d.querySelector(".msg");
-  f.onsubmit=async e=>{e.preventDefault();b.disabled=true;mm.style.color="#8a94a3";mm.textContent="Sending…";
-    const {error}=await sb.auth.signInWithOtp({email:i.value.trim(),options:{emailRedirectTo:location.href.split("#")[0]}});
-    b.disabled=false;if(error){mm.style.color="#e5636f";mm.textContent=/not allowed|Database error|signup/i.test(error.message)?"This email is not allowed.":error.message}
-    else{mm.style.color="#3fb68b";mm.textContent="Check your email for the sign-in link, then open it on this device."}}}
+  d.innerHTML=`<div class=bx><h1>Sunny AI</h1><p>Sign in to view the paper-trading desk.</p>
+  <form><input type=email name=email required autocomplete=username placeholder="Email"><input type=password name=password required autocomplete=current-password placeholder="Password"><button>Sign in</button></form><div class=msg>${msg||""}</div><div class=pb>PAPER / SIMULATED ONLY</div></div>`;
+  document.body.appendChild(d);const f=d.querySelector("form"),b=d.querySelector("button"),mm=d.querySelector(".msg");
+  f.onsubmit=async e=>{e.preventDefault();b.disabled=true;mm.style.color="#8a94a3";mm.textContent="Signing in…";
+    const {error}=await sb.auth.signInWithPassword({email:f.email.value.trim(),password:f.password.value});
+    b.disabled=false;if(error){mm.style.color="#e5636f";mm.textContent=/invalid/i.test(error.message)?"Wrong email or password. Try again.":/confirm/i.test(error.message)?"This account isn't confirmed yet.":"Couldn't sign in right now. Please try again."}}}
 function unlock(){document.getElementById("sa-login")?.remove();document.documentElement.classList.remove("sa-locked");
   if(!document.getElementById("sa-out")){const o=document.createElement("button");o.id="sa-out";o.textContent="Sign out";o.onclick=async()=>{await sb.auth.signOut();location.reload()};document.body.appendChild(o)}}
-function start(){sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,detectSessionInUrl:true,flowType:"implicit"}});
-  sb.auth.getSession().then(({data})=>{if(data.session){unlock();ok()}else{const w=()=>document.body?login(new URLSearchParams(location.hash.slice(1)).get("error_description")||""):setTimeout(w,20);w()}});
+function start(){sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storage:window.localStorage,detectSessionInUrl:false}});
+  sb.auth.getSession().then(({data})=>{if(data.session){unlock();ok()}else{const w=()=>document.body?login(""):setTimeout(w,20);w()}});
   sb.auth.onAuthStateChange((ev,s)=>{if(s&&document.documentElement.classList.contains("sa-locked")){unlock();ok();if(location.hash.includes("access_token"))history.replaceState(null,"",location.pathname+location.search)}})}
 const sc=document.createElement("script");sc.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js";sc.onload=start;sc.onerror=()=>fail(new Error("auth lib failed"));document.head.appendChild(sc);
 })();
