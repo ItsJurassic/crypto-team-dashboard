@@ -101,3 +101,10 @@ table{max-width:100%}
 .lct{display:flex;gap:6px;margin:10px 0 6px;overflow-x:auto}.lct .lb{background:transparent;border:1px solid var(--line);color:var(--mut)}
 .lcv{font-size:12px;margin-bottom:4px}.lcc{width:100%;height:clamp(150px,42vw,240px);display:block}.lcn{font-size:10.5px;margin-top:4px}
 @media (min-width:1024px){.lcc{height:220px}}
+/* why we bought this */
+.why{font-size:12px;color:#c5ccd6;white-space:normal;margin:2px 0}.why summary{cursor:pointer;list-style:none;padding:6px 0;line-height:1.45}.why summary::-webkit-details-marker{display:none}
+.why summary:after{content:" ▸ details";color:#8fb3ff;font-size:11px}.why[open] summary:after{content:" ▾ hide"}.wq{color:#8fb3ff;font-weight:600}
+.wd{background:#0d1218;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:4px 0 6px;display:grid;gap:2px}
+.wh{color:#8a94a3;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;margin-top:6px}.wr{display:flex;justify-content:space-between;gap:10px}.wr b{font-weight:500;text-align:right}.wl{line-height:1.5}.wn{font-size:10.5px;margin-top:6px}
+tr.rsn td{white-space:normal;padding-top:0;border-top:0}tr.rsn td>.why{position:sticky;left:0;max-width:min(640px,calc(100vw - 60px))}
+.rb{padding:8px 0;border-top:1px solid var(--line)}.rb:first-child{border-top:0}.rbh{display:flex;justify-content:space-between;gap:8px;font-size:13px}
