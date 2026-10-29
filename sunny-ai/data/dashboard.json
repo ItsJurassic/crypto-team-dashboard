@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T23:06:14-05:00",
+ "updated": "2026-10-28T23:09:15-05:00",
  "start": 1000.0,
  "equity": 996.97,
  "cash": 996.97,
@@ -227,44 +227,56 @@
   [
    1793246774,
    996.97
+  ],
+  [
+   1793246955,
+   996.97
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 120,
-  "killed": 107,
+  "scanned": 121,
+  "killed": 108,
   "passed": 18,
   "trades": 12,
   "judged": 17,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 87 checked)",
-  "Filter": "Filter killed $ZOOM - Judge rejected",
-  "Analyst": "Approved $ZOOM score 78",
-  "Judge": "Judge rejected $ZOOM - red flag: lp_99",
+  "Scout": "Scouted 1 new pairs (of 87 checked)",
+  "Filter": "Filter killed $MOOND - LP not burned",
+  "Analyst": "Nothing to score",
+  "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 2 kills, 0 trade events"
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
   "Score <70": 49,
-  "LP not burned": 10,
+  "LP not burned": 11,
   "Mint/freeze": 17,
   "Liq <$40k": 12,
   "Judge rejected": 5,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:09:15-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MOOND",
+   "mint": "SIM00123MOOND",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 0%"
+  },
   {
    "time": "2026-10-28T23:06:14-05:00",
    "source": "SIM-FEED",
@@ -576,14 +588,6 @@
    "mint": "SIM00085BEARBA",
    "rule": "Liq <$40k",
    "detail": "liq $13,298"
-  },
-  {
-   "time": "2026-10-28T21:04:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEA",
-   "mint": "SIM00082PEPEA",
-   "rule": "Score <70",
-   "detail": "score 38"
   }
  ],
  "trades": [
@@ -1004,7 +1008,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 10.15,
- "sol_usd": 99.4,
+ "sol_usd": 99.36,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
