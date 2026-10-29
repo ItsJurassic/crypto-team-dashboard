@@ -10,16 +10,16 @@
  "trial_days": 30,
  "prices": {
   "BTC": {
-   "price": 81160,
-   "chg24": 0.39495
+   "price": 81028,
+   "chg24": 0.48678
   },
   "ETH": {
-   "price": 2356.93,
-   "chg24": 0.37057
+   "price": 2352.6,
+   "chg24": 0.41617
   }
  },
- "prices_as_of": "5:11 PM CT",
+ "prices_as_of": "8:01 PM CT",
  "last_trade": "BUY BNB @ $760.44 2026-10-28",
- "updated": "Oct 28, 2026, 7:09 PM CT",
+ "updated": "Oct 28, 2026, 8:01 PM CT",
  "url": "https://itsjurassic.github.io/crypto-team-dashboard/"
 }
