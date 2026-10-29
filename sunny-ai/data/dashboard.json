@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T23:02:49-05:00",
+ "updated": "2026-10-28T23:06:14-05:00",
  "start": 1000.0,
  "equity": 996.97,
  "cash": 996.97,
@@ -223,16 +223,20 @@
   [
    1793246569,
    996.97
+  ],
+  [
+   1793246774,
+   996.97
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 118,
-  "killed": 105,
-  "passed": 17,
+  "scanned": 120,
+  "killed": 107,
+  "passed": 18,
   "trades": 12,
-  "judged": 16,
-  "judge_rejected": 4
+  "judged": 17,
+  "judge_rejected": 5
  },
  "last_run": {
   "scanned": 2,
@@ -242,9 +246,9 @@
  },
  "activity": {
   "Scout": "Scouted 2 new pairs (of 87 checked)",
-  "Filter": "Filter killed $YOLOAPE - Liq <$40k",
-  "Analyst": "Nothing to score",
-  "Judge": "Nothing to judge",
+  "Filter": "Filter killed $ZOOM - Judge rejected",
+  "Analyst": "Approved $ZOOM score 78",
+  "Judge": "Judge rejected $ZOOM - red flag: lp_99",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
   "Logger": "Logged 2 kills, 0 trade events"
@@ -253,14 +257,30 @@
   "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
-  "Score <70": 48,
+  "Score <70": 49,
   "LP not burned": 10,
   "Mint/freeze": 17,
   "Liq <$40k": 12,
-  "Judge rejected": 4,
+  "Judge rejected": 5,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:06:14-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOM",
+   "mint": "SIM00121ZOOM",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
+  {
+   "time": "2026-10-28T23:06:14-05:00",
+   "source": "SIM-FEED",
+   "symbol": "TOADPUM",
+   "mint": "SIM00122TOADPUM",
+   "rule": "Score <70",
+   "detail": "score 60"
+  },
   {
    "time": "2026-10-28T23:02:49-05:00",
    "source": "SIM-FEED",
@@ -564,22 +584,6 @@
    "mint": "SIM00082PEPEA",
    "rule": "Score <70",
    "detail": "score 38"
-  },
-  {
-   "time": "2026-10-28T21:04:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BONK",
-   "mint": "SIM00065BONK",
-   "rule": "Score <70",
-   "detail": "score 12"
-  },
-  {
-   "time": "2026-10-28T21:04:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMTO",
-   "mint": "SIM00064ZOOMTO",
-   "rule": "Score <70",
-   "detail": "score 56"
   }
  ],
  "trades": [
@@ -1000,8 +1004,16 @@
  ],
  "failed_fills": 1,
  "fees_paid": 10.15,
- "sol_usd": 99.44,
+ "sol_usd": 99.4,
  "judge_rejections": [
+  {
+   "time": "2026-10-28T23:06:14-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOM",
+   "mint": "SIM00121ZOOM",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
   {
    "time": "2026-10-28T22:01:37-05:00",
    "source": "SIM-FEED",
