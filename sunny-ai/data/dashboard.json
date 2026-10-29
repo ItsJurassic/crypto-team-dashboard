@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T05:09:16-05:00",
+ "updated": "2026-10-29T05:25:10-05:00",
  "start": 1000.0,
- "equity": 1179.4,
- "cash": 870.62,
+ "equity": 1153.08,
+ "cash": 1153.08,
  "curve": [
   [
    1793231266,
@@ -419,45 +419,24 @@
   [
    1793268556,
    1179.4
+  ],
+  [
+   1793268859,
+   1186.98
+  ],
+  [
+   1793269236,
+   1161.73
+  ],
+  [
+   1793269510,
+   1153.08
   ]
  ],
- "positions": {
-  "SIM00216MOON": {
-   "symbol": "MOON",
-   "source": "SIM-FEED",
-   "venue": "Jupiter route",
-   "entry": 0.0010418389950288107,
-   "qty": 80658.75442124596,
-   "usd": 84.03343564650653,
-   "entry_fees": 0.3648,
-   "stop": 0.002498082304705674,
-   "high": 0.002657534366708164,
-   "last": 0.002657534366708164,
-   "trailing": true,
-   "time": "2026-10-29T04:07:49-05:00",
-   "score": 88,
-   "judge_p": 0.75
-  },
-  "SIM00193BONKYOL": {
-   "symbol": "BONKYOL",
-   "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "entry": 0.0003496472714834279,
-   "qty": 270071.74785657803,
-   "usd": 94.42984974281282,
-   "entry_fees": 0.9734,
-   "stop": 0.00032866843519442217,
-   "high": 0.0003496472714834279,
-   "last": 0.0003496472714834279,
-   "trailing": false,
-   "time": "2026-10-29T05:09:16-05:00",
-   "score": 73,
-   "judge_p": 0.75
-  }
- },
+ "positions": {},
  "counts": {
-  "scanned": 219,
-  "killed": 197,
+  "scanned": 226,
+  "killed": 204,
   "passed": 31,
   "trades": 21,
   "judged": 30,
@@ -465,31 +444,87 @@
  },
  "last_run": {
   "scanned": 2,
-  "killed": 1,
-  "passed": 1,
-  "traded": 1
+  "killed": 2,
+  "passed": 0,
+  "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 88 checked)",
-  "Filter": "Filter killed $MEOWWIF - Liq <$40k",
-  "Analyst": "Approved $BONKYOL score 73",
-  "Judge": "Judge passed $BONKYOL p=0.75",
-  "Executor": "Bought $BONKYOL $94.43 via Pump.fun bonding curve slip 0.716%",
-  "Risk": "Watching 2 open, stops set",
-  "Logger": "Logged 1 kills, 1 trade events"
+  "Scout": "Scouted 2 new pairs (of 89 checked)",
+  "Filter": "Filter killed $BASED - Mint/freeze",
+  "Analyst": "Nothing to score",
+  "Judge": "Nothing to judge",
+  "Executor": "No approved entries",
+  "Risk": "Closed $MOON +119.33",
+  "Logger": "Logged 2 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 81,
+  "Score <70": 84,
   "LP not burned": 25,
-  "Mint/freeze": 37,
-  "Liq <$40k": 26,
+  "Mint/freeze": 39,
+  "Liq <$40k": 28,
   "Judge rejected": 9,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T05:25:10-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BASED",
+   "mint": "SIM00240BASED",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T05:25:10-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEARTO",
+   "mint": "SIM00211BEARTO",
+   "rule": "Liq <$40k",
+   "detail": "liq $4,951"
+  },
+  {
+   "time": "2026-10-29T05:20:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PEPEDUC",
+   "mint": "SIM00238PEPEDUC",
+   "rule": "Score <70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-29T05:20:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADAP",
+   "mint": "SIM00237CHADAP",
+   "rule": "Score <70",
+   "detail": "score 65"
+  },
+  {
+   "time": "2026-10-29T05:20:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADGI",
+   "mint": "SIM00236CHADGI",
+   "rule": "Score <70",
+   "detail": "score 65"
+  },
+  {
+   "time": "2026-10-29T05:20:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "TOADP",
+   "mint": "SIM00239TOADP",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T05:14:19-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PUMPW",
+   "mint": "SIM00235PUMPW",
+   "rule": "Liq <$40k",
+   "detail": "liq $23,121"
+  },
   {
    "time": "2026-10-29T05:09:16-05:00",
    "source": "SIM-FEED",
@@ -753,65 +788,45 @@
    "mint": "SIM00187DOGAPE",
    "rule": "Score <70",
    "detail": "score 65"
-  },
-  {
-   "time": "2026-10-29T02:37:07-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BULLGIG",
-   "mint": "SIM00189BULLGIG",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T02:37:07-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGA",
-   "mint": "SIM00188GIGA",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T02:37:07-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOAD",
-   "mint": "SIM00181TOAD",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
-  },
-  {
-   "time": "2026-10-29T02:25:10-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MOONBE",
-   "mint": "SIM00186MOONBE",
-   "rule": "Score <70",
-   "detail": "score 68"
-  },
-  {
-   "time": "2026-10-29T02:25:10-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLOP",
-   "mint": "SIM00185YOLOP",
-   "rule": "Score <70",
-   "detail": "score 59"
-  },
-  {
-   "time": "2026-10-29T02:25:10-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGAD",
-   "mint": "SIM00184GIGAD",
-   "rule": "Score <70",
-   "detail": "score 57"
-  },
-  {
-   "time": "2026-10-29T02:25:10-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGDO",
-   "mint": "SIM00183FROGDO",
-   "rule": "Liq <$40k",
-   "detail": "liq $12,194"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T05:25:10-05:00",
+   "side": "SELL",
+   "symbol": "MOON",
+   "mint": "SIM00216MOON",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.0025328109",
+   "filled": "0.0025330181",
+   "slip_pct": "-0.008",
+   "delay_s": "2.28",
+   "fees_usd": "0.5811",
+   "status": "FILLED",
+   "qty": "80658.75442124596",
+   "usd": "204.31",
+   "pnl_usd": "119.33",
+   "reason": "trail stop gap -3.6% vs stop"
+  },
+  {
+   "time": "2026-10-29T05:20:36-05:00",
+   "side": "SELL",
+   "symbol": "BONKYOL",
+   "mint": "SIM00193BONKYOL",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.00030000054",
+   "filled": "0.00029466905",
+   "slip_pct": "1.777",
+   "delay_s": "4.56",
+   "fees_usd": "0.851",
+   "status": "FILLED",
+   "qty": "270071.74785657803",
+   "usd": "79.58",
+   "pnl_usd": "-16.67",
+   "reason": "-6% hard stop gap -10.3% vs stop"
+  },
   {
    "time": "2026-10-29T05:09:16-05:00",
    "side": "BUY",
@@ -1495,29 +1510,11 @@
    "usd": "79.41",
    "pnl_usd": "",
    "reason": "score 71, stop 0.0052968084"
-  },
-  {
-   "time": "2026-10-28T19:55:49-05:00",
-   "side": "BUY",
-   "symbol": "WIF",
-   "mint": "SIM00008WIF",
-   "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "intended": "0.0017181968",
-   "filled": "0.0017473324",
-   "slip_pct": "1.696",
-   "delay_s": "3.3",
-   "fees_usd": "0.9282",
-   "status": "FILLED",
-   "qty": "45500.04422202123",
-   "usd": "79.5",
-   "pnl_usd": "",
-   "reason": "score 74, stop 0.0016424924"
   }
  ],
  "failed_fills": 1,
- "fees_paid": 20.69,
- "sol_usd": 100.2,
+ "fees_paid": 22.12,
+ "sol_usd": 100.16,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
@@ -1736,6 +1733,22 @@
    "judge_p": 0.75,
    "pnl": -8.08,
    "win": false
+  },
+  {
+   "time": "2026-10-29T05:20:36-05:00",
+   "symbol": "BONKYOL",
+   "mint": "SIM00193BONKYOL",
+   "judge_p": 0.75,
+   "pnl": -16.67,
+   "win": false
+  },
+  {
+   "time": "2026-10-29T05:25:10-05:00",
+   "symbol": "MOON",
+   "mint": "SIM00216MOON",
+   "judge_p": 0.75,
+   "pnl": 119.33,
+   "win": true
   }
  ],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
