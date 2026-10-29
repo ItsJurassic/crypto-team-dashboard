@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T00:02:39-05:00",
+ "updated": "2026-10-29T00:05:40-05:00",
  "start": 1000.0,
  "equity": 971.95,
  "cash": 971.95,
@@ -259,37 +259,41 @@
   [
    1793250159,
    971.95
+  ],
+  [
+   1793250340,
+   971.95
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 138,
-  "killed": 122,
+  "scanned": 139,
+  "killed": 123,
   "passed": 21,
   "trades": 15,
   "judged": 20,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 86 checked)",
-  "Filter": "Filter killed $TOADG - Score <70",
-  "Analyst": "Best score 64 - none 70+",
+  "Scout": "Scouted 1 new pairs (of 86 checked)",
+  "Filter": "Filter killed $CATZO - Score <70",
+  "Analyst": "Best score 48 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 2 kills, 0 trade events"
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
-  "Score <70": 53,
+  "Score <70": 54,
   "LP not burned": 13,
   "Mint/freeze": 21,
   "Liq <$40k": 16,
@@ -297,6 +301,14 @@
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-29T00:05:40-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CATZO",
+   "mint": "SIM00144CATZO",
+   "rule": "Score <70",
+   "detail": "score 48"
+  },
   {
    "time": "2026-10-29T00:02:39-05:00",
    "source": "SIM-FEED",
@@ -608,14 +620,6 @@
    "mint": "SIM00095CHADW",
    "rule": "Score <70",
    "detail": "score 41"
-  },
-  {
-   "time": "2026-10-28T22:04:40-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMCAT",
-   "mint": "SIM00097ZOOMCAT",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
   }
  ],
  "trades": [
@@ -1144,7 +1148,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 12.8,
- "sol_usd": 100.19,
+ "sol_usd": 100.31,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
