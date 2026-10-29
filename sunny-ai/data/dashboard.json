@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T04:37:16-05:00",
+ "updated": "2026-10-29T05:09:16-05:00",
  "start": 1000.0,
- "equity": 1086.0,
- "cash": 966.02,
+ "equity": 1179.4,
+ "cash": 870.62,
  "curve": [
   [
    1793231266,
@@ -411,6 +411,14 @@
   [
    1793266636,
    1086.0
+  ],
+  [
+   1793266818,
+   1095.01
+  ],
+  [
+   1793268556,
+   1179.4
   ]
  ],
  "positions": {
@@ -422,50 +430,106 @@
    "qty": 80658.75442124596,
    "usd": 84.03343564650653,
    "entry_fees": 0.3648,
-   "stop": 0.0013982809833871248,
-   "high": 0.0014875329610501329,
-   "last": 0.0014875329610501329,
+   "stop": 0.002498082304705674,
+   "high": 0.002657534366708164,
+   "last": 0.002657534366708164,
    "trailing": true,
    "time": "2026-10-29T04:07:49-05:00",
    "score": 88,
    "judge_p": 0.75
+  },
+  "SIM00193BONKYOL": {
+   "symbol": "BONKYOL",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "entry": 0.0003496472714834279,
+   "qty": 270071.74785657803,
+   "usd": 94.42984974281282,
+   "entry_fees": 0.9734,
+   "stop": 0.00032866843519442217,
+   "high": 0.0003496472714834279,
+   "last": 0.0003496472714834279,
+   "trailing": false,
+   "time": "2026-10-29T05:09:16-05:00",
+   "score": 73,
+   "judge_p": 0.75
   }
  },
  "counts": {
-  "scanned": 213,
-  "killed": 192,
-  "passed": 30,
-  "trades": 20,
-  "judged": 29,
+  "scanned": 219,
+  "killed": 197,
+  "passed": 31,
+  "trades": 21,
+  "judged": 30,
   "judge_rejected": 9
  },
  "last_run": {
-  "scanned": 4,
-  "killed": 4,
-  "passed": 0,
-  "traded": 0
+  "scanned": 2,
+  "killed": 1,
+  "passed": 1,
+  "traded": 1
  },
  "activity": {
-  "Scout": "Scouted 4 new pairs (of 85 checked)",
-  "Filter": "Filter killed $BEAR - Score <70",
-  "Analyst": "Best score 40 - none 70+",
-  "Judge": "Nothing to judge",
-  "Executor": "No approved entries",
-  "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 4 kills, 0 trade events"
+  "Scout": "Scouted 2 new pairs (of 88 checked)",
+  "Filter": "Filter killed $MEOWWIF - Liq <$40k",
+  "Analyst": "Approved $BONKYOL score 73",
+  "Judge": "Judge passed $BONKYOL p=0.75",
+  "Executor": "Bought $BONKYOL $94.43 via Pump.fun bonding curve slip 0.716%",
+  "Risk": "Watching 2 open, stops set",
+  "Logger": "Logged 1 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 79,
-  "LP not burned": 24,
-  "Mint/freeze": 36,
-  "Liq <$40k": 25,
+  "Score <70": 81,
+  "LP not burned": 25,
+  "Mint/freeze": 37,
+  "Liq <$40k": 26,
   "Judge rejected": 9,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T05:09:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWWIF",
+   "mint": "SIM00210MEOWWIF",
+   "rule": "Liq <$40k",
+   "detail": "liq $32,162"
+  },
+  {
+   "time": "2026-10-29T04:40:18-05:00",
+   "source": "SIM-FEED",
+   "symbol": "APEBA",
+   "mint": "SIM00230APEBA",
+   "rule": "Score <70",
+   "detail": "score 29"
+  },
+  {
+   "time": "2026-10-29T04:40:18-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOW",
+   "mint": "SIM00229MEOW",
+   "rule": "Score <70",
+   "detail": "score 43"
+  },
+  {
+   "time": "2026-10-29T04:40:18-05:00",
+   "source": "SIM-FEED",
+   "symbol": "DUCKPUM",
+   "mint": "SIM00232DUCKPUM",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T04:40:18-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGF",
+   "mint": "SIM00231FROGF",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 0%"
+  },
   {
    "time": "2026-10-29T04:37:16-05:00",
    "source": "SIM-FEED",
@@ -745,49 +809,27 @@
    "mint": "SIM00183FROGDO",
    "rule": "Liq <$40k",
    "detail": "liq $12,194"
-  },
-  {
-   "time": "2026-10-29T02:22:07-05:00",
-   "source": "SIM-FEED",
-   "symbol": "WIF",
-   "mint": "SIM00182WIF",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
-  },
-  {
-   "time": "2026-10-29T02:19:06-05:00",
-   "source": "SIM-FEED",
-   "symbol": "APEF",
-   "mint": "SIM00178APEF",
-   "rule": "Score <70",
-   "detail": "score 40"
-  },
-  {
-   "time": "2026-10-29T02:19:06-05:00",
-   "source": "SIM-FEED",
-   "symbol": "WIFF",
-   "mint": "SIM00180WIFF",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 40%"
-  },
-  {
-   "time": "2026-10-29T02:19:06-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASED",
-   "mint": "SIM00179BASED",
-   "rule": "Already +80% 1h",
-   "detail": "+82.03% 1h"
-  },
-  {
-   "time": "2026-10-29T02:16:06-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDAPE",
-   "mint": "SIM00177BASEDAPE",
-   "rule": "Score <70",
-   "detail": "score 51"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T05:09:16-05:00",
+   "side": "BUY",
+   "symbol": "BONKYOL",
+   "mint": "SIM00193BONKYOL",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.00034715996",
+   "filled": "0.00034964727",
+   "slip_pct": "0.716",
+   "delay_s": "1.3",
+   "fees_usd": "0.9734",
+   "status": "FILLED",
+   "qty": "270071.74785657803",
+   "usd": "94.43",
+   "pnl_usd": "",
+   "reason": "score 73, stop 0.00032866844"
+  },
   {
    "time": "2026-10-29T04:07:49-05:00",
    "side": "BUY",
@@ -1474,8 +1516,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 19.72,
- "sol_usd": 100.033,
+ "fees_paid": 20.69,
+ "sol_usd": 100.2,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
