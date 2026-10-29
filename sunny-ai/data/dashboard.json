@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T00:08:41-05:00",
+ "updated": "2026-10-29T00:15:47-05:00",
  "start": 1000.0,
- "equity": 971.95,
- "cash": 971.95,
+ "equity": 971.14,
+ "cash": 893.39,
  "curve": [
   [
    1793231266,
@@ -267,44 +267,109 @@
   [
    1793250521,
    971.95
+  ],
+  [
+   1793250703,
+   971.95
+  ],
+  [
+   1793250947,
+   971.14
   ]
  ],
- "positions": {},
+ "positions": {
+  "SIM00150BEAR": {
+   "symbol": "BEAR",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "entry": 0.0010434367014225273,
+   "qty": 74519.28230228355,
+   "usd": 77.75615411786886,
+   "entry_fees": 0.8087,
+   "stop": 0.0009808304993371756,
+   "high": 0.0010434367014225273,
+   "last": 0.0010434367014225273,
+   "trailing": false,
+   "time": "2026-10-29T00:15:47-05:00",
+   "score": 78,
+   "judge_p": 0.75
+  }
+ },
  "counts": {
-  "scanned": 141,
-  "killed": 125,
-  "passed": 21,
-  "trades": 15,
-  "judged": 20,
+  "scanned": 147,
+  "killed": 130,
+  "passed": 22,
+  "trades": 16,
+  "judged": 21,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
-  "passed": 0,
-  "traded": 0
+  "scanned": 4,
+  "killed": 3,
+  "passed": 1,
+  "traded": 1
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 86 checked)",
-  "Filter": "Filter killed $WIFCHA - Score <70",
-  "Analyst": "Best score 63 - none 70+",
-  "Judge": "Nothing to judge",
-  "Executor": "No approved entries",
-  "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 2 kills, 0 trade events"
+  "Scout": "Scouted 4 new pairs (of 86 checked)",
+  "Filter": "Filter killed $MEOWBON - Score <70",
+  "Analyst": "Approved $BEAR score 78",
+  "Judge": "Judge passed $BEAR p=0.75",
+  "Executor": "Bought $BEAR $77.76 via Pump.fun bonding curve slip 0.006%",
+  "Risk": "Watching 1 open, stops set",
+  "Logger": "Logged 3 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
-  "1h vol <$50k": 9,
+  "1h vol <$50k": 11,
   "Top 10 holders": 1,
-  "Score <70": 55,
+  "Score <70": 57,
   "LP not burned": 13,
   "Mint/freeze": 22,
-  "Liq <$40k": 16,
+  "Liq <$40k": 17,
   "Judge rejected": 5,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-29T00:15:47-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWBON",
+   "mint": "SIM00152MEOWBON",
+   "rule": "Score <70",
+   "detail": "score 43"
+  },
+  {
+   "time": "2026-10-29T00:15:47-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWS",
+   "mint": "SIM00151MEOWS",
+   "rule": "Score <70",
+   "detail": "score 63"
+  },
+  {
+   "time": "2026-10-29T00:15:47-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEAR",
+   "mint": "SIM00149BEAR",
+   "rule": "1h vol <$50k",
+   "detail": "1h vol $38,059"
+  },
+  {
+   "time": "2026-10-29T00:11:43-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMY",
+   "mint": "SIM00148ZOOMY",
+   "rule": "1h vol <$50k",
+   "detail": "1h vol $7,579"
+  },
+  {
+   "time": "2026-10-29T00:11:43-05:00",
+   "source": "SIM-FEED",
+   "symbol": "APE",
+   "mint": "SIM00146APE",
+   "rule": "Liq <$40k",
+   "detail": "liq $29,025"
+  },
   {
    "time": "2026-10-29T00:08:41-05:00",
    "source": "SIM-FEED",
@@ -584,49 +649,27 @@
    "mint": "SIM00106APEZOO",
    "rule": "Score <70",
    "detail": "score 45"
-  },
-  {
-   "time": "2026-10-28T22:13:42-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEBU",
-   "mint": "SIM00105PEPEBU",
-   "rule": "Score <70",
-   "detail": "score 67"
-  },
-  {
-   "time": "2026-10-28T22:13:42-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASED",
-   "mint": "SIM00104BASED",
-   "rule": "Score <70",
-   "detail": "score 43"
-  },
-  {
-   "time": "2026-10-28T22:13:42-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEPUM",
-   "mint": "SIM00102PEPEPUM",
-   "rule": "Score <70",
-   "detail": "score 57"
-  },
-  {
-   "time": "2026-10-28T22:10:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGAPEP",
-   "mint": "SIM00101GIGAPEP",
-   "rule": "Score <70",
-   "detail": "score 25"
-  },
-  {
-   "time": "2026-10-28T22:07:40-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MOONZ",
-   "mint": "SIM00100MOONZ",
-   "rule": "Liq <$40k",
-   "detail": "liq $18,125"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T00:15:47-05:00",
+   "side": "BUY",
+   "symbol": "BEAR",
+   "mint": "SIM00150BEAR",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0010433719",
+   "filled": "0.0010434367",
+   "slip_pct": "0.006",
+   "delay_s": "4.51",
+   "fees_usd": "0.8087",
+   "status": "FILLED",
+   "qty": "74519.28230228355",
+   "usd": "77.76",
+   "pnl_usd": "",
+   "reason": "score 78, stop 0.0009808305"
+  },
   {
    "time": "2026-10-28T23:37:24-05:00",
    "side": "SELL",
@@ -1151,8 +1194,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 12.8,
- "sol_usd": 100.38,
+ "fees_paid": 13.61,
+ "sol_usd": 100.55,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
