@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T22:22:04-05:00",
+ "updated": "2026-10-28T22:59:48-05:00",
  "start": 1000.0,
- "equity": 989.22,
- "cash": 898.8,
+ "equity": 996.97,
+ "cash": 996.97,
  "curve": [
   [
    1793231266,
@@ -199,61 +199,144 @@
   [
    1793244124,
    989.22
+  ],
+  [
+   1793244136,
+   994.44
+  ],
+  [
+   1793244316,
+   1007.1
+  ],
+  [
+   1793244716,
+   1004.29
+  ],
+  [
+   1793244896,
+   996.97
+  ],
+  [
+   1793246388,
+   996.97
   ]
  ],
- "positions": {
-  "SIM00103BONKBON": {
-   "symbol": "BONKBON",
-   "source": "SIM-FEED",
-   "venue": "Raydium AMM",
-   "entry": 0.0008247756236946364,
-   "qty": 94786.47983829367,
-   "usd": 78.17757802644775,
-   "entry_fees": 0.2382,
-   "stop": 0.0008966888881289545,
-   "high": 0.0009539243490733559,
-   "last": 0.0009539243490733559,
-   "trailing": true,
-   "time": "2026-10-28T22:10:41-05:00",
-   "score": 86,
-   "judge_p": 0.75
-  }
- },
+ "positions": {},
  "counts": {
-  "scanned": 106,
-  "killed": 93,
+  "scanned": 116,
+  "killed": 103,
   "passed": 17,
   "trades": 12,
   "judged": 16,
   "judge_rejected": 4
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
+  "scanned": 4,
+  "killed": 4,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 88 checked)",
-  "Filter": "Filter killed $BASEDWIF - Liq <$40k",
-  "Analyst": "Nothing to score",
+  "Scout": "Scouted 4 new pairs (of 87 checked)",
+  "Filter": "Filter killed $SNEK - Score <70",
+  "Analyst": "Best score 47 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 2 kills, 0 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 4 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 2,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
-  "Score <70": 43,
-  "LP not burned": 9,
-  "Mint/freeze": 14,
-  "Liq <$40k": 10,
+  "Score <70": 48,
+  "LP not burned": 10,
+  "Mint/freeze": 17,
+  "Liq <$40k": 11,
   "Judge rejected": 4,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T22:59:48-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEK",
+   "mint": "SIM00119SNEK",
+   "rule": "Score <70",
+   "detail": "score 47"
+  },
+  {
+   "time": "2026-10-28T22:59:48-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEKZO",
+   "mint": "SIM00114SNEKZO",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 0%"
+  },
+  {
+   "time": "2026-10-28T22:59:48-05:00",
+   "source": "SIM-FEED",
+   "symbol": "GIGA",
+   "mint": "SIM00098GIGA",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-28T22:59:48-05:00",
+   "source": "SIM-FEED",
+   "symbol": "DOGZO",
+   "mint": "SIM00073DOGZO",
+   "rule": "Liq <$40k",
+   "detail": "liq $11,501"
+  },
+  {
+   "time": "2026-10-28T22:31:56-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMT",
+   "mint": "SIM00117ZOOMT",
+   "rule": "Score <70",
+   "detail": "score 57"
+  },
+  {
+   "time": "2026-10-28T22:31:56-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEAR",
+   "mint": "SIM00116BEAR",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-28T22:25:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWZ",
+   "mint": "SIM00113MEOWZ",
+   "rule": "Score <70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-28T22:25:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEARGIG",
+   "mint": "SIM00112BEARGIG",
+   "rule": "Score <70",
+   "detail": "score 37"
+  },
+  {
+   "time": "2026-10-28T22:22:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWM",
+   "mint": "SIM00111MEOWM",
+   "rule": "Score <70",
+   "detail": "score 61"
+  },
+  {
+   "time": "2026-10-28T22:22:16-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BULL",
+   "mint": "SIM00110BULL",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-28T22:22:04-05:00",
    "source": "SIM-FEED",
@@ -493,89 +576,27 @@
    "mint": "SIM00079SNEKPEP",
    "rule": "1h vol <$50k",
    "detail": "1h vol $48,037"
-  },
-  {
-   "time": "2026-10-28T20:38:52-05:00",
-   "source": "SIM-FEED",
-   "symbol": "APEMEO",
-   "mint": "SIM00076APEMEO",
-   "rule": "Score <70",
-   "detail": "score 50"
-  },
-  {
-   "time": "2026-10-28T20:38:52-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEKGIG",
-   "mint": "SIM00075SNEKGIG",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
-  },
-  {
-   "time": "2026-10-28T20:38:52-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADCA",
-   "mint": "SIM00074TOADCA",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
-  },
-  {
-   "time": "2026-10-28T20:24:11-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOGC",
-   "mint": "SIM00069DOGC",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-28T20:24:11-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROG",
-   "mint": "SIM00072FROG",
-   "rule": "Liq <$40k",
-   "detail": "liq $28,727"
-  },
-  {
-   "time": "2026-10-28T20:24:11-05:00",
-   "source": "SIM-FEED",
-   "symbol": "WIFB",
-   "mint": "SIM00070WIFB",
-   "rule": "Dev >3% / past rugs",
-   "detail": "dev 8.8%, past rugs 0"
-  },
-  {
-   "time": "2026-10-28T20:19:42-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BONKSN",
-   "mint": "SIM00066BONKSN",
-   "rule": "Score <70",
-   "detail": "score 62"
-  },
-  {
-   "time": "2026-10-28T20:12:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEB",
-   "mint": "SIM00035PEPEB",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-28T20:12:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CATCA",
-   "mint": "SIM00062CATCA",
-   "rule": "Score <70",
-   "detail": "score 49"
-  },
-  {
-   "time": "2026-10-28T20:12:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BONKYOL",
-   "mint": "SIM00061BONKYOL",
-   "rule": "Score <70",
-   "detail": "score 50"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T22:34:56-05:00",
+   "side": "SELL",
+   "symbol": "BONKBON",
+   "mint": "SIM00103BONKBON",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.0010449165",
+   "filled": "0.001040106",
+   "slip_pct": "0.46",
+   "delay_s": "2.52",
+   "fees_usd": "0.4222",
+   "status": "FILLED",
+   "qty": "94786.47983829367",
+   "usd": "98.59",
+   "pnl_usd": "19.75",
+   "reason": "trail stop gap -3.2% vs stop"
+  },
   {
    "time": "2026-10-28T22:10:41-05:00",
    "side": "BUY",
@@ -974,8 +995,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 9.73,
- "sol_usd": 99.67,
+ "fees_paid": 10.15,
+ "sol_usd": 99.61,
  "judge_rejections": [
   {
    "time": "2026-10-28T22:01:37-05:00",
@@ -1090,6 +1111,14 @@
    "judge_p": 0.75,
    "pnl": -58.7,
    "win": false
+  },
+  {
+   "time": "2026-10-28T22:34:56-05:00",
+   "symbol": "BONKBON",
+   "mint": "SIM00103BONKBON",
+   "judge_p": 0.75,
+   "pnl": 19.75,
+   "win": true
   }
  ],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
