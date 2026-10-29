@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-28T20:42:44-05:00",
+ "updated": "2026-10-28T21:18:14-05:00",
  "start": 1000.0,
- "equity": 1082.27,
- "cash": 865.74,
+ "equity": 1052.63,
+ "cash": 883.57,
  "curve": [
   [
    1793231266,
@@ -151,48 +151,56 @@
   [
    1793238164,
    1082.27
+  ],
+  [
+   1793239476,
+   1052.26
+  ],
+  [
+   1793240294,
+   1052.63
   ]
  ],
  "positions": {
-  "SIM00046CATS": {
-   "symbol": "CATS",
+  "SIM00081MEOW": {
+   "symbol": "MEOW",
    "source": "SIM-FEED",
-   "venue": "Jupiter route",
-   "entry": 0.0029243024235753793,
-   "qty": 26971.14592528255,
-   "usd": 78.87178739590898,
-   "entry_fees": 0.2565,
-   "stop": 0.0045260710847364275,
-   "high": 0.0048149692390813065,
-   "last": 0.0048149692390813065,
-   "trailing": true,
-   "time": "2026-10-28T20:02:41-05:00",
-   "score": 84,
-   "judge_p": 0.75
-  },
-  "J7cqsaTuXUavwA3sp238tSpartUfYwDrJAaHuDvypump": {
-   "symbol": "FLOATER",
-   "source": "REAL-DATA",
-   "venue": "Pump.fun bonding curve",
-   "entry": 0.00026829601157268265,
-   "qty": 322993.721727229,
-   "usd": 86.65792730243247,
-   "entry_fees": 0.9568,
-   "stop": 0.00025219825087832167,
-   "high": 0.00026829601157268265,
-   "last": 0.00026829601157268265,
+   "venue": "Raydium AMM",
+   "entry": 0.012611527147918284,
+   "qty": 6676.6910062259285,
+   "usd": 84.20326988328014,
+   "entry_fees": 0.2857,
+   "stop": 0.011854835519043186,
+   "high": 0.012705448281903339,
+   "last": 0.012705448281903339,
    "trailing": false,
-   "time": "2026-10-28T20:42:44-05:00",
+   "time": "2026-10-28T21:04:36-05:00",
+   "score": 92,
+   "judge_p": 0.65
+  },
+  "SIM00086TOADA": {
+   "symbol": "TOADA",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "entry": 0.0019418616033951236,
+   "qty": 43376.20164447269,
+   "usd": 84.23058047452594,
+   "entry_fees": 0.2507,
+   "stop": 0.0018253499071914162,
+   "high": 0.0019418616033951236,
+   "last": 0.0019418616033951236,
+   "trailing": false,
+   "time": "2026-10-28T21:18:14-05:00",
    "score": 92,
    "judge_p": 0.75
   }
  },
  "counts": {
-  "scanned": 74,
-  "killed": 65,
-  "passed": 12,
-  "trades": 8,
-  "judged": 11,
+  "scanned": 81,
+  "killed": 70,
+  "passed": 14,
+  "trades": 10,
+  "judged": 13,
   "judge_rejected": 3
  },
  "last_run": {
@@ -202,26 +210,66 @@
   "traded": 1
  },
  "activity": {
-  "Scout": "Scouted 3 new pairs (of 87 checked)",
-  "Filter": "Filter killed $CHADSNE - Score <70",
-  "Analyst": "Approved $FLOATER score 92",
-  "Judge": "Judge passed $FLOATER p=0.75",
-  "Executor": "Bought $FLOATER $86.66 via Pump.fun bonding curve slip -0.336%",
-  "Risk": "Closed $PEPEM +14.78",
-  "Logger": "Logged 2 kills, 3 trade events"
+  "Scout": "Scouted 3 new pairs (of 88 checked)",
+  "Filter": "Filter killed $MOONM - Score <70",
+  "Analyst": "Approved $TOADA score 92",
+  "Judge": "Judge passed $TOADA p=0.75",
+  "Executor": "Bought $TOADA $84.23 via Raydium AMM slip 0.062%",
+  "Risk": "Watching 2 open, stops set",
+  "Logger": "Logged 2 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 1,
   "1h vol <$50k": 7,
   "Top 10 holders": 1,
-  "Score <70": 27,
+  "Score <70": 31,
   "LP not burned": 9,
   "Mint/freeze": 10,
-  "Liq <$40k": 6,
+  "Liq <$40k": 7,
   "Judge rejected": 3,
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T21:18:14-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MOONM",
+   "mint": "SIM00084MOONM",
+   "rule": "Score <70",
+   "detail": "score 67"
+  },
+  {
+   "time": "2026-10-28T21:18:14-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEARBA",
+   "mint": "SIM00085BEARBA",
+   "rule": "Liq <$40k",
+   "detail": "liq $13,298"
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PEPEA",
+   "mint": "SIM00082PEPEA",
+   "rule": "Score <70",
+   "detail": "score 38"
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BONK",
+   "mint": "SIM00065BONK",
+   "rule": "Score <70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMTO",
+   "mint": "SIM00064ZOOMTO",
+   "rule": "Score <70",
+   "detail": "score 56"
+  },
   {
    "time": "2026-10-28T20:42:44-05:00",
    "source": "SIM-FEED",
@@ -501,49 +549,81 @@
    "mint": "SIM00033WIFCH",
    "rule": "Liq <$40k",
    "detail": "liq $34,813"
-  },
-  {
-   "time": "2026-10-28T19:55:54-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEYO",
-   "mint": "SIM00029PEPEYO",
-   "rule": "Score <70",
-   "detail": "score 63"
-  },
-  {
-   "time": "2026-10-28T19:55:54-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLO",
-   "mint": "SIM00031YOLO",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 40%"
-  },
-  {
-   "time": "2026-10-28T19:55:54-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLO",
-   "mint": "SIM00030YOLO",
-   "rule": "Liq <$40k",
-   "detail": "liq $22,331"
-  },
-  {
-   "time": "2026-10-28T19:55:54-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGC",
-   "mint": "SIM00028FROGC",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T19:55:53-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADB",
-   "mint": "SIM00027TOADB",
-   "rule": "Score <70",
-   "detail": "score 54"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-28T21:18:14-05:00",
+   "side": "BUY",
+   "symbol": "TOADA",
+   "mint": "SIM00086TOADA",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.001940652",
+   "filled": "0.0019418616",
+   "slip_pct": "0.062",
+   "delay_s": "1.3",
+   "fees_usd": "0.2507",
+   "status": "FILLED",
+   "qty": "43376.20164447269",
+   "usd": "84.23",
+   "pnl_usd": "",
+   "reason": "score 92, stop 0.0018253499"
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "side": "BUY",
+   "symbol": "MEOW",
+   "mint": "SIM00081MEOW",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.012372988",
+   "filled": "0.012611527",
+   "slip_pct": "1.928",
+   "delay_s": "4.54",
+   "fees_usd": "0.2857",
+   "status": "FILLED",
+   "qty": "6676.6910062259285",
+   "usd": "84.2",
+   "pnl_usd": "",
+   "reason": "score 92, stop 0.011854836"
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "side": "SELL",
+   "symbol": "FLOATER",
+   "mint": "J7cqsaTuXUavwA3sp238tSpartUfYwDrJAaHuDvypump",
+   "source": "REAL-DATA",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.0002418",
+   "filled": "0.00024147214",
+   "slip_pct": "0.136",
+   "delay_s": "5.61",
+   "fees_usd": "0.9698",
+   "status": "FILLED",
+   "qty": "322993.721727229",
+   "usd": "77.99",
+   "pnl_usd": "-10.59",
+   "reason": "-6% hard stop gap -4.3% vs stop"
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "side": "SELL",
+   "symbol": "CATS",
+   "mint": "SIM00046CATS",
+   "source": "SIM-FEED",
+   "venue": "Jupiter route",
+   "intended": "0.0040661546",
+   "filled": "0.0040811341",
+   "slip_pct": "-0.368",
+   "delay_s": "6.14",
+   "fees_usd": "0.3003",
+   "status": "FILLED",
+   "qty": "26971.14592528255",
+   "usd": "110.07",
+   "pnl_usd": "30.64",
+   "reason": "trail stop gap -9.8% vs stop"
+  },
   {
    "time": "2026-10-28T20:42:44-05:00",
    "side": "BUY",
@@ -780,8 +860,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 6.95,
- "sol_usd": 99.77,
+ "fees_paid": 8.76,
+ "sol_usd": 99.57,
  "judge_rejections": [
   {
    "time": "2026-10-28T20:24:11-05:00",
@@ -848,6 +928,22 @@
    "judge_p": 0.75,
    "pnl": 14.78,
    "win": true
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "symbol": "CATS",
+   "mint": "SIM00046CATS",
+   "judge_p": 0.75,
+   "pnl": 30.64,
+   "win": true
+  },
+  {
+   "time": "2026-10-28T21:04:36-05:00",
+   "symbol": "FLOATER",
+   "mint": "J7cqsaTuXUavwA3sp238tSpartUfYwDrJAaHuDvypump",
+   "judge_p": 0.75,
+   "pnl": -10.59,
+   "win": false
   }
  ],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
