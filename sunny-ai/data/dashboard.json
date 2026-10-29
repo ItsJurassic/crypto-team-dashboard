@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T01:18:24-05:00",
+ "updated": "2026-10-29T01:33:49-05:00",
  "start": 1000.0,
- "equity": 994.56,
- "cash": 734.11,
+ "equity": 1016.29,
+ "cash": 820.85,
  "curve": [
   [
    1793231266,
@@ -299,6 +299,14 @@
   [
    1793254704,
    994.56
+  ],
+  [
+   1793254887,
+   998.31
+  ],
+  [
+   1793255629,
+   1016.29
   ]
  ],
  "positions": {
@@ -310,28 +318,12 @@
    "qty": 74519.28230228355,
    "usd": 77.75615411786886,
    "entry_fees": 0.8087,
-   "stop": 0.0011441898764083342,
-   "high": 0.0012172232727748237,
-   "last": 0.0012172232727748237,
+   "stop": 0.0013973687251965514,
+   "high": 0.0014865624736133526,
+   "last": 0.0014865624736133526,
    "trailing": true,
    "time": "2026-10-29T00:15:47-05:00",
    "score": 78,
-   "judge_p": 0.75
-  },
-  "SIM00158BEART": {
-   "symbol": "BEART",
-   "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "entry": 0.004201151409944275,
-   "qty": 18575.664861836733,
-   "usd": 78.03918062495771,
-   "entry_fees": 0.8049,
-   "stop": 0.004811779417258689,
-   "high": 0.005118914273679456,
-   "last": 0.004851025833854535,
-   "trailing": true,
-   "time": "2026-10-29T01:03:37-05:00",
-   "score": 72,
    "judge_p": 0.75
   },
   "SIM00164MEOWCA": {
@@ -343,8 +335,8 @@
    "usd": 79.62885012361157,
    "entry_fees": 0.8041,
    "stop": 0.009334196576999843,
-   "high": 0.009929996358510471,
-   "last": 0.009929996358510471,
+   "high": 0.010557926021485288,
+   "last": 0.010557926021485288,
    "trailing": false,
    "time": "2026-10-29T01:18:24-05:00",
    "score": 82,
@@ -352,33 +344,33 @@
   }
  },
  "counts": {
-  "scanned": 160,
-  "killed": 141,
+  "scanned": 162,
+  "killed": 143,
   "passed": 24,
   "trades": 18,
   "judged": 23,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 3,
-  "killed": 2,
-  "passed": 1,
-  "traded": 1
+  "scanned": 1,
+  "killed": 1,
+  "passed": 0,
+  "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 3 new pairs (of 87 checked)",
-  "Filter": "Filter killed $PEPE - Score <70",
-  "Analyst": "Approved $MEOWCA score 82",
-  "Judge": "Judge passed $MEOWCA p=0.75",
-  "Executor": "Bought $MEOWCA $79.63 via Pump.fun bonding curve slip -1.166%",
-  "Risk": "Watching 3 open, stops set",
-  "Logger": "Logged 2 kills, 1 trade events"
+  "Scout": "Scouted 1 new pairs (of 85 checked)",
+  "Filter": "Filter killed $SNEKY - Score <70",
+  "Analyst": "Best score 54 - none 70+",
+  "Judge": "Nothing to judge",
+  "Executor": "No approved entries",
+  "Risk": "Watching 2 open, stops set",
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 58,
+  "Score <70": 60,
   "LP not burned": 14,
   "Mint/freeze": 26,
   "Liq <$40k": 20,
@@ -386,6 +378,22 @@
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T01:33:49-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEKY",
+   "mint": "SIM00167SNEKY",
+   "rule": "Score <70",
+   "detail": "score 54"
+  },
+  {
+   "time": "2026-10-29T01:21:27-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMBE",
+   "mint": "SIM00166ZOOMBE",
+   "rule": "Score <70",
+   "detail": "score 51"
+  },
   {
    "time": "2026-10-29T01:18:24-05:00",
    "source": "SIM-FEED",
@@ -689,25 +697,27 @@
    "mint": "5JbRYEz844bwnKbGx4dRHhrJ6zjrJ194CKdDXtzwgaXo",
    "rule": "Already +80% 1h",
    "detail": "+110% 1h"
-  },
-  {
-   "time": "2026-10-28T22:59:48-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEK",
-   "mint": "SIM00119SNEK",
-   "rule": "Score <70",
-   "detail": "score 47"
-  },
-  {
-   "time": "2026-10-28T22:59:48-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEKZO",
-   "mint": "SIM00114SNEKZO",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T01:21:27-05:00",
+   "side": "SELL",
+   "symbol": "BEART",
+   "mint": "SIM00158BEART",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.004786082",
+   "filled": "0.0047217192",
+   "slip_pct": "1.345",
+   "delay_s": "3.29",
+   "fees_usd": "0.9698",
+   "status": "FILLED",
+   "qty": "18575.664861836733",
+   "usd": "87.71",
+   "pnl_usd": "7.9",
+   "reason": "trail stop gap -1.9% vs stop"
+  },
   {
    "time": "2026-10-29T01:18:24-05:00",
    "side": "BUY",
@@ -1286,8 +1296,8 @@
   }
  ],
  "failed_fills": 1,
- "fees_paid": 15.22,
- "sol_usd": 99.94,
+ "fees_paid": 16.19,
+ "sol_usd": 100.099,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
@@ -1442,6 +1452,14 @@
    "judge_p": 0.75,
    "pnl": -6.09,
    "win": false
+  },
+  {
+   "time": "2026-10-29T01:21:27-05:00",
+   "symbol": "BEART",
+   "mint": "SIM00158BEART",
+   "judge_p": 0.75,
+   "pnl": 7.9,
+   "win": true
   }
  ],
  "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
