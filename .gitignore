@@ -1,1 +1,4 @@
 screenshot-*.png
+# private desk data lives in Supabase (PAPER ONLY); never commit
+sunny-ai/data/
+sunny-ai/team/

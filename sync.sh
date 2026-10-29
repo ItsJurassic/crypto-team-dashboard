@@ -112,7 +112,10 @@ widget = {"state": status.get("state", "Unknown"), "color": colors.get(status.ge
           "updated": score["synced"], "url": "https://itsjurassic.github.io/crypto-team-dashboard/sunny-ai/seedling.html"}
 json.dump(widget, open(f"{out}/widget.json", "w"), indent=1, ensure_ascii=False)
 os.makedirs(os.path.join(site, "data"), exist_ok=True)  # legacy widget path kept for installed iPhone widgets
-json.dump(widget, open(os.path.join(site, "data", "widget.json"), "w"), indent=1, ensure_ascii=False)
+# Public widget = public coin prices only (private desk data lives in Supabase behind login)
+pub = {"state": "Sign in", "color": "#9ca3af", "coin": "", "reason": "Desk data is private. Open the dashboard and sign in.",
+       "prices": px, "prices_as_of": cgt, "updated": score["synced"], "url": widget["url"], "public_prices_only": True}
+json.dump(pub, open(os.path.join(site, "data", "widget.json"), "w"), indent=1, ensure_ascii=False)
 if os.path.exists(pbf): shutil.copy(pbf, f"{out}/playbook.md")
 # Seedling extras: raw portfolio, shadow DCA account, USDC yield log, CoinGecko marks
 for n in ("portfolio.json", "shadow.json"):
@@ -124,12 +127,15 @@ if cg: json.dump([{k: c.get(k) for k in ("id","symbol","name","current_price","m
 print("synced:", {k: (len(v) if isinstance(v, list) else "ok") for k, v in [("trades", trades), ("lessons", lessons), ("playbook", pb)]})
 PY
 cp -f "$DASH/candles_extra.json" "$SITE/sunny-ai/team/candles_extra.json" 2>/dev/null || true  # fallback OHLC (TRX/XMR/LEO/WBT/RAIN/FIGR_HELOC)
+# Private data -> Supabase (token in /home/box/.secrets/supabase.env, never committed)
+T="$SITE/sunny-ai/team"; A=(); for f in "$T"/*.json "$T"/playbook.md; do [ -e "$f" ] && A+=("team/$(basename "$f")=$f"); done
+timeout 180 python3 /workspace/meme-desk/publish.py "${A[@]}" --img "$T/img" || echo "supabase publish failed"
 [ "${1:-}" = "--no-push" ] && exit 0
 cd "$SITE"
 git rev-parse --git-dir >/dev/null 2>&1 || git init -q -b main
 git remote get-url origin >/dev/null 2>&1 || git remote add origin "$REMOTE"
 if true; then
-  git add -A sunny-ai/team data/widget.json
+  git add data/widget.json sync.sh
   git diff --cached --quiet || git commit -qm "Sync bot data $(date '+%F %H:%M %Z')"
   git pull -q --rebase --autostash origin main || { git rebase --abort; git pull -q --no-rebase -X ours origin main; }
   git push -q origin HEAD:main
