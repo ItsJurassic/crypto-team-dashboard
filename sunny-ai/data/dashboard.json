@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T05:25:10-05:00",
+ "updated": "2026-10-29T06:14:35-05:00",
  "start": 1000.0,
  "equity": 1153.08,
  "cash": 1153.08,
@@ -431,12 +431,16 @@
   [
    1793269510,
    1153.08
+  ],
+  [
+   1793272475,
+   1153.08
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 226,
-  "killed": 204,
+  "scanned": 228,
+  "killed": 206,
   "passed": 31,
   "trades": 21,
   "judged": 30,
@@ -449,13 +453,13 @@
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 89 checked)",
-  "Filter": "Filter killed $BASED - Mint/freeze",
+  "Scout": "Scouted 2 new pairs (of 84 checked)",
+  "Filter": "Filter killed $CHADCHA - Liq <$40k",
   "Analyst": "Nothing to score",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Closed $MOON +119.33",
-  "Logger": "Logged 2 kills, 1 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 2 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
@@ -463,12 +467,28 @@
   "Top 10 holders": 1,
   "Score <70": 84,
   "LP not burned": 25,
-  "Mint/freeze": 39,
-  "Liq <$40k": 28,
+  "Mint/freeze": 40,
+  "Liq <$40k": 29,
   "Judge rejected": 9,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T06:14:35-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CHADCHA",
+   "mint": "SIM00244CHADCHA",
+   "rule": "Liq <$40k",
+   "detail": "liq $11,147"
+  },
+  {
+   "time": "2026-10-29T06:14:35-05:00",
+   "source": "SIM-FEED",
+   "symbol": "DUCK",
+   "mint": "SIM00243DUCK",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-29T05:25:10-05:00",
    "source": "SIM-FEED",
@@ -772,22 +792,6 @@
    "mint": "SIM00192APESNE",
    "rule": "Liq <$40k",
    "detail": "liq $5,461"
-  },
-  {
-   "time": "2026-10-29T03:02:40-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADPU",
-   "mint": "SIM00190CHADPU",
-   "rule": "Score <70",
-   "detail": "score 42"
-  },
-  {
-   "time": "2026-10-29T02:37:07-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOGAPE",
-   "mint": "SIM00187DOGAPE",
-   "rule": "Score <70",
-   "detail": "score 65"
   }
  ],
  "trades": [
@@ -1514,7 +1518,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 22.12,
- "sol_usd": 100.16,
+ "sol_usd": 100.49,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
