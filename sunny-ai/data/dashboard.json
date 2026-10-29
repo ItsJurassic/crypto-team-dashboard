@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T03:15:24-05:00",
+ "updated": "2026-10-29T03:40:58-05:00",
  "start": 1000.0,
  "equity": 1058.49,
  "cash": 1058.49,
@@ -363,44 +363,104 @@
   [
    1793261724,
    1058.49
+  ],
+  [
+   1793262007,
+   1058.49
+  ],
+  [
+   1793262188,
+   1058.49
+  ],
+  [
+   1793263258,
+   1058.49
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 190,
-  "killed": 171,
-  "passed": 25,
+  "scanned": 196,
+  "killed": 177,
+  "passed": 26,
   "trades": 18,
-  "judged": 24,
-  "judge_rejected": 6
+  "judged": 25,
+  "judge_rejected": 7
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
+  "scanned": 2,
+  "killed": 2,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 87 checked)",
-  "Filter": "Filter killed $SNEKD - Mint/freeze",
-  "Analyst": "Nothing to score",
+  "Scout": "Scouted 2 new pairs (of 89 checked)",
+  "Filter": "Filter killed $PEPE - Score <70",
+  "Analyst": "Best score 25 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Logger": "Logged 2 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 72,
+  "Score <70": 75,
   "LP not burned": 20,
-  "Mint/freeze": 32,
-  "Liq <$40k": 22,
-  "Judge rejected": 6,
+  "Mint/freeze": 33,
+  "Liq <$40k": 23,
+  "Judge rejected": 7,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T03:40:58-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PEPE",
+   "mint": "SIM00203PEPE",
+   "rule": "Score <70",
+   "detail": "score 25"
+  },
+  {
+   "time": "2026-10-29T03:40:58-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEKFR",
+   "mint": "SIM00204SNEKFR",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T03:23:08-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGM",
+   "mint": "SIM00202FROGM",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
+  {
+   "time": "2026-10-29T03:23:08-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PEPESNE",
+   "mint": "SIM00201PEPESNE",
+   "rule": "Score <70",
+   "detail": "score 45"
+  },
+  {
+   "time": "2026-10-29T03:20:07-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGY",
+   "mint": "SIM00200FROGY",
+   "rule": "Score <70",
+   "detail": "score 65"
+  },
+  {
+   "time": "2026-10-29T03:20:07-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGW",
+   "mint": "SIM00198FROGW",
+   "rule": "Liq <$40k",
+   "detail": "liq $11,997"
+  },
   {
    "time": "2026-10-29T03:15:24-05:00",
    "source": "SIM-FEED",
@@ -672,54 +732,6 @@
    "mint": "SIM00161BASEDCHA",
    "rule": "1h vol <$50k",
    "detail": "1h vol $30,841"
-  },
-  {
-   "time": "2026-10-29T01:06:38-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CAT",
-   "mint": "SIM00160CAT",
-   "rule": "Liq <$40k",
-   "detail": "liq $16,298"
-  },
-  {
-   "time": "2026-10-29T01:03:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOGYOL",
-   "mint": "SIM00159DOGYOL",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T01:00:35-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BULL",
-   "mint": "SIM00157BULL",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T01:00:35-05:00",
-   "source": "SIM-FEED",
-   "symbol": "YOLOPEP",
-   "mint": "SIM00156YOLOPEP",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T01:00:35-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGAW",
-   "mint": "SIM00155GIGAW",
-   "rule": "Liq <$40k",
-   "detail": "liq $18,479"
-  },
-  {
-   "time": "2026-10-29T00:34:18-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADZO",
-   "mint": "SIM00154TOADZO",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
   }
  ],
  "trades": [
@@ -1356,8 +1368,16 @@
  ],
  "failed_fills": 1,
  "fees_paid": 18.71,
- "sol_usd": 99.94,
+ "sol_usd": 99.86,
  "judge_rejections": [
+  {
+   "time": "2026-10-29T03:23:08-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGM",
+   "mint": "SIM00202FROGM",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
   {
    "time": "2026-10-29T02:10:04-05:00",
    "source": "SIM-FEED",
