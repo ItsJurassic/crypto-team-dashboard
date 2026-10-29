@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T07:11:43-05:00",
+ "updated": "2026-10-29T07:37:03-05:00",
  "start": 1000.0,
- "equity": 1126.85,
- "cash": 1126.85,
+ "equity": 1118.25,
+ "cash": 1118.25,
  "curve": [
   [
    1793231266,
@@ -467,44 +467,120 @@
   [
    1793275903,
    1126.85
+  ],
+  [
+   1793276086,
+   1126.54
+  ],
+  [
+   1793276267,
+   1121.51
+  ],
+  [
+   1793277423,
+   1118.25
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 246,
-  "killed": 223,
-  "passed": 32,
-  "trades": 22,
-  "judged": 31,
+  "scanned": 255,
+  "killed": 231,
+  "passed": 33,
+  "trades": 23,
+  "judged": 32,
   "judge_rejected": 9
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
+  "scanned": 2,
+  "killed": 2,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 85 checked)",
-  "Filter": "Filter killed $PUMPF - Score <70",
-  "Analyst": "Best score 52 - none 70+",
+  "Scout": "Scouted 2 new pairs (of 84 checked)",
+  "Filter": "Filter killed $APEFR - Score <70",
+  "Analyst": "Best score 57 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Risk": "Closed $MOONCH -8.60",
+  "Logger": "Logged 2 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
-  "1h vol <$50k": 13,
+  "1h vol <$50k": 14,
   "Top 10 holders": 1,
-  "Score <70": 94,
+  "Score <70": 100,
   "LP not burned": 26,
-  "Mint/freeze": 43,
+  "Mint/freeze": 44,
   "Liq <$40k": 30,
   "Judge rejected": 9,
   "Dev >3% / past rugs": 3
  },
  "kills": [
+  {
+   "time": "2026-10-29T07:37:03-05:00",
+   "source": "SIM-FEED",
+   "symbol": "APEFR",
+   "mint": "SIM00271APEFR",
+   "rule": "Score <70",
+   "detail": "score 57"
+  },
+  {
+   "time": "2026-10-29T07:37:03-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEKPEP",
+   "mint": "SIM00272SNEKPEP",
+   "rule": "1h vol <$50k",
+   "detail": "1h vol $16,773"
+  },
+  {
+   "time": "2026-10-29T07:17:47-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CATB",
+   "mint": "SIM00270CATB",
+   "rule": "Score <70",
+   "detail": "score 25"
+  },
+  {
+   "time": "2026-10-29T07:17:47-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOB",
+   "mint": "SIM00269YOLOB",
+   "rule": "Score <70",
+   "detail": "score 35"
+  },
+  {
+   "time": "2026-10-29T07:17:47-05:00",
+   "source": "SIM-FEED",
+   "symbol": "YOLOP",
+   "mint": "SIM00268YOLOP",
+   "rule": "Score <70",
+   "detail": "score 65"
+  },
+  {
+   "time": "2026-10-29T07:14:46-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEAR",
+   "mint": "SIM00267BEAR",
+   "rule": "Score <70",
+   "detail": "score 49"
+  },
+  {
+   "time": "2026-10-29T07:14:46-05:00",
+   "source": "SIM-FEED",
+   "symbol": "APECH",
+   "mint": "SIM00264APECH",
+   "rule": "Score <70",
+   "detail": "score 55"
+  },
+  {
+   "time": "2026-10-29T07:14:46-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CAT",
+   "mint": "SIM00266CAT",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-29T07:11:43-05:00",
    "source": "SIM-FEED",
@@ -760,73 +836,45 @@
    "mint": "SIM00222BEAR",
    "rule": "Score <70",
    "detail": "score 40"
-  },
-  {
-   "time": "2026-10-29T04:37:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGCHA",
-   "mint": "SIM00205FROGCHA",
-   "rule": "Score <70",
-   "detail": "score 35"
-  },
-  {
-   "time": "2026-10-29T04:37:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADP",
-   "mint": "SIM00227CHADP",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
-  },
-  {
-   "time": "2026-10-29T04:37:16-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEMEO",
-   "mint": "SIM00214PEPEMEO",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T04:16:53-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPE",
-   "mint": "SIM00224PEPE",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-29T04:16:53-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDCA",
-   "mint": "SIM00226BASEDCA",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T04:16:53-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEK",
-   "mint": "SIM00225SNEK",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 40%"
-  },
-  {
-   "time": "2026-10-29T04:16:53-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADSN",
-   "mint": "SIM00223TOADSN",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T04:10:50-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADFR",
-   "mint": "SIM00219TOADFR",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T07:37:03-05:00",
+   "side": "SELL",
+   "symbol": "MOONCH",
+   "mint": "SIM00265MOONCH",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.00099119074",
+   "filled": "0.00097336172",
+   "slip_pct": "1.799",
+   "delay_s": "7.97",
+   "fees_usd": "0.2822",
+   "status": "FILLED",
+   "qty": "84390.510121171",
+   "usd": "82.14",
+   "pnl_usd": "-8.6",
+   "reason": "-6% hard stop gap -3.1% vs stop"
+  },
+  {
+   "time": "2026-10-29T07:14:46-05:00",
+   "side": "BUY",
+   "symbol": "MOONCH",
+   "mint": "SIM00265MOONCH",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.001052904",
+   "filled": "0.0010682242",
+   "slip_pct": "1.455",
+   "delay_s": "5.86",
+   "fees_usd": "0.3099",
+   "status": "FILLED",
+   "qty": "84390.510121171",
+   "usd": "90.15",
+   "pnl_usd": "",
+   "reason": "score 92, stop 0.0010041307"
+  },
   {
    "time": "2026-10-29T06:55:30-05:00",
    "side": "SELL",
@@ -1510,47 +1558,11 @@
    "usd": "79.07",
    "pnl_usd": "",
    "reason": "score 74, stop 0.0047676522"
-  },
-  {
-   "time": "2026-10-28T19:56:24-05:00",
-   "side": "SELL",
-   "symbol": "GIGAD",
-   "mint": "SIM00014GIGAD",
-   "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "intended": "0.0051622501",
-   "filled": "0.0051875508",
-   "slip_pct": "-0.49",
-   "delay_s": "4.4",
-   "fees_usd": "0.757",
-   "status": "FILLED",
-   "qty": "14092.63802015519",
-   "usd": "73.11",
-   "pnl_usd": "-8.07",
-   "reason": "-6% hard stop gap -2.1% vs stop"
-  },
-  {
-   "time": "2026-10-28T19:55:52-05:00",
-   "side": "SELL",
-   "symbol": "WIFPU",
-   "mint": "SIM00013WIFPU",
-   "source": "SIM-FEED",
-   "venue": "Raydium AMM",
-   "intended": "0.00028476135",
-   "filled": "0.00028517818",
-   "slip_pct": "-0.146",
-   "delay_s": "6.56",
-   "fees_usd": "0.2958",
-   "status": "FILLED",
-   "qty": "259115.68734870284",
-   "usd": "73.89",
-   "pnl_usd": "-6.51",
-   "reason": "-6% hard stop gap -1.4% vs stop"
   }
  ],
  "failed_fills": 1,
- "fees_paid": 22.61,
- "sol_usd": 100.11,
+ "fees_paid": 23.2,
+ "sol_usd": 100.24,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
@@ -1792,6 +1804,14 @@
    "mint": "SIM00249MOONBEA",
    "judge_p": 0.65,
    "pnl": -26.23,
+   "win": false
+  },
+  {
+   "time": "2026-10-29T07:37:03-05:00",
+   "symbol": "MOONCH",
+   "mint": "SIM00265MOONCH",
+   "judge_p": 0.75,
+   "pnl": -8.6,
    "win": false
   }
  ],
