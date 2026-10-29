@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T06:55:30-05:00",
+ "updated": "2026-10-29T07:11:43-05:00",
  "start": 1000.0,
  "equity": 1126.85,
  "cash": 1126.85,
@@ -451,44 +451,124 @@
   [
    1793274930,
    1126.85
+  ],
+  [
+   1793275360,
+   1126.85
+  ],
+  [
+   1793275541,
+   1126.85
+  ],
+  [
+   1793275722,
+   1126.85
+  ],
+  [
+   1793275903,
+   1126.85
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 238,
-  "killed": 215,
+  "scanned": 246,
+  "killed": 223,
   "passed": 32,
   "trades": 22,
   "judged": 31,
   "judge_rejected": 9
  },
  "last_run": {
-  "scanned": 3,
-  "killed": 3,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 3 new pairs (of 81 checked)",
-  "Filter": "Filter killed $YOLOPE - Score <70",
-  "Analyst": "Best score 44 - none 70+",
+  "Scout": "Scouted 1 new pairs (of 85 checked)",
+  "Filter": "Filter killed $PUMPF - Score <70",
+  "Analyst": "Best score 52 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Closed $MOONBEA -26.23",
-  "Logger": "Logged 3 kills, 1 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 13,
   "Top 10 holders": 1,
-  "Score <70": 89,
-  "LP not burned": 25,
-  "Mint/freeze": 41,
+  "Score <70": 94,
+  "LP not burned": 26,
+  "Mint/freeze": 43,
   "Liq <$40k": 30,
   "Judge rejected": 9,
   "Dev >3% / past rugs": 3
  },
  "kills": [
+  {
+   "time": "2026-10-29T07:11:43-05:00",
+   "source": "SIM-FEED",
+   "symbol": "PUMPF",
+   "mint": "SIM00263PUMPF",
+   "rule": "Score <70",
+   "detail": "score 52"
+  },
+  {
+   "time": "2026-10-29T07:08:42-05:00",
+   "source": "SIM-FEED",
+   "symbol": "TOADD",
+   "mint": "SIM00260TOADD",
+   "rule": "Score <70",
+   "detail": "score 64"
+  },
+  {
+   "time": "2026-10-29T07:08:42-05:00",
+   "source": "SIM-FEED",
+   "symbol": "CATBUL",
+   "mint": "SIM00262CATBUL",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T07:08:42-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOM",
+   "mint": "SIM00261ZOOM",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 0%"
+  },
+  {
+   "time": "2026-10-29T07:05:41-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MOONDO",
+   "mint": "SIM00258MOONDO",
+   "rule": "Score <70",
+   "detail": "score 28"
+  },
+  {
+   "time": "2026-10-29T07:02:40-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MEOWBO",
+   "mint": "SIM00257MEOWBO",
+   "rule": "Score <70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-29T07:02:40-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BEAR",
+   "mint": "SIM00256BEAR",
+   "rule": "Score <70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-29T07:02:40-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BONKZO",
+   "mint": "SIM00242BONKZO",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
   {
    "time": "2026-10-29T06:55:30-05:00",
    "source": "SIM-FEED",
@@ -744,70 +824,6 @@
    "mint": "SIM00219TOADFR",
    "rule": "Judge rejected",
    "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-29T04:10:50-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGAMEO",
-   "mint": "SIM00220GIGAMEO",
-   "rule": "Liq <$40k",
-   "detail": "liq $5,014"
-  },
-  {
-   "time": "2026-10-29T04:07:49-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CATBEA",
-   "mint": "SIM00217CATBEA",
-   "rule": "Liq <$40k",
-   "detail": "liq $5,714"
-  },
-  {
-   "time": "2026-10-29T04:01:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARZ",
-   "mint": "SIM00213BEARZ",
-   "rule": "Score <70",
-   "detail": "score 22"
-  },
-  {
-   "time": "2026-10-29T04:01:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CATB",
-   "mint": "SIM00212CATB",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%"
-  },
-  {
-   "time": "2026-10-29T03:58:46-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PUMP",
-   "mint": "SIM00209PUMP",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%"
-  },
-  {
-   "time": "2026-10-29T03:55:44-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMP",
-   "mint": "SIM00207ZOOMP",
-   "rule": "Score <70",
-   "detail": "score 66"
-  },
-  {
-   "time": "2026-10-29T03:40:58-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPE",
-   "mint": "SIM00203PEPE",
-   "rule": "Score <70",
-   "detail": "score 25"
-  },
-  {
-   "time": "2026-10-29T03:40:58-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEKFR",
-   "mint": "SIM00204SNEKFR",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
   }
  ],
  "trades": [
@@ -1534,7 +1550,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 22.61,
- "sol_usd": 100.37,
+ "sol_usd": 100.11,
  "judge_rejections": [
   {
    "time": "2026-10-29T04:16:53-05:00",
@@ -1779,5 +1795,5 @@
    "win": false
   }
  ],
- "recap": "MORNING RECAP 2026-10-28 (PAPER TRADING - SIMULATED)\nEquity $1,000.00 (+0.00%), cash $920.00, open 1\nKills last 24h: 5\n  Score <70: 2\n  Already +80% 1h: 1\n  1h vol <$50k: 1\n  Top 10 holders: 1\nOpen positions:\n  $DUBBLE entry 0.003946 last 0.003946 stop 0.00370924\n"
+ "recap": "SUNNY AI MORNING RECAP 2026-10-29 (PAPER TRADING - SIMULATED)\nEquity $1,126.85 (+12.68%), cash $1,126.85, open 0\nKills last 24h: 218\n  Score <70: 91\n  Mint/freeze: 42\n  Liq <$40k: 30\n  LP not burned: 25\n  1h vol <$50k: 13\n  Judge rejected: 9\n  Already +80% 1h: 4\n  Dev >3% / past rugs: 3\n  Top 10 holders: 1\nOpen positions:\n"
 }
