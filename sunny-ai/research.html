@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="team.css"><title>Sunny AI · Research (paper)</title></head><body><div class="wrap"><div class="banner">⚠ PAPER / SIMULATED ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="team.css"><link rel="stylesheet" href="sunny.css"><title>Sunny AI · Research (paper)</title></head><body><div class="wrap"><div class="banner">⚠ PAPER / SIMULATED ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
 <h1>📚 Research · Sequoia &amp; Owl</h1><div class="m s">Sequoia (Market Historian) studies 10 years of top-20 chart history. Owl (Strategy Scholar) turns it into the playbook Seedling trades by.</div><div class="nav"><a href="./">☀️ Desk</a><a href="profits.html">💰 Profits</a><a href="seedling.html" id="n-seedling">🌱 Seedling</a><a href="research.html" id="n-research">📚 Research</a><a href="charts.html" id="n-charts">📈 Charts</a></div>
 <div class="card"><div class="hd"><span>Owl's playbook rules</span><span id="pc"></span></div><ol id="pb" style="padding-left:20px"></ol><details><summary class="m s" style="cursor:pointer">Full playbook (strategies S1–S4, checks, evidence)</summary><pre id="md" style="margin-top:8px"></pre></details></div>
 <div class="card"><div class="hd"><span>Lessons</span><span id="lc"></span></div><div class="chips" id="flt"></div><div id="ls"></div></div>
@@ -12,4 +12,4 @@ fetch("team/playbook.md?t="+Date.now()).then(r=>r.ok?r.text():"").then(t=>$("md"
 L=(await J("team/lessons.json").catch(()=>[])).sort((a,b)=>b.date.localeCompare(a.date));
 $("flt").innerHTML=["All","Sequoia","Owl"].map(b=>'<button data-b="'+b+'" class="'+(b==B?"on":"")+'">'+b+"</button>").join("");
 document.querySelectorAll("#flt button").forEach(b=>b.onclick=()=>{B=b.dataset.b;document.querySelectorAll("#flt button").forEach(y=>y.classList.toggle("on",y==b));draw()});draw()})();
-</script></body></html>
+</script><script src="nav.js"></script></body></html>

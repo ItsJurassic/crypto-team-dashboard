@@ -1,0 +1,38 @@
+/* Sunny AI shared theme - restrained fintech dark. PAPER / SIMULATED ONLY. */
+:root{--bg:#0e1116;--card:#151a21;--line:#252c36;--mut:#8a94a3;--t:#d9dee5;--g:#3fb68b;--r:#e5636f;--acc:#6b8afd;--amber:#d4a24c}
+html,body{background:var(--bg)!important;color:var(--t)!important}
+body{font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif!important;-webkit-font-smoothing:antialiased;padding-bottom:calc(68px + env(safe-area-inset-bottom))!important}
+.wrap{max-width:1040px!important;padding:12px 14px!important}
+td,th,table,pre,code,.mono{font-variant-numeric:tabular-nums}
+.g{color:var(--g)!important}.r{color:var(--r)!important}.m{color:var(--mut)!important}
+*{text-shadow:none!important}
+.banner{background:#1b1710!important;color:var(--amber)!important;border:1px solid #3a3020!important;border-radius:6px!important;padding:5px 10px!important;font-size:11px!important;font-weight:600!important;letter-spacing:.04em!important;box-shadow:none!important}
+.card{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:8px!important;padding:12px 14px!important;margin-top:10px!important;box-shadow:none!important}
+.hd{font-size:11px!important;letter-spacing:.06em!important;font-weight:600;color:var(--mut)!important}
+.eq{font-size:34px!important;font-weight:650!important;letter-spacing:-.02em}.big{font-size:32px!important;font-weight:650!important}.pct{font-size:15px!important;font-weight:600!important}
+.mult{background:transparent!important;border:1px solid var(--line);color:var(--mut)!important;font-weight:600!important;padding:2px 8px!important;font-size:12px}
+.tag{background:#1e2530!important;color:#a9b4c4!important;border:1px solid var(--line);border-radius:3px!important;font-size:9.5px!important;font-weight:600;padding:0 4px!important}
+table{font-size:12px!important}td,th{padding:5px 6px!important;border-bottom:1px solid var(--line)!important}th{font-weight:600!important;color:var(--mut)!important;font-size:11px}
+tr:hover td{background:#181e26}
+canvas{height:150px!important}
+.bar{background:#7a3d45!important;height:4px!important}
+button,.lb{border-radius:6px!important;font:600 11px/1 inherit!important;padding:5px 10px!important}.lb.on{background:var(--acc)!important;border-color:var(--acc)!important;color:#fff!important}
+a{color:var(--acc)}a.back{color:var(--mut)!important;font-size:12px}
+.met,.ln{background:#11151b!important;border:1px solid var(--line)!important;border-radius:6px!important;padding:8px 10px!important}.met b{font-size:16px!important;font-weight:650}.ln b{font-size:20px!important;font-weight:650}
+/* compact agent list */
+.grid#agents,#agents{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important;margin-top:8px!important}
+@media(max-width:700px){#agents{grid-template-columns:1fr!important}.eq{font-size:28px!important}}
+.ag{padding:7px 10px!important;gap:10px!important;border-radius:6px!important;background:#11151b!important;border:1px solid var(--line)!important;align-items:center}
+.ag:hover{border-color:#34404f!important}
+.ic{width:24px!important;height:24px!important;font-size:13px!important;border-radius:5px!important}
+.nm{font-weight:600!important;font-size:12.5px;color:var(--t)!important;display:flex;align-items:center}
+.dot{width:6px!important;height:6px!important;box-shadow:none!important;background:var(--g)!important;margin-left:6px!important}
+.act{font-size:11.5px!important;margin-top:1px!important;color:#b7c0cc!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ag>div:last-child{min-width:0;flex:1}.ct{font-size:10.5px!important;margin-top:1px!important}
+/* bottom nav */
+.snav{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(17,21,27,.97);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom));display:flex;justify-content:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.snav .in{display:flex;width:100%;max-width:720px;justify-content:space-between}
+.snav a{flex:1;min-width:44px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--mut)!important;text-decoration:none!important;font:500 10px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;border-radius:8px}
+.snav a svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.snav a.on{color:var(--t)!important;background:#1c232d}.snav a.on svg{stroke:var(--acc)}
+.snav a:active{background:#1c232d}

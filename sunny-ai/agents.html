@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="stylesheet" href="sunny.css"><title>Sunny AI · Agents (paper)</title><style>.hd{text-transform:uppercase}</style></head><body><div class="wrap">
+<div class="banner">PAPER / SIMULATED ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
+<div class="card"><div class="hd">Agents · 7-stage pipeline · SOLANA + MAJOR lanes</div><div id="agents"></div></div>
+<p class="m" style="font-size:11px;text-align:center;margin-top:10px" id="upd"></p></div>
+<script>
+const A=[["Scout","🔭","#5b7fd6","Finds candidates"],["Filter","🛡️","#c46a6a","Hard kill rules"],["Analyst","🧠","#8f74c9","Scores 0–100"],["Judge","⚖️","#c4a24c","Yes/no checklist"],["Executor","⚡","#4f9e7c","Simulated fills"],["Risk","🎯","#c48a4c","Stops & trails"],["Logger","📒","#4c9ea0","Kills, trades, recap"]];
+const esc=s=>String(s??"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+async function go(){try{const d=await (await fetch("data/dashboard.json?"+Date.now())).json(),M=(d.major||{}).activity||{};
+document.getElementById("agents").innerHTML=A.map(([n,i,c,w])=>`<a class="ag" href="agent.html?a=${n.toLowerCase()}"><div class="ic" style="background:${c}22;color:${c}">${i}</div><div><div class="nm">${n}<span class="dot"></span><span class=m style="font-weight:400;font-size:11px;margin-left:8px">${w}</span></div><div class="act"><span class=tag>SOL</span> ${esc(d.activity[n])}</div><div class="act"><span class=tag>MAJ</span> ${esc(M[n]||"—")}</div></div></a>`).join("");
+document.getElementById("upd").textContent="updated "+new Date(d.updated).toLocaleTimeString()}catch(e){}}go();setInterval(go,30000)
+</script><script src="nav.js"></script></body></html>

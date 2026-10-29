@@ -1,7 +1,7 @@
 {
- "updated": "2026-10-29T10:05:33-05:00",
+ "updated": "2026-10-29T10:12:51-05:00",
  "start": 1000.0,
- "equity": 1102.87,
+ "equity": 1110.7,
  "cash": 839.77,
  "curve": [
   [
@@ -587,6 +587,18 @@
   [
    1793286333,
    1102.87
+  ],
+  [
+   1793286409,
+   1104.68
+  ],
+  [
+   1793286590,
+   1108.52
+  ],
+  [
+   1793286771,
+   1110.7
   ]
  ],
  "positions": {
@@ -599,8 +611,8 @@
    "usd": 88.5154084340501,
    "entry_fees": 0.2759,
    "stop": 0.00611933492697275,
-   "high": 0.006618135170779124,
-   "last": 0.0063106813051043605,
+   "high": 0.0067853435433477,
+   "last": 0.0067853435433477,
    "trailing": false,
    "time": "2026-10-29T10:00:48-05:00",
    "score": 82,
@@ -619,8 +631,8 @@
    "init_stop": 712.7421741640586,
    "atr": 17.775,
    "tp": 854.9421741640585,
-   "high": 748.2921741640586,
-   "last": 747.7,
+   "high": 750.76,
+   "last": 750.76,
    "trailing": false,
    "time": "2026-10-29T10:03:12-05:00",
    "score": 77,
@@ -639,8 +651,8 @@
    "init_stop": 1195.7846773780198,
    "atr": 103.411429,
    "tp": 1611.7097825529831,
-   "high": 1305.31,
-   "last": 1305.31,
+   "high": 1320.17,
+   "last": 1320.17,
    "trailing": false,
    "time": "2026-10-29T10:03:12-05:00",
    "score": 72,
@@ -648,43 +660,106 @@
   }
  },
  "counts": {
-  "scanned": 316,
-  "killed": 290,
-  "passed": 36,
+  "scanned": 323,
+  "killed": 297,
+  "passed": 37,
   "trades": 25,
-  "judged": 35,
-  "judge_rejected": 10
+  "judged": 36,
+  "judge_rejected": 11
  },
  "last_run": {
-  "scanned": 4,
-  "killed": 4,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 4 new pairs (of 90 checked)",
-  "Filter": "Filter killed $BEAR - Score <70",
-  "Analyst": "Best score 64 - none 70+",
-  "Judge": "Nothing to judge",
+  "Scout": "Scouted 1 new pairs (of 90 checked)",
+  "Filter": "Filter killed $BONKB - Judge rejected",
+  "Analyst": "Approved $BONKB score 72",
+  "Judge": "Judge rejected $BONKB - red flag: lp_99",
   "Executor": "No approved entries",
   "Risk": "Watching 3 open, stops set",
-  "Logger": "Logged 4 kills, 0 trade events"
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 6,
   "1h vol <$50k": 17,
   "Top 10 holders": 1,
-  "Score <70": 123,
-  "LP not burned": 31,
+  "Score <70": 125,
+  "LP not burned": 33,
   "Mint/freeze": 55,
-  "Liq <$40k": 40,
-  "Judge rejected": 10,
+  "Liq <$40k": 42,
+  "Judge rejected": 11,
   "Dev >3% / past rugs": 7,
   "MAJOR: Stablecoin": 8,
   "MAJOR: 24h vol < $50M": 3,
   "MAJOR: Analyst < 70": 18
  },
  "kills": [
+  {
+   "time": "2026-10-29T10:12:51-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BONKB",
+   "mint": "SIM00345BONKB",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
+  {
+   "time": "2026-10-29T10:09:50-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "PEPEME",
+   "mint": "SIM00342PEPEME",
+   "rule": "Score <70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T10:09:50-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BEARB",
+   "mint": "SIM00340BEARB",
+   "rule": "Score <70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:09:50-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "YOLODOG",
+   "mint": "SIM00344YOLODOG",
+   "rule": "Liq <$40k",
+   "detail": "liq $30,629"
+  },
+  {
+   "time": "2026-10-29T10:09:50-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "CAT",
+   "mint": "SIM00341CAT",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 40%"
+  },
+  {
+   "time": "2026-10-29T10:06:49-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "CATZ",
+   "mint": "SIM00339CATZ",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 0%"
+  },
+  {
+   "time": "2026-10-29T10:06:49-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "DOGFR",
+   "mint": "SIM00315DOGFR",
+   "rule": "Liq <$40k",
+   "detail": "liq $5,956"
+  },
   {
    "time": "2026-10-29T10:05:33-05:00",
    "lane": "SOLANA",
@@ -1160,69 +1235,6 @@
    "mint": "SIM00309MEOWZOO",
    "rule": "Score <70",
    "detail": "score 38",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:20:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "TOADFRO",
-   "mint": "SIM00308TOADFRO",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:20:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGSN",
-   "mint": "SIM00307FROGSN",
-   "rule": "Liq <$40k",
-   "detail": "liq $14,117",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:17:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MOONME",
-   "mint": "SIM00305MOONME",
-   "rule": "Score <70",
-   "detail": "score 51",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:17:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BULL",
-   "mint": "SIM00304BULL",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:14:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MEOWM",
-   "mint": "SIM00300MEOWM",
-   "rule": "Score <70",
-   "detail": "score 51",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:14:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MEOW",
-   "mint": "SIM00303MEOW",
-   "rule": "Liq <$40k",
-   "detail": "liq $20,156",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:14:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "GIGABA",
-   "mint": "SIM00302GIGABA",
-   "rule": "Already +80% 1h",
-   "detail": "+87.84% 1h",
    "lane": "SOLANA"
   }
  ],
@@ -2130,8 +2142,17 @@
  ],
  "failed_fills": 1,
  "fees_paid": 26.12,
- "sol_usd": 101.72,
+ "sol_usd": 102.38,
  "judge_rejections": [
+  {
+   "time": "2026-10-29T10:12:51-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BONKB",
+   "mint": "SIM00345BONKB",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
   {
    "time": "2026-10-29T10:03:12-05:00",
    "lane": "MAJOR",
@@ -2440,7 +2461,7 @@
     "banked": 63.88,
     "closed": 24,
     "total_costs": 46.68,
-    "pnl_open": -2.99
+    "pnl_open": 3.47
    },
    "MAJOR": {
     "gross": 0.0,
@@ -2451,7 +2472,7 @@
     "banked": 0.0,
     "closed": 0,
     "total_costs": 0.0,
-    "pnl_open": -0.58
+    "pnl_open": 0.79
    }
   },
   "note": "Banking = 20% of net profit (gains minus all fees). Tell Sunny if you meant something different.",
@@ -2460,19 +2481,19 @@
  "lanes": {
   "SOLANA": {
    "realized": 106.44,
-   "unrealized": -2.99,
-   "pnl": 103.45,
+   "unrealized": 3.47,
+   "pnl": 109.91,
    "open": 1,
-   "open_value": 85.81,
+   "open_value": 92.26,
    "buys": 24,
    "closed": 23
   },
   "MAJOR": {
    "realized": 0,
-   "unrealized": -0.58,
-   "pnl": -0.58,
+   "unrealized": 0.79,
+   "pnl": 0.79,
    "open": 2,
-   "open_value": 177.29,
+   "open_value": 178.67,
    "buys": 2,
    "closed": 0
   }
@@ -2796,6 +2817,6 @@
     }
    ]
   },
-  "next_scan_in_s": 1057
+  "next_scan_in_s": 619
  }
 }

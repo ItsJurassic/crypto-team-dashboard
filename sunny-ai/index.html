@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sunny AI · Paper</title>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sunny AI · Paper</title>
 <style>
 :root{--bg:#07090d;--card:#0f131a;--line:#1c222c;--mut:#7b8594;--g:#22e08a;--r:#ff4d5e;--t:#e7ecf3}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
@@ -17,10 +17,10 @@ table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:6px 4px;b
 .bar{height:6px;background:var(--r);border-radius:3px}.two{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}@media(max-width:700px){.two{grid-template-columns:1fr}.eq{font-size:38px}}
 .tag{font-size:9px;padding:1px 4px;border-radius:4px;background:#1c2533;color:#8fb3ff}#trades{display:block;overflow-x:auto;white-space:nowrap}pre{white-space:pre-wrap;color:#c5ccd6;font-size:12px;margin:0}
 .lb{background:#0b0e14;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:3px 10px;margin-left:4px;cursor:pointer;font:inherit;font-size:11px}.lb.on{background:#1c2533;color:var(--t)}.lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:10px}.ln{background:#0b0e14;border:1px solid var(--line);border-radius:12px;padding:12px}.ln b{font-size:24px}
-</style></head><body><div class="wrap">
-<div class="banner">⚠ PAPER / SIMULATED ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
+</style><link rel="stylesheet" href="sunny.css"></head><body><div class="wrap">
+<div class="banner">PAPER / SIMULATED ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
 <div class="card"><div class="hd"><span>Sunny AI · Equity</span><span id="upd"></span></div>
-<div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div class="eq" id="eq">—</div><div class="pct" id="pct"></div><span class="mult" id="mult"></span><a href="profits.html" style="background:#1c2533;color:#e7ecf3;border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;font-size:13px">💰 Profits →</a> <a href="seedling.html" style="background:#1c2533;color:#e7ecf3;border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;font-size:13px">🌱 Seedling</a> <a href="research.html" style="background:#1c2533;color:#e7ecf3;border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;font-size:13px">📚 Research</a> <a href="charts.html" style="background:#1c2533;color:#e7ecf3;border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;font-size:13px">📈 Charts</a></div>
+<div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div class="eq" id="eq">—</div><div class="pct" id="pct"></div><span class="mult" id="mult"></span><a href="profits.html" style="background:#1c2533;color:#e7ecf3;border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;font-size:13px">💰 Profits →</a></div>
 <div class="m" id="sub" style="font-size:12px"></div><div class="m" id="exs" style="font-size:12px"></div><canvas id="c"></canvas></div>
 <div class="card"><div class="hd"><span>🏦 Banking tracker · paper only, no real withdrawals</span><span id="bkr"></span></div><div id="bank"></div><div class="m" style="font-size:11px;margin-top:8px">Banking = 20% of net profit (gains minus all fees). Tell Sunny if you meant something different. Realized P/L already includes fees and slippage, so gross is derived as net + fees + slippage (not double-counted). New positions are sized at 8% of working capital, so banked money is not used for trading.</div></div>
 <div class="card"><div class="hd"><span>Lanes</span><span id="lbtn"></span></div><div class="lanes" id="lanes"></div><div class="m" id="mnote" style="font-size:11px;margin-top:8px"></div></div>
@@ -30,7 +30,7 @@ table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:6px 4px;b
 <div class="two"><div><table id="kills"></table></div><div><div class="m" style="font-size:12px;margin:6px 0">KILLED BY RULE</div><table id="rules"></table></div></div>
 <div class="m" style="font-size:12px;margin:14px 0 6px">JUDGE REJECTIONS</div><table id="jrej"></table><div class="m" style="font-size:12px;margin:14px 0 6px">JUDGE CALIBRATION (win rate by probability)</div><table id="cal"></table><div class="m" style="font-size:12px;margin:14px 0 6px">TRADES</div><table id="trades"></table>
 <div class="m" style="font-size:12px;margin:14px 0 6px">MORNING RECAP</div><pre id="recap"></pre></div>
-<p class="m" style="font-size:11px;text-align:center">PAPER / SIMULATED ONLY. SOLANA lane: REAL = public DexScreener + RugCheck reads, SIM = synthetic SIM-FEED pairs. MAJOR lane: public CoinGecko + Coinbase candle reads (no account). Fills simulated (delay, AMM slippage, failed tx, fees). Auto-refreshes every 30s. <a style="color:var(--mut)" href="seedling.html">🌱 Seedling account</a></p>
+<p class="m" style="font-size:11px;text-align:center">PAPER / SIMULATED ONLY. SOLANA lane: REAL = public DexScreener + RugCheck reads, SIM = synthetic SIM-FEED pairs. MAJOR lane: public CoinGecko + Coinbase candle reads (no account). Fills simulated (delay, AMM slippage, failed tx, fees). Auto-refreshes every 30s. <a style="color:var(--mut)" href="../">← Crypto team dashboard</a></p>
 </div><script>
 const A=[["Scout","🔭","#3b82f6"],["Filter","🛡️","#ef4444"],["Analyst","🧠","#a855f7"],["Judge","⚖️","#eab308"],["Executor","⚡","#22c55e"],["Risk","🎯","#f59e0b"],["Logger","📒","#14b8a6"]];
 const $=i=>document.getElementById(i),f=(n,d=2)=>"$"+Number(n).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d}),esc=s=>String(s??"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
@@ -64,4 +64,4 @@ const J=d.judge_rejections||[];$("jrej").innerHTML=J.length?J.map(k=>`<tr><td cl
 const B=[[0.65,0.75],[0.75,0.85],[0.85,1.01]];$("cal").innerHTML="<tr><th>Judge p</th><th>Trades</th><th>Win rate</th></tr>"+B.map(([a,b])=>{const t=(d.calibration||[]).filter(x=>x.judge_p>=a&&x.judge_p<b),w=t.filter(x=>x.win).length;return`<tr><td>${a.toFixed(2)}–${Math.min(b,1).toFixed(2)}</td><td>${t.length}</td><td>${t.length?(w/t.length*100).toFixed(0)+"%":"—"}</td></tr>`}).join("");
 $("recap").textContent=d.recap||"First recap after 7 AM CT.";}catch(e){$("upd").textContent="render error"}}
 go();setInterval(go,30000);
-</script></body></html>
+</script><script src="nav.js"></script></body></html>

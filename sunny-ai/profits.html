@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sunny AI · Profits</title>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sunny AI · Profits</title>
 <style>
 :root{--bg:#07090d;--card:#0f131a;--line:#1c222c;--mut:#7b8594;--g:#22e08a;--r:#ff4d5e;--t:#e7ecf3}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
@@ -8,8 +8,8 @@ a.back{color:var(--mut);text-decoration:none;display:inline-block;margin-top:12p
 .big{font-size:42px;font-weight:800}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.met{background:#0b0e14;border:1px solid var(--line);border-radius:10px;padding:10px}.met b{display:block;font-size:18px}.met span{color:var(--mut);font-size:11px}
 .tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}td,th{padding:6px 5px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:500}
 .tag{font-size:9px;padding:1px 4px;border-radius:4px;background:#1c2533;color:#8fb3ff}p{margin:0}
-</style></head><body><div class="wrap">
-<div class="banner">⚠ PAPER / SIMULATED ONLY — NOT REAL MONEY. Most trades use synthetic SIM-FEED tokens.</div>
+</style><link rel="stylesheet" href="sunny.css"></head><body><div class="wrap">
+<div class="banner">PAPER / SIMULATED ONLY — NOT REAL MONEY. Most trades use synthetic SIM-FEED tokens.</div>
 <a class="back" href="./">← Back to Sunny AI desk</a>
 <div class="card"><div class="hd">Total paper P/L</div><div class="big" id="tot">—</div><div class="m" id="sub"></div></div>
 <div class="card"><div class="hd">Breakdown</div><div class="grid" id="mets"></div></div>
@@ -34,4 +34,4 @@ $("bank").innerHTML=bankHTML(d.bank);const BL=d.by_lane||{};$("lanes").innerHTML
 $("rows").innerHTML="<tr><th>Token</th><th>Status</th><th>Venue</th><th>Entry</th><th>Exit/Last</th><th>In</th><th>Out</th><th>Size</th><th>Slip $</th><th>Fees</th><th>P/L</th><th>%</th><th>Exit reason</th></tr>"+d.rows.map(r=>`<tr><td>$${esc(r.symbol)} ${r.lane=="MAJOR"?"<span class=tag style=\"background:#2a1f05;color:#ffcf5c\">MAJOR</span>":"<span class=tag style=\"background:#0c2a1c;color:#22e08a\">SOLANA</span> <span class=tag>"+(r.source=="SIM-FEED"?"SIM":"REAL")+"</span>"}</td><td>${r.status}</td><td class=m>${esc(r.venue)}</td><td>${pr(r.entry)}</td><td>${pr(r.exit)}</td><td class=m>${tm(r.entry_time)}</td><td class=m>${tm(r.exit_time)}</td><td>${m(r.size_usd)}</td><td>${r.slip_cost==null?"—":m(r.slip_cost)}</td><td>${m(r.fees)}</td><td class=${c(r.pnl)}>${sg(r.pnl)}</td><td class=${c(r.pnl)}>${r.pnl_pct.toFixed(1)}%</td><td class=m>${esc(r.exit_reason)}</td></tr>`).join("");
 $("upd").textContent="PAPER / SIMULATED ONLY · updated "+tm(d.updated)+" · auto-refresh 30s";}catch(e){$("upd").textContent="load error"}}
 go();setInterval(go,30000);
-</script></body></html>
+</script><script src="nav.js"></script></body></html>
