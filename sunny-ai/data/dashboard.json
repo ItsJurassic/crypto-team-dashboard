@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T10:12:51-05:00",
+ "updated": "2026-10-29T10:28:32-05:00",
  "start": 1000.0,
- "equity": 1110.7,
- "cash": 839.77,
+ "equity": 1089.77,
+ "cash": 823.33,
  "curve": [
   [
    1793231266,
@@ -599,6 +599,26 @@
   [
    1793286771,
    1110.7
+  ],
+  [
+   1793286954,
+   1109.32
+  ],
+  [
+   1793287135,
+   1105.64
+  ],
+  [
+   1793287316,
+   1108.71
+  ],
+  [
+   1793287497,
+   1099.7
+  ],
+  [
+   1793287712,
+   1089.77
   ]
  ],
  "positions": {
@@ -612,7 +632,7 @@
    "entry_fees": 0.2759,
    "stop": 0.00611933492697275,
    "high": 0.0067853435433477,
-   "last": 0.0067853435433477,
+   "last": 0.00646401942120163,
    "trailing": false,
    "time": "2026-10-29T10:00:48-05:00",
    "score": 82,
@@ -631,8 +651,8 @@
    "init_stop": 712.7421741640586,
    "atr": 17.775,
    "tp": 854.9421741640585,
-   "high": 750.76,
-   "last": 750.76,
+   "high": 751.38,
+   "last": 750.99,
    "trailing": false,
    "time": "2026-10-29T10:03:12-05:00",
    "score": 77,
@@ -651,8 +671,8 @@
    "init_stop": 1195.7846773780198,
    "atr": 103.411429,
    "tp": 1611.7097825529831,
-   "high": 1320.17,
-   "last": 1320.17,
+   "high": 1320.69,
+   "last": 1318.0,
    "trailing": false,
    "time": "2026-10-29T10:03:12-05:00",
    "score": 72,
@@ -660,43 +680,394 @@
   }
  },
  "counts": {
-  "scanned": 323,
-  "killed": 297,
-  "passed": 37,
-  "trades": 25,
-  "judged": 36,
-  "judge_rejected": 11
+  "scanned": 332,
+  "killed": 305,
+  "passed": 39,
+  "trades": 26,
+  "judged": 38,
+  "judge_rejected": 12
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
+  "scanned": 0,
+  "killed": 0,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 90 checked)",
-  "Filter": "Filter killed $BONKB - Judge rejected",
-  "Analyst": "Approved $BONKB score 72",
-  "Judge": "Judge rejected $BONKB - red flag: lp_99",
+  "Scout": "Scouted 0 new pairs (of 90 checked)",
+  "Filter": "0 passed all 8 rules",
+  "Analyst": "Nothing to score",
+  "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 3 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Risk": "Closed $FROG -16.42",
+  "Logger": "Logged 0 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 6,
   "1h vol <$50k": 17,
   "Top 10 holders": 1,
-  "Score <70": 125,
+  "Score <70": 131,
   "LP not burned": 33,
-  "Mint/freeze": 55,
+  "Mint/freeze": 56,
   "Liq <$40k": 42,
-  "Judge rejected": 11,
+  "Judge rejected": 12,
   "Dev >3% / past rugs": 7,
-  "MAJOR: Stablecoin": 8,
-  "MAJOR: 24h vol < $50M": 3,
-  "MAJOR: Analyst < 70": 18
+  "MAJOR: Stablecoin": 16,
+  "MAJOR: 24h vol < $50M": 6,
+  "MAJOR: Analyst < 70": 36
  },
  "kills": [
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "TRX",
+   "mint": "MAJOR:tron",
+   "rule": "Judge rejected",
+   "detail": "red flag: uptrend"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "HYPE",
+   "mint": "MAJOR:hyperliquid",
+   "rule": "Judge rejected",
+   "detail": "red flag: no_spike"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "HBAR",
+   "mint": "MAJOR:hedera-hashgraph",
+   "rule": "Analyst < 70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "XLM",
+   "mint": "MAJOR:stellar",
+   "rule": "Analyst < 70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "ADA",
+   "mint": "MAJOR:cardano",
+   "rule": "Analyst < 70",
+   "detail": "score 12"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "SHIB",
+   "mint": "MAJOR:shiba-inu",
+   "rule": "Analyst < 70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "DOGE",
+   "mint": "MAJOR:dogecoin",
+   "rule": "Analyst < 70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "XRP",
+   "mint": "MAJOR:ripple",
+   "rule": "Analyst < 70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "AVAX",
+   "mint": "MAJOR:avalanche-2",
+   "rule": "Analyst < 70",
+   "detail": "score 41"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "TAO",
+   "mint": "MAJOR:bittensor",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "BCH",
+   "mint": "MAJOR:bitcoin-cash",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "LINK",
+   "mint": "MAJOR:chainlink",
+   "rule": "Analyst < 70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "SUI",
+   "mint": "MAJOR:sui",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "LTC",
+   "mint": "MAJOR:litecoin",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "SOL",
+   "mint": "MAJOR:solana",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "ETH",
+   "mint": "MAJOR:ethereum",
+   "rule": "Analyst < 70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "NEAR",
+   "mint": "MAJOR:near",
+   "rule": "Analyst < 70",
+   "detail": "score 52"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "UNI",
+   "mint": "MAJOR:uniswap",
+   "rule": "Analyst < 70",
+   "detail": "score 62"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "BTC",
+   "mint": "MAJOR:bitcoin",
+   "rule": "Analyst < 70",
+   "detail": "score 67"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "XMR",
+   "mint": "MAJOR:monero",
+   "rule": "Analyst < 70",
+   "detail": "score 68"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "PYUSD",
+   "mint": "MAJOR:paypal-usd",
+   "rule": "Stablecoin",
+   "detail": "PYUSD pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDG",
+   "mint": "MAJOR:global-dollar",
+   "rule": "Stablecoin",
+   "detail": "USDG pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "GRAM",
+   "mint": "MAJOR:the-open-network",
+   "rule": "24h vol < $50M",
+   "detail": "$23.7M"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USD1",
+   "mint": "MAJOR:usd1-wlfi",
+   "rule": "Stablecoin",
+   "detail": "USD1 pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "CC",
+   "mint": "MAJOR:canton-network",
+   "rule": "24h vol < $50M",
+   "detail": "$24.2M"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDE",
+   "mint": "MAJOR:ethena-usde",
+   "rule": "Stablecoin",
+   "detail": "USDE pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "RAIN",
+   "mint": "MAJOR:rain",
+   "rule": "24h vol < $50M",
+   "detail": "$13.7M"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "DAI",
+   "mint": "MAJOR:dai",
+   "rule": "Stablecoin",
+   "detail": "DAI pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDS",
+   "mint": "MAJOR:usds",
+   "rule": "Stablecoin",
+   "detail": "USDS pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDC",
+   "mint": "MAJOR:usd-coin",
+   "rule": "Stablecoin",
+   "detail": "USDC pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "USDT",
+   "mint": "MAJOR:tether",
+   "rule": "Stablecoin",
+   "detail": "USDT pegged ~$1"
+  },
+  {
+   "time": "2026-10-29T10:24:57-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "MOONSN",
+   "mint": "SIM00355MOONSN",
+   "rule": "Score <70",
+   "detail": "score 39"
+  },
+  {
+   "time": "2026-10-29T10:24:57-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "CHADA",
+   "mint": "SIM00354CHADA",
+   "rule": "Score <70",
+   "detail": "score 44"
+  },
+  {
+   "time": "2026-10-29T10:24:57-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "MEOW",
+   "mint": "SIM00353MEOW",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T10:21:56-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BASEDPU",
+   "mint": "SIM00351BASEDPU",
+   "rule": "Score <70",
+   "detail": "score 46"
+  },
+  {
+   "time": "2026-10-29T10:18:55-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "PEPE",
+   "mint": "SIM00350PEPE",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
+  {
+   "time": "2026-10-29T10:18:55-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "DUCKP",
+   "mint": "SIM00195DUCKP",
+   "rule": "Score <70",
+   "detail": "score 54"
+  },
+  {
+   "time": "2026-10-29T10:15:54-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "BONKBO",
+   "mint": "SIM00346BONKBO",
+   "rule": "Score <70",
+   "detail": "score 52"
+  },
+  {
+   "time": "2026-10-29T10:15:54-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "DUCKB",
+   "mint": "SIM00343DUCKB",
+   "rule": "Score <70",
+   "detail": "score 22"
+  },
   {
    "time": "2026-10-29T10:12:51-05:00",
    "lane": "SOLANA",
@@ -885,360 +1256,63 @@
    "mint": "MAJOR:cardano",
    "rule": "Analyst < 70",
    "detail": "score 12"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "XRP",
-   "mint": "MAJOR:ripple",
-   "rule": "Analyst < 70",
-   "detail": "score 26"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "SHIB",
-   "mint": "MAJOR:shiba-inu",
-   "rule": "Analyst < 70",
-   "detail": "score 31"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "DOGE",
-   "mint": "MAJOR:dogecoin",
-   "rule": "Analyst < 70",
-   "detail": "score 31"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "AVAX",
-   "mint": "MAJOR:avalanche-2",
-   "rule": "Analyst < 70",
-   "detail": "score 41"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "TAO",
-   "mint": "MAJOR:bittensor",
-   "rule": "Analyst < 70",
-   "detail": "score 46"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "BCH",
-   "mint": "MAJOR:bitcoin-cash",
-   "rule": "Analyst < 70",
-   "detail": "score 46"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "LINK",
-   "mint": "MAJOR:chainlink",
-   "rule": "Analyst < 70",
-   "detail": "score 46"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "SOL",
-   "mint": "MAJOR:solana",
-   "rule": "Analyst < 70",
-   "detail": "score 46"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "SUI",
-   "mint": "MAJOR:sui",
-   "rule": "Analyst < 70",
-   "detail": "score 51"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "LTC",
-   "mint": "MAJOR:litecoin",
-   "rule": "Analyst < 70",
-   "detail": "score 51"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "ETH",
-   "mint": "MAJOR:ethereum",
-   "rule": "Analyst < 70",
-   "detail": "score 51"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "NEAR",
-   "mint": "MAJOR:near",
-   "rule": "Analyst < 70",
-   "detail": "score 52"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "UNI",
-   "mint": "MAJOR:uniswap",
-   "rule": "Analyst < 70",
-   "detail": "score 62"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "BTC",
-   "mint": "MAJOR:bitcoin",
-   "rule": "Analyst < 70",
-   "detail": "score 67"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "XMR",
-   "mint": "MAJOR:monero",
-   "rule": "Analyst < 70",
-   "detail": "score 68"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "PYUSD",
-   "mint": "MAJOR:paypal-usd",
-   "rule": "Stablecoin",
-   "detail": "PYUSD pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "USDG",
-   "mint": "MAJOR:global-dollar",
-   "rule": "Stablecoin",
-   "detail": "USDG pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "GRAM",
-   "mint": "MAJOR:the-open-network",
-   "rule": "24h vol < $50M",
-   "detail": "$23.8M"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "USD1",
-   "mint": "MAJOR:usd1-wlfi",
-   "rule": "Stablecoin",
-   "detail": "USD1 pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "CC",
-   "mint": "MAJOR:canton-network",
-   "rule": "24h vol < $50M",
-   "detail": "$24.5M"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "USDE",
-   "mint": "MAJOR:ethena-usde",
-   "rule": "Stablecoin",
-   "detail": "USDE pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "RAIN",
-   "mint": "MAJOR:rain",
-   "rule": "24h vol < $50M",
-   "detail": "$13.6M"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "DAI",
-   "mint": "MAJOR:dai",
-   "rule": "Stablecoin",
-   "detail": "DAI pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "USDS",
-   "mint": "MAJOR:usds",
-   "rule": "Stablecoin",
-   "detail": "USDS pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "USDC",
-   "mint": "MAJOR:usd-coin",
-   "rule": "Stablecoin",
-   "detail": "USDC pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:03:12-05:00",
-   "lane": "MAJOR",
-   "source": "MAJOR",
-   "symbol": "USDT",
-   "mint": "MAJOR:tether",
-   "rule": "Stablecoin",
-   "detail": "USDT pegged ~$1"
-  },
-  {
-   "time": "2026-10-29T10:00:48-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEARYO",
-   "mint": "SIM00326BEARYO",
-   "rule": "Score <70",
-   "detail": "score 67",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:57:45-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMBU",
-   "mint": "SIM00324ZOOMBU",
-   "rule": "Liq <$40k",
-   "detail": "liq $8,934",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:57:45-05:00",
-   "source": "SIM-FEED",
-   "symbol": "SNEKMO",
-   "mint": "SIM00323SNEKMO",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $32,440",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:57:45-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEAR",
-   "mint": "SIM00322BEAR",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:36:02-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PEPEC",
-   "mint": "SIM00321PEPEC",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 80%",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:36:02-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADF",
-   "mint": "SIM00320CHADF",
-   "rule": "Dev >3% / past rugs",
-   "detail": "dev 8.3%, past rugs 0",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:33:01-05:00",
-   "source": "SIM-FEED",
-   "symbol": "PUMP",
-   "mint": "SIM00319PUMP",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:29:42-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDCA",
-   "mint": "SIM00316BASEDCA",
-   "rule": "Score <70",
-   "detail": "score 53",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:26:41-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMZO",
-   "mint": "SIM00314ZOOMZO",
-   "rule": "Score <70",
-   "detail": "score 40",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:24:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "FROGPE",
-   "mint": "SIM00313FROGPE",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 0%",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:24:36-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMD",
-   "mint": "SIM00312ZOOMD",
-   "rule": "LP not burned",
-   "detail": "LP locked/burned 40%",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:23:38-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BONK",
-   "mint": "SIM00310BONK",
-   "rule": "Score <70",
-   "detail": "score 32",
-   "lane": "SOLANA"
-  },
-  {
-   "time": "2026-10-29T09:20:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MEOWZOO",
-   "mint": "SIM00309MEOWZOO",
-   "rule": "Score <70",
-   "detail": "score 38",
-   "lane": "SOLANA"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T10:28:32-05:00",
+   "side": "SELL",
+   "symbol": "FROG",
+   "mint": "SIM00352FROG",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.0027029389",
+   "filled": "0.002689025",
+   "slip_pct": "0.515",
+   "delay_s": "3.88",
+   "fees_usd": "0.2302",
+   "status": "FILLED",
+   "qty": "25126.227973854075",
+   "usd": "67.57",
+   "pnl_usd": "-16.42",
+   "reason": "-6% hard stop gap -13.8% vs stop"
+  },
+  {
+   "time": "2026-10-29T10:24:57-05:00",
+   "side": "SELL",
+   "symbol": "FROG",
+   "mint": "SIM00352FROG",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.0029922921",
+   "filled": "",
+   "slip_pct": "0.697",
+   "delay_s": "6.7",
+   "fees_usd": "0.0275",
+   "status": "FAILED: tx dropped",
+   "qty": "25126.227973854075",
+   "usd": "0",
+   "pnl_usd": "",
+   "reason": "-6% hard stop (retry next cycle)"
+  },
+  {
+   "time": "2026-10-29T10:21:56-05:00",
+   "side": "BUY",
+   "symbol": "FROG",
+   "mint": "SIM00352FROG",
+   "source": "SIM-FEED",
+   "venue": "Raydium AMM",
+   "intended": "0.003264336",
+   "filled": "0.0033194",
+   "slip_pct": "1.687",
+   "delay_s": "7.06",
+   "fees_usd": "0.3507",
+   "status": "FILLED",
+   "qty": "25126.227973854075",
+   "usd": "83.4",
+   "pnl_usd": "",
+   "reason": "score 87, stop 0.003120236"
+  },
   {
    "time": "2026-10-29T10:03:12-05:00",
    "side": "BUY",
@@ -2140,10 +2214,37 @@
    "reason": "score 74, stop 0.0016424924"
   }
  ],
- "failed_fills": 1,
- "fees_paid": 26.12,
- "sol_usd": 102.38,
+ "failed_fills": 2,
+ "fees_paid": 26.72,
+ "sol_usd": 101.96,
  "judge_rejections": [
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "TRX",
+   "mint": "MAJOR:tron",
+   "rule": "Judge rejected",
+   "detail": "red flag: uptrend"
+  },
+  {
+   "time": "2026-10-29T10:25:05-05:00",
+   "lane": "MAJOR",
+   "source": "MAJOR",
+   "symbol": "HYPE",
+   "mint": "MAJOR:hyperliquid",
+   "rule": "Judge rejected",
+   "detail": "red flag: no_spike"
+  },
+  {
+   "time": "2026-10-29T10:18:55-05:00",
+   "lane": "SOLANA",
+   "source": "SIM-FEED",
+   "symbol": "PEPE",
+   "mint": "SIM00350PEPE",
+   "rule": "Judge rejected",
+   "detail": "red flag: lp_99"
+  },
   {
    "time": "2026-10-29T10:12:51-05:00",
    "lane": "SOLANA",
@@ -2240,14 +2341,6 @@
    "source": "SIM-FEED",
    "symbol": "PEPEB",
    "mint": "SIM00035PEPEB",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
-  },
-  {
-   "time": "2026-10-28T20:02:42-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDT",
-   "mint": "SIM00048BASEDT",
    "rule": "Judge rejected",
    "detail": "red flag: lp_99"
   }
@@ -2436,32 +2529,40 @@
    "judge_p": 0.75,
    "pnl": -11.81,
    "win": false
+  },
+  {
+   "time": "2026-10-29T10:28:32-05:00",
+   "symbol": "FROG",
+   "mint": "SIM00352FROG",
+   "judge_p": 0.65,
+   "pnl": -16.42,
+   "win": false
   }
  ],
  "recap": "SUNNY AI MORNING RECAP 2026-10-29 (PAPER TRADING - SIMULATED)\nEquity $1,126.85 (+12.68%), cash $1,126.85, open 0\nKills last 24h: 218\n  Score <70: 91\n  Mint/freeze: 42\n  Liq <$40k: 30\n  LP not burned: 25\n  1h vol <$50k: 13\n  Judge rejected: 9\n  Already +80% 1h: 4\n  Dev >3% / past rugs: 3\n  Top 10 holders: 1\nOpen positions:\n",
  "bank": {
   "rate": 0.2,
   "start": 1000.0,
-  "gross": 153.11,
-  "trade_fees": 24.94,
-  "slippage": 21.73,
-  "failed_costs": 0.01,
-  "net": 106.43,
+  "gross": 139.03,
+  "trade_fees": 25.52,
+  "slippage": 23.49,
+  "failed_costs": 0.04,
+  "net": 89.98,
   "banked": 63.88,
-  "closed": 24,
-  "total_costs": 46.68,
-  "working_capital": 1042.55,
+  "closed": 25,
+  "total_costs": 49.05,
+  "working_capital": 1026.1,
   "lanes": {
    "SOLANA": {
-    "gross": 153.11,
-    "trade_fees": 24.94,
-    "slippage": 21.73,
-    "failed_costs": 0.01,
-    "net": 106.43,
+    "gross": 139.03,
+    "trade_fees": 25.52,
+    "slippage": 23.49,
+    "failed_costs": 0.04,
+    "net": 89.98,
     "banked": 63.88,
-    "closed": 24,
-    "total_costs": 46.68,
-    "pnl_open": 3.47
+    "closed": 25,
+    "total_costs": 49.05,
+    "pnl_open": -0.9
    },
    "MAJOR": {
     "gross": 0.0,
@@ -2472,7 +2573,7 @@
     "banked": 0.0,
     "closed": 0,
     "total_costs": 0.0,
-    "pnl_open": 0.79
+    "pnl_open": 0.67
    }
   },
   "note": "Banking = 20% of net profit (gains minus all fees). Tell Sunny if you meant something different.",
@@ -2480,66 +2581,66 @@
  },
  "lanes": {
   "SOLANA": {
-   "realized": 106.44,
-   "unrealized": 3.47,
-   "pnl": 109.91,
+   "realized": 90.02,
+   "unrealized": -0.9,
+   "pnl": 89.12,
    "open": 1,
-   "open_value": 92.26,
-   "buys": 24,
-   "closed": 23
+   "open_value": 87.89,
+   "buys": 25,
+   "closed": 24
   },
   "MAJOR": {
    "realized": 0,
-   "unrealized": 0.79,
-   "pnl": 0.79,
+   "unrealized": 0.67,
+   "pnl": 0.67,
    "open": 2,
-   "open_value": 178.67,
+   "open_value": 178.55,
    "buys": 2,
    "closed": 0
   }
  },
  "major": {
-  "last_scan": 1793286192.0869775,
+  "last_scan": 1793287505.8055234,
   "counts": {
-   "scanned": 33,
-   "killed": 29,
-   "passed": 4,
-   "judged": 4,
-   "judge_rejected": 2,
+   "scanned": 66,
+   "killed": 58,
+   "passed": 8,
+   "judged": 8,
+   "judge_rejected": 4,
    "trades": 2
   },
   "activity": {
    "Risk": "Watching 2 MAJOR open (stop -4%..-8% / 2xATR, trail after +6%)",
    "Scout": "Scouted top 25 majors by market cap (CoinGecko)",
    "Filter": "Filter killed $HBAR - Analyst < 70",
-   "Analyst": "Top major $BNB 77/100, 4 passed 70+",
+   "Analyst": "Top major $BNB 82/100, 4 passed 70+",
    "Judge": "Judge passed 2/4 majors",
-   "Executor": "Bought $ZEC $88.49 slip 0.085%",
-   "Logger": "MAJOR scan logged 29 kills, 2 entries"
+   "Executor": "No approved MAJOR entries",
+   "Logger": "MAJOR scan logged 29 kills, 0 entries"
   },
   "traded": [
    "MAJOR:binancecoin",
    "MAJOR:zcash"
   ],
   "last_run": {
-   "time": "2026-10-29T10:03:12-05:00",
+   "time": "2026-10-29T10:25:05-05:00",
    "scanned": 33,
    "killed": 29,
    "passed": 4,
    "approved": 2,
-   "traded": 2,
+   "traded": 0,
    "scores": [
     {
      "symbol": "BNB",
-     "score": 77,
+     "score": 82,
      "parts": {
       "trend": 30,
       "rsi": 12,
-      "macd": 10,
+      "macd": 15,
       "volume": 10,
       "breakout": 15
      },
-     "rsi14": 52.0,
+     "rsi14": 53.4,
      "judge_p": 1.0
     },
     {
@@ -2552,8 +2653,21 @@
       "volume": 10,
       "breakout": 15
      },
-     "rsi14": 65.1,
+     "rsi14": 67.7,
      "judge_p": 0.8
+    },
+    {
+     "symbol": "ZEC",
+     "score": 73,
+     "parts": {
+      "trend": 30,
+      "rsi": 8,
+      "macd": 20,
+      "volume": 5,
+      "breakout": 10
+     },
+     "rsi14": 55.7,
+     "judge_p": 0.85
     },
     {
      "symbol": "TRX",
@@ -2565,21 +2679,8 @@
       "volume": 10,
       "breakout": 15
      },
-     "rsi14": 48.3,
+     "rsi14": 48.5,
      "judge_p": 0.75
-    },
-    {
-     "symbol": "ZEC",
-     "score": 72,
-     "parts": {
-      "trend": 30,
-      "rsi": 12,
-      "macd": 20,
-      "volume": 5,
-      "breakout": 5
-     },
-     "rsi14": 54.1,
-     "judge_p": 0.85
     },
     {
      "symbol": "XMR",
@@ -2604,7 +2705,7 @@
       "volume": 10,
       "breakout": 10
      },
-     "rsi14": 47.2,
+     "rsi14": 48.6,
      "judge_p": null
     },
     {
@@ -2617,7 +2718,7 @@
       "volume": 0,
       "breakout": 5
      },
-     "rsi14": 47.7,
+     "rsi14": 49.1,
      "judge_p": null
     },
     {
@@ -2630,7 +2731,7 @@
       "volume": 0,
       "breakout": 0
      },
-     "rsi14": 46.7,
+     "rsi14": 47.3,
      "judge_p": null
     },
     {
@@ -2643,7 +2744,20 @@
       "volume": 5,
       "breakout": 5
      },
-     "rsi14": 37.7,
+     "rsi14": 38.9,
+     "judge_p": null
+    },
+    {
+     "symbol": "SOL",
+     "score": 51,
+     "parts": {
+      "trend": 20,
+      "rsi": 16,
+      "macd": 5,
+      "volume": 5,
+      "breakout": 5
+     },
+     "rsi14": 39.4,
      "judge_p": null
     },
     {
@@ -2656,7 +2770,7 @@
       "volume": 10,
       "breakout": 0
      },
-     "rsi14": 42.5,
+     "rsi14": 43.7,
      "judge_p": null
     },
     {
@@ -2669,20 +2783,7 @@
       "volume": 10,
       "breakout": 0
      },
-     "rsi14": 42.2,
-     "judge_p": null
-    },
-    {
-     "symbol": "SOL",
-     "score": 46,
-     "parts": {
-      "trend": 20,
-      "rsi": 16,
-      "macd": 5,
-      "volume": 5,
-      "breakout": 0
-     },
-     "rsi14": 38.7,
+     "rsi14": 43.1,
      "judge_p": null
     },
     {
@@ -2695,7 +2796,7 @@
       "volume": 5,
       "breakout": 0
      },
-     "rsi14": 42.8,
+     "rsi14": 43.8,
      "judge_p": null
     },
     {
@@ -2708,7 +2809,7 @@
       "volume": 15,
       "breakout": 5
      },
-     "rsi14": 49.4,
+     "rsi14": 49.7,
      "judge_p": null
     },
     {
@@ -2721,7 +2822,7 @@
       "volume": 5,
       "breakout": 0
      },
-     "rsi14": 42.1,
+     "rsi14": 42.5,
      "judge_p": null
     },
     {
@@ -2734,7 +2835,20 @@
       "volume": 0,
       "breakout": 0
      },
-     "rsi14": 36.5,
+     "rsi14": 37.2,
+     "judge_p": null
+    },
+    {
+     "symbol": "XRP",
+     "score": 31,
+     "parts": {
+      "trend": 0,
+      "rsi": 6,
+      "macd": 15,
+      "volume": 5,
+      "breakout": 5
+     },
+     "rsi14": 42.8,
      "judge_p": null
     },
     {
@@ -2747,7 +2861,7 @@
       "volume": 5,
       "breakout": 5
      },
-     "rsi14": 42.9,
+     "rsi14": 43.3,
      "judge_p": null
     },
     {
@@ -2760,20 +2874,7 @@
       "volume": 10,
       "breakout": 0
      },
-     "rsi14": 41.5,
-     "judge_p": null
-    },
-    {
-     "symbol": "XRP",
-     "score": 26,
-     "parts": {
-      "trend": 0,
-      "rsi": 6,
-      "macd": 10,
-      "volume": 5,
-      "breakout": 5
-     },
-     "rsi14": 41.4,
+     "rsi14": 41.8,
      "judge_p": null
     },
     {
@@ -2786,7 +2887,7 @@
       "volume": 5,
       "breakout": 0
      },
-     "rsi14": 35.5,
+     "rsi14": 36.1,
      "judge_p": null
     },
     {
@@ -2799,7 +2900,7 @@
       "volume": 5,
       "breakout": 0
      },
-     "rsi14": 37.2,
+     "rsi14": 37.8,
      "judge_p": null
     },
     {
@@ -2812,11 +2913,11 @@
       "volume": 5,
       "breakout": 0
      },
-     "rsi14": 32.2,
+     "rsi14": 32.5,
      "judge_p": null
     }
    ]
   },
-  "next_scan_in_s": 619
+  "next_scan_in_s": 992
  }
 }
