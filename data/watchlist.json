@@ -1,1 +1,12 @@
-[]
+[
+ {
+  "symbol": "HYPE",
+  "name": "Hyperliquid",
+  "coingecko_id": "hyperliquid",
+  "added_at": "2026-10-29T08:00:00-05:00",
+  "added_by": "Lark",
+  "reason": "ICE (NYSE owner) taking steps to bring Hyperliquid perpetual futures to the US; HYPE +10.8% in 24h at ~$89 with ~$1.4B daily volume; listed on Coinbase (HYPE-USD online).",
+  "source_url": "https://www.coindesk.com/markets/2026/10/29/nyse-owner-takes-steps-to-bring-hyperliquid-perpetual-futures-to-u-s",
+  "status": "watching"
+ }
+]
