@@ -97,3 +97,7 @@ table{max-width:100%}
 @media (min-width:1024px){.pipe .ag{flex-direction:column!important}}
 @media (max-width:700px){#agents.pipe{gap:20px!important}.grid#agents{grid-template-columns:minmax(0,1fr)!important}}
 @media (min-width:1024px){.grid#agents{grid-template-columns:repeat(4,minmax(0,1fr))!important}#agents.pipe{grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:20px!important}}
+/* lane chart tabs */
+.lct{display:flex;gap:6px;margin:10px 0 6px;overflow-x:auto}.lct .lb{background:transparent;border:1px solid var(--line);color:var(--mut)}
+.lcv{font-size:12px;margin-bottom:4px}.lcc{width:100%;height:clamp(150px,42vw,240px);display:block}.lcn{font-size:10.5px;margin-top:4px}
+@media (min-width:1024px){.lcc{height:220px}}
