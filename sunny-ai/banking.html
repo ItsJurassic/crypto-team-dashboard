@@ -1,8 +1,10 @@
 <!doctype html><html><head><script src="auth.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="stylesheet" href="sunny.css"><title>Sunny AI · Banking (paper)</title><style>.hd{text-transform:uppercase;margin-bottom:6px}p{margin:0}</style></head><body><div class="wrap">
 <div class="banner">PAPER / SIMULATED ONLY · NO REAL MONEY · NO REAL WITHDRAWALS</div>
+<div class="card"><div class="hd">Accounts · separate &amp; combined</div><div id="accts">Loading…</div></div>
 <div class="card"><div class="hd">Banking tracker</div><div id="bank">Loading…</div>
 <p class="m" style="font-size:11px;margin-top:8px">Banking = 20% of net profit (gains minus all fees). Tell Sunny if you meant something different. Realized P/L already includes fees and slippage, so gross = net + fees + slippage (no double-counting). Losses never un-bank. New positions are sized at 8% of working capital ($1,000 start + net − banked), so banked money is not traded.</p></div>
 <p class="m" style="font-size:11px;text-align:center;margin-top:10px" id="upd"></p></div>
-<script src="bank.js"></script><script>
+<script src="bank.js"></script><script src="accounts.js"></script><script>
+accountsHTML().then(h=>document.getElementById("accts").innerHTML=h);setInterval(()=>accountsHTML().then(h=>document.getElementById("accts").innerHTML=h),30000);
 async function go(){try{const d=await (await fetch("data/dashboard.json?"+Date.now())).json();document.getElementById("bank").innerHTML=bankHTML(d.bank);document.getElementById("upd").textContent="PAPER / SIMULATED ONLY · updated "+new Date(d.updated).toLocaleTimeString()+" · refresh 30s"}catch(e){document.getElementById("upd").textContent="load error"}}go();setInterval(go,30000)
 </script><script src="nav.js"></script></body></html>
