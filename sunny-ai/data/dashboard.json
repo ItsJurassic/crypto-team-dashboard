@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-29T09:23:38-05:00",
+ "updated": "2026-10-29T09:24:36-05:00",
  "start": 1000.0,
- "equity": 1114.76,
- "cash": 1027.88,
+ "equity": 1106.44,
+ "cash": 1106.44,
  "curve": [
   [
    1793231266,
@@ -547,61 +547,64 @@
   [
    1793283818,
    1114.76
+  ],
+  [
+   1793283876,
+   1106.44
   ]
  ],
- "positions": {
-  "SIM00301GIGAC": {
-   "symbol": "GIGAC",
-   "source": "SIM-FEED",
-   "venue": "Pump.fun bonding curve",
-   "entry": 0.0009292453757529993,
-   "qty": 96271.85584564951,
-   "usd": 89.46017685972916,
-   "entry_fees": 0.9134,
-   "stop": 0.0008734906532078193,
-   "high": 0.0009292453757529993,
-   "last": 0.0009024675709873725,
-   "trailing": false,
-   "time": "2026-10-29T09:14:36-05:00",
-   "score": 83,
-   "judge_p": 0.75
-  }
- },
+ "positions": {},
  "counts": {
-  "scanned": 295,
-  "killed": 270,
+  "scanned": 297,
+  "killed": 272,
   "passed": 35,
   "trades": 24,
   "judged": 34,
   "judge_rejected": 10
  },
  "last_run": {
-  "scanned": 1,
-  "killed": 1,
+  "scanned": 2,
+  "killed": 2,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 86 checked)",
-  "Filter": "Filter killed $BONK - Score <70",
-  "Analyst": "Best score 32 - none 70+",
+  "Scout": "Scouted 2 new pairs (of 85 checked)",
+  "Filter": "Filter killed $FROGPE - LP not burned",
+  "Analyst": "Nothing to score",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Watching 1 open, stops set",
-  "Logger": "Logged 1 kills, 0 trade events"
+  "Risk": "Closed $GIGAC -11.81",
+  "Logger": "Logged 2 kills, 1 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 6,
   "1h vol <$50k": 16,
   "Top 10 holders": 1,
   "Score <70": 116,
-  "LP not burned": 27,
+  "LP not burned": 29,
   "Mint/freeze": 53,
   "Liq <$40k": 35,
   "Judge rejected": 10,
   "Dev >3% / past rugs": 6
  },
  "kills": [
+  {
+   "time": "2026-10-29T09:24:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "FROGPE",
+   "mint": "SIM00313FROGPE",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 0%"
+  },
+  {
+   "time": "2026-10-29T09:24:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMD",
+   "mint": "SIM00312ZOOMD",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 40%"
+  },
   {
    "time": "2026-10-29T09:23:38-05:00",
    "source": "SIM-FEED",
@@ -905,25 +908,27 @@
    "mint": "SIM00274BASEDFR",
    "rule": "Score <70",
    "detail": "score 53"
-  },
-  {
-   "time": "2026-10-29T07:40:06-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOG",
-   "mint": "SIM00273DOG",
-   "rule": "Liq <$40k",
-   "detail": "liq $34,354"
-  },
-  {
-   "time": "2026-10-29T07:37:03-05:00",
-   "source": "SIM-FEED",
-   "symbol": "APEFR",
-   "mint": "SIM00271APEFR",
-   "rule": "Score <70",
-   "detail": "score 57"
   }
  ],
  "trades": [
+  {
+   "time": "2026-10-29T09:24:36-05:00",
+   "side": "SELL",
+   "symbol": "GIGAC",
+   "mint": "SIM00301GIGAC",
+   "source": "SIM-FEED",
+   "venue": "Pump.fun bonding curve",
+   "intended": "0.00083678467",
+   "filled": "0.00082476619",
+   "slip_pct": "1.436",
+   "delay_s": "7.26",
+   "fees_usd": "0.8378",
+   "status": "FILLED",
+   "qty": "96271.85584564951",
+   "usd": "79.4",
+   "pnl_usd": "-11.81",
+   "reason": "-6% hard stop gap -5.6% vs stop"
+  },
   {
    "time": "2026-10-29T09:14:36-05:00",
    "side": "BUY",
@@ -1625,29 +1630,11 @@
    "usd": "69.69",
    "pnl_usd": "-9.84",
    "reason": "-6% hard stop gap -6.2% vs stop"
-  },
-  {
-   "time": "2026-10-28T20:02:41-05:00",
-   "side": "BUY",
-   "symbol": "CATS",
-   "mint": "SIM00046CATS",
-   "source": "SIM-FEED",
-   "venue": "Jupiter route",
-   "intended": "0.0028827",
-   "filled": "0.0029243024",
-   "slip_pct": "1.443",
-   "delay_s": "2.49",
-   "fees_usd": "0.2565",
-   "status": "FILLED",
-   "qty": "26971.14592528255",
-   "usd": "78.87",
-   "pnl_usd": "",
-   "reason": "score 84, stop 0.0027488443"
   }
  ],
  "failed_fills": 1,
- "fees_paid": 24.11,
- "sol_usd": 100.71,
+ "fees_paid": 24.95,
+ "sol_usd": 100.63,
  "judge_rejections": [
   {
    "time": "2026-10-29T09:07:23-05:00",
@@ -1905,6 +1892,14 @@
    "mint": "SIM00265MOONCH",
    "judge_p": 0.75,
    "pnl": -8.6,
+   "win": false
+  },
+  {
+   "time": "2026-10-29T09:24:36-05:00",
+   "symbol": "GIGAC",
+   "mint": "SIM00301GIGAC",
+   "judge_p": 0.75,
+   "pnl": -11.81,
    "win": false
   }
  ],
