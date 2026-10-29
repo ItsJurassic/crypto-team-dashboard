@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T23:37:24-05:00",
+ "updated": "2026-10-28T23:56:36-05:00",
  "start": 1000.0,
  "equity": 971.95,
  "cash": 971.95,
@@ -247,12 +247,16 @@
   [
    1793248644,
    971.95
+  ],
+  [
+   1793249796,
+   971.95
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 132,
-  "killed": 116,
+  "scanned": 133,
+  "killed": 117,
   "passed": 21,
   "trades": 15,
   "judged": 20,
@@ -265,19 +269,19 @@
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 1 new pairs (of 85 checked)",
-  "Filter": "Filter killed $CATWI - Mint/freeze",
-  "Analyst": "Nothing to score",
+  "Scout": "Scouted 1 new pairs (of 84 checked)",
+  "Filter": "Filter killed $MOONTOA - Score <70",
+  "Analyst": "Best score 58 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
-  "Risk": "Closed $MEOWGIG -6.09",
-  "Logger": "Logged 1 kills, 1 trade events"
+  "Risk": "Watching 0 open, stops set",
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
-  "Score <70": 49,
+  "Score <70": 50,
   "LP not burned": 12,
   "Mint/freeze": 21,
   "Liq <$40k": 15,
@@ -285,6 +289,14 @@
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-28T23:56:36-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MOONTOA",
+   "mint": "SIM00137MOONTOA",
+   "rule": "Score <70",
+   "detail": "score 58"
+  },
   {
    "time": "2026-10-28T23:37:24-05:00",
    "source": "SIM-FEED",
@@ -596,14 +608,6 @@
    "mint": "SIM00091MEOWWIF",
    "rule": "Score <70",
    "detail": "score 52"
-  },
-  {
-   "time": "2026-10-28T21:38:26-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADZO",
-   "mint": "SIM00090CHADZO",
-   "rule": "Score <70",
-   "detail": "score 60"
   }
  ],
  "trades": [
@@ -1132,7 +1136,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 12.8,
- "sol_usd": 99.8,
+ "sol_usd": 100.11,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
