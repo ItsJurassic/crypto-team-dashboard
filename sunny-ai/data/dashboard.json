@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T03:02:40-05:00",
+ "updated": "2026-10-29T03:15:24-05:00",
  "start": 1000.0,
  "equity": 1058.49,
  "cash": 1058.49,
@@ -347,12 +347,28 @@
   [
    1793260960,
    1058.49
+  ],
+  [
+   1793261142,
+   1058.49
+  ],
+  [
+   1793261323,
+   1058.49
+  ],
+  [
+   1793261504,
+   1058.49
+  ],
+  [
+   1793261724,
+   1058.49
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 185,
-  "killed": 166,
+  "scanned": 190,
+  "killed": 171,
   "passed": 25,
   "trades": 18,
   "judged": 24,
@@ -366,8 +382,8 @@
  },
  "activity": {
   "Scout": "Scouted 1 new pairs (of 87 checked)",
-  "Filter": "Filter killed $CHADPU - Score <70",
-  "Analyst": "Best score 42 - none 70+",
+  "Filter": "Filter killed $SNEKD - Mint/freeze",
+  "Analyst": "Nothing to score",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
@@ -377,14 +393,54 @@
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 71,
-  "LP not burned": 19,
-  "Mint/freeze": 30,
-  "Liq <$40k": 21,
+  "Score <70": 72,
+  "LP not burned": 20,
+  "Mint/freeze": 32,
+  "Liq <$40k": 22,
   "Judge rejected": 6,
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T03:15:24-05:00",
+   "source": "SIM-FEED",
+   "symbol": "SNEKD",
+   "mint": "SIM00199SNEKD",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T03:11:44-05:00",
+   "source": "SIM-FEED",
+   "symbol": "APEBU",
+   "mint": "SIM00196APEBU",
+   "rule": "Score <70",
+   "detail": "score 51"
+  },
+  {
+   "time": "2026-10-29T03:11:44-05:00",
+   "source": "SIM-FEED",
+   "symbol": "MOONB",
+   "mint": "SIM00197MOONB",
+   "rule": "Mint/freeze",
+   "detail": "authority not revoked"
+  },
+  {
+   "time": "2026-10-29T03:08:43-05:00",
+   "source": "SIM-FEED",
+   "symbol": "BULLWIF",
+   "mint": "SIM00194BULLWIF",
+   "rule": "LP not burned",
+   "detail": "LP locked/burned 80%"
+  },
+  {
+   "time": "2026-10-29T03:05:42-05:00",
+   "source": "SIM-FEED",
+   "symbol": "APESNE",
+   "mint": "SIM00192APESNE",
+   "rule": "Liq <$40k",
+   "detail": "liq $5,461"
+  },
   {
    "time": "2026-10-29T03:02:40-05:00",
    "source": "SIM-FEED",
@@ -664,46 +720,6 @@
    "mint": "SIM00154TOADZO",
    "rule": "Mint/freeze",
    "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-29T00:34:18-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DUCKP",
-   "mint": "SIM00147DUCKP",
-   "rule": "Liq <$40k",
-   "detail": "liq $6,992"
-  },
-  {
-   "time": "2026-10-29T00:15:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MEOWBON",
-   "mint": "SIM00152MEOWBON",
-   "rule": "Score <70",
-   "detail": "score 43"
-  },
-  {
-   "time": "2026-10-29T00:15:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "MEOWS",
-   "mint": "SIM00151MEOWS",
-   "rule": "Score <70",
-   "detail": "score 63"
-  },
-  {
-   "time": "2026-10-29T00:15:47-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BEAR",
-   "mint": "SIM00149BEAR",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $38,059"
-  },
-  {
-   "time": "2026-10-29T00:11:43-05:00",
-   "source": "SIM-FEED",
-   "symbol": "ZOOMY",
-   "mint": "SIM00148ZOOMY",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $7,579"
   }
  ],
  "trades": [
@@ -1340,7 +1356,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 18.71,
- "sol_usd": 99.78,
+ "sol_usd": 99.94,
  "judge_rejections": [
   {
    "time": "2026-10-29T02:10:04-05:00",
