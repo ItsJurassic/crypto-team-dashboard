@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T03:40:58-05:00",
+ "updated": "2026-10-29T03:55:44-05:00",
  "start": 1000.0,
  "equity": 1058.49,
  "cash": 1058.49,
@@ -375,37 +375,41 @@
   [
    1793263258,
    1058.49
+  ],
+  [
+   1793264144,
+   1058.49
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 196,
-  "killed": 177,
+  "scanned": 197,
+  "killed": 178,
   "passed": 26,
   "trades": 18,
   "judged": 25,
   "judge_rejected": 7
  },
  "last_run": {
-  "scanned": 2,
-  "killed": 2,
+  "scanned": 1,
+  "killed": 1,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 2 new pairs (of 89 checked)",
-  "Filter": "Filter killed $PEPE - Score <70",
-  "Analyst": "Best score 25 - none 70+",
+  "Scout": "Scouted 1 new pairs (of 88 checked)",
+  "Filter": "Filter killed $ZOOMP - Score <70",
+  "Analyst": "Best score 66 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 2 kills, 0 trade events"
+  "Logger": "Logged 1 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 4,
   "1h vol <$50k": 12,
   "Top 10 holders": 1,
-  "Score <70": 75,
+  "Score <70": 76,
   "LP not burned": 20,
   "Mint/freeze": 33,
   "Liq <$40k": 23,
@@ -413,6 +417,14 @@
   "Dev >3% / past rugs": 2
  },
  "kills": [
+  {
+   "time": "2026-10-29T03:55:44-05:00",
+   "source": "SIM-FEED",
+   "symbol": "ZOOMP",
+   "mint": "SIM00207ZOOMP",
+   "rule": "Score <70",
+   "detail": "score 66"
+  },
   {
    "time": "2026-10-29T03:40:58-05:00",
    "source": "SIM-FEED",
@@ -724,14 +736,6 @@
    "mint": "SIM00162CHAD",
    "rule": "Dev >3% / past rugs",
    "detail": "dev 4.3%, past rugs 0"
-  },
-  {
-   "time": "2026-10-29T01:09:39-05:00",
-   "source": "SIM-FEED",
-   "symbol": "BASEDCHA",
-   "mint": "SIM00161BASEDCHA",
-   "rule": "1h vol <$50k",
-   "detail": "1h vol $30,841"
   }
  ],
  "trades": [
@@ -1368,7 +1372,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 18.71,
- "sol_usd": 99.86,
+ "sol_usd": 99.95,
  "judge_rejections": [
   {
    "time": "2026-10-29T03:23:08-05:00",
