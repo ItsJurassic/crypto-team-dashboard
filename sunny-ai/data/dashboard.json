@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T23:59:38-05:00",
+ "updated": "2026-10-29T00:02:39-05:00",
  "start": 1000.0,
  "equity": 971.95,
  "cash": 971.95,
@@ -255,37 +255,41 @@
   [
    1793249978,
    971.95
+  ],
+  [
+   1793250159,
+   971.95
   ]
  ],
  "positions": {},
  "counts": {
-  "scanned": 136,
-  "killed": 120,
+  "scanned": 138,
+  "killed": 122,
   "passed": 21,
   "trades": 15,
   "judged": 20,
   "judge_rejected": 5
  },
  "last_run": {
-  "scanned": 3,
-  "killed": 3,
+  "scanned": 2,
+  "killed": 2,
   "passed": 0,
   "traded": 0
  },
  "activity": {
-  "Scout": "Scouted 3 new pairs (of 86 checked)",
-  "Filter": "Filter killed $BONK - Score <70",
-  "Analyst": "Best score 68 - none 70+",
+  "Scout": "Scouted 2 new pairs (of 86 checked)",
+  "Filter": "Filter killed $TOADG - Score <70",
+  "Analyst": "Best score 64 - none 70+",
   "Judge": "Nothing to judge",
   "Executor": "No approved entries",
   "Risk": "Watching 0 open, stops set",
-  "Logger": "Logged 3 kills, 0 trade events"
+  "Logger": "Logged 2 kills, 0 trade events"
  },
  "kill_rules": {
   "Already +80% 1h": 3,
   "1h vol <$50k": 9,
   "Top 10 holders": 1,
-  "Score <70": 51,
+  "Score <70": 53,
   "LP not burned": 13,
   "Mint/freeze": 21,
   "Liq <$40k": 16,
@@ -293,6 +297,22 @@
   "Dev >3% / past rugs": 1
  },
  "kills": [
+  {
+   "time": "2026-10-29T00:02:39-05:00",
+   "source": "SIM-FEED",
+   "symbol": "TOADG",
+   "mint": "SIM00143TOADG",
+   "rule": "Score <70",
+   "detail": "score 31"
+  },
+  {
+   "time": "2026-10-29T00:02:39-05:00",
+   "source": "SIM-FEED",
+   "symbol": "GIGABU",
+   "mint": "SIM00142GIGABU",
+   "rule": "Score <70",
+   "detail": "score 64"
+  },
   {
    "time": "2026-10-28T23:59:38-05:00",
    "source": "SIM-FEED",
@@ -596,22 +616,6 @@
    "mint": "SIM00097ZOOMCAT",
    "rule": "Mint/freeze",
    "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T22:04:40-05:00",
-   "source": "SIM-FEED",
-   "symbol": "DOGG",
-   "mint": "SIM00094DOGG",
-   "rule": "Mint/freeze",
-   "detail": "authority not revoked"
-  },
-  {
-   "time": "2026-10-28T22:01:37-05:00",
-   "source": "SIM-FEED",
-   "symbol": "CHADDO",
-   "mint": "SIM00093CHADDO",
-   "rule": "Judge rejected",
-   "detail": "red flag: lp_99"
   }
  ],
  "trades": [
@@ -1140,7 +1144,7 @@
  ],
  "failed_fills": 1,
  "fees_paid": 12.8,
- "sol_usd": 100.02,
+ "sol_usd": 100.19,
  "judge_rejections": [
   {
    "time": "2026-10-28T23:06:14-05:00",
