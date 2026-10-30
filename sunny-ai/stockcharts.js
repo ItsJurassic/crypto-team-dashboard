@@ -108,7 +108,7 @@ let QL=[],QM=localStorage.qMint||"",QIVK=QIV[localStorage.qIv]?localStorage.qIv:
 const okMint=m=>m&&!isSimX(m)&&!/^MAJOR/i.test(m)&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(m);
 const gt=async u=>{const c=new AbortController(),to=setTimeout(()=>c.abort(),10000);try{const r=await fetch("https://api.geckoterminal.com/api/v2/"+u,{signal:c.signal,headers:{Accept:"application/json"}});if(r.status==429)throw new Error("rate limited, retry in a minute");if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}finally{clearTimeout(to)}};
 E("#q-ivs").innerHTML=Object.keys(QIV).map(k=>`<button data-iv="${k}" title="${k=="All"?"Pool lifetime (daily candles, up to 1000 days)":""}">${k}</button>`).join("");
-E("#q-ivs").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(b.disabled)return;QIVK=b.dataset.iv;localStorage.qIv=QIVK;if(DL)DL.user=1;qchart()});
+E("#q-ivs").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(b.disabled)return;QIVK=b.dataset.iv;localStorage.qIv=QIVK;if(DL){DL.user=1;DL.pick=1}qchart()});
 function qopts(){const x=QL.filter(q=>QF=="all"||(QF=="desk"&&q.desk)||(QF=="ref"&&!q.desk)||(QF=="traded"&&q.traded));
   if(!x.some(q=>q.mint===QM))QM=(x[0]||QL[0]||{}).mint||"";
   E("#q-sel").innerHTML=x.map(q=>`<option value="${q.mint}">${esc(q.symbol)}${q.traded?" · fake-traded":q.desk?" · desk scanned":" · reference"}</option>`).join("")||'<option value="">No coins in this filter</option>';E("#q-sel").value=QM;}
@@ -124,6 +124,7 @@ async function qload(){let d=null;try{d=await (await fetch("data/dashboard.json?
   if(DL&&DL.sim){E("#q-dl").innerHTML=`<div class="sbox" style="border-color:#7a5a1e"><span class="rmd ptag">Fake trade</span> <b>${esc(DLp.get("s")||"This coin")}</b> was a <b>SIM practice coin</b> from the simulator feed, so it has no real market data and no chart. ${DL.px?(DL.side==="sell"?"Sold ":"Bought ")+pF(DL.px)+" · ":""}${DL.t?ctF(DL.t):""} (simulated).</div>`;if(!DL.done){DL.done=1;setTimeout(()=>qcard.scrollIntoView({behavior:"smooth",block:"center"}),300)}}
   qchart();}
 async function qchart(){E("#q-ivs").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.iv===QIVK));
+  if(DL&&DL.sim&&!DL.pick){E("#q-chart").style.display="none";E("#q-px").textContent="–";E("#q-trades").innerHTML="";return}E("#q-chart").style.display="";
   const q=QL.find(z=>z.mint===QM);if(!q)return;localStorage.qMint=QM;if(!LW()){E("#q-note").textContent="Chart library didn't load. Reload to retry.";return}
   if(!QC){QC=mkChart(E("#q-chart"));QCs=QC.addCandlestickSeries({upColor:"#16c784",downColor:"#ea3943",borderVisible:false,wickUpColor:"#16c784",wickDownColor:"#ea3943",priceFormat:{type:"price",precision:8,minMove:1e-8}});}
   E("#q-px").textContent="…";
@@ -140,6 +141,6 @@ async function qchart(){E("#q-ivs").querySelectorAll("button").forEach(b=>b.clas
     E("#q-px").innerHTML=`$${last>=1?last.toFixed(2):last.toPrecision(4)} <span class="chg ${ch>=0?"up":"dn"}">${ch>=0?"+":""}${ch.toFixed(1)}%</span>`;
     E("#q-trades").innerHTML=`<b>${esc(q.symbol)}</b> · pool ${esc(pl.name)} (${esc(pl.dex)}) · ${L.length} candles of ${QIVK} · <a style="color:#8fb3ff" target=_blank rel=noopener href="https://www.geckoterminal.com/solana/pools/${pl.id}">source</a>`+(tr.length?`<br>`+tr.slice(-5).reverse().map(t=>`<span class="rmd ptag">Fake trade</span>${esc(t.side)} at $${esc(t.filled||t.intended)} · ${esc(String(t.time).slice(0,16))} · ${esc(t.reason||"")}`).join("<br>"):`<br>No paper trades on this coin in the current log.`);
   }catch(e){if(/no candles/.test(e.message||"")){const b=E("#q-ivs").querySelector(`[data-iv="${QIVK}"]`);if(b){b.disabled=true;b.title="Not available for this pool";b.style.opacity=".4"}E("#q-px").textContent="–";E("#q-trades").innerHTML=`<span class="m">${QIVK} isn't available for ${esc(q.symbol)}'s pool. Pick another timeframe.</span>`;return}E("#q-px").textContent="–";E("#q-trades").innerHTML=`<span class="dn">Couldn't load DEX candles for ${esc(q.symbol)} (${esc(e.name=="AbortError"?"timed out":e.message)}). Pick another coin or retry shortly.</span>`;}}
-E("#q-sel").onchange=e=>{QM=e.target.value;qchart()};E("#q-flt").onchange=e=>{QF=e.target.value;qopts();qchart()};
+E("#q-sel").onchange=e=>{QM=e.target.value;if(DL)DL.pick=1;E("#q-dl").innerHTML="";qchart()};E("#q-flt").onchange=e=>{QF=e.target.value;if(DL)DL.pick=1;qopts();qchart()};
 qload();setInterval(qload,300000);setInterval(()=>{if(TAB=="all"||TAB=="quick")qchart()},90000);
 })();
