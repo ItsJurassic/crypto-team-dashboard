@@ -79,6 +79,7 @@ except Exception: rows = []
 if rows:
     byid = {t.get("id"): t for t in trades}
     for r in rows:
+        if not (r.get("price_usd") or "").strip() or not (r.get("size") or "").strip(): continue  # skip cancels/notes with no fill
         tid = r["trade_id"] + ("" if r["side"] == "buy" else "-" + r["side"])
         t = byid.get(tid) or byid.get(r["trade_id"]) if r["side"] == "buy" else byid.get(tid)
         if t is None:
