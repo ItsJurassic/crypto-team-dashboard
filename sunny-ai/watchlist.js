@@ -12,7 +12,8 @@ let DATA=null,LOADING=null;
 async function load(force){if(DATA&&!force)return DATA;if(LOADING)return LOADING;LOADING=fetch("data/stocks.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{DATA=d;LOADING=null;return d}).catch(e=>{LOADING=null;throw e});return LOADING}
 function mount(el,opt){opt=opt||{};const key="wlF";let F=localStorage[key]||"signals",more=false;
   async function render(force){let d;try{d=await load(force)}catch(e){el.innerHTML=`<div class="m" style="font-size:12px">Watchlist unavailable right now.</div>`;return}
-    const W=(d.watch||[]).filter(w=>!isSim(w.symbol)),secs=[...new Set(W.map(w=>w.sector).filter(Boolean))].sort();
+    let A=null;try{A=(await (await fetch("data/active_markets.json?"+Date.now(),{cache:"no-store"})).json()).stocks}catch(e){}
+    const W=(d.watch||[]).filter(w=>!isSim(w.symbol)&&(!A||A.includes(w.symbol))),secs=[...new Set(W.map(w=>w.sector).filter(Boolean))].sort();
     if(F!="signals"&&F!="held"&&F!="all"&&!secs.includes(F))F="signals";
     let x=W.filter(w=>F=="all"?true:F=="held"?w.held:F=="signals"?(w.held||w.queued||w.status=="signal"):w.sector==F).sort((a,b)=>rk(a)-rk(b)||(b.score||0)-(a.score||0)||a.symbol.localeCompare(b.symbol));
     const empty=!x.length;const N=opt.compact&&!more?5:1e9,shown=x.slice(0,N);

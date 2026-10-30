@@ -174,22 +174,28 @@ async function pollCB() {  // REST backup for prices in case the websocket is bl
     if (!state.ws || state.ws.readyState !== 1) { live[s] = Object.assign(live[s]||{}, {price:+t.price}); onTick(s, +t.price, Math.floor(Date.now()/1000)); } } catch {} }
   showPx();
 }
+let ACT=null; // bots' active markets (data/active_markets.json). Unlisted coins are removed from charts.
+async function loadAct(){ try { ACT=(await getJSON("data/active_markets.json?"+Date.now())).crypto.map(x=>x.toUpperCase()); } catch { ACT=ACT||null; } }
 async function loadTop() {
+  await loadAct();
   try {
     state.top = (await getJSON("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&price_change_percentage=24h,7d")).filter(c => !isSim(c));
     $("#top tbody").innerHTML = state.top.map((c,i)=>{const s=c.symbol.toUpperCase(); return `<tr class="click" data-sym="${esc(s)}"><td>${i+1}</td><td>${esc(c.name)} <span class="muted">${esc(s)}</span></td><td data-px="${esc(s)}">${fp(live[s]?live[s].price:c.current_price)}</td><td>${pc(c.price_change_percentage_24h_in_currency)}</td><td>${pc(c.price_change_percentage_7d_in_currency)}</td><td>${fmc(c.market_cap)}</td></tr>`;}).join("");
     $("#top-note").textContent = "CoinGecko, updated " + ct(Date.now()) + " (every 60 s). Coinbase coins tick live. Tap a row to chart it.";
     document.querySelectorAll("#top tr.click").forEach(r => r.onclick = () => { setSym(r.dataset.sym); scrollTo({top:0,behavior:"smooth"}); });
     const sel = $("#coin"), cur = state.sym;
-    const syms = [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase()), ...(state.watch||[]).map(w=>w.symbol.toUpperCase())])].filter(x => !isSim(x));
+    const syms = (ACT ? [...ACT] : [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase())])]).filter(x => !isSim(x));
+    if (ACT && !ACT.includes(cur) && !DL) { state.sym = ACT.includes("BTC") ? "BTC" : ACT[0]; setTimeout(loadChart, 0); }
     sel.innerHTML = syms.map(s=>{const c=state.top.find(x=>x.symbol.toUpperCase()===s);return `<option value="${s}">${(state.watch||[]).some(w=>w.symbol.toUpperCase()===s)?"👀 ":""}${c?esc(c.name)+" ("+s+")":s}${CB.includes(s)?"":" · line"}</option>`}).join("");
-    if (!syms.includes(cur)) sel.insertAdjacentHTML("afterbegin", `<option value="${esc(cur)}">${esc(cur)}</option>`);
-    sel.value = cur;
+    if (DL && !syms.includes(cur)) sel.insertAdjacentHTML("afterbegin", `<option value="${esc(cur)}">${esc(cur)}</option>`);
+    sel.value = state.sym;
+    document.querySelectorAll("#top tr.click").forEach(r => { if (ACT && !ACT.includes(r.dataset.sym)) { r.classList.remove("click"); r.onclick = null; r.title = "Not on any bot's active list"; } });
+    document.querySelectorAll(".wchart").forEach(a => { if (ACT && !ACT.includes(a.dataset.sym.toUpperCase())) a.remove(); });
   } catch (e) { $("#top-note").innerHTML = `<span class="dn">Top-20 table unavailable (${esc(e.message)}); retrying in 60 s.</span>`; }
   showPx(); 
 }
 function setSym(s) { state.sym = s; $("#coin").value = s; showPx(); loadChart(); }
-$("#coin").innerHTML = CB.map(s=>`<option>${s}</option>`).join("");
+$("#coin").innerHTML = [state.sym].map(s=>`<option>${s}</option>`).join("");
 $("#coin").onchange = e => setSym(e.target.value);
 $("#ivs").innerHTML = Object.keys(IVS).map(k=>`<button data-iv="${k}" class="${k===state.iv?"on":""}">${IVL[k]||k}</button>`).join("");
 function ivAvail(keys) { document.querySelectorAll("#ivs button").forEach(b => { const ok = !keys || keys.includes(b.dataset.iv); b.disabled = !ok; b.title = ok ? "" : "Not available for this coin's data source"; b.style.opacity = ok ? "" : ".4"; b.classList.toggle("on", b.dataset.iv === state.iv); }); }

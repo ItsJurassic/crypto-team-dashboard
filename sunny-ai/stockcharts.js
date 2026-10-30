@@ -59,7 +59,8 @@ function svg(w,ch,trades,W=300,H=90){const c=ch.c||[],n=c.length; if(n<2) return
     const buy=/buy/i.test(tr.side),x=X(i),y=Y(c[i]);
     mk+=`<g><title>Paper trade · ${buy?"Buy":"Sell"} ${esc(w.symbol)} at $${(+tr.price).toFixed(2)} · ${esc(String(tr.time).slice(0,16))} (simulated order)</title><path d="${buy?`M${x} ${y+3}l-5 8h10z`:`M${x} ${y-3}l-5 -8h10z`}" fill="${buy?"#16c784":"#ea3943"}"/></g>`;}
   return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline fill="none" stroke="#d4a24c" stroke-width="1" points="${P(ch.s200||[])}"/><polyline fill="none" stroke="#2fb3b0" stroke-width="1" points="${P(ch.s50||[])}"/><polyline fill="none" stroke="#3fb68b" stroke-width="1.6" points="${P(c)}"/>${mk}</svg>`;}
-let WD=[],TD=[];
+let WD=[],TD=[],ACTM=null;
+const actGet=async()=>{try{ACTM=await (await fetch("data/active_markets.json?"+Date.now(),{cache:"no-store"})).json()}catch(e){}return ACTM};
 const rk=w=>w.held?0:w.queued?1:w.status=="signal"?2:w.status=="rejected"?3:4;
 const badge=w=>(w.held?'<span class="bdg h">HELD</span> ':"")+(w.status=="signal"||w.queued?'<span class="bdg s">SIGNAL</span>':w.status=="rejected"?'<span class="bdg">REJECTED</span>':'<span class="bdg">WATCH</span>');
 function list(){const srt=SS=="day"?(a,b)=>b.day_pct-a.day_pct:SS=="rsi"?(a,b)=>a.rsi2-b.rsi2:SS=="az"?(a,b)=>a.symbol.localeCompare(b.symbol):(a,b)=>rk(a)-rk(b)||(b.score||0)-(a.score||0)||a.symbol.localeCompare(b.symbol);
@@ -93,7 +94,8 @@ function pick(sym){SSYM=sym;localStorage.stkSym=sym;E("#stk-sel").value=sym;cons
 E("#stk-sel").onchange=e=>pick(e.target.value);E("#stk-flt").onchange=e=>{SF=e.target.value;draw()};E("#stk-sort").onchange=e=>{SS=e.target.value;draw()};
 async function go(){try{const d=await (await fetch("data/stocks.json?"+Date.now(),{cache:"no-store"})).json();
   const W=(d.watch||[]).filter(w=>!isSimX(w.symbol)), T=(d.trades||[]).filter(t=>!isSimX(t.symbol)&&!/FAIL|REJECT/i.test(t.status||""));
-  WD=W; TD=T; if(DL&&DL.tab==="stocks"&&!DL.used){DL.used=1;SF="all";SSYM=DL.sym.toUpperCase();} draw();
+  await actGet(); const AS=ACTM&&ACTM.stocks; const dls=DL&&DL.tab==="stocks"?DL.sym.toUpperCase():"";
+  WD=AS?W.filter(w=>AS.includes(w.symbol)||w.symbol===dls):W; TD=T; if(DL&&DL.tab==="stocks"&&!DL.used){DL.used=1;SF="all";SSYM=DL.sym.toUpperCase();} draw();
   const $f=v=>v==null?"n/a":"$"+(+v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}), P=Object.entries(d.positions||{}), lt=(d.trades||[]).slice(-3).reverse();
   E("#stk-desk").innerHTML=`<div class="t"><b>Long-term stocks · fake money desk</b></div>
   <div class="m" style="font-size:12px">Fake money start ${$f(d.start)} · equity <b>${$f(d.equity)}</b> · net <span class="${(d.net_pnl||0)>=0?"up":"dn"}">${$f(d.net_pnl)}</span> · cash ${$f(d.cash)} · ${d.closed||0} closed / ${d.wins||0} wins · ${P.length} open${P.length?": "+P.map(([k])=>esc(k)).join(", "):""}</div>
@@ -118,9 +120,11 @@ async function qload(){let d=null;try{d=await (await fetch("data/dashboard.json?
     for(const t of d.trades||[])if(okMint(t.mint)&&!isSimX(t.source)){add(t.symbol,t.mint,{desk:true,traded:true});QT.push(t)}
     for(const [m,p] of Object.entries(d.positions||{}))if(p.lane!=="MAJOR")add(p.symbol,m,{desk:true,traded:true,held:true});}
   const desk=[...M.values()].sort((a,b)=>(b.traded-a.traded)||a.symbol.localeCompare(b.symbol));
-  QL=[...desk,...REF.filter(([,m])=>!M.has(m)).map(([s,m])=>({symbol:s,mint:m,desk:false,traded:false}))];
+  await actGet(); const AQ=ACTM&&ACTM.quick_mints;
+  QL=AQ?desk.filter(q=>AQ.includes(q.mint)):[...desk,...REF.filter(([,m])=>!M.has(m)).map(([s,m])=>({symbol:s,mint:m,desk:false,traded:false}))];
+  if(AQ&&!QL.length&&!(DL&&DL.tab==="quick"))E("#q-chart").style.display="none";
   if(DL&&DL.tab==="quick"&&!DL.used){DL.used=1;if(!okMint(DL.sym)){DL.sim=1}else{QF="all";QM=DL.sym;if(!QL.some(q=>q.mint===QM))QL.unshift({symbol:DLp.get("s")||QM.slice(0,6),mint:QM,desk:true,traded:true});const age=Date.now()/1000-DL.t;QIVK=age<4.5*3600?"1m":age<24*3600?"5m":age<70*3600?"15m":age<12*86400?"1h":age<45*86400?"4h":age<280*86400?"1d":"All";}}
-  qopts(); E("#q-note").textContent=`${desk.length} real coin(s) the SOLANA lane scanned or traded, plus ${QL.length-desk.length} reference Solana coins. Practice (SIM) coins are never charted.${d?"":" Desk data unavailable, showing reference coins only."}`;
+  qopts(); E("#q-note").textContent=AQ?`${QL.length} coin(s) on the SOLANA lane's active list (held or shadow-trading). Coins no bot lists are removed and come back when a bot lists them again.`:`${desk.length} real coin(s) the SOLANA lane scanned or traded, plus ${QL.length-desk.length} reference Solana coins. Practice (SIM) coins are never charted.${d?"":" Desk data unavailable, showing reference coins only."}`;
   if(DL&&DL.sim){E("#q-dl").innerHTML=`<div class="sbox" style="border-color:#7a5a1e"><span class="rmd ptag">Fake trade</span> <b>${esc(DLp.get("s")||"This coin")}</b> was a <b>SIM practice coin</b> from the simulator feed, so it has no real market data and no chart. ${DL.px?(DL.side==="sell"?"Sold ":"Bought ")+pF(DL.px)+" · ":""}${DL.t?ctF(DL.t):""} (simulated).</div>`;if(!DL.done){DL.done=1;setTimeout(()=>qcard.scrollIntoView({behavior:"smooth",block:"center"}),300)}}
   qchart();}
 async function qchart(){E("#q-ivs").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.iv===QIVK));
