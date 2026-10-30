@@ -1,12 +1,18 @@
 /* Equity / lane P/L chart with tabs Total | MAJOR | SOLANA. FAKE MONEY ONLY. */
+window.LCTF={"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1d":86400,"1w":604800,"1mo":2592000,"1y":31536000,"All":0};
 window.laneChart=function(el,d){
   const tab=localStorage.lcTab||"Total";
-  if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist">'+["Total","MAJOR","SOLANA"].map(t=>`<button class="lb" data-t="${t}">${t}</button>`).join("")+'</div><div class="lcv m"></div><canvas class="lcc"></canvas><div class="lcn m"></div>';
+  if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist">'+["Total","MAJOR","SOLANA"].map(t=>`<button class="lb" data-t="${t}">${t}</button>`).join("")+'</div><div class="lctf ctf" role="group" aria-label="Timeframe"></div><div class="lcv m"></div><canvas class="lcc"></canvas><div class="lcn m"></div>';
     el.querySelectorAll(".lct button").forEach(b=>b.onclick=()=>{localStorage.lcTab=b.dataset.t;laneChart(el,el._d)})}
+  if(!el.querySelector(".lctf").dataset.init){const z=el.querySelector(".lctf");z.dataset.init=1;z.innerHTML=Object.keys(LCTF).map(k=>`<button class="lb" data-tf="${k}">${k}</button>`).join("");z.onclick=e=>{const b=e.target.closest("button");if(b&&!b.disabled){localStorage.lcTf=b.dataset.tf;laneChart(el,el._d)}}}
   el._d=d;el.querySelectorAll(".lct button").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));
   const LC=d.lane_curve||[],S=d.start||1000;let pts,base,lab;
   if(tab=="Total"){pts=(d.curve||[]).map(p=>[p[0],p[1]]);base=S;lab="Equity"}
   else{const i=tab=="SOLANA"?1:2;pts=LC.map(p=>[p[0],p[i]]);base=0;lab=tab+" cumulative P/L"}
+  {const all=pts,tE=all.length?all[all.length-1][0]:0,cnt=k=>LCTF[k]?all.filter(p=>p[0]>=tE-LCTF[k]).length:all.length;let tf=localStorage.lcTf||"All";
+   el.querySelectorAll(".lctf button").forEach(b=>{const ok=cnt(b.dataset.tf)>=2;b.disabled=!ok;b.title=ok?"Last "+b.dataset.tf:"Not available: fewer than 2 recorded points in this window (equity is recorded about every 1-3 min)";b.style.opacity=ok?"":".4"});
+   if(cnt(tf)<2)tf="All";el.querySelectorAll(".lctf button").forEach(b=>b.classList.toggle("on",b.dataset.tf==tf));
+   if(LCTF[tf])pts=all.filter(p=>p[0]>=tE-LCTF[tf]);}
   const last=pts.length?pts[pts.length-1][1]:base,up=last>=base,col=up?"#3fb68b":"#e5636f";
   const fm=v=>(v<0?"-$":"$")+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
   el.querySelector(".lcv").innerHTML=`${lab}: <b style="color:${col}">${tab=="Total"?fm(last):(last>=0?"+":"")+fm(last)}</b>`;

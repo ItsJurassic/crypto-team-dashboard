@@ -1,0 +1,49 @@
+<!doctype html><html><head><script src="auth.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Sunny AI · Logs</title>
+<style>
+:root{--bg:#07090d;--card:#0f131a;--line:#1c222c;--mut:#7b8594;--g:#22e08a;--r:#ff4d5e;--t:#e7ecf3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{max-width:1000px;margin:auto;padding:16px}.banner{background:#2a1a00;color:#ffb020;border:1px solid #5a3a00;border-radius:8px;padding:6px 10px;text-align:center;font-weight:700;letter-spacing:.08em;font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
+.hd{display:flex;justify-content:space-between;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.eq{font-size:46px;font-weight:800;margin:6px 0 0}.pct{font-size:18px;font-weight:700}.g{color:var(--g)}.r{color:var(--r)}.m{color:var(--mut)}
+.mult{background:#0c2a1c;color:var(--g);border-radius:999px;padding:4px 10px;font-weight:800}
+canvas{width:100%;height:170px;display:block;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;margin-top:10px}
+.ag{color:inherit;text-decoration:none;background:#0b0e14;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;gap:12px}
+.ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:19px;flex:none}
+.nm{font-weight:800}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);margin-left:6px}
+.act{color:#c5ccd6;font-size:12px;margin-top:3px}.ct{color:var(--mut);font-size:11px;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:500}
+.bar{height:6px;background:var(--r);border-radius:3px}.two{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}@media(max-width:700px){.two{grid-template-columns:1fr}.eq{font-size:38px}}
+.tag{font-size:9px;padding:1px 4px;border-radius:4px;background:#1c2533;color:#8fb3ff}#trades{display:block;overflow-x:auto;white-space:nowrap}pre{white-space:pre-wrap;color:#c5ccd6;font-size:12px;margin:0}
+.lb{background:#0b0e14;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:3px 10px;margin-left:4px;cursor:pointer;font:inherit;font-size:11px}.lb.on{background:#1c2533;color:var(--t)}.lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:10px}.ln{background:#0b0e14;border:1px solid var(--line);border-radius:12px;padding:12px}.ln b{font-size:24px}
+</style><link rel="stylesheet" href="sunny.css"></head><body><div class="wrap">
+<div class="banner">FAKE MONEY ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
+<div class="card"><div class="hd"><span>📒 Logs</span><span><span id="lbtn"></span> <span id="upd" class=m></span></span></div><div class=m style="font-size:12px;margin-top:6px">Every log in one place. Crypto desk refreshes every 30s, stocks every 60s.</div></div>
+<div class="card"><div class="hd"><span>Crypto desk logger</span><span>kills · trades · recap</span></div>
+<div class="two"><div><table id="kills"></table></div><div><div class="m" style="font-size:12px;margin:6px 0">KILLED BY RULE</div><table id="rules"></table></div></div>
+<div class="m" style="font-size:12px;margin:14px 0 6px">JUDGE REJECTIONS</div><table id="jrej"></table><div class="m" style="font-size:12px;margin:14px 0 6px">JUDGE CALIBRATION (win rate by probability)</div><table id="cal"></table><div class="m" style="font-size:12px;margin:14px 0 6px">TRADES</div><table id="trades"></table>
+<div class="m" style="font-size:12px;margin:14px 0 6px">MORNING RECAP</div><pre id="recap"></pre></div>
+<div class="card" id="stocks"><div class="hd"><span>📈 Long-term stocks · trades · why</span><span id="supd" class=m></span></div><div id="tr" style="overflow-x:auto"></div>
+<div class="m" style="font-size:12px;margin:14px 0 6px">SKIPPED BUYS</div><div id="kl" style="overflow-x:auto"></div></div>
+</div><script>
+const $=i=>document.getElementById(i),f=(n,d=2)=>"$"+Number(n).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d}),esc=s=>String(s??"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+let LANE=localStorage.lane||"ALL",D0=null;const lof=x=>(x.lane||(x.source=="MAJOR"?"MAJOR":"SOLANA")),inL=x=>LANE=="ALL"||lof(x)==LANE;
+function setL(l){LANE=localStorage.lane=l;if(D0)render(D0)}
+const LT=l=>l=="MAJOR"?'<span class=tag style="background:#2a1f05;color:#ffcf5c">MAJOR</span>':'<span class=tag style="background:#0c2a1c;color:#22e08a">SOLANA</span>';
+const $$=n=>n==null||n===""?"—":(n<0?"-$":"$")+Math.abs(+n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),E=$;
+async function go(){try{D0=await (await fetch("data/dashboard.json?"+Date.now())).json();render(D0)}catch(e){$("upd").textContent="load error"}}
+function render(d){try{$("lbtn").innerHTML=["ALL","SOLANA","MAJOR"].map(l=>`<button class="lb ${LANE==l?"on":""}" onclick="setL('${l}')">${l=="ALL"?"All":l}</button>`).join("");const T=d.trades.filter(inL);
+$("kills").innerHTML="<tr><th>Time</th><th>Token</th><th>Rule</th></tr>"+d.kills.filter(inL).slice(0,15).map(k=>`<tr><td class=m>${new Date(k.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td><td>$${esc(k.symbol)} ${LT(lof(k))}</td><td class=r>✕ ${esc(k.rule)} <span class=m>${esc(k.detail)}</span></td></tr>`).join("");
+const R=Object.entries(d.kill_rules).sort((a,b)=>b[1]-a[1]),mx=R.length?R[0][1]:1;$("rules").innerHTML=R.map(([r,n])=>`<tr><td>${esc(r)}</td><td style="width:40%"><div class=bar style="width:${n/mx*100}%"></div></td><td class=r>${n}</td></tr>`).join("");
+$("trades").innerHTML="<tr><th>Time</th><th>Side</th><th>Token</th><th>Venue</th><th>Intended→Filled</th><th>Slip</th><th>Delay</th><th>Fees</th><th>Status</th><th>USD</th><th>P/L</th></tr>"+(T.length?T.map(t=>`<tr><td class=m>${new Date(t.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td><td>${sideBadge(t)}</td><td>$${esc(t.symbol)} ${LT(lof(t))}${lof(t)=="SOLANA"?` <span class=tag>${t.source=="SIM-FEED"?"SIM":"REAL"}</span>`:""}</td><td class=m>${esc(t.venue)}</td><td>${Number(t.intended).toPrecision(4)}→${t.filled?Number(t.filled).toPrecision(4):"—"}</td><td>${(+t.slip_pct).toFixed(2)}%</td><td>${t.delay_s}s</td><td>${f(t.fees_usd)}</td><td class=${t.status=="FILLED"?"g":"r"}>${esc(t.status)}</td><td>${f(t.usd)}</td><td class=${+t.pnl_usd>=0?"g":"r"}>${t.pnl_usd?f(t.pnl_usd):""}</td></tr>${t.side=="BUY"&&t.status=="FILLED"?`<tr class=rsn><td colspan=11>${whyHTML((d.reasons||{})[t.time+"|"+t.mint]||findWhy(d.reasons,t.mint,t.time))}</td></tr>`:""}`).join(""):"<tr><td colspan=11 class=m>none yet</td></tr>");
+const J=d.judge_rejections||[];$("jrej").innerHTML=J.length?J.map(k=>`<tr><td class=m>${new Date(k.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td><td>$${esc(k.symbol)}</td><td class=r>⚖ ${esc(k.detail)}</td></tr>`).join(""):"<tr><td class=m>none yet</td></tr>";
+const B=[[0.65,0.75],[0.75,0.85],[0.85,1.01]];$("cal").innerHTML="<tr><th>Judge p</th><th>Trades</th><th>Win rate</th></tr>"+B.map(([a,b])=>{const t=(d.calibration||[]).filter(x=>x.judge_p>=a&&x.judge_p<b),w=t.filter(x=>x.win).length;return`<tr><td>${a.toFixed(2)}–${Math.min(b,1).toFixed(2)}</td><td>${t.length}</td><td>${t.length?(w/t.length*100).toFixed(0)+"%":"—"}</td></tr>`}).join("");
+$("recap").textContent=d.recap||"First recap after 7 AM CT.";
+$("upd").textContent="updated "+new Date(d.updated).toLocaleTimeString();}catch(e){$("upd").textContent="render error"}}
+async function gos(){try{const d=await (await fetch("data/stocks.json?"+Date.now())).json();
+const T=(d.trades||[]).slice().reverse();E("tr").innerHTML=T.length?`<table><tr><th>Time</th><th>Side</th><th>Symbol</th><th>Price</th><th>Qty</th><th>P/L</th></tr>${T.map(t=>`<tr class="rb ${t.side=="BUY"?"lb-b":"lb-s"}"><td>${new Date(t.time).toLocaleString()}</td><td><span class="pill ${t.side=="BUY"?"pb":"ps"}">${t.side}</span></td><td><b>${t.symbol}</b> <span class=m>${t.strategy}</span></td><td>${$$(t.price)}</td><td>${t.qty}</td><td class=${+t.pnl_usd>=0?"g":"r"}>${t.pnl_usd?$$(t.pnl_usd)+" ("+t.pnl_pct+"%)":""}</td></tr><tr><td colspan=6 class=m style="font-size:11px;white-space:normal">Why: ${esc(t.reason)}</td></tr>`).join("")}</table>`:"<p class=m>No trades yet. Buys are planned after the close and filled at the next session's price.</p>";
+const K=(d.kills||[]).slice(-40).reverse();E("kl").innerHTML=K.length?`<table><tr><th>Time</th><th>Symbol</th><th>Rule</th><th>Detail</th></tr>${K.map(k=>`<tr class="rb lb-f"><td>${new Date(k.time).toLocaleString()}</td><td>${esc(k.symbol)}</td><td><span class="pill pf">${esc(k.rule)}</span></td><td class=m>${esc(k.detail)}</td></tr>`).join("")}</table>`:"<p class=m>None.</p>";
+$("supd").textContent="updated "+new Date(d.updated).toLocaleTimeString();}catch(e){$("supd").textContent="load error"}}
+go();setInterval(go,30000);gos();setInterval(gos,60000);
+</script><script src="reasons.js"></script><script src="nav.js"></script></body></html>

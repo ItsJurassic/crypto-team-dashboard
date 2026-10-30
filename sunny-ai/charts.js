@@ -1,7 +1,8 @@
 "use strict";
 let CB = ["BTC","ETH","SOL","XRP","DOGE"];  // + watchlist coins that Coinbase lists
-const IVS = {"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1D":86400,"1W":604800,"1M":2592000};
-const CG_DAYS = {"1m":1,"5m":1,"15m":1,"1h":2,"4h":7,"1D":90,"1W":365,"1M":"max"};
+const IVS = {"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1D":86400,"1W":604800,"1M":2592000,"1Y":86400,"All":604800};
+const IVL = {"1D":"1d","1W":"1w","1M":"1mo","1Y":"1y"};
+const CG_DAYS = {"1m":1,"5m":1,"15m":1,"1h":2,"4h":7,"1D":90,"1W":365,"1M":"max","1Y":365,"All":"max"};
 const SCOL = {"Watching":"#4ea1ff","Getting ready to trade":"#f5a623","Buying":"#16c784","Selling":"#ea3943","Paused":"#9e9e9e","Unknown":"#9e9e9e"};
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -15,7 +16,9 @@ const getJSON = async (u) => { const r = await fetch(u, {cache:"no-store"}); if 
 const isSim = x => { if (!x) return false; if (typeof x === "string") return /^SIM/i.test(x) || /SIM-?FEED|simulat|synthetic/i.test(x);
   return ["mint","id","coin","symbol","pair","source","src","lane","coingecko_id"].some(k => x[k] != null && (/^SIM/i.test(String(x[k])) || /SIM-?FEED|simulat|synthetic/i.test(String(x[k])))); };
 const SRC_TAG = s => `<span class="rmd">Real market data · ${esc(s)}</span>`;
-let state = {sym:"BTC", iv:"1h", top:[], trades:[], candles:[], ws:null};
+let state = {sym:"BTC", iv:(IVS[localStorage.cIv]?localStorage.cIv:"1h"), top:[], trades:[], candles:[], ws:null};
+const DLp = new URLSearchParams(location.search), DL = DLp.get("tab")==="crypto" && DLp.get("sym") ? {sym:DLp.get("sym").toUpperCase(), t:+DLp.get("t"), px:+DLp.get("px"), side:(DLp.get("side")||"buy").toLowerCase(), done:false, pl:null} : null;
+if (DL) { state.sym = DL.sym; const age = Date.now()/1000 - DL.t; state.iv = age < 4.5*3600 ? "1m" : age < 24*3600 ? "5m" : age < 70*3600 ? "15m" : age < 12*86400 ? "1h" : age < 280*86400 ? "1D" : "All"; }
 let chart, cs, ls;
 async function loadTrades(){ try { state.trades = (await getJSON("team/trades.json")).filter(t => !isSim(t)); } catch { state.trades = []; } setMarkers(); }
 async function loadWatch() {
@@ -52,7 +55,17 @@ function setMarkers() {
   if (!cs) return;
   const mk = state.trades.filter(t=>t.coin===state.sym).map(t=>({t,b:bucket(t.t)})).filter(x=>x.b!=null).sort((a,b)=>a.b-b.b)
     .map(({t,b})=>({time:b, position:t.side==="buy"?"belowBar":"aboveBar", color:t.side==="buy"?"#16c784":"#ea3943", shape:t.side==="buy"?"arrowUp":"arrowDown", text:"Fake trade · "+(t.side==="buy"?"Buy ":"Sell ")+fp(t.price)}));
-  (ls.options().visible ? ls : cs).setMarkers(mk); showTradeNote();
+  const ser = ls.options().visible ? ls : cs;
+  if (DL && DL.sym === state.sym && DL.t) { const b = bucket(DL.t) ?? (state.candles.length && DL.t >= state.candles[0].time ? state.candles[state.candles.length-1].time : null);
+    const buy = DL.side !== "sell", lab = (buy ? "Bought " : "Sold ") + fp(DL.px) + " · " + ct(DL.t*1000);
+    if (DL.pl) { try { DL.pl.s.removePriceLine(DL.pl.l); } catch {} DL.pl = null; }
+    if (DL.px) DL.pl = {s:ser, l:ser.createPriceLine({price:DL.px, color:"#f5c26b", lineWidth:2, lineStyle:2, axisLabelVisible:true, title:"Fake trade · " + lab})};
+    if (b != null) { mk.push({time:b, position:buy?"belowBar":"aboveBar", color:"#f5c26b", shape:buy?"arrowUp":"arrowDown", size:2, text:"Fake trade · " + lab}); mk.sort((x,y)=>x.time-y.time); }
+    $("#trade-note").innerHTML = b != null ? `<span class="rmd ptag">Fake trade</span> <b>${esc(lab)}</b> (simulated, highlighted in gold)` : `<span class="rmd ptag">Fake trade</span> ${esc(lab)}: outside this timeframe's data, try a longer range.`;
+    if (!DL.done && state.candles.length) { DL.done = true; if (b != null) { const w = IVS[state.iv]*60; try { chart.timeScale().setVisibleRange({from: Math.max(state.candles[0].time, b - w), to: Math.min(state.candles[state.candles.length-1].time, b + w)}); } catch {} }
+      setTimeout(() => $("#chart").scrollIntoView({behavior:"smooth", block:"center"}), 300); }
+    ser.setMarkers(mk); return; }
+  ser.setMarkers(mk); showTradeNote();
 }
 function agg(c, iv) {
   const out = []; let cur = null;
@@ -85,16 +98,19 @@ async function loadChart() {
   const sym = state.sym, iv = state.iv, note = $("#chart-note");
   try {
     if (isSim(sym)) throw new Error("practice/simulator coin blocked on Charts");
-    if (CB.includes(sym)) {
+    if (CB.includes(sym)) { ivAvail(null);
       let c;
       if (iv === "4h") c = agg(await cbCandles(sym,3600,2),"4h");
       else if (iv === "1W" || iv === "1M") c = agg(await cbCandles(sym,86400,iv==="1M"?4:2),iv);
+      else if (iv === "1Y") c = (await cbCandles(sym,86400,2)).slice(-365);
+      else if (iv === "All") c = agg(await cbCandles(sym,86400,12),"1W");
       else c = await cbCandles(sym, IVS[iv]);
       if (sym !== state.sym || iv !== state.iv) return;
       state.candles = c; ls.applyOptions({visible:false}); cs.applyOptions({visible:true}); ls.setData([]); cs.setData(c);
       note.textContent = `${sym}-USD ${iv} candles from Coinbase Exchange, live via websocket. ${iv==="4h"?"4h built from 1h candles. ":""}${iv==="1W"||iv==="1M"?"Built from daily candles (UTC). ":""}Times shown in CT.`; $("#src-tag").innerHTML = SRC_TAG("Coinbase Exchange");
     } else if ((await extraCandles())[sym]) {
-      const d = state.extra[sym], k = d[iv];
+      const d = state.extra[sym]; ivAvail(Object.keys(d)); if (!d[iv]) { const f = Object.keys(IVS).filter(x=>d[x]); if (f.length) { state.iv = f.includes("1h") ? "1h" : f[f.length-1]; ivAvail(Object.keys(d)); return loadChart(); } }
+      const k = d[state.iv];
       if (sym !== state.sym || iv !== state.iv) return;
       if (!k) {
         cs.setData([]); ls.setData([]); state.candles = [];
@@ -107,7 +123,7 @@ async function loadChart() {
       note.textContent = `${sym} ${iv} candles from ${d.src}. Not on Coinbase; snapshot refreshed by the bots (${age} min old). Times shown in CT.`; $("#src-tag").innerHTML = SRC_TAG(d.src.split(";")[0].split(" (")[0]);
     } else {
       const id = (state.top.find(c=>c.symbol.toUpperCase()===sym)||{}).id || ((state.watch||[]).find(w=>w.symbol.toUpperCase()===sym)||{}).coingecko_id;
-      if (!id) throw new Error("no CoinGecko id");
+      if (!id) throw new Error("no CoinGecko id"); ivAvail(null);
       const r = await getJSON(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${CG_DAYS[iv]}`);
       if (sym !== state.sym || iv !== state.iv) return;
       const m = new Map(); for (const [t,v] of r.prices) m.set(Math.floor(t/1000), v);
@@ -125,9 +141,9 @@ function onTick(sym, price, t) {
   if (sym !== state.sym || !CB.includes(sym)) return;
   const c = state.candles; if (!c.length || c[0].open == null) return;
   const g = IVS[state.iv], last = c[c.length-1];
-  let bt = state.iv === "1W" || state.iv === "1M" ? last.time : Math.floor(t/g)*g;
+  let bt = state.iv === "1W" || state.iv === "1M" || state.iv === "All" ? last.time : Math.floor(t/g)*g;
   if (state.iv === "1M") { const d = new Date(t*1000); bt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1)/1000; }
-  if (state.iv === "1W") { const d = new Date(t*1000); const day = Math.floor(t/86400)*86400; bt = day - ((d.getUTCDay()+6)%7)*86400; }
+  if (state.iv === "1W" || state.iv === "All") { const d = new Date(t*1000); const day = Math.floor(t/86400)*86400; bt = day - ((d.getUTCDay()+6)%7)*86400; }
   if (bt > last.time) { const n = {time:bt,open:price,high:price,low:price,close:price}; c.push(n); cs.update(n); }
   else if (bt === last.time) { last.high = Math.max(last.high,price); last.low = Math.min(last.low,price); last.close = price; cs.update(last); }
 }
@@ -167,6 +183,7 @@ async function loadTop() {
     const sel = $("#coin"), cur = state.sym;
     const syms = [...new Set([...CB, ...state.top.map(c=>c.symbol.toUpperCase()), ...(state.watch||[]).map(w=>w.symbol.toUpperCase())])].filter(x => !isSim(x));
     sel.innerHTML = syms.map(s=>{const c=state.top.find(x=>x.symbol.toUpperCase()===s);return `<option value="${s}">${(state.watch||[]).some(w=>w.symbol.toUpperCase()===s)?"👀 ":""}${c?esc(c.name)+" ("+s+")":s}${CB.includes(s)?"":" · line"}</option>`}).join("");
+    if (!syms.includes(cur)) sel.insertAdjacentHTML("afterbegin", `<option value="${esc(cur)}">${esc(cur)}</option>`);
     sel.value = cur;
   } catch (e) { $("#top-note").innerHTML = `<span class="dn">Top-20 table unavailable (${esc(e.message)}); retrying in 60 s.</span>`; }
   showPx(); 
@@ -174,8 +191,9 @@ async function loadTop() {
 function setSym(s) { state.sym = s; $("#coin").value = s; showPx(); loadChart(); }
 $("#coin").innerHTML = CB.map(s=>`<option>${s}</option>`).join("");
 $("#coin").onchange = e => setSym(e.target.value);
-$("#ivs").innerHTML = Object.keys(IVS).map(k=>`<button data-iv="${k}" class="${k===state.iv?"on":""}">${k}</button>`).join("");
-document.querySelectorAll("#ivs button").forEach(b => b.onclick = () => { state.iv = b.dataset.iv; document.querySelectorAll("#ivs button").forEach(x=>x.classList.toggle("on",x===b)); loadChart(); });
+$("#ivs").innerHTML = Object.keys(IVS).map(k=>`<button data-iv="${k}" class="${k===state.iv?"on":""}">${IVL[k]||k}</button>`).join("");
+function ivAvail(keys) { document.querySelectorAll("#ivs button").forEach(b => { const ok = !keys || keys.includes(b.dataset.iv); b.disabled = !ok; b.title = ok ? "" : "Not available for this coin's data source"; b.style.opacity = ok ? "" : ".4"; b.classList.toggle("on", b.dataset.iv === state.iv); }); }
+document.querySelectorAll("#ivs button").forEach(b => b.onclick = () => { if (b.disabled) return; state.iv = b.dataset.iv; localStorage.cIv = state.iv; document.querySelectorAll("#ivs button").forEach(x=>x.classList.toggle("on",x===b)); loadChart(); });
 
 { const st = document.createElement("style"); st.textContent = ".rmd{display:inline-block;font-size:11px;padding:2px 7px;border-radius:999px;border:1px solid #2f6f55;color:#6fd3a6;background:rgba(22,199,132,.08);margin:2px 4px 2px 0}.rmd.ptag{border-color:#7a5a1e;color:#f5c26b;background:rgba(245,166,35,.08)}"; document.head.appendChild(st); }
 initChart(); loadTrades(); loadWatch().then(loadTop).then(loadChart); connectWS();
