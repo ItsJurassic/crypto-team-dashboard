@@ -161,3 +161,7 @@ select:focus,input:focus,button:focus-visible{outline:2px solid rgba(124,156,255
 #sa-stale{border-radius:0 0 12px 12px}
 a{text-decoration-color:rgba(124,156,255,.4)}
 ::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:8px}
+/* Oct 30: Desk equity chart full row + taller; accounts full row below */
+@media (min-width:1024px){.dgrid>div.card:nth-of-type(2),.dgrid>div.card:nth-of-type(3){grid-column:1/-1!important}}
+#lc .lcc{height:clamp(240px,55vw,320px)!important}
+@media (min-width:1024px){#lc .lcc{height:420px!important}}

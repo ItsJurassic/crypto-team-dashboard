@@ -190,7 +190,7 @@ async function loadTop() {
     if (DL && !syms.includes(cur)) sel.insertAdjacentHTML("afterbegin", `<option value="${esc(cur)}">${esc(cur)}</option>`);
     sel.value = state.sym;
     document.querySelectorAll("#top tr.click").forEach(r => { if (ACT && !ACT.includes(r.dataset.sym)) { r.classList.remove("click"); r.onclick = null; r.title = "Not on any bot's active list"; } });
-    document.querySelectorAll(".wchart").forEach(a => { if (ACT && !ACT.includes(a.dataset.sym.toUpperCase())) a.remove(); });
+    document.querySelectorAll(".wchart").forEach(a => { if (ACT && !ACT.includes(a.dataset.sym.toUpperCase())) (a.closest(".lesson")||a).remove(); });
   } catch (e) { $("#top-note").innerHTML = `<span class="dn">Top-20 table unavailable (${esc(e.message)}); retrying in 60 s.</span>`; }
   showPx(); 
 }
