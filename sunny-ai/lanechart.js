@@ -1,8 +1,8 @@
 /* Equity / lane P/L chart, tabs Total | MAJOR | SOLANA. One continuous chart of ALL data:
    drag/swipe sideways to scroll, wheel / pinch to zoom, double-click/tap to reset. FAKE MONEY ONLY. */
 window.laneChart=function(el,d){
-  const tab=localStorage.lcTab||"Total";
-  if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist" style="display:flex;gap:6px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none">'+[["Total","Total"],["MAJOR","MAJOR"],["SOLANA","SOLANA"],["STOCKS","Fake Stocks"],["SEEDLING","Seedling"]].map(([t,l])=>`<button class="lb" data-t="${t}" style="flex:0 0 auto;white-space:nowrap">${l}</button>`).join("")+'</div><div class="lcv m"></div><canvas class="lcc" style="touch-action:pan-y;cursor:grab;width:100%;height:220px;display:block"></canvas><div class="lch m" style="font-size:11px">Drag or swipe sideways to scroll · pinch or Ctrl+scroll to zoom · double-tap to show all</div><div class="lcn m"></div>';
+  let tab=localStorage.lcTab||"Total";if(tab=="SEEDLING")tab=localStorage.lcTab="Total";
+  if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist" style="display:flex;gap:6px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none">'+[["Total","Total"],["MAJOR","MAJOR"],["SOLANA","SOLANA"],["STOCKS","Fake Stocks"]].map(([t,l])=>`<button class="lb" data-t="${t}" style="flex:0 0 auto;white-space:nowrap">${l}</button>`).join("")+'</div><div class="lcv m"></div><canvas class="lcc" style="touch-action:pan-y;cursor:grab;width:100%;height:220px;display:block"></canvas><div class="lch m" style="font-size:11px">Drag or swipe sideways to scroll · pinch or Ctrl+scroll to zoom · double-tap to show all</div><div class="lcn m"></div>';
     el.querySelectorAll(".lct button").forEach(b=>b.onclick=()=>{localStorage.lcTab=b.dataset.t;el._v=null;laneChart(el,el._d);window.hdr&&window.hdr(el._d)});
     (async()=>{const J=async u=>{try{return await (await fetch(u+"?"+Date.now())).json()}catch(e){return null}};el._sc=await J("data/stocks_curve.json");el._sk=await J("data/stocks.json");el._sd=await J("team/scorecard.json");el._d&&laneChart(el,el._d)})();
     bind(el)}
@@ -17,7 +17,7 @@ window.laneChart=function(el,d){
   else{const A=window.__ACC||[],oth=A.filter(a=>!/Sunny AI/.test(a.n)),seS=oth.filter(a=>/Seedling/.test(a.n)).reduce((x,a)=>x+a.start,0),seE=oth.filter(a=>/Seedling/.test(a.n)).reduce((x,a)=>x+a.eq,0),ks=sk.start||1000,c=d.curve||[];
     pts=c.map((p,i)=>[p[0],p[1]+at(sc,p[0],ks)+(i==c.length-1?seE:seS)]);base=S+ks+seS;lab="All fake money equity"}
   el._p=pts;el._base=base;el._lab=lab;el._tab=tab;
-  el.querySelector(".lcn").textContent=tab=="Total"?"Total curve = Sunny AI history + stock desk history; Seedling has no stored history, so its change shows at the latest point.":tab=="STOCKS"?"Stock equity history is recorded each cycle from Oct 30, 2:10 PM CT.":tab=="SEEDLING"?"":"Lane series recorded each cycle. Before the first MAJOR fill (Oct 29, 10:03 AM CT) all P/L was SOLANA (backfilled); the 10:03–10:56 AM CT stretch was not reconstructed.";
+  el.querySelector(".lcn").textContent=tab=="Total"?"Total curve = Sunny AI history + stock desk history. Three lanes at $1,000 each: SOLANA, MAJOR, Fake Stocks.":tab=="STOCKS"?"Stock equity history is recorded each cycle from Oct 30, 2:10 PM CT.":tab=="SEEDLING"?"":"Lane series recorded each cycle. Before the first MAJOR fill (Oct 29, 10:03 AM CT) all P/L was SOLANA (backfilled); the 10:03–10:56 AM CT stretch was not reconstructed.";
   draw(el);
   function draw(el){
     const pts=el._p,base=el._base,c=el.querySelector(".lcc"),r=c.getBoundingClientRect(),dpr=devicePixelRatio||1,W=Math.max(200,r.width),H=r.height||220;
