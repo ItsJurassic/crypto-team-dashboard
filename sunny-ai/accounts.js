@@ -6,7 +6,7 @@ const [d,sc,sh,cg,st,stt]=await Promise.all([J("data/dashboard.json"),J("team/sc
 const $$=n=>n==null||isNaN(n)?"—":(n<0?"-$":"$")+Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const A=[];const b=d&&d.bank;
 if(b){const L=b.lanes||{},S=L.SOLANA||{},M=L.MAJOR||{},ms=b.start/2;
- A.push({n:"Sunny AI · SOLANA",t:"quick",start:ms,pl:(S.net||0)+(S.pnl_open||0),fees:(S.trade_fees||0)+(S.slippage||0)+(S.failed_costs||0),banked:S.banked||0,note:"shares the $1,000 Sunny AI start with MAJOR (shown as $500 each)"});
+ A.push({n:"Sunny AI · SOLANA",t:"quick",start:ms,pl:(S.net||0)+(S.pnl_open||0),fees:(S.trade_fees||0)+(S.slippage||0)+(S.failed_costs||0),banked:S.banked||0,note:"shares the $2,000 Sunny AI account with MAJOR ($1,000 each)"});
  A.push({n:"Sunny AI · MAJOR",t:"lt",start:ms,pl:(M.net||0)+(M.pnl_open||0),fees:(M.trade_fees||0)+(M.slippage||0)+(M.failed_costs||0),banked:M.banked||0});}
 if(sc)A.push({n:"Seedling · $2,000 crypto",t:"lt",start:sc.start_balance||2000,eq:sc.equity,fees:null,banked:null,note:"20% bank rule not applied"});
 if(sh){const px={};(cg||[]).forEach(c=>px[(c.symbol||"").toUpperCase()]=c.current_price);

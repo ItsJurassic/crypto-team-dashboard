@@ -18,7 +18,7 @@ root.innerHTML=`<div class="chips" id="uc-tabs" style="display:flex;gap:8px;over
 $("#uc-tabs").onclick=e=>{const b=e.target.closest("button");if(b){TAB=localStorage.ucTab=b.dataset.t;show()}};
 $("#uc-f").onclick=e=>{const b=e.target.closest("button");if(b){F=localStorage.ucF=b.dataset.f;list()}};
 $("#uc-tf").onclick=e=>{const b=e.target.closest("button");if(b&&!b.disabled){TF=localStorage.ucTF=b.dataset.tf;draw()}};
-function mk(){if(chart)return;const el=$("#uc-chart");chart=LightweightCharts.createChart(el,{height:300,layout:{background:{color:"transparent"},textColor:"#9aa1ad",fontFamily:"Inter,sans-serif"},grid:{vertLines:{color:"rgba(255,255,255,.04)"},horzLines:{color:"rgba(255,255,255,.04)"}},rightPriceScale:{borderVisible:false},timeScale:{borderVisible:false,timeVisible:true},handleScroll:true,handleScale:true});
+function mk(){if(chart)return;const el=$("#uc-chart");chart=LightweightCharts.createChart(el,{height:300,layout:{background:{color:"transparent"},textColor:"#9aa1ad",fontFamily:"Inter,sans-serif"},grid:{vertLines:{color:"rgba(255,255,255,.04)"},horzLines:{color:"rgba(255,255,255,.04)"}},timeScale:{borderVisible:false,timeVisible:true,rightOffset:10},handleScroll:{mouseWheel:false,pressedMouseMove:true,horzTouchDrag:true,vertTouchDrag:false},handleScale:{axisPressedMouseMove:{time:true,price:false},axisDoubleClickReset:true,mouseWheel:true,pinch:true},rightPriceScale:{borderVisible:false,autoScale:true,scaleMargins:{top:.12,bottom:.12}}});
  cs=chart.addCandlestickSeries({upColor:"#4fbf8f",downColor:"#e07a7f",wickUpColor:"#4fbf8f",wickDownColor:"#e07a7f",borderVisible:false});new ResizeObserver(()=>chart.applyOptions({width:el.clientWidth})).observe(el)}
 const ts=t=>typeof t=="number"?t:Math.floor(new Date(t).getTime()/1000);
 async function load(){
@@ -27,7 +27,7 @@ async function load(){
  // Stocks
  const pos=(stk&&stk.positions)||{};
  D.stocks={lab:"Long-term Stocks desk · fake money",rows:((stk&&stk.watch)||[]).filter(w=>!(L.STOCKS)||L.STOCKS.includes(w.symbol)).map(w=>({sym:w.symbol,px:w.price,chg:w.day_pct,sub:w.sector,st:pos[w.symbol]||w.held?"HELD":w.status=="signal"?"SIGNAL":"WATCHING",why:w.why,spark:(w.chart&&w.chart.c||[]).slice(-30),candles:w.chart?w.chart.t.map((t,i)=>({time:t,value:w.chart.c[i]})):[]})),
-  trades:((stk&&stk.trades)||[]).filter(t=>t.status=="FILLED").map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+t.price})),tfs:{"1D":"Stock data is daily closes","1W":true,"1M":true,"1Y":true},line:true};
+  trades:((stk&&stk.trades)||[]).filter(t=>t.status=="FILLED").map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+t.price,bot:"Stocks"})),tfs:{"1D":"Stock data is daily closes","1W":true,"1M":true,"1Y":true},line:true};
  // Quick (SOLANA): only real coins the lane holds or shadow-trades
  const dp=(dash&&dash.positions)||{};
  const qh=Object.values(dp).filter(p=>p.lane=="SOLANA"&&!isSim(p)).map(p=>p.symbol);
@@ -38,15 +38,21 @@ async function load(){
  const mh=Object.values(dp).filter(p=>p.lane=="MAJOR"&&!isSim(p)).map(p=>p.symbol),sh=Object.keys((pf&&pf.positions)||{}).map(s=>s.toUpperCase());
  const cl=[...new Set([...(L.MAJOR||[]),...((L.SEEDLING&&L.SEEDLING.markets)||[]),...mh,...sh])].filter(s=>!isSim(s));
  D.crypto={lab:"MAJOR lane + Seedling · fake money",rows:cl.map(s=>({sym:s,st:mh.includes(s)||sh.includes(s)?"HELD":"WATCHING",sub:(mh.includes(s)?"MAJOR":"")+((L.SEEDLING&&L.SEEDLING.markets||[]).includes(s)?(mh.includes(s)?" · ":"")+"Seedling":(L.MAJOR||[]).includes(s)&&!mh.includes(s)?"MAJOR":"")})),
-  trades:[...((dash&&dash.trades)||[]).filter(t=>!isSim(t)&&t.symbol).map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price)})),...((tt||[]).filter(t=>!isSim(t)).map(t=>({sym:(t.coin||"").toUpperCase(),t:t.t||ts(t.time),side:t.side,px:t.price})))],tfs:{"1D":true,"1W":true,"1M":true,"1Y":true}};
+  trades:[...((dash&&dash.trades)||[]).filter(t=>!isSim(t)&&t.symbol).map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price),bot:t.lane||(t.source=="MAJOR"?"MAJOR":t.source)||"MAJOR"})),...((tt||[]).filter(t=>!isSim(t)).map(t=>({sym:(t.coin||"").toUpperCase(),t:t.t||ts(t.time),side:String(t.side).toLowerCase(),px:+t.price,bot:"Seedling"})))],tfs:{"1D":true,"1W":true,"1M":true,"1Y":true}};
  D.crypto.rows.sort((a,b)=>(a.st=="HELD"?0:1)-(b.st=="HELD"?0:1)||a.sym.localeCompare(b.sym));
  D.stocks.rows.sort((a,b)=>({HELD:0,SIGNAL:1,WATCHING:2}[a.st]-{HELD:0,SIGNAL:1,WATCHING:2}[b.st])||a.sym.localeCompare(b.sym));
 }
+const EXK={"1D":"5m","1W":"1h","1M":"4h","1Y":"1D"};let EXP=null;const extras=()=>EXP||(EXP=J("team/candles_extra.json").then(d=>d.c||{}).catch(()=>({})));
+let CGQ=Promise.resolve();const cgGet=u=>{const k="cg:"+u;try{const h=JSON.parse(localStorage[k]||"null");if(h&&Date.now()-h.t<9e5)return Promise.resolve(h.d)}catch(e){}
+ const p=CGQ.then(async()=>{for(let i=0;i<3;i++){const r=await fetch(u).catch(()=>null);if(r&&r.ok){const d=await r.json();if(Array.isArray(d)){try{localStorage[k]=JSON.stringify({t:Date.now(),d})}catch(e){}return d}}await new Promise(z=>setTimeout(z,3000*(i+1)))}return null});CGQ=p.then(()=>new Promise(z=>setTimeout(z,1500)));return p};
+// sanitize: seconds, finite positive numbers, ascending, unique times
+function clean(c){const m=new Map();for(const x of c||[]){let t=+x.time;if(t>1e11)t=Math.floor(t/1000);const o=+x.open,h=+x.high,l=+x.low,cl=+x.close;if(!(t>0)||![o,h,l,cl].every(v=>Number.isFinite(v)&&v>0))continue;m.set(t,{time:t,open:o,high:Math.max(h,o,cl),low:Math.min(l,o,cl),close:cl})}return [...m.values()].sort((a,b)=>a.time-b.time)}
 function cryptoCandles(s,tf){const k=s+tf;return cache[k]||(cache[k]=cc(s,tf).then(c=>{if(!c.length)delete cache[k];return c}))}
-async function cc(s,tf){let c=[];
- try{const r=await fetch(`https://api.exchange.coinbase.com/products/${s}-USD/candles?granularity=${GR[tf]}`);if(r.ok){c=(await r.json()).map(x=>({time:x[0],low:x[1],high:x[2],open:x[3],close:x[4]})).reverse()}}catch(e){}
- for(let i=0;i<3&&!c.length&&CG[s];i++){if(i)await new Promise(r=>setTimeout(r,2500*i));try{c=(await (await fetch(`https://api.coingecko.com/api/v3/coins/${CG[s]}/ohlc?vs_currency=usd&days=${CGD[tf]}`)).json()).map(x=>({time:x[0]/1000|0,open:x[1],high:x[2],low:x[3],close:x[4]}))}catch(e){}}
- const now=Date.now()/1000;return c.filter(x=>x.time>=now-SPAN[tf])}
+async function cc(s,tf){let c=[],src="";
+ try{const r=await fetch(`https://api.exchange.coinbase.com/products/${s}-USD/candles?granularity=${GR[tf]}`);if(r.ok){c=(await r.json()).map(x=>({time:x[0],low:x[1],high:x[2],open:x[3],close:x[4]})).reverse();src="Coinbase Exchange"}}catch(e){}
+ if(!c.length){const e=(await extras())[s],x=e&&e[EXK[tf]];if(x&&x.t&&x.t.length){c=x.t.map((t,i)=>({time:t,open:x.o[i],high:x.h[i],low:x.l[i],close:x.c[i]}));src=e.src||"exchange fallback"}}
+ if(!c.length&&CG[s]){const d=await cgGet(`https://api.coingecko.com/api/v3/coins/${CG[s]}/ohlc?vs_currency=usd&days=${CGD[tf]}`);if(d){c=d.map(x=>({time:x[0],open:x[1],high:x[2],low:x[3],close:x[4]}));src="CoinGecko"}}
+ const now=Date.now()/1000;c=clean(c).filter(x=>x.time>=now-SPAN[tf]);c.src=src;return c}
 const spark=v=>{if(!v||v.length<2)return '<svg width="70" height="24"></svg>';const a=Math.min(...v),b=Math.max(...v)||1,up=v[v.length-1]>=v[0];return `<svg width="70" height="24" viewBox="0 0 70 24"><polyline fill="none" stroke="${up?"#4fbf8f":"#e07a7f"}" stroke-width="1.5" points="${v.map((y,i)=>(i*70/(v.length-1)).toFixed(1)+","+(22-(y-a)/((b-a)||1)*20).toFixed(1)).join(" ")}"/></svg>`};
 const BC={HELD:"#4fbf8f",SIGNAL:"#d9b26a",WATCHING:"#7c8cf8"};
 function list(){const d=D[TAB];$("#uc-f").innerHTML=[["held","Held"],["watch","Watching or setting up"],["all","Show all"]].map(([k,l])=>`<button data-f="${k}" class="${F==k?"on":""}">${l}</button>`).join("");
@@ -64,11 +70,16 @@ async function draw(){const d=D[TAB],top=$("#uc-top");$("#uc-lab").textContent=d
   // daily closes: draw as candles open=prev close
   c=c.map((x,i)=>i?{...x,open:c[i-1].close,high:Math.max(x.close,c[i-1].close),low:Math.min(x.close,c[i-1].close)}:x)}
  else c=await cryptoCandles(s,tf);
- if(SYM[TAB]!=s)return;cs.setData(c);chart.timeScale().fitContent();
+ if(d.line)c=clean(c);if(SYM[TAB]!=s||TF!=TF)return;
+ cs.setMarkers([]);cs.setData(c);cs.priceScale().applyOptions({autoScale:true});chart.priceScale("right").applyOptions({autoScale:true});
+ const ce=$("#uc-chart");ce.style.display=c.length<2?"none":"";$("#uc-empty")&&$("#uc-empty").remove();
+ if(c.length<2){ce.insertAdjacentHTML("afterend",`<div id="uc-empty" class="m" style="padding:24px 14px;border:1px dashed var(--line);border-radius:14px;text-align:center">No ${tf} price data for ${esc(s)} right now${c.length?" (only 1 point)":""}. Try another timeframe, or check back after the next refresh.</div>`)}
+ else requestAnimationFrame(()=>{chart.applyOptions({width:ce.clientWidth});chart.timeScale().fitContent()});
  const last=c[c.length-1],first=c[0];$("#uc-px").textContent=last?" "+fp(last.close):"";$("#uc-chg").innerHTML=last&&first?`<span class="${last.close>=first.close?"g":"r"}">${last.close>=first.close?"+":""}${((last.close/first.close-1)*100).toFixed(2)}% · ${tf}</span>`:"";
  const tr=d.trades.filter(t=>t.sym==s&&c.length&&t.t>=c[0].time),bk=t=>{let b=c[0].time;for(const x of c)if(x.time<=t)b=x.time;return b};
- cs.setMarkers(tr.map(t=>({time:bk(t.t),position:t.side=="buy"?"belowBar":"aboveBar",color:t.side=="buy"?"#4fbf8f":"#e07a7f",shape:t.side=="buy"?"arrowUp":"arrowDown",text:(t.side=="buy"?"Buy ":"Sell ")+fp(t.px)})).sort((a,b)=>a.time-b.time));
- $("#uc-note").textContent=(c.length?"":"No candles available for this market right now. ")+(tr.length?`${tr.length} fake ${tr.length>1?"trades":"trade"} marked (▲ buy, ▼ sell). `:"No fake trades by this lane in this range. ")+(d.line?"Daily closes (Yahoo Finance via the stock desk).":"Real market data · Coinbase Exchange, CoinGecko fallback.")+(row.why?" "+row.why:"")}
+ cs.setMarkers(tr.map(t=>({time:bk(t.t),position:t.side=="buy"?"belowBar":"aboveBar",color:t.side=="buy"?"#4fbf8f":"#e07a7f",shape:t.side=="buy"?"arrowUp":"arrowDown",text:t.bot+" "+(t.side=="buy"?"Buy ":"Sell ")+fp(t.px)})).sort((a,b)=>a.time-b.time));
+ $("#uc-note").textContent=(c.length?"":"No candles available for this market right now. ")+(tr.length?`${tr.length} fake ${tr.length>1?"trades":"trade"} marked (▲ buy, ▼ sell; label = bot). `:"No fake trades by this lane in this range. ")+(d.line?"Daily closes (Yahoo Finance via the stock desk).":"Real market data · "+(c.src||"Coinbase / Kraken / CoinGecko")+".")+(row.why?" "+row.why:"")}
 function show(){document.querySelectorAll("#uc-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t==TAB));list();draw()}
+window.__uc={cryptoCandles,D,draw,set:(t,s,f)=>{TAB=t;SYM[t]=s;TF=f;show()}};
 load().then(show);setInterval(()=>{cache={};load().then(show)},120000);
 })();
