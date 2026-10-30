@@ -129,6 +129,7 @@ async function qload(){let d=null;try{d=await (await fetch("data/dashboard.json?
   qchart();}
 async function qchart(){E("#q-ivs").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.iv===QIVK));
   if(DL&&DL.sim&&!DL.pick){E("#q-chart").style.display="none";E("#q-px").textContent="–";E("#q-trades").innerHTML="";return}E("#q-chart").style.display="";
+  if(!QL.length){E("#q-chart").style.display="none";E("#q-px").textContent="";return}
   const q=QL.find(z=>z.mint===QM);if(!q)return;localStorage.qMint=QM;if(!LW()){E("#q-note").textContent="Chart library didn't load. Reload to retry.";return}
   if(!QC){QC=mkChart(E("#q-chart"));QCs=QC.addCandlestickSeries({upColor:"#16c784",downColor:"#ea3943",borderVisible:false,wickUpColor:"#16c784",wickDownColor:"#ea3943",priceFormat:{type:"price",precision:8,minMove:1e-8}});}
   E("#q-px").textContent="…";
