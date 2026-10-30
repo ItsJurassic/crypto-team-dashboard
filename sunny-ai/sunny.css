@@ -165,3 +165,20 @@ a{text-decoration-color:rgba(124,156,255,.4)}
 @media (min-width:1024px){.dgrid>div.card:nth-of-type(2),.dgrid>div.card:nth-of-type(3){grid-column:1/-1!important}}
 #lc .lcc{height:clamp(240px,55vw,320px)!important}
 @media (min-width:1024px){#lc .lcc{height:420px!important}}
+
+/* === Oct 30 color refresh: calm consumer-app palette (visual only) === */
+:root{--bg:#111318;--card:#1a1d24;--line:#2a2e37;--mut:#9aa1ad;--t:#e8eaee;--g:#4fbf8f;--r:#e07a7f;--acc:#7c8cf8;--amber:#d9b26a;--shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.18)}
+html,body{background:var(--bg)!important;color:var(--t)!important}
+body{font:14px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif!important;letter-spacing:-.005em}
+.wrap{padding:20px 18px!important}
+.card{background:var(--card)!important;border:1px solid rgba(255,255,255,.05)!important;border-radius:18px!important;padding:20px 20px!important;margin-top:16px!important;box-shadow:var(--shadow)!important}
+.hd{font-size:12px!important;letter-spacing:.02em!important;text-transform:none!important;color:var(--mut)!important;font-weight:600!important;margin-bottom:6px}
+.eq,.big{font-weight:700!important;letter-spacing:-.025em!important}
+.banner{background:rgba(217,178,106,.08)!important;border:1px solid rgba(217,178,106,.22)!important;border-radius:14px!important;padding:10px 14px!important;color:var(--amber)!important}
+button,.lb{border-radius:999px!important;background:#22262f!important;border:1px solid var(--line)!important;color:var(--t)!important;padding:8px 14px!important;font:600 12px/1 Inter,sans-serif!important;transition:background .15s}
+button:hover,.lb:hover{background:#2a2f3a!important}
+.lb.on,button.on{background:var(--acc)!important;border-color:var(--acc)!important;color:#fff!important}
+.mult,.tag{border-radius:999px!important;background:#22262f!important;border-color:var(--line)!important;color:var(--mut)!important}
+td,th{padding:9px 8px!important;border-bottom:1px solid var(--line)!important}tr:hover td{background:rgba(255,255,255,.02)!important}
+a{color:var(--acc)!important}a.back{color:var(--mut)!important}
+.met,.ln{border-radius:14px!important}
