@@ -8,12 +8,12 @@ const A=[];const b=d&&d.bank;
 if(b){const L=b.lanes||{},S=L.SOLANA||{},M=L.MAJOR||{},ms=b.start/2;
  A.push({n:"Sunny AI · SOLANA",t:"quick",start:ms,pl:(S.net||0)+(S.pnl_open||0),fees:(S.trade_fees||0)+(S.slippage||0)+(S.failed_costs||0),banked:S.banked||0,note:"shares the $2,000 Sunny AI account with MAJOR ($1,000 each)"});
  A.push({n:"Sunny AI · MAJOR",t:"lt",start:ms,pl:(M.net||0)+(M.pnl_open||0),fees:(M.trade_fees||0)+(M.slippage||0)+(M.failed_costs||0),banked:M.banked||0});}
-if(sc)A.push({n:"Seedling · $2,000 crypto",t:"lt",start:sc.start_balance||2000,eq:sc.equity,fees:null,banked:null,note:"20% bank rule not applied"});
+if(sc)A.push({n:"Seedling · fast side",t:"lt",start:500/* Oct 30 3:40 PM CT reset: $500 fast (scorecard start_balance is stale) */,eq:sc.equity,fees:null,banked:null,note:"20% bank rule not applied"});
 if(sh){const px={};(cg||[]).forEach(c=>px[(c.symbol||"").toUpperCase()]=c.current_price);
  const parts=[sh.buildup,sh.steady_base,sh.strategy_sleeve].filter(x=>x&&typeof x=="object");let eq=null,ok=false;
  if(parts.length){eq=+sh.accrued_usdc_rewards_usd||0;for(const g of parts){if(g.cash_usd!=null){eq+=+g.cash_usd;ok=true}for(const[k,h]of Object.entries(g.holdings||{})){ok=true;eq+=px[k]?h.qty*px[k]:(+h.cost_usd||0)}}}
  if(!ok||!isFinite(eq))eq=null;
- const T=Array.isArray(stt)?stt:(stt&&stt.trades)||[];A.push({n:"Seedling · shadow DCA",t:"lt",start:sh.total_start_usd||2000,eq,na:eq==null,fees:T.reduce((a,t)=>a+(+t.fee_usd||0),0),banked:null,note:"marked to CoinGecko prices"});}
+ const T=Array.isArray(stt)?stt:(stt&&stt.trades)||[];A.push({n:"Seedling · buildup (shadow DCA)",t:"lt",start:sh.total_start_usd||500,eq,na:eq==null,fees:T.reduce((a,t)=>a+(+t.fee_usd||0),0),banked:null,note:"marked to CoinGecko prices"});}
 if(st)A.push({n:"Fake Money · Long-term Stocks",t:"stk",start:st.start,eq:st.equity,fees:(st.fees||0)+(st.slippage||0),banked:st.banked});
 A.forEach(a=>{if(a.na)return;if(a.eq==null)a.eq=a.start+a.pl;if(a.pl==null)a.pl=a.eq-a.start});window.__ACC=A.filter(a=>!a.na);window.dispatchEvent(new Event("acc"));
 const sum=(r0,n)=>{const r=r0.filter(a=>!a.na);return{n,start:r.reduce((x,a)=>x+a.start,0),eq:r.reduce((x,a)=>x+a.eq,0),pl:r.reduce((x,a)=>x+a.pl,0),fees:r.reduce((x,a)=>x+(a.fees||0),0),banked:r.reduce((x,a)=>x+(a.banked||0),0)}};

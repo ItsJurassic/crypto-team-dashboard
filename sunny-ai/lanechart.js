@@ -13,7 +13,7 @@ window.laneChart=function(el,d){
   let pts,base,lab;
   if(tab=="MAJOR"||tab=="SOLANA"){const i=tab=="SOLANA"?1:2;pts=LC.map(p=>[p[0],H2+p[i]]);base=H2;lab=tab+" equity"}
   else if(tab=="STOCKS"){pts=sc.map(p=>[p[0],p[1]]);base=sk.start||1000;lab="Long-term Stocks equity"}
-  else if(tab=="SEEDLING"){const A=(window.__ACC||[]).filter(a=>/Seedling/.test(a.n)),st=A.reduce((x,a)=>x+a.start,0)||2000,eq=A.length?A.reduce((x,a)=>x+a.eq,0):(sd.equity||st),c=d.curve||[];pts=c.length?[[c[0][0],st],[c[c.length-1][0],eq]]:[];base=st;lab="Seedling equity (start → now; no stored history)"}
+  else if(tab=="SEEDLING"){const A=(window.__ACC||[]).filter(a=>/Seedling/.test(a.n)),st=A.reduce((x,a)=>x+a.start,0)||1000,eq=A.length?A.reduce((x,a)=>x+a.eq,0):(sd.equity||st),c=d.curve||[];pts=c.length?[[c[0][0],st],[c[c.length-1][0],eq]]:[];base=st;lab="Seedling equity (start → now; no stored history)"}
   else{const A=window.__ACC||[],oth=A.filter(a=>!/Sunny AI/.test(a.n)),seS=oth.filter(a=>/Seedling/.test(a.n)).reduce((x,a)=>x+a.start,0),seE=oth.filter(a=>/Seedling/.test(a.n)).reduce((x,a)=>x+a.eq,0),ks=sk.start||1000,c=d.curve||[];
     pts=c.map((p,i)=>[p[0],p[1]+at(sc,p[0],ks)+(i==c.length-1?seE:seS)]);base=S+ks+seS;lab="All fake money equity"}
   el._p=pts;el._base=base;el._lab=lab;el._tab=tab;
