@@ -15,7 +15,7 @@ if(sh){const px={};(cg||[]).forEach(c=>px[(c.symbol||"").toUpperCase()]=c.curren
  if(!ok||!isFinite(eq))eq=null;
  const T=Array.isArray(stt)?stt:(stt&&stt.trades)||[];A.push({n:"Seedling · shadow DCA",t:"lt",start:sh.total_start_usd||2000,eq,na:eq==null,fees:T.reduce((a,t)=>a+(+t.fee_usd||0),0),banked:null,note:"marked to CoinGecko prices"});}
 if(st)A.push({n:"Fake Money · Long-term Stocks",t:"stk",start:st.start,eq:st.equity,fees:(st.fees||0)+(st.slippage||0),banked:st.banked});
-A.forEach(a=>{if(a.na)return;if(a.eq==null)a.eq=a.start+a.pl;if(a.pl==null)a.pl=a.eq-a.start});
+A.forEach(a=>{if(a.na)return;if(a.eq==null)a.eq=a.start+a.pl;if(a.pl==null)a.pl=a.eq-a.start});window.__ACC=A.filter(a=>!a.na);window.dispatchEvent(new Event("acc"));
 const sum=(r0,n)=>{const r=r0.filter(a=>!a.na);return{n,start:r.reduce((x,a)=>x+a.start,0),eq:r.reduce((x,a)=>x+a.eq,0),pl:r.reduce((x,a)=>x+a.pl,0),fees:r.reduce((x,a)=>x+(a.fees||0),0),banked:r.reduce((x,a)=>x+(a.banked||0),0)}};
 const TY={stk:["Long-term Stocks","ty-stk"],quick:["Quick Crypto","ty-q"],lt:["Long-term Crypto","ty-lt"],bank:["Banking","ty-bk"]};
 const pill=t=>TY[t]?` <span class="pill ${TY[t][1]}">${TY[t][0]}</span>`:"";

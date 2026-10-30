@@ -1,30 +1,50 @@
-/* Equity / lane P/L chart with tabs Total | MAJOR | SOLANA. FAKE MONEY ONLY. */
-window.LCTF={"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1d":86400,"1w":604800,"1mo":2592000,"1y":31536000,"All":0};
+/* Equity / lane P/L chart, tabs Total | MAJOR | SOLANA. One continuous chart of ALL data:
+   drag/swipe sideways to scroll, wheel / pinch to zoom, double-click/tap to reset. FAKE MONEY ONLY. */
 window.laneChart=function(el,d){
   const tab=localStorage.lcTab||"Total";
-  if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist">'+["Total","MAJOR","SOLANA"].map(t=>`<button class="lb" data-t="${t}">${t}</button>`).join("")+'</div><div class="lctf ctf" role="group" aria-label="Timeframe"></div><div class="lcv m"></div><canvas class="lcc"></canvas><div class="lcn m"></div>';
-    el.querySelectorAll(".lct button").forEach(b=>b.onclick=()=>{localStorage.lcTab=b.dataset.t;laneChart(el,el._d)})}
-  if(!el.querySelector(".lctf").dataset.init){const z=el.querySelector(".lctf");z.dataset.init=1;z.innerHTML=Object.keys(LCTF).map(k=>`<button class="lb" data-tf="${k}">${k}</button>`).join("");z.onclick=e=>{const b=e.target.closest("button");if(b&&!b.disabled){localStorage.lcTf=b.dataset.tf;laneChart(el,el._d)}}}
+  if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist">'+["Total","MAJOR","SOLANA"].map(t=>`<button class="lb" data-t="${t}">${t}</button>`).join("")+'</div><div class="lcv m"></div><canvas class="lcc" style="touch-action:pan-y;cursor:grab;width:100%;height:220px;display:block"></canvas><div class="lch m" style="font-size:11px">Drag or swipe sideways to scroll · pinch or Ctrl+scroll to zoom · double-tap to show all</div><div class="lcn m"></div>';
+    el.querySelectorAll(".lct button").forEach(b=>b.onclick=()=>{localStorage.lcTab=b.dataset.t;el._v=null;laneChart(el,el._d)});
+    bind(el)}
   el._d=d;el.querySelectorAll(".lct button").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));
   const LC=d.lane_curve||[],S=d.start||1000;let pts,base,lab;
   if(tab=="Total"){pts=(d.curve||[]).map(p=>[p[0],p[1]]);base=S;lab="Equity"}
   else{const i=tab=="SOLANA"?1:2;pts=LC.map(p=>[p[0],p[i]]);base=0;lab=tab+" cumulative P/L"}
-  {const all=pts,tE=all.length?all[all.length-1][0]:0,cnt=k=>LCTF[k]?all.filter(p=>p[0]>=tE-LCTF[k]).length:all.length;let tf=localStorage.lcTf||"All";
-   el.querySelectorAll(".lctf button").forEach(b=>{const ok=cnt(b.dataset.tf)>=2;b.disabled=!ok;b.title=ok?"Last "+b.dataset.tf:"Not available: fewer than 2 recorded points in this window (equity is recorded about every 1-3 min)";b.style.opacity=ok?"":".4"});
-   if(cnt(tf)<2)tf="All";el.querySelectorAll(".lctf button").forEach(b=>b.classList.toggle("on",b.dataset.tf==tf));
-   if(LCTF[tf])pts=all.filter(p=>p[0]>=tE-LCTF[tf]);}
-  const last=pts.length?pts[pts.length-1][1]:base,up=last>=base,col=up?"#3fb68b":"#e5636f";
-  const fm=v=>(v<0?"-$":"$")+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
-  el.querySelector(".lcv").innerHTML=`${lab}: <b style="color:${col}">${tab=="Total"?fm(last):(last>=0?"+":"")+fm(last)}</b>`;
+  el._p=pts;el._base=base;el._lab=lab;el._tab=tab;
   el.querySelector(".lcn").textContent=tab=="Total"?"":"Lane series recorded each cycle. Before the first MAJOR fill (Oct 29, 10:03 AM CT) all P/L was SOLANA (backfilled); the 10:03–10:56 AM CT stretch was not reconstructed.";
-  const c=el.querySelector(".lcc"),r=c.getBoundingClientRect(),dpr=devicePixelRatio||1,W=Math.max(200,r.width),H=r.height||150;
-  c.width=W*dpr;c.height=H*dpr;const x=c.getContext("2d");x.scale(dpr,dpr);x.clearRect(0,0,W,H);
-  if(pts.length<2){x.fillStyle="#8a94a3";x.font="12px sans-serif";x.fillText("Collecting data…",10,H/2);return}
-  const t0=pts[0][0],t1=pts[pts.length-1][0],vs=pts.map(p=>p[1]).concat([base]),lo=Math.min(...vs),hi=Math.max(...vs),pad=(hi-lo)*.08||1;
-  const X=t=>(t-t0)/(t1-t0||1)*(W-4)+2,Y=v=>H-4-(v-lo+pad)/(hi-lo+2*pad)*(H-8);
-  x.strokeStyle="#252c36";x.setLineDash([3,3]);x.beginPath();x.moveTo(0,Y(base));x.lineTo(W,Y(base));x.stroke();x.setLineDash([]);
-  x.beginPath();pts.forEach((p,i)=>i?x.lineTo(X(p[0]),Y(p[1])):x.moveTo(X(p[0]),Y(p[1])));
-  x.strokeStyle=col;x.lineWidth=1.6;x.stroke();
-  x.lineTo(X(t1),H);x.lineTo(X(t0),H);x.closePath();const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,col+"44");g.addColorStop(1,col+"00");x.fillStyle=g;x.fill();
+  draw(el);
+  function draw(el){
+    const pts=el._p,base=el._base,c=el.querySelector(".lcc"),r=c.getBoundingClientRect(),dpr=devicePixelRatio||1,W=Math.max(200,r.width),H=r.height||220;
+    c.width=W*dpr;c.height=H*dpr;const x=c.getContext("2d");x.scale(dpr,dpr);x.clearRect(0,0,W,H);
+    const fm=v=>(v<0?"-$":"$")+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(pts.length<2){el.querySelector(".lcv").textContent=el._lab;x.fillStyle="#8a94a3";x.font="12px sans-serif";x.fillText("Collecting data…",10,H/2);return}
+    const T0=pts[0][0],T1=pts[pts.length-1][0];let v=el._v||[T0,T1];
+    const span=Math.max(120,Math.min(T1-T0,v[1]-v[0]));let a=Math.max(T0,Math.min(v[0],T1-span));v=el._v=[a,a+span];
+    const vis=pts.filter((p,i)=>(p[0]>=v[0]&&p[0]<=v[1])||(pts[i+1]&&pts[i+1][0]>=v[0]&&p[0]<v[0])||(pts[i-1]&&pts[i-1][0]<=v[1]&&p[0]>v[1]));
+    const last=pts[pts.length-1][1],up=last>=base,col=up?"#3fb68b":"#e5636f";
+    el.querySelector(".lcv").innerHTML=`${el._lab}: <b style="color:${col}">${el._tab=="Total"?fm(last):(last>=0?"+":"")+fm(last)}</b>`;
+    const vs=vis.map(p=>p[1]).concat([base]),lo=Math.min(...vs),hi=Math.max(...vs),pad=(hi-lo)*.08||1,B=16;
+    const X=t=>(t-v[0])/(v[1]-v[0])*(W-4)+2,Y=q=>H-B-4-(q-lo+pad)/(hi-lo+2*pad)*(H-B-8);
+    x.strokeStyle="#252c36";x.setLineDash([3,3]);x.beginPath();x.moveTo(0,Y(base));x.lineTo(W,Y(base));x.stroke();x.setLineDash([]);
+    x.save();x.beginPath();x.rect(0,0,W,H-B);x.clip();
+    x.beginPath();vis.forEach((p,i)=>i?x.lineTo(X(p[0]),Y(p[1])):x.moveTo(X(p[0]),Y(p[1])));x.strokeStyle=col;x.lineWidth=1.6;x.stroke();
+    x.lineTo(X(vis[vis.length-1][0]),H-B);x.lineTo(X(vis[0][0]),H-B);x.closePath();const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,col+"44");g.addColorStop(1,col+"00");x.fillStyle=g;x.fill();x.restore();
+    x.fillStyle="#8a94a3";x.font="10px sans-serif";const tl=t=>new Date(t*1000).toLocaleString([], (v[1]-v[0])>172800?{month:"short",day:"numeric"}:{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+    x.textAlign="left";x.fillText(tl(v[0]),2,H-3);x.textAlign="right";x.fillText(tl(v[1]),W-2,H-3);
+    // scrollbar
+    const sw=Math.max(20,(v[1]-v[0])/(T1-T0||1)*W),sx=(v[0]-T0)/(T1-T0||1)*W;if(sw<W-1){x.fillStyle="#2a3240";x.fillRect(sx,H-B-2,sw,2)}
+  }
+  function bind(el){
+    const c=el.querySelector(".lcc"),P=new Map();let last=null;
+    const zoom=(f,cx)=>{const v=el._v,w=c.getBoundingClientRect().width,t=v[0]+(cx/w)*(v[1]-v[0]),n=(v[1]-v[0])*f;el._v=[t-(t-v[0])*f,t-(t-v[0])*f+n];draw(el)};
+    const pan=dx=>{const v=el._v,w=c.getBoundingClientRect().width,dt=-dx/w*(v[1]-v[0]);el._v=[v[0]+dt,v[1]+dt];draw(el)};
+    c.addEventListener("wheel",e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){e.preventDefault();pan(-e.deltaX);return}if(e.ctrlKey||e.metaKey){e.preventDefault();zoom(Math.exp(e.deltaY*0.01),e.offsetX)}else if(e.shiftKey){e.preventDefault();pan(-e.deltaY)}},{passive:false});
+    c.addEventListener("pointerdown",e=>{c.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.offsetX,e.offsetY]);c.style.cursor="grabbing";last=null});
+    c.addEventListener("pointermove",e=>{if(!P.has(e.pointerId))return;const o=P.get(e.pointerId);
+      if(P.size==1){pan(e.offsetX-o[0])}else if(P.size==2){const q=[...P.entries()],other=q.find(k=>k[0]!=e.pointerId)[1],d0=Math.abs(o[0]-other[0])||1,d1=Math.abs(e.offsetX-other[0])||1;zoom(d0/d1,(e.offsetX+other[0])/2)}
+      P.set(e.pointerId,[e.offsetX,e.offsetY])});
+    const up=e=>{P.delete(e.pointerId);if(!P.size)c.style.cursor="grab"};c.addEventListener("pointerup",up);c.addEventListener("pointercancel",up);
+    c.addEventListener("dblclick",()=>{el._v=null;draw(el)});
+    el._draw=()=>draw(el);
+  }
 };
 addEventListener("resize",()=>document.querySelectorAll("[data-init]").forEach(e=>e._d&&laneChart(e,e._d)));
