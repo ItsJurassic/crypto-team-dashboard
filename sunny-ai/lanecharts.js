@@ -8,7 +8,7 @@ const isSim=x=>{if(!x)return true;const s=typeof x=="string"?x:[x.symbol,x.mint,
 const CG={BTC:"bitcoin",ETH:"ethereum",SOL:"solana",XRP:"ripple",DOGE:"dogecoin",BNB:"binancecoin",AVAX:"avalanche-2",LINK:"chainlink",SUI:"sui",HYPE:"hyperliquid",TRX:"tron",XMR:"monero",ZEC:"zcash"};
 const TFS=["1D","1W","1M","1Y"],SPAN={"1D":86400,"1W":604800,"1M":2592000,"1Y":31536000};
 const GR={"1D":300,"1W":3600,"1M":21600,"1Y":86400},CGD={"1D":1,"1W":7,"1M":30,"1Y":365};
-const LANES=[["stocks","Stocks (slow build)"],["quick","Quick trades (Solana)"],["crypto","Crypto"]];
+const LANES=[["stocks","📈 Fake Stocks · slow"],["quick","⚡ Fast Crypto · SOLANA"],["crypto","🐢 Slow Crypto · MAJOR"]];
 let TAB=LANES.some(l=>l[0]==localStorage.ucTab)?localStorage.ucTab:"stocks",F=localStorage.ucF||"all",TF=localStorage.ucTF||"1M",SYM={},D={},chart,cs,cache={};
 const root=$("#uc");
 root.innerHTML=`<div class="chips" id="uc-tabs" style="display:flex;gap:8px;overflow-x:auto;margin:14px 0 4px">${LANES.map(([k,l])=>`<button data-t="${k}" style="flex:0 0 auto;white-space:nowrap">${l}</button>`).join("")}</div>
@@ -26,19 +26,19 @@ async function load(){
  const L=(act&&act.lanes)||{};
  // Stocks
  const pos=(stk&&stk.positions)||{};
- D.stocks={lab:"Long-term Stocks desk · fake money",rows:((stk&&stk.watch)||[]).filter(w=>!(L.STOCKS)||L.STOCKS.includes(w.symbol)).map(w=>({sym:w.symbol,px:w.price,chg:w.day_pct,sub:w.sector,st:pos[w.symbol]||w.held?"HELD":w.status=="signal"?"SIGNAL":"WATCHING",why:w.why,spark:(w.chart&&w.chart.c||[]).slice(-30),candles:w.chart?w.chart.t.map((t,i)=>({time:t,value:w.chart.c[i]})):[]})),
+ D.stocks={lab:"📈 Fake Stocks · slow · fake money",rows:((stk&&stk.watch)||[]).filter(w=>!(L.STOCKS)||L.STOCKS.includes(w.symbol)).map(w=>({sym:w.symbol,px:w.price,chg:w.day_pct,sub:w.sector,st:pos[w.symbol]||w.held?"HELD":w.status=="signal"?"SIGNAL":"WATCHING",why:w.why,spark:(w.chart&&w.chart.c||[]).slice(-30),candles:w.chart?w.chart.t.map((t,i)=>({time:t,value:w.chart.c[i]})):[]})),
   trades:((stk&&stk.trades)||[]).filter(t=>t.status=="FILLED").map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+t.price,bot:"Stocks"})),tfs:{"1D":"Stock data is daily closes","1W":true,"1M":true,"1Y":true},line:true};
  // Quick (SOLANA): only real coins the lane holds or shadow-trades
  const dp=(dash&&dash.positions)||{};
  const qh=Object.values(dp).filter(p=>p.lane=="SOLANA"&&!isSim(p)).map(p=>p.symbol);
  const ql=(L.SOLANA||[]).map(x=>typeof x=="string"?{symbol:x}:x).filter(x=>!isSim(x)&&x.mint).map(x=>x.symbol);
- D.quick={lab:"SOLANA lane · fake money quick trades",rows:[...new Set([...qh,...ql])].map(s=>({sym:s,st:qh.includes(s)?"HELD":"WATCHING"})),trades:[],dex:true,
+ D.quick={lab:"⚡ Fast Crypto · SOLANA · fake money",rows:[...new Set([...qh,...ql])].map(s=>({sym:s,st:qh.includes(s)?"HELD":"WATCHING"})),trades:[],dex:true,
   empty:"No real Solana coins to chart right now. Quick trading was unpaused at 1:54 PM CT, but SOLANA holds no positions and none of the real-data coins it scanned passed its filters, so its shadow log is empty. The only coin it listed (TOADB) is a simulated practice coin and is hidden. Coins will appear here automatically as soon as the lane holds or shadow-trades a real one."};
- // Crypto: MAJOR lane + Seedling, real coins only
- const mh=Object.values(dp).filter(p=>p.lane=="MAJOR"&&!isSim(p)).map(p=>p.symbol),sh=Object.keys((pf&&pf.positions)||{}).map(s=>s.toUpperCase());
- const cl=[...new Set([...(L.MAJOR||[]),...((L.SEEDLING&&L.SEEDLING.markets)||[]),...mh,...sh])].filter(s=>!isSim(s));
- D.crypto={lab:"MAJOR lane + Seedling · fake money",rows:cl.map(s=>({sym:s,st:mh.includes(s)||sh.includes(s)?"HELD":"WATCHING",sub:(mh.includes(s)?"MAJOR":"")+((L.SEEDLING&&L.SEEDLING.markets||[]).includes(s)?(mh.includes(s)?" · ":"")+"Seedling":(L.MAJOR||[]).includes(s)&&!mh.includes(s)?"MAJOR":"")})),
-  trades:[...((dash&&dash.trades)||[]).filter(t=>!isSim(t)&&t.symbol).map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price),bot:t.lane||(t.source=="MAJOR"?"MAJOR":t.source)||"MAJOR"})),...((tt||[]).filter(t=>!isSim(t)).map(t=>({sym:(t.coin||"").toUpperCase(),t:t.t||ts(t.time),side:String(t.side).toLowerCase(),px:+t.price,bot:"Seedling"})))],tfs:{"1D":true,"1W":true,"1M":true,"1Y":true}};
+ // Slow Crypto: MAJOR lane only (Seedling is practice, no money), real coins only
+ const mh=Object.values(dp).filter(p=>p.lane=="MAJOR"&&!isSim(p)).map(p=>p.symbol),sh=[];
+ const cl=[...new Set([...(L.MAJOR||[]),...mh,...sh])].filter(s=>!isSim(s));
+ D.crypto={lab:"🐢 Slow Crypto · MAJOR · fake money",rows:cl.map(s=>({sym:s,st:mh.includes(s)||sh.includes(s)?"HELD":"WATCHING",sub:(mh.includes(s)?"MAJOR":"")+((L.MAJOR||[]).includes(s)&&!mh.includes(s)?"MAJOR":"")})),
+  trades:[...((dash&&dash.trades)||[]).filter(t=>!isSim(t)&&t.symbol).map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price),bot:t.lane||(t.source=="MAJOR"?"MAJOR":t.source)||"MAJOR"}))],tfs:{"1D":true,"1W":true,"1M":true,"1Y":true}};
  D.crypto.rows.sort((a,b)=>(a.st=="HELD"?0:1)-(b.st=="HELD"?0:1)||a.sym.localeCompare(b.sym));
  D.stocks.rows.sort((a,b)=>({HELD:0,SIGNAL:1,WATCHING:2}[a.st]-{HELD:0,SIGNAL:1,WATCHING:2}[b.st])||a.sym.localeCompare(b.sym));
 }
