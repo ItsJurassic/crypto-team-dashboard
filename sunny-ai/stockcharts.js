@@ -27,7 +27,7 @@ card.innerHTML=`<div class="hd"><span>Stocks · paper desk watchlist</span><a cl
 const qcard=document.createElement("div"); qcard.className="card"; qcard.dataset.sec="quick";
 qcard.innerHTML=`<div class="hd"><span>Quick trades · SOLANA lane coins</span><a class=m href="./">desk →</a></div>
 <div><span class="rmd">Real market data · GeckoTerminal DEX (Solana)</span><span class="rmd ptag">▲▼ Paper trade (simulated orders)</span></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0"><select id="q-sel" aria-label="Quick-trade coin" style="${SEL};min-width:200px"></select><select id="q-flt" aria-label="Filter" style="${SEL}"><option value="all">All real coins</option><option value="desk">Desk-scanned only</option><option value="ref">Reference Solana coins</option><option value="traded">Paper-traded only</option></select><div id="q-px" class="px" style="font-size:22px"></div></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0"><select id="q-sel" aria-label="Quick-trade coin" style="${SEL};min-width:200px"></select><select id="q-flt" aria-label="Filter" style="${SEL}"><option value="all">All real coins</option><option value="desk">Desk-scanned only</option><option value="ref">Reference Solana coins</option><option value="traded">Fake-traded only</option></select><div id="q-px" class="px" style="font-size:22px"></div></div>
 <div id="q-ivs" class="ctabs" style="margin:4px 0"></div><div id="q-chart" style="height:340px"></div><div id="q-note" class="m s">Loading…</div><div id="q-trades" class="m" style="font-size:12px"></div>`;
 (cryptoCards[0]||wrap.firstChild).before(tabs); tabs.after(card); card.after(qcard);
 tabs.innerHTML=["All","Stocks (slow build)","Quick trades (Solana)","Crypto"].map((l,i)=>`<button data-t="${["all","stocks","quick","crypto"][i]}">${l}</button>`).join("");
@@ -53,14 +53,14 @@ const badge=w=>(w.held?'<span class="bdg h">HELD</span> ':"")+(w.status=="signal
 function list(){const srt=SS=="day"?(a,b)=>b.day_pct-a.day_pct:SS=="rsi"?(a,b)=>a.rsi2-b.rsi2:SS=="az"?(a,b)=>a.symbol.localeCompare(b.symbol):(a,b)=>rk(a)-rk(b)||(b.score||0)-(a.score||0)||a.symbol.localeCompare(b.symbol);
   return WD.filter(w=>SF=="all"?true:SF=="held"?w.held:SF=="signals"?(w.status=="signal"||w.queued||w.held):SF=="traded"?TD.some(t=>t.symbol===w.symbol):w.sector==SF).sort(srt)}
 function draw(){const secs=[...new Set(WD.map(w=>w.sector).filter(Boolean))].sort();
-  E("#stk-flt").innerHTML=[["all","All "+WD.length+" stocks"],["signals","Signals + held"],["held","Held only"],["traded","Paper-traded"]].map(([k,l])=>`<option value="${k}">${l}</option>`).join("")+`<optgroup label="Sector">${secs.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("")}</optgroup>`; E("#stk-flt").value=SF;
+  E("#stk-flt").innerHTML=[["all","All "+WD.length+" stocks"],["signals","Signals + held"],["held","Held only"],["traded","Fake-traded"]].map(([k,l])=>`<option value="${k}">${l}</option>`).join("")+`<optgroup label="Sector">${secs.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("")}</optgroup>`; E("#stk-flt").value=SF;
   E("#stk-sort").innerHTML=[["signals","Sort: signals first"],["day","Sort: day %"],["rsi","Sort: RSI(2) low"],["az","Sort: A–Z"]].map(([k,l])=>`<option value="${k}">${l}</option>`).join(""); E("#stk-sort").value=SS;
   let x=list(), note=""; if(!x.length){x=WD.slice(); note=" (none match this filter, showing all)";}
   if(!x.some(w=>w.symbol===SSYM)) SSYM=(x[0]||{}).symbol||"";
   E("#stk-sel").innerHTML=x.map(w=>`<option value="${esc(w.symbol)}">${esc(w.symbol)} · $${(+w.price).toFixed(2)} ${w.day_pct>=0?"+":""}${w.day_pct}%${w.held?" · HELD":w.status=="signal"||w.queued?" · SIGNAL":""}</option>`).join(""); E("#stk-sel").value=SSYM;
   E("#stk").innerHTML=x.map(w=>`<div class="srow ${w.held?"held":w.status=="signal"?"sig":""}" data-s="${esc(w.symbol)}"><b>${esc(w.symbol)}</b><span style="text-align:right">$${(+w.price).toFixed(2)}</span><span style="text-align:right" class="${w.day_pct>=0?"up":"dn"}">${w.day_pct>=0?"+":""}${w.day_pct}%</span>${svg(w,w.chart||{},TD.filter(t=>t.symbol===w.symbol),90,24)}<span>${badge(w)}</span></div>`).join("");
   E("#stk").querySelectorAll(".srow").forEach(r=>r.onclick=()=>{pick(r.dataset.s);E("#stk-sel").scrollIntoView({behavior:"smooth",block:"center"})});
-  E("#stk-note").textContent=`${x.length} of ${WD.length} stocks${note} · pick one from the dropdown · ${TD.length} paper trade(s) marked ▲ buy / ▼ sell`;
+  E("#stk-note").textContent=`${x.length} of ${WD.length} stocks${note} · pick one from the dropdown · ${TD.length} fake trade(s) marked ▲ buy / ▼ sell`;
   pick(SSYM);}
 function pick(sym){SSYM=sym;localStorage.stkSym=sym;E("#stk-sel").value=sym;const w=WD.find(z=>z.symbol===sym);if(!w)return;
   if(!LW()){E("#stk-note").textContent="Chart library didn't load. Reload to retry.";return}
@@ -77,9 +77,9 @@ async function go(){try{const d=await (await fetch("data/stocks.json?"+Date.now(
   const W=(d.watch||[]).filter(w=>!isSimX(w.symbol)), T=(d.trades||[]).filter(t=>!isSimX(t.symbol)&&!/FAIL|REJECT/i.test(t.status||""));
   WD=W; TD=T; draw();
   const $f=v=>v==null?"n/a":"$"+(+v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}), P=Object.entries(d.positions||{}), lt=(d.trades||[]).slice(-3).reverse();
-  E("#stk-desk").innerHTML=`<div class="t"><b>Stocks paper desk</b></div>
-  <div class="m" style="font-size:12px">Paper start ${$f(d.start)} · equity <b>${$f(d.equity)}</b> · net <span class="${(d.net_pnl||0)>=0?"up":"dn"}">${$f(d.net_pnl)}</span> · cash ${$f(d.cash)} · ${d.closed||0} closed / ${d.wins||0} wins · ${P.length} open${P.length?": "+P.map(([k])=>esc(k)).join(", "):""}</div>
-  ${lt.length?`<div class="m" style="font-size:12px">Latest paper trades: ${lt.map(t=>`<span class="rmd ptag">Paper trade</span>${esc(t.side)} ${esc(t.symbol)} $${(+t.price).toFixed(2)} · ${esc(String(t.reason||"").slice(0,90))}`).join("<br>")}</div>`:`<div class="m" style="font-size:12px">No paper trades yet. Trades with reasons, rules and the backtest are on the <a href="stocks.html">stocks desk page</a>.</div>`}`;
+  E("#stk-desk").innerHTML=`<div class="t"><b>Long-term stocks · fake money desk</b></div>
+  <div class="m" style="font-size:12px">Fake money start ${$f(d.start)} · equity <b>${$f(d.equity)}</b> · net <span class="${(d.net_pnl||0)>=0?"up":"dn"}">${$f(d.net_pnl)}</span> · cash ${$f(d.cash)} · ${d.closed||0} closed / ${d.wins||0} wins · ${P.length} open${P.length?": "+P.map(([k])=>esc(k)).join(", "):""}</div>
+  ${lt.length?`<div class="m" style="font-size:12px">Latest fake trades: ${lt.map(t=>`<span class="rmd ptag">Fake trade</span>${esc(t.side)} ${esc(t.symbol)} $${(+t.price).toFixed(2)} · ${esc(String(t.reason||"").slice(0,90))}`).join("<br>")}</div>`:`<div class="m" style="font-size:12px">No fake trades yet. Trades with reasons, rules and the backtest are on the <a href="stocks.html">stocks desk page</a>.</div>`}`;
  }catch(e){E("#stk-note").innerHTML=`<span class="dn">Stock charts unavailable right now (${esc(e.message)}).</span>`;}}
 go(); setInterval(go,300000);
 // ---- Quick trades (SOLANA lane): one big DEX chart + dropdown. Real coins only (GeckoTerminal public API); SIM practice coins are filtered out.
@@ -92,7 +92,7 @@ E("#q-ivs").innerHTML=Object.keys(QIV).map(k=>`<button data-iv="${k}">${k}</butt
 E("#q-ivs").querySelectorAll("button").forEach(b=>b.onclick=()=>{QIVK=b.dataset.iv;localStorage.qIv=QIVK;qchart()});
 function qopts(){const x=QL.filter(q=>QF=="all"||(QF=="desk"&&q.desk)||(QF=="ref"&&!q.desk)||(QF=="traded"&&q.traded));
   if(!x.some(q=>q.mint===QM))QM=(x[0]||QL[0]||{}).mint||"";
-  E("#q-sel").innerHTML=x.map(q=>`<option value="${q.mint}">${esc(q.symbol)}${q.traded?" · paper-traded":q.desk?" · desk scanned":" · reference"}</option>`).join("")||'<option value="">No coins in this filter</option>';E("#q-sel").value=QM;}
+  E("#q-sel").innerHTML=x.map(q=>`<option value="${q.mint}">${esc(q.symbol)}${q.traded?" · fake-traded":q.desk?" · desk scanned":" · reference"}</option>`).join("")||'<option value="">No coins in this filter</option>';E("#q-sel").value=QM;}
 async function qload(){let d=null;try{d=await (await fetch("data/dashboard.json?"+Date.now())).json()}catch(e){}
   const M=new Map();const add=(sym,mint,o)=>{if(!okMint(mint))return;const q=M.get(mint)||{symbol:sym||mint.slice(0,6),mint,desk:false,traded:false};Object.assign(q,o);M.set(mint,q)};
   QT=[];if(d){for(const k of ["kills","judge_rejections","calibration"])for(const r of d[k]||[])if(r.lane!=="MAJOR")add(r.symbol,r.mint,{desk:true});
@@ -116,7 +116,7 @@ async function qchart(){E("#q-ivs").querySelectorAll("button").forEach(b=>b.clas
     QCs.setMarkers(mk.sort((a,b)=>a.time-b.time));QC.timeScale().fitContent();
     const last=L[L.length-1].close,first=L[0].open,ch=(last/first-1)*100;
     E("#q-px").innerHTML=`$${last>=1?last.toFixed(2):last.toPrecision(4)} <span class="chg ${ch>=0?"up":"dn"}">${ch>=0?"+":""}${ch.toFixed(1)}%</span>`;
-    E("#q-trades").innerHTML=`<b>${esc(q.symbol)}</b> · pool ${esc(pl.name)} (${esc(pl.dex)}) · ${L.length} candles of ${QIVK} · <a style="color:#8fb3ff" target=_blank rel=noopener href="https://www.geckoterminal.com/solana/pools/${pl.id}">source</a>`+(tr.length?`<br>`+tr.slice(-5).reverse().map(t=>`<span class="rmd ptag">Paper trade</span>${esc(t.side)} at $${esc(t.filled||t.intended)} · ${esc(String(t.time).slice(0,16))} · ${esc(t.reason||"")}`).join("<br>"):`<br>No paper trades on this coin in the current log.`);
+    E("#q-trades").innerHTML=`<b>${esc(q.symbol)}</b> · pool ${esc(pl.name)} (${esc(pl.dex)}) · ${L.length} candles of ${QIVK} · <a style="color:#8fb3ff" target=_blank rel=noopener href="https://www.geckoterminal.com/solana/pools/${pl.id}">source</a>`+(tr.length?`<br>`+tr.slice(-5).reverse().map(t=>`<span class="rmd ptag">Fake trade</span>${esc(t.side)} at $${esc(t.filled||t.intended)} · ${esc(String(t.time).slice(0,16))} · ${esc(t.reason||"")}`).join("<br>"):`<br>No paper trades on this coin in the current log.`);
   }catch(e){E("#q-px").textContent="–";E("#q-trades").innerHTML=`<span class="dn">Couldn't load DEX candles for ${esc(q.symbol)} (${esc(e.name=="AbortError"?"timed out":e.message)}). Pick another coin or retry shortly.</span>`;}}
 E("#q-sel").onchange=e=>{QM=e.target.value;qchart()};E("#q-flt").onchange=e=>{QF=e.target.value;qopts();qchart()};
 qload();setInterval(qload,300000);setInterval(()=>{if(TAB=="all"||TAB=="quick")qchart()},90000);

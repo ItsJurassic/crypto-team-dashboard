@@ -1,4 +1,4 @@
-/* Sunny AI auth gate (Supabase email magic link). PAPER / SIMULATED ONLY.
+/* Sunny AI auth gate (Supabase email magic link). FAKE MONEY ONLY.
    Data lives in Supabase (table public.datasets + private bucket "lessons"), readable only by allowlisted emails via RLS.
    Pages keep calling fetch("data/x.json") / fetch("team/x.json"); this shim serves those from Supabase after sign-in. */
 (function(){
@@ -45,8 +45,8 @@ const signed={};async function fix(img){const s=img.getAttribute("src")||"";cons
   if(signed[k])img.src=signed[k]}
 new MutationObserver(ms=>ms.forEach(m=>{(m.type=="attributes"?[m.target]:[...m.addedNodes]).forEach(n=>{if(n.nodeType!=1)return;if(n.tagName=="IMG")fix(n);n.querySelectorAll&&n.querySelectorAll("img").forEach(fix)})})).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["src"]});
 function login(msg){if(document.getElementById("sa-login"))return;const d=document.createElement("div");d.id="sa-login";
-  d.innerHTML=`<div class=bx><h1>Sunny AI</h1><p>Sign in to view the paper-trading desk.</p>
-  <form><input type=email name=email required autocomplete=username placeholder="Email"><input type=password name=password required autocomplete=current-password placeholder="Password"><button>Sign in</button></form><div class=msg>${msg||""}</div><div class=pb>PAPER / SIMULATED ONLY</div></div>`;
+  d.innerHTML=`<div class=bx><h1>Sunny AI</h1><p>Sign in to view the fake money trading desk.</p>
+  <form><input type=email name=email required autocomplete=username placeholder="Email"><input type=password name=password required autocomplete=current-password placeholder="Password"><button>Sign in</button></form><div class=msg>${msg||""}</div><div class=pb>FAKE MONEY ONLY</div></div>`;
   document.body.appendChild(d);const f=d.querySelector("form"),b=d.querySelector("button"),mm=d.querySelector(".msg");
   f.onsubmit=async e=>{e.preventDefault();b.disabled=true;mm.style.color="#8a94a3";mm.textContent="Signing in…";
     const {error}=await sb.auth.signInWithPassword({email:f.email.value.trim(),password:f.password.value});

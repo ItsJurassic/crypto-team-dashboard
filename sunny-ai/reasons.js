@@ -1,4 +1,4 @@
-/* "Why we bought this" renderer. PAPER / SIMULATED ONLY. */
+/* "Why we bought this" renderer. FAKE MONEY ONLY. */
 (function(){
 const E=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const N=v=>typeof v=="number"?(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?"$"+(v/1e6).toFixed(2)+"M":Math.abs(v)>=1e3?"$"+(v/1e3).toFixed(0)+"k":String(v)):E(v);
@@ -14,7 +14,7 @@ window.whyHTML=function(r,open){
   if(j)det+=`<div class=wh>Judge · probability ${(+j.p).toFixed(2)}</div><div class=wl>${j.yes.map(x=>"Yes: "+E(x)).join("<br>")}</div>`;
   det+=`<div class=wh>Executor</div>`+row("Venue",E(f.venue))+row("Size",f.usd!=null?"$"+(+f.usd).toFixed(2)+" (8% of working capital)":"")+row("Slippage",f.slip_pct!=null?E(f.slip_pct)+"%":"")+row("Fees",f.fees!=null?"$"+(+f.fees).toFixed(2):"");
   if(r.risk)det+=`<div class=wh>Risk</div>`+row("Stop",E(k.stop))+row("Trail",E(k.trail))+row("Take profit",E(k.tp));
-  det+=`<div class="m wn">${E(r.lane)} lane · ${E(r.recorded||"")} · paper trade</div>`;
+  det+=`<div class="m wn">${E(r.lane)} lane · ${E(r.recorded||"")} · fake trade</div>`;
   return `<details class="why"${open?" open":""}><summary><span class=wq>Why:</span> ${E(r.summary)}</summary><div class=wd>${det}</div></details>`;
 };})();
 /* BUY / SELL / FAILED / OPEN pill badges */

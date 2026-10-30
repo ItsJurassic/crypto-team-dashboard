@@ -1,4 +1,4 @@
-/* Shared Sunny AI bottom nav. PAPER / SIMULATED ONLY. */
+/* Shared Sunny AI bottom nav. FAKE MONEY ONLY. */
 (function(){
 if(!window.SUNNY_BOTS&&!document.querySelector('script[src="bots.js"]')){const b=document.createElement('script');b.src='bots.js';document.head.appendChild(b)}
 if(!document.querySelector('script[src="tfilter.js"]')){const t=document.createElement('script');t.src='tfilter.js';document.head.appendChild(t)}

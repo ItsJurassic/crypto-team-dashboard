@@ -1,6 +1,6 @@
-/* Desk tabs: Combined | Long-term crypto | Quick crypto | Stocks. PAPER ONLY. Reads data/profits.json .tabs */
+/* Desk tabs: Combined | Long-term crypto | Quick crypto | Long-term stocks. FAKE MONEY ONLY. Reads data/profits.json .tabs */
 (function(){
-const T=[["combined","Combined"],["crypto_long","Long-term crypto"],["crypto_quick","Quick crypto"],["stocks","Stocks"]];
+const T=[["combined","Combined"],["crypto_long","Long-term crypto"],["crypto_quick","Quick crypto"],["stocks","Long-term stocks"]];
 const m=n=>n==null?"—":(n<0?"-$":"$")+Math.abs(+n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),
 sg=n=>n==null?"—":(n>=0?"+":"")+m(n),cl=n=>n==null?"":n>=0?"g":"r";
 let sel=localStorage.getItem("deskTab")||"combined",D=null,els=[];

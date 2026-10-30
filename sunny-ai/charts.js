@@ -39,19 +39,19 @@ function initChart() {
   chart.subscribeCrosshairMove(p => {
     if (!p.time) return showTradeNote();
     const hit = state.trades.filter(t => t.coin === state.sym && bucket(t.t) === p.time);
-    if (hit.length) $("#trade-note").innerHTML = hit.map(t=>`<span class="rmd ptag">Paper trade</span> <b class="${t.side==="buy"?"up":"dn"}">${t.side.toUpperCase()}</b> ${esc(t.coin)} at ${fp(t.price)}, ${ct(t.t*1000)}. Why: ${esc(t.reason)}`).join("<br>");
+    if (hit.length) $("#trade-note").innerHTML = hit.map(t=>`<span class="rmd ptag">Fake trade</span> <b class="${t.side==="buy"?"up":"dn"}">${t.side.toUpperCase()}</b> ${esc(t.coin)} at ${fp(t.price)}, ${ct(t.t*1000)}. Why: ${esc(t.reason)}`).join("<br>");
     else showTradeNote();
   });
 }
 function bucket(t) { const c = state.candles; for (let i = c.length-1; i >= 0; i--) if (t >= c[i].time) return (i===c.length-1 && t - c[i].time > IVS[state.iv]*1.5) ? null : c[i].time; return null; }
 function showTradeNote() {
   const n = state.trades.filter(t=>t.coin===state.sym).length;
-  $("#trade-note").textContent = n ? `${n} ${state.sym} paper trade(s). Legend: green ▲ = Paper trade buy, red ▼ = Paper trade sell (simulated, not real orders). Tap a marker's candle to read why.` : `No trades yet for ${state.sym}. Paper trade buys show as green ▲ and paper trade sells as red ▼ on the chart (simulated, not real orders).`;
+  $("#trade-note").textContent = n ? `${n} ${state.sym} fake trade(s). Legend: green ▲ = Fake trade buy, red ▼ = Fake trade sell (simulated, not real orders). Tap a marker's candle to read why.` : `No trades yet for ${state.sym}. Fake trade buys show as green ▲ and fake trade sells as red ▼ on the chart (simulated, not real orders).`;
 }
 function setMarkers() {
   if (!cs) return;
   const mk = state.trades.filter(t=>t.coin===state.sym).map(t=>({t,b:bucket(t.t)})).filter(x=>x.b!=null).sort((a,b)=>a.b-b.b)
-    .map(({t,b})=>({time:b, position:t.side==="buy"?"belowBar":"aboveBar", color:t.side==="buy"?"#16c784":"#ea3943", shape:t.side==="buy"?"arrowUp":"arrowDown", text:"Paper trade · "+(t.side==="buy"?"Buy ":"Sell ")+fp(t.price)}));
+    .map(({t,b})=>({time:b, position:t.side==="buy"?"belowBar":"aboveBar", color:t.side==="buy"?"#16c784":"#ea3943", shape:t.side==="buy"?"arrowUp":"arrowDown", text:"Fake trade · "+(t.side==="buy"?"Buy ":"Sell ")+fp(t.price)}));
   (ls.options().visible ? ls : cs).setMarkers(mk); showTradeNote();
 }
 function agg(c, iv) {

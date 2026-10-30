@@ -1,4 +1,4 @@
-/* Equity / lane P/L chart with tabs Total | MAJOR | SOLANA. PAPER / SIMULATED ONLY. */
+/* Equity / lane P/L chart with tabs Total | MAJOR | SOLANA. FAKE MONEY ONLY. */
 window.laneChart=function(el,d){
   const tab=localStorage.lcTab||"Total";
   if(!el.dataset.init){el.dataset.init=1;el.innerHTML='<div class="lct" role="tablist">'+["Total","MAJOR","SOLANA"].map(t=>`<button class="lb" data-t="${t}">${t}</button>`).join("")+'</div><div class="lcv m"></div><canvas class="lcc"></canvas><div class="lcn m"></div>';

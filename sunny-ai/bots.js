@@ -1,4 +1,4 @@
-/* Sunny AI team bot identities: one shared config for icons + accent colors. PAPER ONLY site. */
+/* Sunny AI team bot identities: one shared config for icons + accent colors. FAKE MONEY ONLY site. */
 (function(){
 const S=(d)=>`<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-.15em">${d}</svg>`;
 // c = accent (icon/background), t = text color tuned for contrast on the dark background

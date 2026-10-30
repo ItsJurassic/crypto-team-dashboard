@@ -1,4 +1,4 @@
-/* Shared table filters: any table with 8+ rows gets a search box and, when it has them, Lane and Side dropdowns. Survives 30s re-renders. PAPER ONLY. */
+/* Shared table filters: any table with 8+ rows gets a search box and, when it has them, Lane and Side dropdowns. Survives 30s re-renders. FAKE MONEY ONLY. */
 (function(){
 const st=document.createElement("style");st.textContent=`.tfl{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.tfl input,.tfl select{background:#0b0e14;color:#c9d3e6;border:1px solid #2d3542;border-radius:8px;padding:6px 9px;font:inherit;font-size:12px}.tfl input{flex:1;min-width:120px}`;document.head.appendChild(st);
 const S={},B={};let n=0;
