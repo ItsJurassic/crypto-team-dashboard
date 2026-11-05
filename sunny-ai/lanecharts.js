@@ -30,15 +30,18 @@ async function load(){
   trades:((stk&&stk.trades)||[]).filter(t=>t.status=="FILLED").map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+t.price,bot:"Stocks"})),tfs:{"1D":"Stock data is daily closes","1W":true,"1M":true,"1Y":true},line:true};
  // Quick (SOLANA): only real coins the lane holds or shadow-trades
  const dp=(dash&&dash.positions)||{};
- const qh=Object.values(dp).filter(p=>p.lane=="SOLANA"&&!isSim(p)).map(p=>p.symbol);
- const ql=(L.SOLANA||[]).map(x=>typeof x=="string"?{symbol:x}:x).filter(x=>!isSim(x)&&x.mint).map(x=>x.symbol);
- D.quick={lab:"⚡ Fast Crypto · SOLANA · fake money",rows:[...new Set([...qh,...ql])].map(s=>({sym:s,st:qh.includes(s)?"HELD":"WATCHING"})),trades:[],dex:true,
-  empty:"No real Solana coins to chart right now. Quick trading was unpaused at 1:54 PM CT, but SOLANA holds no positions and none of the real-data coins it scanned passed its filters, so its shadow log is empty. The only coin it listed (TOADB) is a simulated practice coin and is hidden. Coins will appear here automatically as soon as the lane holds or shadow-trades a real one."};
+ const qp=await J("data/quick_prices.json").catch(()=>({}))||{};
+ const QT=((dash&&dash.trades)||[]).filter(t=>t.lane!="MAJOR"&&t.source!="MAJOR"&&!/^MAJOR/.test(t.mint||"")&&t.status=="FILLED");
+ const qc=(act&&act.quick_coins)||[];
+ D.quick={lab:"⚡ Fast Crypto · SOLANA · fake money",rows:qc.slice().reverse().map(x=>({sym:x.symbol,mint:x.mint,simc:x.sim,st:x.held?"HELD":"TRADED",sub:x.sim?"practice coin (SIM-FEED) · simulated prices":"real Solana coin · GeckoTerminal",hist:qp[x.mint]||[]})),
+  trades:QT.map(t=>({sym:t.symbol,mint:t.mint,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price),bot:"SOLANA"})),quick:true,tfs:{"1D":true,"1W":true,"1M":true,"1Y":true},
+  empty:"Fast Crypto hasn't held or traded any coins yet. Coins show up here automatically after its first trade."};
+ D.quick.rows.sort((a,b)=>(a.st=="HELD"?0:1)-(b.st=="HELD"?0:1));
  // Slow Crypto: MAJOR lane only (Seedling is practice, no money), real coins only
  const mh=Object.values(dp).filter(p=>p.lane=="MAJOR"&&!isSim(p)).map(p=>p.symbol),sh=[];
  const cl=[...new Set([...(L.MAJOR||[]),...mh,...sh])].filter(s=>!isSim(s));
  D.crypto={lab:"🐢 Slow Crypto · MAJOR · fake money",rows:cl.map(s=>({sym:s,st:mh.includes(s)||sh.includes(s)?"HELD":"WATCHING",sub:(mh.includes(s)?"MAJOR":"")+((L.MAJOR||[]).includes(s)&&!mh.includes(s)?"MAJOR":"")})),
-  trades:[...((dash&&dash.trades)||[]).filter(t=>!isSim(t)&&t.symbol).map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price),bot:t.lane||(t.source=="MAJOR"?"MAJOR":t.source)||"MAJOR"}))],tfs:{"1D":true,"1W":true,"1M":true,"1Y":true}};
+  trades:[...((dash&&dash.trades)||[]).filter(t=>!isSim(t)&&t.symbol&&(t.lane=="MAJOR"||t.source=="MAJOR"||/^MAJOR/.test(t.mint||""))).map(t=>({sym:t.symbol,t:ts(t.time),side:t.side.toLowerCase(),px:+(t.filled||t.price),bot:t.lane||(t.source=="MAJOR"?"MAJOR":t.source)||"MAJOR"}))],tfs:{"1D":true,"1W":true,"1M":true,"1Y":true}};
  D.crypto.rows.sort((a,b)=>(a.st=="HELD"?0:1)-(b.st=="HELD"?0:1)||a.sym.localeCompare(b.sym));
  D.stocks.rows.sort((a,b)=>({HELD:0,SIGNAL:1,WATCHING:2}[a.st]-{HELD:0,SIGNAL:1,WATCHING:2}[b.st])||a.sym.localeCompare(b.sym));
 }
@@ -53,8 +56,16 @@ async function cc(s,tf){let c=[],src="";
  if(!c.length){const e=(await extras())[s],x=e&&e[EXK[tf]];if(x&&x.t&&x.t.length){c=x.t.map((t,i)=>({time:t,open:x.o[i],high:x.h[i],low:x.l[i],close:x.c[i]}));src=e.src||"exchange fallback"}}
  if(!c.length&&CG[s]){const d=await cgGet(`https://api.coingecko.com/api/v3/coins/${CG[s]}/ohlc?vs_currency=usd&days=${CGD[tf]}`);if(d){c=d.map(x=>({time:x[0],open:x[1],high:x[2],low:x[3],close:x[4]}));src="CoinGecko"}}
  const now=Date.now()/1000;c=clean(c).filter(x=>x.time>=now-SPAN[tf]);c.src=src;return c}
+const GTF={"1D":["minute",5],"1W":["hour",1],"1M":["hour",4],"1Y":["day",1]},POOL={};
+async function quickCandles(row,tf,d){const now=Date.now()/1000;let c=[],src="";
+ if(!row.simc){try{if(!POOL[row.mint]){const r=await fetch(`https://api.geckoterminal.com/api/v2/networks/solana/tokens/${row.mint}/pools?page=1`);if(r.ok)POOL[row.mint]=((await r.json()).data||[])[0]?.attributes?.address}
+  const pa=POOL[row.mint];if(pa){const [u,a]=GTF[tf];const r=await fetch(`https://api.geckoterminal.com/api/v2/networks/solana/pools/${pa}/ohlcv/${u}?aggregate=${a}&limit=1000&currency=usd&token=${row.mint}`);if(r.ok){c=(((await r.json()).data||{}).attributes||{}).ohlcv_list||[];c=c.map(x=>({time:x[0],open:x[1],high:x[2],low:x[3],close:x[4]}));src="GeckoTerminal (real DEX prices)"}}}catch(e){}}
+ if(!c.length){// simulated coin: recorded SIM-FEED prices + this lane's fills, drawn as a line
+  const pts=[...(row.hist||[]),...d.trades.filter(t=>t.mint==row.mint&&t.px>0).map(t=>[t.t,t.px])].sort((a,b)=>a[0]-b[0]);
+  c=pts.map((p,i)=>{const o=i?pts[i-1][1]:p[1];return {time:p[0],open:o,high:Math.max(o,p[1]),low:Math.min(o,p[1]),close:p[1]}});src=row.simc?"simulated SIM-FEED prices + fake fills":"fake fills only"}
+ c=clean(c);const f=c.filter(x=>x.time>=now-SPAN[tf]);c=f.length>=2?f:c;c.src=src;return c}
 const spark=v=>{if(!v||v.length<2)return '<svg width="70" height="24"></svg>';const a=Math.min(...v),b=Math.max(...v)||1,up=v[v.length-1]>=v[0];return `<svg width="70" height="24" viewBox="0 0 70 24"><polyline fill="none" stroke="${up?"#4fbf8f":"#e07a7f"}" stroke-width="1.5" points="${v.map((y,i)=>(i*70/(v.length-1)).toFixed(1)+","+(22-(y-a)/((b-a)||1)*20).toFixed(1)).join(" ")}"/></svg>`};
-const BC={HELD:"#4fbf8f",SIGNAL:"#d9b26a",WATCHING:"#7c8cf8"};
+const BC={TRADED:"#9aa1ad",HELD:"#4fbf8f",SIGNAL:"#d9b26a",WATCHING:"#7c8cf8"};
 function list(){const d=D[TAB];$("#uc-f").innerHTML=[["held","Held"],["watch","Watching or setting up"],["all","Show all"]].map(([k,l])=>`<button data-f="${k}" class="${F==k?"on":""}">${l}</button>`).join("");
  const r=d.rows.filter(x=>F=="all"||(F=="held"?x.st=="HELD":x.st!="HELD"));
  $("#uc-wlh").textContent=`What the bots are holding and watching · ${d.rows.length} markets`;
@@ -69,7 +80,7 @@ async function draw(){const d=D[TAB],top=$("#uc-top");$("#uc-lab").textContent=d
  let c=[];if(d.line){const now=Date.now()/1000;c=row.candles.filter(x=>x.time>=now-SPAN[tf]).map(x=>({time:x.time,open:x.value,high:x.value,low:x.value,close:x.value}));
   // daily closes: draw as candles open=prev close
   c=c.map((x,i)=>i?{...x,open:c[i-1].close,high:Math.max(x.close,c[i-1].close),low:Math.min(x.close,c[i-1].close)}:x)}
- else c=await cryptoCandles(s,tf);
+ else if(d.quick)c=await quickCandles(row,tf,d);else c=await cryptoCandles(s,tf);
  if(d.line)c=clean(c);if(SYM[TAB]!=s||TF!=TF)return;
  cs.setMarkers([]);cs.setData(c);cs.priceScale().applyOptions({autoScale:true});chart.priceScale("right").applyOptions({autoScale:true});
  const ce=$("#uc-chart");ce.style.display=c.length<2?"none":"";$("#uc-empty")&&$("#uc-empty").remove();
@@ -78,7 +89,7 @@ async function draw(){const d=D[TAB],top=$("#uc-top");$("#uc-lab").textContent=d
  const last=c[c.length-1],first=c[0];$("#uc-px").textContent=last?" "+fp(last.close):"";$("#uc-chg").innerHTML=last&&first?`<span class="${last.close>=first.close?"g":"r"}">${last.close>=first.close?"+":""}${((last.close/first.close-1)*100).toFixed(2)}% · ${tf}</span>`:"";
  const tr=d.trades.filter(t=>t.sym==s&&c.length&&t.t>=c[0].time),bk=t=>{let b=c[0].time;for(const x of c)if(x.time<=t)b=x.time;return b};
  cs.setMarkers(tr.map(t=>({time:bk(t.t),position:t.side=="buy"?"belowBar":"aboveBar",color:t.side=="buy"?"#4fbf8f":"#e07a7f",shape:t.side=="buy"?"arrowUp":"arrowDown",text:t.bot+" "+(t.side=="buy"?"Buy ":"Sell ")+fp(t.px)})).sort((a,b)=>a.time-b.time));
- $("#uc-note").textContent=(c.length?"":"No candles available for this market right now. ")+(tr.length?`${tr.length} fake ${tr.length>1?"trades":"trade"} marked (▲ buy, ▼ sell; label = bot). `:"No fake trades by this lane in this range. ")+(d.line?"Daily closes (Yahoo Finance via the stock desk).":"Real market data · "+(c.src||"Coinbase / Kraken / CoinGecko")+".")+(row.why?" "+row.why:"")}
+ $("#uc-note").textContent=(c.length?"":"No candles available for this market right now. ")+(tr.length?`${tr.length} fake ${tr.length>1?"trades":"trade"} marked (▲ buy, ▼ sell; label = bot). `:"No fake trades by this lane in this range. ")+(d.line?"Daily closes (Yahoo Finance via the stock desk).":(row.simc?"Practice coin · ":"Real market data · ")+(c.src||"Coinbase / Kraken / CoinGecko")+".")+(row.why?" "+row.why:"")}
 function show(){document.querySelectorAll("#uc-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t==TAB));list();draw()}
 window.__uc={cryptoCandles,D,draw,set:(t,s,f)=>{TAB=t;SYM[t]=s;TF=f;show()}};
 load().then(show);setInterval(()=>{cache={};load().then(show)},120000);
