@@ -1,0 +1,72 @@
+<!doctype html><html><head><script src="auth.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Sunny AI · Numbers (fake money)</title>
+<style>
+:root{--bg:#07090d;--card:#0f131a;--line:#1c222c;--mut:#7b8594;--g:#22e08a;--r:#ff4d5e;--t:#e7ecf3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{max-width:1000px;margin:auto;padding:16px}.banner{background:#2a1a00;color:#ffb020;border:1px solid #5a3a00;border-radius:8px;padding:6px 10px;text-align:center;font-weight:700;letter-spacing:.08em;font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
+.hd{display:flex;justify-content:space-between;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.eq{font-size:46px;font-weight:800;margin:6px 0 0}.pct{font-size:18px;font-weight:700}.g{color:var(--g)}.r{color:var(--r)}.m{color:var(--mut)}
+.mult{background:#0c2a1c;color:var(--g);border-radius:999px;padding:4px 10px;font-weight:800}
+canvas{width:100%;height:170px;display:block;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;margin-top:10px}
+.ag{color:inherit;text-decoration:none;background:#0b0e14;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;gap:12px}
+.ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:19px;flex:none}
+.nm{font-weight:800}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);margin-left:6px}
+.act{color:#c5ccd6;font-size:12px;margin-top:3px}.ct{color:var(--mut);font-size:11px;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:500}
+.bar{height:6px;background:var(--r);border-radius:3px}.two{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}@media(max-width:700px){.two{grid-template-columns:1fr}.eq{font-size:38px}}
+.tag{font-size:9px;padding:1px 4px;border-radius:4px;background:#1c2533;color:#8fb3ff}#trades{display:block;overflow-x:auto;white-space:nowrap}pre{white-space:pre-wrap;color:#c5ccd6;font-size:12px;margin:0}
+.lb{background:#0b0e14;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:3px 10px;margin-left:4px;cursor:pointer;font:inherit;font-size:11px}.lb.on{background:#1c2533;color:var(--t)}.lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:10px}.ln{background:#0b0e14;border:1px solid var(--line);border-radius:12px;padding:12px}.ln b{font-size:24px}
+</style><link rel="stylesheet" href="sunny.css"></head><body><div class="wrap dgrid">
+<div class="banner">FAKE MONEY ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div><p class="m" style="font-size:11px;text-align:center;margin:4px 0">When we go live with real money, this will say Active money.</p>
+<div class="card"><div class="hd"><span id="eqh">Fake money · Equity</span><span id="upd"></span></div>
+<div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div class="eq" id="eq">—</div><div class="pct" id="pct"></div><span class="mult" id="mult"></span><a href="profits.html" style="background:#1c2533;color:#e7ecf3;border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;font-size:13px">💰 Profits →</a></div>
+<div class="m" id="sub" style="font-size:12px"></div><div class="m" id="exs" style="font-size:12px"></div><div id="lc"></div></div>
+<div class="card" id="accounts" style="scroll-margin-top:12px"><div class="hd"><span>Accounts · all fake money</span><a href="profits.html" class=m>P/L &amp; results →</a></div><div id="accts">Loading…</div></div>
+<div class="card" id="cookies" style="scroll-margin-top:12px"><div class="hd"><span>🍪 Cookies · Good profitable decisions</span><span class=m>month → top-ups</span></div><div id="ck">Loading…</div></div>
+<div class="card"><div class="hd"><span>Lanes</span><span id="lbtn"></span></div><div class="lanes" id="lanes"></div><div class="m" id="mnote" style="font-size:11px;margin-top:8px"></div></div>
+<div class="card"><div class="hd"><span>Desk · 7 agents</span><span id="tot"></span></div><div class="grid" id="agents"></div></div>
+<div class="card"><div class="hd"><span>🧾 Recent trades · why</span><span class=m>tap for details</span></div><div id="rbuys"></div></div>
+<div class="card"><div class="hd"><span>Open positions</span></div><table id="pos"></table></div>
+<div class="card"><div class="hd"><span>📈 Stock watchlist</span><a class=m href="charts.html?tab=stocks">Charts →</a></div><div id="wl"></div></div>
+<div class="card"><div class="hd"><span>Logger</span><a class=m href="logs.html">View logs →</a></div><div class=m style="font-size:12px">Kills, rules, judge rejections, calibration, trades and the morning recap now live on the Logs page.</div></div>
+<p class="m" style="font-size:11px;text-align:center">FAKE MONEY ONLY. SOLANA lane: REAL = public DexScreener + RugCheck reads, SIM = synthetic SIM-FEED pairs. MAJOR lane: public CoinGecko + Coinbase candle reads (no account). Fills simulated (delay, AMM slippage, failed tx, fees). Auto-refreshes every 30s. <a style="color:var(--mut)" href="../">← Crypto team dashboard</a></p>
+</div><script>
+const A=[["Scout","🔭","#3b82f6"],["Filter","🛡️","#ef4444"],["Analyst","🧠","#a855f7"],["Judge","⚖️","#eab308"],["Executor","⚡","#22c55e"],["Risk","🎯","#f59e0b"],["Logger","📒","#14b8a6"]];
+const $=i=>document.getElementById(i),f=(n,d=2)=>"$"+Number(n).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d}),esc=s=>String(s??"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+function chart(pts,up){const c=$("c"),x=c.getContext("2d"),w=c.width=c.clientWidth*2,h=c.height=340;x.clearRect(0,0,w,h);if(pts.length<2)pts=[pts[0],pts[0]];
+const v=pts.map(p=>p[1]),lo=Math.min(...v),hi=Math.max(...v),rg=(hi-lo)||1,X=i=>i/(pts.length-1)*w,Y=y=>h-20-(y-lo)/rg*(h-40);
+const col=up?"#22e08a":"#ff4d5e",gr=x.createLinearGradient(0,0,0,h);gr.addColorStop(0,col+"55");gr.addColorStop(1,col+"00");
+x.beginPath();v.forEach((y,i)=>i?x.lineTo(X(i),Y(y)):x.moveTo(0,Y(y)));x.lineWidth=4;x.strokeStyle=col;x.stroke();x.lineTo(w,h);x.lineTo(0,h);x.fillStyle=gr;x.fill();}
+function bankHTML(b){if(!b)return"";const $$=n=>(n<0?"-$":"$")+Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),row=(l,v,cl)=>`<div style="background:#0b0e14;border:1px solid #1c222c;border-radius:10px;padding:10px"><b style="display:block;font-size:18px" class="${cl||""}">${v}</b><span style="color:#7b8594;font-size:11px">${l}</span></div>`;
+const g="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:8px";
+return `<div style="${g}">${row("Gross realized (before costs)",$$(b.gross),b.gross>=0?"g":"r")}${row("Total fees + slippage + failed",$$(-b.total_costs),"r")}${row("Net realized P/L",$$(b.net),b.net>=0?"g":"r")}${row("🏦 Banked (20% of winning net)",$$(b.banked),"g")}${row("Working capital",$$(b.working_capital))}</div>
+<table style="margin-top:10px"><tr><th>Lane</th><th>Gross</th><th>Trade fees</th><th>Slippage</th><th>Failed tx</th><th>Net</th><th>Banked</th><th>Closed</th></tr>${Object.entries(b.lanes).map(([n,l])=>`<tr><td>${n}</td><td>${$$(l.gross)}</td><td>${$$(l.trade_fees)}</td><td>${$$(l.slippage)}</td><td>${$$(l.failed_costs)}</td><td class=${l.net>=0?"g":"r"}>${$$(l.net)}</td><td class=g>${$$(l.banked)}</td><td>${l.closed}</td></tr>`).join("")}</table>`}
+let LANE=localStorage.lane||"ALL",D0=null;const lof=x=>(x.lane||(x.source=="MAJOR"?"MAJOR":"SOLANA")),inL=x=>LANE=="ALL"||LANE=="FAKE"||lof(x)==LANE;
+
+function hdr(d){const B=(d.bank&&d.bank.lanes)||{},hs=(d.bank&&d.bank.start||d.start)/2,tab=localStorage.lcTab||"Total",A=window.__ACC||[];let eq,st,sub;
+const pick=r=>{st=r.reduce((x,a)=>x+a.start,0);eq=r.reduce((x,a)=>x+a.eq,0)};
+if(tab=="SOLANA"||tab=="MAJOR"){const L=B[tab]||{},o=Object.values(d.positions).filter(p=>lof(p)==tab);st=hs;eq=hs+(L.net||0)+(L.pnl_open||0);sub=`${tab} desk · start ${f(st)} (half of the shared Sunny AI ${f(d.start)}) · ${o.length} open · in positions ${f(o.reduce((a,p)=>a+p.qty*(p.last||p.entry),0))}`}
+else if(tab=="STOCKS"){const r=A.filter(a=>/Stocks/.test(a.n));pick(r);sub=r.length?`Long-term Stocks desk · start ${f(st)} · fake money, DCA, holds months to years`:"Loading stock desk…"}
+else if(tab=="SEEDLING"){const r=A.filter(a=>/Seedling/.test(a.n));pick(r);sub=r.length?`Seedling · ${r.length} accounts: `+r.map(a=>`${a.n.replace("Seedling · ","")} ${f(a.eq)}`).join(" · "):"Loading Seedling…"}
+else{pick(A);sub=A.length?`All ${A.length} fake-money accounts · start ${f(st)} · `+A.map(a=>`${a.n} ${(a.eq-a.start>=0?"+":"-")+f(Math.abs(a.eq-a.start))}`).join(" · ")+" · Banking not added separately":"Loading accounts…";if(!A.length){eq=d.equity;st=d.start}}
+const pl=eq-st,g=st?pl/st:0,up=pl>=0;$("eq").textContent=f(eq);$("pct").textContent=(up?"+":"-")+f(Math.abs(pl))+" ("+(up?"+":"")+(g*100).toFixed(2)+"%)";$("pct").className="pct "+(up?"g":"r");
+$("mult").textContent=(st?eq/st:1).toFixed(3)+"x";$("sub").textContent=sub;if($("eqh"))$("eqh").textContent={Total:"All fake money · Equity",MAJOR:"Slow Crypto (MAJOR) · Equity",SOLANA:"Fast Crypto (SOLANA) · Equity",STOCKS:"Fake Stocks · Equity",SEEDLING:"Seedling · Equity"}[tab]||"Equity";if($("exs"))$("exs").style.display=(tab=="STOCKS"||tab=="SEEDLING")?"none":""}
+window.hdr=hdr;
+addEventListener("acc",()=>{if(D0){hdr(D0);const e=document.getElementById("lc");if(e&&e._d)laneChart(e,e._d)}});
+function setL(l){LANE=localStorage.lane=l;if(l=="MAJOR"||l=="SOLANA"||l=="ALL")localStorage.lcTab=l=="ALL"?"Total":l;const _lc=document.getElementById("lc");if(_lc)_lc._v=null;if(D0)render(D0)}
+const LT=l=>l=="MAJOR"?'<span class=tag style="background:#2a1f05;color:#ffcf5c">MAJOR</span>':'<span class=tag style="background:#0c2a1c;color:#22e08a">SOLANA</span>';
+async function go(){try{D0=await (await fetch("data/dashboard.json?"+Date.now())).json();render(D0)}catch(e){$("upd").textContent="load error"}}
+function render(d){try{
+if($("bank"))$("bank").innerHTML=bankHTML(d.bank);const LN=d.lanes||{};$("lbtn").innerHTML=["ALL","SOLANA","MAJOR"].map(l=>`<button class="lb ${LANE==l?"on":""}" onclick="setL('${l}')">${l=="ALL"?"All":l=="FAKE"?"Fake money":l}</button>`).join("");
+const desc={SOLANA:"Pump.fun/Raydium snipes · fast momentum/breakout scoring · score ≥80 · max 3 trades/day · −6% stop · half off + trail after +12% (≥15 min held) · every ~3 min",MAJOR:"Top ~25 large-caps · trend/RSI/MACD swing scoring · stop −4%…−12% (3×ATR), trail after +10% @2×ATR, TP 3R · every 20 min"};
+$("lanes").innerHTML=Object.entries(LN).filter(([n])=>LANE=="ALL"||n==LANE).map(([n,v])=>`<div class=ln>${LT(n)}<div style="margin-top:6px"><b class=${v.pnl>=0?"g":"r"}>${v.pnl>=0?"+":"-"}${f(Math.abs(v.pnl))}</b> <span class=m>lane P/L</span></div><div class=m style="font-size:12px">realized ${f(v.realized)} · unrealized ${f(v.unrealized)}<br>open ${v.open} (${f(v.open_value)}) · buys ${v.buys} · closed ${v.closed}</div><div class=ct>${desc[n]}</div></div>`).join("");
+const mj=d.major||{};$("mnote").textContent=mj.last_run?`MAJOR last scan ${new Date(mj.last_run.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})} CT: ${mj.last_run.scanned} scanned, ${mj.last_run.passed} scored 70+, ${mj.last_run.approved} Judge-approved, ${mj.last_run.traded} traded · next scan in ~${Math.round((mj.next_scan_in_s||0)/60)} min · one shared paper balance`:"";
+hdr(d);const T=d.trades.filter(inL),F=T.filter(t=>t.status=="FILLED"),av=F.length?F.reduce((a,t)=>a+ +t.slip_pct,0)/F.length:0;$("exs").innerHTML=`fills ${F.length} · <span class=r>failed fills ${d.failed_fills||0}</span> · avg slippage ${av.toFixed(2)}% · fees paid ${f(d.fees_paid||0)} · SOL ${f(d.sol_usd||0)}`;$("upd").textContent="updated "+new Date(d.updated).toLocaleTimeString();laneChart($("lc"),d);const RB=Object.values(d.reasons||{}).filter(inL).sort((x,y)=>Date.parse(y.time)-Date.parse(x.time)).slice(0,8);$("rbuys").innerHTML=feedHTML(d,inL,LT,f,esc,12);
+const c=d.counts,cnt={Scout:`scanned ${c.scanned}`,Filter:`killed ${c.killed}`,Analyst:`passed 80+ ${c.passed}`,Judge:`judged ${c.judged||0} · rejected ${c.judge_rejected||0}`,Executor:`traded ${c.trades}`,Risk:`open ${Object.keys(d.positions).length}`,Logger:`kills logged ${d.kills.length?c.killed:0}`};
+$("tot").textContent=`scanned ${c.scanned} · traded ${c.trades}`;
+$("agents").innerHTML=A.map(([n,i,col])=>`<a class="ag" href="agent.html?a=${n.toLowerCase()}"><div class="ic" style="background:${col}22;color:${col}">${i}</div><div><div class="nm" style="color:${col}">${n}<span class="dot"></span></div><div class="act">${esc(d.activity[n])}</div><div class="ct">${cnt[n]} · details →</div></div></a>`).join("");
+const ps=Object.entries(d.positions).map(([m,p])=>({...p,mint:m})).filter(inL);$("pos").innerHTML="<tr><th>Token</th><th>Venue</th><th>Entry</th><th>Last</th><th>Stop</th><th>P/L</th></tr>"+(ps.length?ps.map(p=>{const r=p.last/p.entry-1;return`<tr><td>${openBadge()} $${esc(p.symbol)} ${LT(lof(p))}${lof(p)=="SOLANA"?` <span class=tag>${p.source=="SIM-FEED"?"SIM":"REAL"}</span>`:""}</td><td class=m>${esc(p.venue||"")}</td><td>${p.entry.toPrecision(4)}</td><td>${p.last.toPrecision(4)}</td><td>${p.stop.toPrecision(4)}${p.trailing?" (trail)":""}</td><td class="${r>=0?"g":"r"}">${(r*100).toFixed(1)}%</td></tr><tr class=rsn><td colspan=6>${whyHTML(findWhy(d.reasons,p.mint,p.time))}</td></tr>`}).join(""):`<tr><td colspan=5 class=m>none</td></tr>`);
+}catch(e){$("upd").textContent="render error"}}
+go();setInterval(go,30000);
+</script><script src="lanechart.js"></script><script src="reasons.js"></script><script src="accounts.js"></script><script>const _ac=()=>accountsHTML().then(h=>document.getElementById("accts").innerHTML=h);_ac();setInterval(_ac,30000)</script><script src="cookies.js"></script><script>const _ck=()=>CookiesCard.mount(document.getElementById("ck"));_ck();setInterval(_ck,60000)</script><script src="watchlist.js"></script><script>Watchlist.mount(document.getElementById("wl"),{compact:true})</script><script src="tabs.js"></script><script src="nav.js"></script></body></html>

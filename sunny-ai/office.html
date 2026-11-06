@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sunny AI · Grok Bot Office</title>
+<link rel="stylesheet" href="sunny.css?v=1105office">
+<style>
+:root{--bg:#07090d;--card:#0f131a;--elev:#12161e;--line:#1c222c;--mut:#7b8594;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3}
+.ofc{max-width:1180px;margin:0 auto;padding:10px 12px 16px}
+.ofc .banner{margin-bottom:8px}
+.ofc-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:4px 0 10px}
+.ofc-mark{width:28px;height:28px;border-radius:8px;background:#4C8DFF;display:grid;place-items:center;flex:none}
+.ofc-mark i{width:12px;height:12px;border-radius:50%;background:#fff;display:block}
+.ofc-top h1{margin:0;font-size:18px;font-weight:650;color:var(--t);line-height:1.2}
+.ofc-clock{font-size:12px;color:var(--mut)}
+.ofc-live{display:inline-flex;align-items:center;gap:6px;color:var(--g);font-size:12px;font-weight:600}
+.ofc-live b{width:8px;height:8px;border-radius:99px;background:var(--g);display:inline-block}
+.ofc-seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto}
+.ofc-seg button{background:#11151b;color:var(--mut);border:0;border-right:1px solid var(--line);padding:8px 12px;font:600 12px/1 inherit;cursor:pointer;min-height:40px}
+.ofc-seg button:last-child{border-right:0}
+.ofc-seg button.on{background:#1c2533;color:var(--t)}
+.ofc-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600}
+.ofc-pill.w{background:#10261c;color:#7dffc0}
+.ofc-pill.q{background:#2a1f05;color:#ffcf5c}
+.ofc-pill.e{background:#2a1216;color:#ff8a96}
+.ofc-pill.r{background:#151a21;color:var(--mut)}
+.ofc-needs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:#2a1f05;border:1px solid #5a3a00;color:var(--t);font-size:12px}
+.ofc-chip button,.ofc-btn{border:1px solid var(--line);background:#6b8afd;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font:600 11px/1 inherit;min-height:32px}
+.ofc-btn.quiet{background:#151a21;color:var(--t)}
+.ofc-grid{display:flex;flex-wrap:wrap;gap:12px}
+.ofc-side{flex:1 1 220px;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.ofc-scene{flex:2 1 360px;min-width:0}
+.ofc-h{font-size:15px;font-weight:650;margin:0 0 8px;color:var(--t)}
+.ofc-cap{font-size:12px;color:var(--mut);margin:0 0 8px}
+.ofc-fb,.ofc-ab{display:block;width:100%;text-align:left;margin:0 0 6px;padding:8px;border-radius:8px;border:1px solid var(--line);background:#11151b;color:var(--t);font:inherit;cursor:pointer}
+.ofc-fb.on,.ofc-ab.on{border-color:#4a5a72;background:#1c2533}
+.ofc-fb b,.ofc-ab b{display:block;font-weight:650;font-size:13px}
+.ofc-fb span,.ofc-ab span{display:block;font-size:11px;color:var(--mut);margin-top:2px}
+.ofc-dot{width:8px;height:8px;border-radius:99px;display:inline-block;margin-right:6px;vertical-align:middle}
+.ofc-wait{margin:12px 0 8px}
+.ofc-waititem{margin:0 0 10px}
+.ofc-waititem .nm{font-size:13px;font-weight:600}
+.ofc-waititem .rs{font-size:12px;color:var(--mut);margin:2px 0 6px}
+.ofc-stage{width:100%;aspect-ratio:1.9/1;min-height:280px;overflow:hidden;border-radius:12px;border:1px solid var(--line);background:#0c1016}
+.ofc.night .ofc-stage{background:#06080c}
+.ofc-stack{height:400%;width:100%;will-change:transform}
+.ofc-fl{height:25%;width:100%}
+.ofc-fl svg{width:100%;height:100%;display:block}
+.ofc-snap{margin-top:12px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#152033}
+.ofc-snap .lab{color:#8fb3ff;font-size:11px;font-weight:650;letter-spacing:.04em;text-transform:uppercase}
+.ofc-snap p{margin:6px 0 0;font-size:13px}
+.ofc-snap .note{font-size:11px;color:var(--mut)}
+.ofc-sel{margin-top:12px}
+.ofc-feed{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.ofc-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;font-size:13px}
+.ofc-row time{color:var(--mut);min-width:72px;font-size:12px}
+@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes sunnyBubble{0%{transform:scale(.72) translateY(8px);opacity:0}62%{transform:scale(1.06) translateY(-2px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}
+@media(max-width:700px){
+  .ofc-grid{flex-direction:column}
+  .ofc-scene{order:-1}
+  .ofc-stage{min-height:280px;aspect-ratio:1.55/1}
+  .ofc-seg{margin-left:0;width:100%}
+  .ofc-seg button{flex:1}
+  .ofc-top{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap ofc" id="office">
+  <div class="banner">FAKE MONEY ONLY · NO REAL MONEY · NO WALLETS · NO EXCHANGE CONNECTIONS</div>
+  <div class="ofc-top">
+    <div class="ofc-mark" aria-hidden="true"><i></i></div>
+    <div>
+      <h1>Grok Bot Office</h1>
+      <div class="ofc-clock" id="clock"></div>
+    </div>
+    <span class="ofc-live"><b></b>Live</span>
+    <div class="ofc-seg" role="tablist" aria-label="Office mode">
+      <button type="button" data-mode="day" class="on">Day</button>
+      <button type="button" data-mode="night">Night</button>
+      <button type="button" data-mode="tour">Tour</button>
+    </div>
+  </div>
+  <div class="ofc-pills" id="pills"></div>
+  <div class="ofc-needs" id="needs"></div>
+  <div class="ofc-grid">
+    <aside class="ofc-side" id="left"></aside>
+    <div class="ofc-scene">
+      <div class="ofc-stage" id="stage">
+        <div class="ofc-stack" id="stack"></div>
+      </div>
+    </div>
+    <aside class="ofc-side" id="right"></aside>
+  </div>
+  <div class="ofc-feed" id="feed"></div>
+</div>
+<script>
+(function(){
+const FLOORS=[
+  {id:4,name:"Trading",blurb:"Fast Crypto, MAJOR, Fake Stocks"},
+  {id:3,name:"Market & Review",blurb:"timing.json, coach, macro"},
+  {id:2,name:"Desk Ops",blurb:"Sunny, publish, charts"},
+  {id:1,name:"Usage & Saver",blurb:"Usage watch, cookies, tune"}
+];
+const ACC={4:"#4C8DFF",3:"#E8A317",2:"#E24B3B",1:"#2FA36B"};
+const ROUTINES=["Evening write-up","Saver usage watch","Nightly self-tune","Cookie scoreboard (always-ask)","Site / chart refresh"];
+const AMBIENCE=[
+  "Fast Crypto scanned another REAL-DATA pass",
+  "MAJOR held the 6-name cluster cap",
+  "Fake Stocks checked the NVDA tape",
+  "Market & Review refreshed timing.json",
+  "Saver Bot glanced at usage",
+  "Publish helper queued a slow site refresh",
+  "Entry coach logged a pullback note"
+];
+function seedAgents(){return [
+  {id:"fast",name:"Fast Crypto",floor:4,status:"working",task:"Scanning REAL-DATA only (SIM-FEED paused)",shape:"sphere",col:0,row:0},
+  {id:"major",name:"Slow Crypto / MAJOR",floor:4,status:"working",task:"Holding cluster; trade as usual after NFP",shape:"cube",col:1,row:0},
+  {id:"stocks",name:"Fake Stocks",floor:4,status:"working",task:"NVDA + watchlist, fake-money book",shape:"diamond",col:2,row:0},
+  {id:"scan",name:"Scan helper",floor:4,status:"working",task:"Desk helper · REAL-DATA tape",shape:"cylinder",col:3,row:0,helper:true},
+  {id:"risk",name:"Risk shadow",floor:4,status:"working",task:"Desk helper · stop and cluster checks",shape:"pyramid",col:0,row:1,helper:true},
+  {id:"stops",name:"Stop desk",floor:4,status:"resting",task:"Desk helper · no live stop fire",shape:"star",col:1,row:1,helper:true},
+  {id:"watch",name:"Watchlist helper",floor:4,status:"working",task:"Desk helper · NVDA / majors tape",shape:"sphere",col:2,row:1,helper:true},
+  {id:"review",name:"Market & Review",floor:3,status:"working",task:"timing.json + daily digests",shape:"cube",col:0,row:0},
+  {id:"coach",name:"Entry coach",floor:3,status:"working",task:"Pullback / spike notes",shape:"pyramid",col:1,row:0},
+  {id:"macro",name:"Macro / NFP",floor:3,status:"working",task:"Friday 7:30 AM CT NFP watch",shape:"cylinder",col:2,row:0},
+  {id:"digest",name:"Digest helper",floor:3,status:"resting",task:"Desk helper · next digest queued",shape:"diamond",col:3,row:0,helper:true},
+  {id:"sunny",name:"Sunny",floor:2,status:"working",task:"Coordinator · EOD + cookies",shape:"star",col:0,row:0},
+  {id:"publish",name:"Publish helper",floor:2,status:"working",task:"Desk helper · site sync",shape:"sphere",col:1,row:0,helper:true},
+  {id:"charts",name:"Chart refresh",floor:2,status:"working",task:"Desk helper · slow refresh on purpose",shape:"cube",col:2,row:0,helper:true},
+  {id:"eod",name:"EOD ideas",floor:2,status:"waiting",task:"EOD idea pack needs your OK",shape:"diamond",col:3,row:0,waitReason:"EOD idea pack needs your OK"},
+  {id:"saver",name:"Saver Bot",floor:1,status:"working",task:"Usage watch",shape:"cylinder",col:0,row:0},
+  {id:"tune",name:"Nightly self-tune",floor:1,status:"resting",task:"Rests until overnight tune",shape:"pyramid",col:1,row:0},
+  {id:"cookies",name:"Cookie scoreboard",floor:1,status:"waiting",task:"Cookie→usage top-up always-ask",shape:"star",col:2,row:0,waitReason:"Cookie→usage top-up always-ask"},
+  {id:"usageh",name:"Usage desk",floor:1,status:"working",task:"Desk helper · plan/limits glance",shape:"sphere",col:3,row:0,helper:true}
+]}
+function seedFeed(now){return [
+  {id:"f1",text:"SIM-FEED paused — SOLANA buys REAL-DATA only until win rate > 40%",at:now-42*60000},
+  {id:"f2",text:"Buildup ~$997 merged into MAJOR — three $1k lanes",at:now-38*60000},
+  {id:"f3",text:"MAJOR: trade as usual after Friday NFP",at:now-36*60000},
+  {id:"f4",text:"Fast Crypto: CHAD exit +$53.82 (Good)",at:now-9*3600000},
+  {id:"f5",text:"MAJOR: HYPE hard stop −$21.81 as designed",at:now-11*3600000},
+  {id:"f6",text:"Fake Stocks bought NVDA dip $49.98",at:now-12*3600000},
+  {id:"f7",text:"Cookies +5 today · month 5 · always-ask before usage top-ups",at:now-30*60000},
+  {id:"f8",text:"Team snapshot ~$2,847 / $3,000 across three lanes",at:now-25*60000}
+]}
+function fmtCT(d){
+  return new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(d)+" CT";
+}
+function relTime(at,now){
+  const sec=Math.max(0,Math.floor((now-at)/1000));
+  if(sec<45)return "just now";
+  if(sec<3600)return Math.floor(sec/60)+"m ago";
+  if(sec<86400)return Math.floor(sec/3600)+"h ago";
+  return Math.floor(sec/86400)+"d ago";
+}
+function iso(x,y,z,ox,oy){return {x:(x-y)*28+ox,y:(x+y)*16-z*16+oy}}
+function pts(list){return list.map(p=>p.x+","+p.y).join(" ")}
+function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":"#7b8594"}
+function starPath(cx,cy,r){
+  const bits=[];
+  for(let i=0;i<10;i++){const rad=i%2===0?r:r*0.42;const a=-Math.PI/2+(i*Math.PI)/5;bits.push(cx+Math.cos(a)*rad+","+(cy+Math.sin(a)*rad))}
+  return bits.join(" ");
+}
+function isoBox(x,y,z,w,d,h,ox,oy,top,left,right,stroke){
+  const t1=iso(x,y,z+h,ox,oy),t2=iso(x+w,y,z+h,ox,oy),t3=iso(x+w,y+d,z+h,ox,oy),t4=iso(x,y+d,z+h,ox,oy);
+  const l1=iso(x,y,z,ox,oy),l2=iso(x,y+d,z,ox,oy),r1=iso(x+w,y+d,z,ox,oy),r2=iso(x+w,y,z,ox,oy);
+  return `<g>
+    <polygon points="${pts([t1,t2,t3,t4])}" fill="${top}" stroke="${stroke}" stroke-width="0.8"/>
+    <polygon points="${pts([t1,t4,l2,l1])}" fill="${left}" stroke="${stroke}" stroke-width="0.8"/>
+    <polygon points="${pts([t4,t3,r1,l2])}" fill="${right}" stroke="${stroke}" stroke-width="0.8"/>
+    <polygon points="${pts([t2,t3,r1,r2])}" fill="${right}" stroke="${stroke}" stroke-width="0.6" opacity="0.65"/>
+  </g>`;
+}
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+const S={
+  mode:"day", floor:4, agents:seedAgents(), selectedId:"fast",
+  clock:fmtCT(new Date()), nowMs:Date.now(), feed:seedFeed(Date.now()),
+  finished:["CHAD exit +$53.82","HYPE hard stop −$21.81","SIM-FEED paused","Buildup merged into MAJOR"],
+  openFinished:false, openRoutines:false, equity:2847, scans:18, shift:0
+};
+let shiftCur=0, shiftTgt=0, amb=0, raf=0, tourId=0;
+
+function counts(){
+  const c={working:0,waiting:0,errors:0,resting:0};
+  S.agents.forEach(a=>{if(a.status==="error")c.errors++;else if(c[a.status]!=null)c[a.status]++});
+  return c;
+}
+function waiting(){return S.agents.filter(a=>a.status==="waiting")}
+function viewAgent(id){
+  const who=S.agents.find(a=>a.id===id); if(!who)return;
+  S.selectedId=id; S.floor=who.floor; paint();
+}
+function approve(id){
+  S.agents=S.agents.map(a=>{
+    if(a.id!==id)return a;
+    return {
+      ...a, status:"working", waitReason:undefined,
+      task:a.id==="cookies"?"Cookie ask logged — always-ask stays on":"EOD idea pack filed — no change until you say so",
+      bubble:a.id==="cookies"?"Thanks — I'll ask before any top-up":"Approved — pack parked",
+      bubbleAt:Date.now()
+    };
+  });
+  const who=S.agents.find(a=>a.id===id);
+  const label=who?who.name:id;
+  S.feed=[{id:"ok-"+Date.now(),text:"Approved "+label+" — back to work",at:Date.now()},...S.feed];
+  S.finished=["Approved "+label,...S.finished];
+  paint();
+}
+
+function agentGlyph(agent,ox,oy,fill,selected){
+  const gx=2.15+agent.col*1.9, gy=3.05+agent.row*1.95;
+  const head=iso(gx+0.55,gy+0.35,1.35,ox,oy);
+  const label=iso(gx+0.55,gy+0.35,0.08,ox,oy);
+  const dot=statusColor(agent.status);
+  const showBubble=Boolean(agent.bubble||(agent.status==="waiting"&&agent.waitReason));
+  const bubbleText=agent.bubble||agent.waitReason||"";
+  const short=bubbleText.length>34?bubbleText.slice(0,32)+"…":bubbleText;
+  const delay=(agent.col+agent.row*2)*0.16;
+  let shape="";
+  if(agent.shape==="sphere"){
+    shape=`<ellipse cx="${head.x}" cy="${head.y}" rx="16" ry="15" fill="${fill}"/>
+      <ellipse cx="${head.x-4}" cy="${head.y-5}" rx="6" ry="4" fill="#fff" opacity="0.35"/>`;
+  }else if(agent.shape==="cube"){
+    shape=isoBox(gx+0.28,gy+0.12,0.85,0.7,0.7,0.7,ox,oy,fill,fill,"#2a3140","#3a4454");
+  }else if(agent.shape==="pyramid"){
+    shape=`<polygon points="${head.x},${head.y-18} ${head.x+16},${head.y+12} ${head.x-16},${head.y+12}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+  }else if(agent.shape==="cylinder"){
+    shape=`<rect x="${head.x-12}" y="${head.y-10}" width="24" height="20" fill="${fill}"/>
+      <ellipse cx="${head.x}" cy="${head.y+10}" rx="12" ry="5" fill="${fill}"/>
+      <ellipse cx="${head.x}" cy="${head.y-10}" rx="12" ry="5" fill="${fill}"/>
+      <ellipse cx="${head.x}" cy="${head.y-10}" rx="8" ry="3" fill="#fff" opacity="0.25"/>`;
+  }else if(agent.shape==="diamond"){
+    shape=`<polygon points="${head.x},${head.y-18} ${head.x+14},${head.y} ${head.x},${head.y+18} ${head.x-14},${head.y}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+  }else{
+    shape=`<polygon points="${starPath(head.x,head.y,17)}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+  }
+  const bubble=showBubble?`<g style="animation:${agent.bubbleAt?"sunnyBubble 0.48s ease":"none"};transform-origin:${head.x}px ${head.y-28}px">
+    <rect x="${head.x-58}" y="${head.y-52}" width="116" height="28" rx="8" fill="#12161e" stroke="#1c222c"/>
+    <text x="${head.x}" y="${head.y-34}" text-anchor="middle" fill="#e7ecf3" font-size="8" font-family="system-ui,sans-serif">${esc(short)}</text>
+  </g>`:"";
+  return `<g>
+    ${isoBox(gx,gy,0,1.35,0.95,0.42,ox,oy,"#1a2030","#10141b","#161b24","#1c222c")}
+    <ellipse cx="${head.x}" cy="${label.y+10}" rx="16" ry="6" fill="#1c222c" opacity="0.45"/>
+    <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.6s ease-in-out ${delay}s infinite">
+      ${shape}
+      <circle cx="${head.x+14}" cy="${head.y-14}" r="4.4" fill="${dot}" stroke="#12161e" stroke-width="1.4"/>
+      ${selected?`<circle cx="${head.x}" cy="${head.y}" r="22" fill="none" stroke="#6b8afd" stroke-width="2" opacity="0.9"/>`:""}
+    </g>
+    <text x="${label.x}" y="${label.y+22}" text-anchor="middle" fill="#9aa3b2" font-size="9" font-family="system-ui,sans-serif">${esc(agent.name)}</text>
+    ${bubble}
+  </g>`;
+}
+function floorSvg(floor,night){
+  const accent=ACC[floor];
+  const ox=455, oy=night?78:70;
+  const here=S.agents.filter(a=>a.floor===floor);
+  const info=FLOORS.find(f=>f.id===floor);
+  const floorFill=night?"#161b24":"#12171f";
+  const wallA=night?"#0a0c10":"#161b24";
+  const wallB=night?"#141820":"#1a2030";
+  const win=night?"#2a4a8c":"#1e3358";
+  const f0=iso(0.4,1.3,0,ox,oy),f1=iso(9.4,1.3,0,ox,oy),f2=iso(9.4,7.4,0,ox,oy),f3=iso(0.4,7.4,0,ox,oy);
+  const w2=iso(9.4,1.3,3.6,ox,oy);
+  const showMonitors=floor===4||floor===1;
+  const mon=showMonitors?(()=>{
+    const p=iso(1.1,1.4,2.6,ox,oy), q=iso(8.15,6.5,2.2,ox,oy);
+    const t1=floor===4?"BOOK SNAP":"COOKIES";
+    const t2=floor===4?("$"+S.equity.toLocaleString("en-US")):"5 · 12%";
+    const t3=floor===4?(S.scans+" scans"):"ask 1st";
+    return `<g>
+      <rect x="${p.x}" y="${p.y}" width="70" height="40" rx="4" fill="#4C8DFF"/>
+      <text x="${p.x+35}" y="${p.y+17}" text-anchor="middle" fill="#fff" font-size="9" font-family="system-ui,sans-serif">${t1}</text>
+      <text x="${p.x+35}" y="${p.y+32}" text-anchor="middle" fill="#fff" font-size="11" font-family="ui-monospace,monospace">${t2}</text>
+      <rect x="${q.x}" y="${q.y-28}" width="64" height="34" rx="4" fill="#12161e" stroke="${accent}"/>
+      <text x="${q.x+32}" y="${q.y-8}" text-anchor="middle" fill="#e7ecf3" font-size="10" font-family="ui-monospace,monospace">${t3}</text>
+    </g>`;
+  })():"";
+  const lamp=iso(8.6,2.1,0.9,ox,oy), post=iso(8.6,2.1,0.2,ox,oy);
+  const wA=iso(3.2,1.35,2.4,ox,oy),wB=iso(5.4,1.35,2.4,ox,oy),wC=iso(7.4,1.35,2.4,ox,oy);
+  return `<svg viewBox="0 0 920 480" role="img" aria-label="${esc(info.name)} floor">
+    <polygon points="${pts([iso(0.4,1.3,3.6,ox,oy),w2,f1,f0])}" fill="${wallA}" stroke="#1c222c"/>
+    <polygon points="${pts([w2,iso(9.4,7.4,3.6,ox,oy),f2,f1])}" fill="${wallB}" stroke="#1c222c"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${floorFill}" stroke="${accent}" stroke-width="1.2"/>
+    <polygon points="${pts([iso(0.4,1.3,0,ox,oy),iso(0.4,7.4,0,ox,oy),iso(0.4,7.4,3.6,ox,oy),iso(0.4,1.3,3.6,ox,oy)])}" fill="${night?"#0a0c10":"#151a21"}" stroke="#1c222c" opacity="0.9"/>
+    <rect x="${wA.x}" y="${wA.y}" width="54" height="32" rx="3" fill="${win}" stroke="#2a3140"/>
+    <rect x="${wB.x}" y="${wB.y}" width="54" height="32" rx="3" fill="${win}" stroke="#2a3140"/>
+    <rect x="${wC.x}" y="${wC.y}" width="54" height="32" rx="3" fill="${win}" stroke="#2a3140"/>
+    ${mon}
+    <circle cx="${lamp.x}" cy="${lamp.y}" r="11" fill="#22e08a" opacity="0.85"/>
+    <rect x="${post.x-2}" y="${post.y}" width="4" height="14" fill="#1a7a4c"/>
+    <text x="24" y="36" fill="${accent}" font-size="18" font-family="system-ui,sans-serif" font-weight="600">Floor ${floor} · ${esc(info.name)}</text>
+    <text x="24" y="56" fill="#7b8594" font-size="12" font-family="system-ui,sans-serif">${esc(info.blurb)}</text>
+    ${here.map(a=>agentGlyph(a,ox,oy,accent,S.selectedId===a.id)).join("")}
+  </svg>`;
+}
+
+function paintScene(){
+  const night=S.mode==="night";
+  document.getElementById("office").classList.toggle("night", night);
+  document.getElementById("stack").innerHTML=[4,3,2,1].map(fid=>`<div class="ofc-fl" data-floor="${fid}">${floorSvg(fid,night)}</div>`).join("");
+  document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";
+}
+
+function paintChrome(){
+  document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;
+  const c=counts(), w=waiting();
+  document.getElementById("pills").innerHTML=`
+    <span class="ofc-pill w">${c.working} working</span>
+    <span class="ofc-pill q">${c.waiting} waiting</span>
+    <span class="ofc-pill e">${c.errors} errors</span>
+    <span class="ofc-pill r">${c.resting} resting</span>`;
+  document.getElementById("needs").innerHTML=w.map(a=>`<div class="ofc-chip">
+    <span>${esc(a.name)} · ${esc(a.waitReason)}</span>
+    <button type="button" class="ofc-btn quiet" data-view="${a.id}">View</button>
+    <button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button>
+  </div>`).join("");
+  document.querySelectorAll(".ofc-seg button").forEach(b=>b.classList.toggle("on", b.dataset.mode===S.mode));
+  const left=document.getElementById("left");
+  left.innerHTML=`<div class="ofc-h">Floors</div>`+FLOORS.map(f=>{
+    const n=S.agents.filter(a=>a.floor===f.id&&a.status==="working").length;
+    return `<button type="button" class="ofc-fb ${S.floor===f.id?"on":""}" data-floor="${f.id}"><b>${f.id} · ${esc(f.name)}</b><span>${n} working · ${esc(f.blurb)}</span></button>`;
+  }).join("")+`
+    <div class="ofc-h ofc-wait">Waiting on me · ${w.length}</div>
+    ${w.map(a=>`<div class="ofc-waititem"><div class="nm">${esc(a.name)}</div><div class="rs">${esc(a.waitReason)}</div><button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button></div>`).join("")}
+    <button type="button" class="ofc-btn quiet" style="width:100%;margin-top:8px" data-tog="fin">Finished · ${S.finished.length}</button>
+    ${S.openFinished?`<div style="margin-top:8px">${S.finished.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}
+    <button type="button" class="ofc-btn quiet" style="width:100%;margin-top:8px" data-tog="rtn">Routines · ${ROUTINES.length}</button>
+    ${S.openRoutines?`<div style="margin-top:8px">${ROUTINES.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}`;
+  const meta=FLOORS.find(f=>f.id===S.floor);
+  const onFloor=S.agents.filter(a=>a.floor===S.floor);
+  const sel=S.agents.find(a=>a.id===S.selectedId)||S.agents[0];
+  document.getElementById("right").innerHTML=`
+    <div class="ofc-h">Floor ${meta.id} · ${esc(meta.name)}</div>
+    <div class="ofc-cap">${esc(meta.blurb)}</div>
+    ${onFloor.map(a=>`<button type="button" class="ofc-ab ${S.selectedId===a.id?"on":""}" data-pick="${a.id}">
+      <b><span class="ofc-dot" style="background:${statusColor(a.status)}"></span>${esc(a.name)}${a.helper?` <span style="color:#7b8594;font-weight:500">desk helper</span>`:""}</b>
+      <span>${esc(a.task)}</span>
+    </button>`).join("")}
+    <div class="ofc-snap">
+      <div class="lab">Weekly goal · snapshot</div>
+      <p>Cookies this month: 5</p>
+      <p>Improvement path: 12%</p>
+      <p>Team book: ~$2,847 / $3,000</p>
+      <p class="note">Embedded snapshot from Thu Nov 5, 2026 EOD — not live market data. Fake money only. Cookies never convert to usage without asking.</p>
+    </div>
+    ${sel?`<div class="ofc-sel"><div class="ofc-cap">Selected</div><div style="font-weight:650">${esc(sel.name)}</div><div class="ofc-cap">${esc(sel.task)}</div></div>`:""}`;
+  document.getElementById("feed").innerHTML=`<div class="ofc-h">Activity</div>`+S.feed.map(item=>`
+    <div class="ofc-row"><time>${relTime(item.at,S.nowMs)}</time><span>${esc(item.text)}</span></div>`).join("");
+}
+
+function paint(){paintChrome();paintScene()}
+
+function animateShift(){
+  cancelAnimationFrame(raf);
+  shiftTgt=(4-S.floor)*25;
+  const step=()=>{
+    const next=shiftCur+(shiftTgt-shiftCur)*0.16;
+    if(Math.abs(shiftTgt-next)<0.08){shiftCur=shiftTgt;S.shift=shiftTgt;document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";return}
+    shiftCur=next;S.shift=next;
+    document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";
+    raf=requestAnimationFrame(step);
+  };
+  raf=requestAnimationFrame(step);
+}
+
+document.getElementById("office").addEventListener("click",e=>{
+  const t=e.target.closest("[data-mode],[data-floor],[data-view],[data-ok],[data-pick],[data-tog]");
+  if(!t)return;
+  if(t.dataset.mode){S.mode=t.dataset.mode;setTour();paint();return}
+  if(t.dataset.floor){S.floor=+t.dataset.floor;paint();animateShift();return}
+  if(t.dataset.view){viewAgent(t.dataset.view);animateShift();return}
+  if(t.dataset.ok){approve(t.dataset.ok);return}
+  if(t.dataset.pick){S.selectedId=t.dataset.pick;const who=S.agents.find(a=>a.id===t.dataset.pick);if(who)S.floor=who.floor;paint();animateShift();return}
+  if(t.dataset.tog==="fin"){S.openFinished=!S.openFinished;paintChrome();return}
+  if(t.dataset.tog==="rtn"){S.openRoutines=!S.openRoutines;paintChrome()}
+});
+
+function setTour(){
+  clearInterval(tourId);
+  if(S.mode!=="tour")return;
+  tourId=setInterval(()=>{S.floor=S.floor===1?4:(S.floor-1);paint();animateShift()},4200);
+}
+
+setInterval(()=>{const n=Date.now();S.nowMs=n;S.clock=fmtCT(new Date(n));document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;paintChrome()},30000);
+setInterval(()=>{const n=Date.now();S.equity=2840+Math.round((n/7000)%16);S.scans=14+Math.round((n/4000)%19);paintScene()},2200);
+setInterval(()=>{const line=AMBIENCE[amb%AMBIENCE.length];amb++;S.feed=[{id:"live-"+Date.now(),text:line,at:Date.now()},...S.feed].slice(0,16);paintChrome()},16000);
+
+paint();
+setTour();
+})();
+</script>
+<script src="nav.js?v=1105office"></script>
+</body>
+</html>
