@@ -5,94 +5,114 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sunny AI · Grok Bot Office</title>
-<link rel="stylesheet" href="sunny.css?v=1105d">
+<link rel="stylesheet" href="sunny.css?v=1105e">
 <style>
 :root{--bg:#07090d;--card:#12161e;--elev:#171c26;--line:#242b36;--mut:#8a94a3;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3;--stage:#0b0f16}
-html,body{height:100%;}
-html.office-day,html.office-day body{background:#efe6d4!important;color:#2c261c!important}
-html.office-day .snav{background:rgba(247,241,232,.96)!important;border-top-color:#d7c9b4}
-html.office-day .snav a{color:#6b6254!important}
-html.office-day .snav a.on{color:#2c261c!important;background:#e7dcc8}
+html,body{height:100%}
+html.office-day,html.office-day body{background:#eef1f5!important;color:#111827!important}
+html.office-day .snav{background:rgba(255,255,255,.94)!important;border-top-color:#e5e7ef}
+html.office-day .snav a{color:#6b7280!important}
+html.office-day .snav a.on{color:#111827!important;background:#eef2ff}
 html.office-night,html.office-night body{background:#07090d!important}
-.wrap.ofc{max-width:none!important;width:100%;height:100dvh;height:100vh;margin:0;padding:8px 12px calc(72px + env(safe-area-inset-bottom))!important;display:flex;flex-direction:column;gap:6px;box-sizing:border-box;overflow:hidden}
-.ofc .banner{margin:0;flex:none;padding:4px 10px!important;font-size:10px!important;text-align:center}
-.ofc-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;flex:none}
-.ofc-mark{width:26px;height:26px;border-radius:8px;background:#4C8DFF;display:grid;place-items:center;flex:none}
+.wrap.ofc{max-width:none!important;width:100%;height:100dvh;height:100vh;margin:0;padding:8px 12px calc(64px + env(safe-area-inset-bottom))!important;display:flex;flex-direction:column;gap:6px;box-sizing:border-box;overflow:hidden}
+.ofc .banner{margin:0;flex:none;padding:4px 10px!important;font-size:10px!important;text-align:center;letter-spacing:.06em}
+.ofc-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;flex:none;z-index:4}
+.ofc-mark{width:26px;height:26px;border-radius:8px;background:#111827;display:grid;place-items:center;flex:none}
 .ofc-mark i{width:11px;height:11px;border-radius:50%;background:#fff;display:block}
-.ofc-top h1{margin:0;font-size:17px;font-weight:650;color:var(--t);line-height:1.15}
-.ofc-clock{font-size:11px;color:var(--mut)}
+.ofc-top h1{margin:0;font-size:16px;font-weight:700;color:var(--t);line-height:1.15;letter-spacing:-.02em}
+.ofc-sub{font-size:11px;color:var(--mut);margin-top:1px}
 .ofc-live{display:inline-flex;align-items:center;gap:6px;color:var(--g);font-size:12px;font-weight:600}
 .ofc-live b{width:8px;height:8px;border-radius:99px;background:var(--g);display:inline-block;box-shadow:0 0 8px #22e08a}
-.ofc-seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto}
-.ofc-seg button{background:var(--elev)!important;color:var(--mut)!important;border:0!important;border-right:1px solid var(--line)!important;border-radius:0!important;padding:7px 12px!important;font:600 12px/1 inherit!important;cursor:pointer;min-height:36px}
+.ofc-seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-left:auto;background:var(--elev)}
+.ofc-seg button{background:transparent!important;color:var(--mut)!important;border:0!important;border-right:1px solid var(--line)!important;border-radius:0!important;padding:7px 14px!important;font:600 12px/1 inherit!important;cursor:pointer;min-height:34px}
 .ofc-seg button:last-child{border-right:0!important}
-.ofc-seg button.on{background:#1c2533!important;color:var(--t)!important}
-.ofc-pills{display:flex;flex-wrap:wrap;gap:6px;flex:none}
-.ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600}
-.ofc-pill.w{background:#10261c;color:#7dffc0}
-.ofc-pill.q{background:#2a1f05;color:#ffcf5c}
-.ofc-pill.e{background:#2a1216;color:#ff8a96}
-.ofc-pill.r{background:#151a21;color:var(--mut)}
-.ofc-needs{display:flex;flex-wrap:wrap;gap:6px;flex:none}
-.ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:#2a1f05;border:1px solid #5a3a00;color:var(--t);font-size:12px}
-.ofc-chip button,.ofc-btn{border:1px solid transparent!important;background:#6b8afd!important;color:#fff!important;border-radius:8px!important;padding:4px 10px!important;cursor:pointer;font:600 11px/1 inherit!important;min-height:32px}
+.ofc-seg button.on{background:#111827!important;color:#fff!important}
+.ofc-pills{display:flex;flex-wrap:wrap;gap:6px;flex:none;z-index:4}
+.ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;background:var(--elev);color:var(--t)}
+.ofc-pill i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.ofc-pill.w i{background:#22e08a}.ofc-pill.q i{background:#ffb020}.ofc-pill.e i{background:#ff4d5e}.ofc-pill.r i{background:#94a3b8}
+.ofc-needs{display:flex;flex-wrap:wrap;gap:6px;flex:none;justify-content:center;z-index:5}
+.ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:var(--t);font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.ofc-chip .who{display:flex;align-items:center;gap:8px}
+.ofc-chip .who em{width:10px;height:10px;border-radius:3px;background:#f59e0b;display:inline-block;flex:none}
+.ofc-chip button,.ofc-btn{border:1px solid transparent!important;background:#111827!important;color:#fff!important;border-radius:8px!important;padding:5px 12px!important;cursor:pointer;font:600 11px/1 inherit!important;min-height:32px}
 .ofc-btn.quiet{background:var(--elev)!important;color:var(--t)!important;border:1px solid var(--line)!important}
-.ofc-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(188px,19%) minmax(0,1fr) minmax(210px,22%);gap:10px}
-.ofc-grid.l-off{grid-template-columns:40px minmax(0,1fr) minmax(210px,22%)}
-.ofc-grid.r-off{grid-template-columns:minmax(188px,19%) minmax(0,1fr) 40px}
+.ofc-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(220px,22%) minmax(0,1fr) minmax(240px,24%);gap:12px;position:relative}
+.ofc-grid.l-off{grid-template-columns:40px minmax(0,1fr) minmax(240px,24%)}
+.ofc-grid.r-off{grid-template-columns:minmax(220px,22%) minmax(0,1fr) 40px}
 .ofc-grid.l-off.r-off{grid-template-columns:40px minmax(0,1fr) 40px}
-.ofc-side{min-width:0;min-height:0;background:var(--card)!important;border:1px solid var(--line);border-radius:12px;padding:10px;overflow:auto;position:relative}
+.ofc-side{min-width:0;min-height:0;background:var(--card)!important;border:1px solid var(--line);border-radius:16px;padding:12px;overflow:auto;position:relative;z-index:3;box-shadow:0 10px 40px rgba(0,0,0,.12)}
 .ofc-side.collapsed{padding:8px 4px;overflow:hidden}
 .ofc-side.collapsed .ofc-side-body{display:none}
-.ofc-collapse{position:sticky;top:0;z-index:2;width:100%;border:1px solid var(--line)!important;background:var(--elev)!important;color:var(--mut)!important;border-radius:6px!important;padding:4px!important;cursor:pointer;font:600 11px/1 inherit!important;min-height:28px;margin-bottom:8px}
+.ofc-collapse{position:sticky;top:0;z-index:2;width:100%;border:1px solid var(--line)!important;background:var(--elev)!important;color:var(--mut)!important;border-radius:8px!important;padding:4px!important;cursor:pointer;font:600 11px/1 inherit!important;min-height:28px;margin-bottom:8px}
 .ofc-scene{min-width:0;min-height:0;display:flex;flex-direction:column;position:relative}
-.ofc-flab{position:absolute;left:18px;top:14px;z-index:3;pointer-events:none;max-width:70%}
-.ofc-flab b{display:block;font-size:22px;font-weight:750;color:var(--t);letter-spacing:-.02em;text-shadow:0 1px 0 rgba(255,255,255,.25)}
-.ofc-flab span{display:block;font-size:13px;color:var(--mut);margin-top:2px}
-.ofc-h{font-size:14px;font-weight:650;margin:0 0 6px;color:var(--t)}
+.ofc-h{font-size:13px;font-weight:700;margin:0 0 8px;color:var(--t)}
 .ofc-cap{font-size:11px;color:var(--mut);margin:0 0 6px}
-.ofc-fb,.ofc-ab{display:block;width:100%;text-align:left;margin:0 0 5px;padding:8px 10px!important;border-radius:10px!important;border:1px solid var(--line)!important;background:var(--elev)!important;color:var(--t)!important;font:inherit!important;cursor:pointer}
-.ofc-fb.on,.ofc-ab.on{border-color:#4a5a72!important;background:#1c2533!important;color:var(--t)!important}
-.ofc-fb b,.ofc-ab b{display:block;font-weight:650;font-size:12px;color:inherit}
-.ofc-fb span,.ofc-ab span{display:block;font-size:11px;color:var(--mut)!important;margin-top:2px;white-space:normal}
+.ofc-fb,.ofc-ab{display:flex;width:100%;text-align:left;margin:0 0 5px;padding:8px 10px!important;border-radius:12px!important;border:1px solid transparent!important;background:var(--elev)!important;color:var(--t)!important;font:inherit!important;cursor:pointer;gap:10px;align-items:flex-start}
+.ofc-fb.on,.ofc-ab.on{border-color:#c7d2fe!important;background:#eef2ff!important;color:#111827!important}
+.ofc-fn{width:22px;height:22px;border-radius:99px;background:#111827;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;flex:none;margin-top:1px}
+.ofc-fb.on .ofc-fn{background:#4C8DFF}
+.ofc-ft{min-width:0;flex:1}
+.ofc-ft b{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:12px;color:inherit}
+.ofc-ft b i{font-style:normal;color:var(--mut);font-weight:600}
+.ofc-ft span,.ofc-ab span{display:block;font-size:11px;color:var(--mut)!important;margin-top:2px;white-space:normal}
 .ofc-dot{width:8px;height:8px;border-radius:99px;display:inline-block;margin-right:6px;vertical-align:middle}
-.ofc-wait{margin:10px 0 6px}
-.ofc-waititem{margin:0 0 8px}
+.ofc-wait{margin:12px 0 6px}
+.ofc-waititem{margin:0 0 8px;padding:8px;border-radius:10px;background:var(--elev)}
 .ofc-waititem .nm{font-size:13px;font-weight:600}
 .ofc-waititem .rs{font-size:12px;color:var(--mut);margin:2px 0 6px}
-.ofc-stage{flex:1 1 auto;width:100%;min-height:0;height:100%;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--stage);box-shadow:inset 0 0 80px rgba(0,0,0,.25)}
+.ofc-stage{flex:1 1 auto;width:100%;min-height:0;height:100%;overflow:hidden;border-radius:18px;border:1px solid transparent;background:var(--stage);touch-action:none;user-select:none}
 .ofc-stack{height:500%;width:100%;will-change:transform}
-.ofc-fl{height:20%;width:100%}
-.ofc-fl svg{width:100%!important;height:100%!important;display:block;max-width:none!important}
-.ofc-snap{margin-top:10px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#152033}
-.ofc-snap .lab{color:#8fb3ff;font-size:11px;font-weight:650;letter-spacing:.04em;text-transform:uppercase}
-.ofc-snap p{margin:6px 0 0;font-size:13px}
-.ofc-snap .note{font-size:11px;color:var(--mut)}
-.ofc-sel{margin-top:10px}
-.ofc-feed{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.ofc-fl{height:20%;width:100%;overflow:hidden}
+.ofc-fl svg,.ofc-stage svg{width:100%!important;height:100%!important;display:block;max-width:none!important}
+.ofc-cam{width:100%;height:100%;transform-origin:50% 46%;will-change:transform}
+.ofc-hint{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:11px;color:var(--mut);pointer-events:none;z-index:2;text-shadow:0 1px 0 rgba(255,255,255,.35)}
+.ofc-rhead{border-radius:14px;padding:12px 14px;margin:0 0 12px;background:#22c55e;color:#fff}
+.ofc-rhead .k{font-size:12px;font-weight:700;opacity:.92}
+.ofc-rhead .t{font-size:20px;font-weight:750;letter-spacing:-.03em;margin:2px 0 0}
+.ofc-rhead .s{font-size:11px;opacity:.88;margin-top:2px}
+.ofc-usage{margin-top:12px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--elev)}
+.ofc-usage .uh{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:650}
+.ofc-usage .uh span{color:var(--mut);font-weight:500;font-size:11px}
+.ofc-usage .up{font-size:22px;font-weight:750;margin:6px 0 8px;letter-spacing:-.03em}
+.ofc-bar{height:8px;border-radius:99px;background:rgba(127,127,127,.18);overflow:hidden}
+.ofc-bar i{display:block;height:100%;width:28%;background:#111827;border-radius:99px}
+.ofc-ul{margin:10px 0 0;padding:0;list-style:none}
+.ofc-ul li{display:flex;justify-content:space-between;gap:8px;font-size:11px;margin:0 0 4px;color:var(--mut)}
+.ofc-ul b{color:var(--t);font-weight:600}
+.ofc-feed{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
 .ofc-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;font-size:12px}
-.ofc-row time{color:var(--mut);min-width:64px;font-size:11px}
-html.office-day{--bg:#efe6d4;--card:#f7f1e6;--elev:#efe6d2;--line:#d4c4aa;--mut:#6d6456;--t:#2c261c;--stage:#d9cbb3;--on:#2c261c}
-html.office-day .ofc-seg button{background:#efe6d2!important;color:#5c5648!important}
-html.office-day .ofc-seg button.on{background:#e0d2b8!important;color:#2c261c!important}
-html.office-day .ofc-pill.w{background:#d7efe3;color:#15744a}
-html.office-day .ofc-pill.q{background:#f6e3b8;color:#8a5a00}
-html.office-day .ofc-pill.e{background:#f5d4d6;color:#a12636}
-html.office-day .ofc-pill.r{background:#e8dfd0;color:#6d6456}
-html.office-day .ofc-chip{background:#f6e3b8;border-color:#c9a45a;color:#2c261c}
-html.office-day .ofc-fb,html.office-day .ofc-ab{background:#efe6d2!important;color:#2c261c!important;border-color:#d4c4aa!important}
-html.office-day .ofc-fb.on,html.office-day .ofc-ab.on{background:#e8d5b0!important;border-color:#b89a68!important;color:#2c261c!important}
-html.office-day .ofc-fb span,html.office-day .ofc-ab span{color:#6d6456!important}
-html.office-day .ofc-collapse,html.office-day .ofc-btn.quiet{background:#efe6d2!important;color:#2c261c!important;border-color:#d4c4aa!important}
-html.office-day .ofc-snap{background:#efe4cc;border-color:#d4c4aa}
-html.office-day .ofc-snap .lab{color:#3d5a9a}
-html.office-day .banner{background:#ece2c8!important;color:#6a5420!important;border-color:#d4c08a!important}
-html.office-day .ofc-flab b{text-shadow:0 1px 0 rgba(255,255,255,.55)}
-@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.ofc-row time{color:var(--mut);min-width:52px;font-size:11px}
+html.office-day{--bg:#eef1f5;--card:#ffffff;--elev:#f6f7fb;--line:#e5e7ef;--mut:#6b7280;--t:#111827;--stage:#e8edf3;--on:#111827}
+html.office-day .ofc-mark{background:#111827}
+html.office-day .ofc-seg{background:#fff;border-color:#e5e7ef}
+html.office-day .ofc-seg button{color:#6b7280!important}
+html.office-day .ofc-seg button.on{background:#111827!important;color:#fff!important}
+html.office-day .ofc-pill{background:#fff;border:1px solid #e5e7ef}
+html.office-day .ofc-chip{background:#fff;border-color:#e5e7ef;color:#111827}
+html.office-day .ofc-fb,html.office-day .ofc-ab{background:#f7f8fb!important;color:#111827!important;border-color:transparent!important}
+html.office-day .ofc-fb.on,html.office-day .ofc-ab.on{background:#eef2ff!important;border-color:#c7d2fe!important;color:#111827!important}
+html.office-day .ofc-fb span,html.office-day .ofc-ab span{color:#6b7280!important}
+html.office-day .ofc-collapse,html.office-day .ofc-btn.quiet{background:#f7f8fb!important;color:#111827!important;border-color:#e5e7ef!important}
+html.office-day .ofc-stage{background:linear-gradient(#f3f5f8,#e6ebf2);border-color:transparent}
+html.office-day .banner{background:#fff8e8!important;color:#8a6914!important;border-color:#f1e0b0!important}
+html.office-day .ofc-side{background:rgba(255,255,255,.94)!important;box-shadow:0 10px 40px rgba(15,23,42,.08)}
+html.office-day .ofc-waititem{background:#f7f8fb}
+html.office-day .ofc-fn{background:#111827;color:#fff}
+html.office-day .ofc-bar i{background:#111827}
+html.office-day .ofc-hint{color:#6b7280}
+html.office-night .ofc-rhead{background:#0f3d28;color:#7dffc0}
+html.office-night .ofc-fb.on,html.office-night .ofc-ab.on{background:#1c2533!important;border-color:#4a5a72!important;color:#e7ecf3!important}
+html.office-night .ofc-fb.on span,html.office-night .ofc-ab.on span{color:#8a94a3!important}
+html.office-night .ofc-fn{background:#4C8DFF}
+html.office-night .ofc-bar i{background:#4C8DFF}
+html.office-night .ofc-hint{color:#8a94a3;text-shadow:none}
+@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes sunnyBubble{0%{transform:scale(.72) translateY(8px);opacity:0}62%{transform:scale(1.06) translateY(-2px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}
-@keyframes tvGlow{0%,100%{opacity:.35}50%{opacity:.7}}
+@keyframes tvGlow{0%,100%{opacity:.28}50%{opacity:.55}}
 @keyframes blinkLed{0%,100%{opacity:1}50%{opacity:.25}}
-@keyframes steam{0%{transform:translateY(0);opacity:.5}100%{transform:translateY(-10px);opacity:0}}
+@keyframes steam{0%{transform:translateY(0);opacity:.55}100%{transform:translateY(-14px);opacity:0}}
+@keyframes zzz{0%{transform:translateY(0);opacity:.55}100%{transform:translateY(-16px);opacity:0}}
 @media(max-width:900px){
   .wrap.ofc{height:auto;min-height:100dvh;overflow:auto;padding:8px 10px 0!important}
   .ofc-grid,.ofc-grid.l-off,.ofc-grid.r-off,.ofc-grid.l-off.r-off{grid-template-columns:1fr;overflow:visible}
@@ -111,14 +131,13 @@ html.office-day .ofc-flab b{text-shadow:0 1px 0 rgba(255,255,255,.55)}
     <div class="ofc-mark" aria-hidden="true"><i></i></div>
     <div>
       <h1>Grok Bot Office</h1>
-      <div class="ofc-clock" id="clock"></div>
+      <div class="ofc-sub">Sunny AI · trading floor</div>
     </div>
-    <span class="ofc-live"><b></b>Live</span>
+    <span class="ofc-live"><b></b>Live · <span id="clock"></span></span>
     <div class="ofc-seg" role="tablist" aria-label="Office mode">
       <button type="button" data-mode="day">Day</button>
       <button type="button" data-mode="night">Night</button>
       <button type="button" data-mode="tour">Tour</button>
-      <button type="button" data-mode="meeting">Meeting</button>
     </div>
   </div>
   <div class="ofc-pills" id="pills"></div>
@@ -126,17 +145,18 @@ html.office-day .ofc-flab b{text-shadow:0 1px 0 rgba(255,255,255,.55)}
   <div class="ofc-grid" id="grid">
     <aside class="ofc-side" id="left"></aside>
     <div class="ofc-scene">
-      <div class="ofc-flab" id="flab"></div>
       <div class="ofc-stage" id="stage">
         <div class="ofc-stack" id="stack"></div>
       </div>
+      <div class="ofc-hint">Drag rotate · right-drag / WASD move · Scroll zoom · 1–5 floors</div>
     </div>
     <aside class="ofc-side" id="right"></aside>
   </div>
 </div>
 <script>
 (function(){
-const TILE=48, RISE=26;
+const TILE=46, RISE=25;
+const DESK={x:2.08,y:3.22,w:6.58,d:2.5};
 const FLOORS=[
   {id:5,name:"Meeting",blurb:"Summaries, EOD, digests"},
   {id:4,name:"Trading",blurb:"Fast Crypto, MAJOR, Fake Stocks"},
@@ -170,7 +190,7 @@ const MEET=[
 ];
 function seedAgents(){return [
   {id:"fast",name:"Fast Crypto",floor:4,status:"working",task:"Scanning REAL-DATA only (SIM-FEED paused)",shape:"sphere",tint:"#3D8BFF",col:0,row:0},
-  {id:"major",name:"Slow Crypto / MAJOR",floor:4,status:"working",task:"Holding cluster; trade as usual after NFP",shape:"cube",tint:"#FF9F1C",col:1,row:0},
+  {id:"major",name:"Slow Crypto / MAJOR",floor:4,status:"working",task:"Holding cluster; trade as usual after NFP",shape:"cube",tint:"#FF8A1C",col:1,row:0},
   {id:"stocks",name:"Fake Stocks",floor:4,status:"working",task:"NVDA + watchlist, fake-money book",shape:"diamond",tint:"#9B6BFF",col:2,row:0},
   {id:"scan",name:"Scan helper",floor:4,status:"working",task:"Desk helper · REAL-DATA tape",shape:"cylinder",tint:"#2EC4B6",col:3,row:0,helper:true},
   {id:"risk",name:"Risk shadow",floor:4,status:"working",task:"Desk helper · stop and cluster checks",shape:"pyramid",tint:"#E84855",col:0,row:1,helper:true},
@@ -200,7 +220,7 @@ function seedFeed(now){return [
   {id:"f8",text:"Team snapshot ~$2,847 / $3,000 across three lanes",at:now-25*60000}
 ]}
 function fmtCT(d){
-  return new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(d)+" CT";
+  return new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"2-digit"}).format(d)+" CT";
 }
 function relTime(at,now){
   const sec=Math.max(0,Math.floor((now-at)/1000));
@@ -211,7 +231,7 @@ function relTime(at,now){
 }
 function iso(x,y,z,ox,oy){return {x:(x-y)*TILE+ox,y:(x+y)*RISE-z*RISE+oy}}
 function pts(list){return list.map(p=>p.x+","+p.y).join(" ")}
-function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":"#7b8594"}
+function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":"#94a3b8"}
 function mixHex(hex,other,t){
   const parse=h=>{h=String(h).replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
   const a=parse(hex),b=parse(other);
@@ -219,11 +239,11 @@ function mixHex(hex,other,t){
 }
 function faces(fill){
   return {
-    top:mixHex(fill,"#ffffff",0.34),
-    left:mixHex(fill,"#000000",0.16),
-    right:mixHex(fill,"#000000",0.38),
-    deep:mixHex(fill,"#000000",0.5),
-    edge:mixHex(fill,"#1a120c",0.52),
+    top:mixHex(fill,"#ffffff",0.38),
+    left:mixHex(fill,"#000000",0.14),
+    right:mixHex(fill,"#000000",0.34),
+    deep:mixHex(fill,"#000000",0.48),
+    edge:mixHex(fill,"#1a120c",0.42),
     mid:fill
   };
 }
@@ -231,9 +251,9 @@ function isoBox(x,y,z,w,d,h,ox,oy,top,left,right,stroke){
   const t1=iso(x,y,z+h,ox,oy),t2=iso(x+w,y,z+h,ox,oy),t3=iso(x+w,y+d,z+h,ox,oy),t4=iso(x,y+d,z+h,ox,oy);
   const l1=iso(x,y,z,ox,oy),l2=iso(x,y+d,z,ox,oy),r1=iso(x+w,y+d,z,ox,oy);
   return `<g>
-    <polygon points="${pts([t1,t2,t3,t4])}" fill="${top}" stroke="${stroke}" stroke-width="0.85" stroke-linejoin="round"/>
-    <polygon points="${pts([t1,t4,l2,l1])}" fill="${left}" stroke="${stroke}" stroke-width="0.85" stroke-linejoin="round"/>
-    <polygon points="${pts([t4,t3,r1,l2])}" fill="${right}" stroke="${stroke}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${pts([t1,t2,t3,t4])}" fill="${top}" stroke="${stroke}" stroke-width="0.7" stroke-linejoin="round"/>
+    <polygon points="${pts([t1,t4,l2,l1])}" fill="${left}" stroke="${stroke}" stroke-width="0.7" stroke-linejoin="round"/>
+    <polygon points="${pts([t4,t3,r1,l2])}" fill="${right}" stroke="${stroke}" stroke-width="0.7" stroke-linejoin="round"/>
   </g>`;
 }
 function isoPyramid(x,y,z,w,d,h,ox,oy,fill){
@@ -242,46 +262,49 @@ function isoPyramid(x,y,z,w,d,h,ox,oy,fill){
   const nw=iso(x,y,z,ox,oy), ne=iso(x+w,y,z,ox,oy);
   const se=iso(x+w,y+d,z,ox,oy), sw=iso(x,y+d,z,ox,oy);
   return `<g>
-    <polygon points="${pts([apex,nw,sw])}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>
-    <polygon points="${pts([apex,sw,se])}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>
-    <polygon points="${pts([apex,ne,nw])}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>
+    <polygon points="${pts([apex,nw,sw])}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${pts([apex,sw,se])}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${pts([apex,ne,nw])}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${apex.x},${apex.y} ${apex.x-6},${apex.y+8} ${apex.x+10},${apex.y+6}" fill="#fff" opacity="0.28"/>
   </g>`;
 }
 function isoSphere(cx,cy,r,fill){
   const f=faces(fill);
   return `<g>
     <ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*0.94}" fill="${f.right}"/>
-    <ellipse cx="${cx-r*0.07}" cy="${cy-r*0.06}" rx="${r*0.9}" ry="${r*0.86}" fill="${fill}"/>
-    <ellipse cx="${cx}" cy="${cy+r*0.28}" rx="${r*0.72}" ry="${r*0.5}" fill="${f.deep}" opacity="0.22"/>
-    <ellipse cx="${cx-r*0.34}" cy="${cy-r*0.4}" rx="${r*0.38}" ry="${r*0.26}" fill="#fff" opacity="0.48"/>
-    <ellipse cx="${cx-r*0.18}" cy="${cy-r*0.22}" rx="${r*0.16}" ry="${r*0.1}" fill="#fff" opacity="0.38"/>
+    <ellipse cx="${cx-r*0.06}" cy="${cy-r*0.05}" rx="${r*0.9}" ry="${r*0.86}" fill="${fill}"/>
+    <ellipse cx="${cx}" cy="${cy+r*0.28}" rx="${r*0.72}" ry="${r*0.5}" fill="${f.deep}" opacity="0.2"/>
+    <ellipse cx="${cx-r*0.34}" cy="${cy-r*0.4}" rx="${r*0.38}" ry="${r*0.26}" fill="#fff" opacity="0.52"/>
+    <ellipse cx="${cx-r*0.16}" cy="${cy-r*0.18}" rx="${r*0.14}" ry="${r*0.09}" fill="#fff" opacity="0.4"/>
   </g>`;
 }
-function isoCylinder(cx,yTop,yBot,rx,ry,fill){
+function isoCapsule(cx,yTop,yBot,rx,ry,fill){
   const f=faces(fill);
+  const bodyH=Math.max(8,yBot-yTop);
   return `<g>
-    <path d="M ${cx-rx} ${yTop} L ${cx-rx} ${yBot} A ${rx} ${ry} 0 0 0 ${cx+rx} ${yBot} L ${cx+rx} ${yTop} A ${rx} ${ry} 0 0 1 ${cx-rx} ${yTop}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.8"/>
-    <ellipse cx="${cx}" cy="${yBot}" rx="${rx}" ry="${ry}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.6"/>
-    <ellipse cx="${cx}" cy="${yTop}" rx="${rx}" ry="${ry}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.85"/>
-    <ellipse cx="${cx-rx*0.22}" cy="${yTop-ry*0.12}" rx="${rx*0.42}" ry="${ry*0.32}" fill="#fff" opacity="0.34"/>
+    <path d="M ${cx-rx} ${yTop} L ${cx-rx} ${yBot} A ${rx} ${ry} 0 0 0 ${cx+rx} ${yBot} L ${cx+rx} ${yTop} A ${rx} ${ry} 0 0 1 ${cx-rx} ${yTop}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.7"/>
+    <ellipse cx="${cx}" cy="${yBot}" rx="${rx}" ry="${ry}" fill="${f.right}"/>
+    <ellipse cx="${cx}" cy="${yTop}" rx="${rx}" ry="${ry}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.75"/>
+    <ellipse cx="${cx-rx*0.28}" cy="${yTop-ry*0.05}" rx="${rx*0.42}" ry="${ry*0.34}" fill="#fff" opacity="0.4"/>
+    <rect x="${cx-rx*0.55}" y="${yTop+bodyH*0.25}" width="${rx*0.18}" height="${bodyH*0.35}" rx="4" fill="#fff" opacity="0.16"/>
   </g>`;
 }
 function isoDiamond(cx,cy,r,fill){
   const f=faces(fill);
-  const top={x:cx,y:cy-r*1.22}, bot={x:cx,y:cy+r*1.18};
-  const L={x:cx-r*0.98,y:cy+r*0.1}, R={x:cx+r*0.98,y:cy+r*0.1};
-  const fm={x:cx+r*0.04,y:cy+r*0.32};
+  const top={x:cx,y:cy-r*1.18}, bot={x:cx,y:cy+r*1.14};
+  const L={x:cx-r*0.96,y:cy+r*0.08}, R={x:cx+r*0.96,y:cy+r*0.08};
+  const fm={x:cx+r*0.04,y:cy+r*0.3};
   return `<g>
-    <polygon points="${top.x},${top.y} ${L.x},${L.y} ${fm.x},${fm.y}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
-    <polygon points="${top.x},${top.y} ${fm.x},${fm.y} ${R.x},${R.y}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
-    <polygon points="${L.x},${L.y} ${bot.x},${bot.y} ${fm.x},${fm.y}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
-    <polygon points="${fm.x},${fm.y} ${bot.x},${bot.y} ${R.x},${R.y}" fill="${f.deep}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
-    <polygon points="${top.x},${top.y} ${cx-r*0.22},${cy-r*0.2} ${cx+r*0.28},${cy-r*0.12}" fill="#fff" opacity="0.3"/>
+    <polygon points="${top.x},${top.y} ${L.x},${L.y} ${fm.x},${fm.y}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${top.x},${top.y} ${fm.x},${fm.y} ${R.x},${R.y}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${L.x},${L.y} ${bot.x},${bot.y} ${fm.x},${fm.y}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${fm.x},${fm.y} ${bot.x},${bot.y} ${R.x},${R.y}" fill="${f.deep}" stroke="${f.edge}" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="${top.x},${top.y} ${cx-r*0.2},${cy-r*0.18} ${cx+r*0.26},${cy-r*0.1}" fill="#fff" opacity="0.32"/>
   </g>`;
 }
 function isoStar(cx,cy,r,fill){
   const f=faces(fill);
-  const dx=8, dy=7, front=[], back=[];
+  const dx=7, dy=6, front=[], back=[];
   for(let i=0;i<10;i++){
     const rad=i%2===0?r:r*0.4;
     const a=-Math.PI/2+(i*Math.PI)/5;
@@ -291,12 +314,20 @@ function isoStar(cx,cy,r,fill){
   let html="<g>";
   for(let i=0;i<10;i++){
     const a=front[i], b=front[(i+1)%10], c=back[(i+1)%10], d=back[i];
-    html+=`<polygon points="${a.x},${a.y} ${b.x},${b.y} ${c.x},${c.y} ${d.x},${d.y}" fill="${i%2?f.right:f.left}" stroke="${f.edge}" stroke-width="0.35"/>`;
+    html+=`<polygon points="${a.x},${a.y} ${b.x},${b.y} ${c.x},${c.y} ${d.x},${d.y}" fill="${i%2?f.right:f.left}" stroke="${f.edge}" stroke-width="0.3"/>`;
   }
   html+=`<polygon points="${back.map(p=>p.x+","+p.y).join(" ")}" fill="${f.deep}"/>`;
-  html+=`<polygon points="${front.map(p=>p.x+","+p.y).join(" ")}" fill="${f.mid}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>`;
-  html+=`<ellipse cx="${cx-r*0.12}" cy="${cy-r*0.22}" rx="${r*0.22}" ry="${r*0.12}" fill="#fff" opacity="0.28"/>`;
+  html+=`<polygon points="${front.map(p=>p.x+","+p.y).join(" ")}" fill="${f.mid}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>`;
+  html+=`<ellipse cx="${cx-r*0.12}" cy="${cy-r*0.2}" rx="${r*0.22}" ry="${r*0.12}" fill="#fff" opacity="0.32"/>`;
   return html+"</g>";
+}
+function isoCubeSoft(x,y,z,s,ox,oy,fill){
+  const f=faces(fill);
+  const box=isoBox(x,y,z,s,s,s,ox,oy,f.top,f.left,f.right,f.edge);
+  const t1=iso(x+s*0.16,y+s*0.18,z+s,ox,oy);
+  const t2=iso(x+s*0.55,y+s*0.12,z+s,ox,oy);
+  const t3=iso(x+s*0.22,y+s*0.48,z+s,ox,oy);
+  return box+`<polygon points="${t1.x},${t1.y} ${t2.x},${t2.y} ${t3.x},${t3.y}" fill="#fff" opacity="0.28"/>`;
 }
 function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
@@ -307,13 +338,14 @@ const S={
   openFinished:false, openRoutines:false, equity:2847, scans:18, shift:20,
   leftOpen:true, rightOpen:true
 };
+const CAM={x:0,y:0,z:1,rot:0};
 try{
   const saved=JSON.parse(localStorage.getItem("sunnyOfficeMode")||"{}");
   if(saved.theme==="day"||saved.theme==="night") S.theme=saved.theme;
   if(saved.mode==="day"||saved.mode==="night"||saved.mode==="tour"||saved.mode==="meeting") S.mode=saved.mode;
   if(S.mode==="day") S.theme="day";
   if(S.mode==="night") S.theme="night";
-  if(S.mode==="meeting") S.floor=5;
+  if(S.mode==="meeting"){S.floor=5;S.mode=S.theme}
 }catch(err){}
 function persist(){try{localStorage.setItem("sunnyOfficeMode",JSON.stringify({mode:S.mode,theme:S.theme}))}catch(err){}}
 
@@ -334,7 +366,7 @@ function counts(){
 function waiting(){return S.agents.filter(a=>a.status==="waiting")}
 function viewAgent(id){
   const who=S.agents.find(a=>a.id===id); if(!who)return;
-  S.selectedId=id; S.floor=who.floor; if(S.mode==="meeting") S.mode=S.theme; persist(); paint();
+  S.selectedId=id; S.floor=who.floor; persist(); paint();
 }
 function approve(id){
   S.agents=S.agents.map(a=>{
@@ -352,230 +384,362 @@ function approve(id){
   S.finished=["Approved "+label,...S.finished];
   paint();
 }
-
 function pal(){
   const n=nightOn();
   return n?{
-    floor:"#1a2230", wallA:"#10141c", wallB:"#181e28", wallC:"#0c1016",
-    win:"#2a4a8c", stroke:"#2a3342", woodT:"#3a2a1c", woodL:"#2a1e14", woodR:"#21170f",
-    deskT:"#243044", deskL:"#1a222e", deskR:"#151b24", rug:"#24324a",
-    text:"#e7ecf3", mut:"#8a94a3", glass:"rgba(130,170,230,.18)",
-    labelBg:"#12161e", labelStroke:"#2a3342"
+    floor:"#1a2230", wallA:"#141a24", wallB:"#10141c", wallC:"#0c1016",
+    win:"#2a4a8c", stroke:"#2a3342",
+    deskT:"#2c3544", deskL:"#232a36", deskR:"#1a202a",
+    rug:"#24324a", text:"#e7ecf3", mut:"#8a94a3",
+    glass:"rgba(130,170,230,.16)", rail:"#8aa0c0",
+    shadow:"#07090d", lower:"#0a0d12",
+    chairT:"#3a404c", chairL:"#2a303a", chairR:"#1a1e26", chairS:"#0b0d12"
   }:{
-    floor:"#e4d2b4", wallA:"#f6ead4", wallB:"#ead9bd", wallC:"#f3e6cc",
-    win:"#8ec4ef", stroke:"#c4b193", woodT:"#c48a52", woodL:"#a46e3e", woodR:"#8d5c32",
-    deskT:"#d7c4a4", deskL:"#c3ad8c", deskR:"#b39976", rug:"#c9b18a",
-    text:"#2c261c", mut:"#6d6456", glass:"rgba(255,255,255,.28)",
-    labelBg:"#fff8ee", labelStroke:"#c4b193"
+    floor:"#eef1f6", wallA:"#f7f8fb", wallB:"#e7ebf1", wallC:"#f3f5f8",
+    win:"#c8dff5", stroke:"#d5dae3",
+    deskT:"#ffffff", deskL:"#e6e9ef", deskR:"#d0d5de",
+    rug:"#e4e8f0", text:"#111827", mut:"#6b7280",
+    glass:"rgba(255,255,255,.38)", rail:"#9aa3b2",
+    shadow:"#9aa3b2", lower:"#d5dae3",
+    chairT:"#3e4450", chairL:"#2c313a", chairR:"#1c2028", chairS:"#0e1014"
   };
 }
-
-function plantAt(x,y,z,ox,oy){
-  const p=iso(x+.22,y+.22,z+1.15,ox,oy);
-  const leaf=nightOn()?"#1d6b3c":"#2fa36b";
-  const leaf2=nightOn()?"#16532e":"#248a58";
-  return isoBox(x,y,z,.44,.44,.32,ox,oy,"#a05a32","#7a4324","#63361c","#4a2814")+
-    `<ellipse cx="${p.x}" cy="${p.y-16}" rx="16" ry="18" fill="${leaf}"/>
-     <ellipse cx="${p.x-11}" cy="${p.y-6}" rx="11" ry="13" fill="${leaf2}"/>
-     <ellipse cx="${p.x+11}" cy="${p.y-8}" rx="10" ry="12" fill="${leaf}"/>`;
-}
-function rugAt(x,y,w,d,ox,oy,fill){
-  const a=iso(x,y,0.02,ox,oy),b=iso(x+w,y,0.02,ox,oy),c=iso(x+w,y+d,0.02,ox,oy),e=iso(x,y+d,0.02,ox,oy);
-  return `<polygon points="${pts([a,b,c,e])}" fill="${fill}" opacity="0.7" stroke="${nightOn()?"#1a2433":"#b89a68"}"/>`;
-}
-function chairAt(x,y,ox,oy){
-  const p=pal();
-  return isoBox(x,y,0,.58,.58,.44,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke)+
-         isoBox(x+.05,y-.1,.44,.48,.18,.5,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke);
-}
-function monitorAt(x,y,z,ox,oy,title,sub,accent,tid){
-  const p=iso(x,y,z,ox,oy);
-  const id=tid?` id="${tid}"`:"";
+function wallClock(px, py, r){
+  const parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"2-digit",hour12:false}).formatToParts(new Date());
+  const hh=+(parts.find(p=>p.type==="hour")||{}).value||0;
+  const mm=+(parts.find(p=>p.type==="minute")||{}).value||0;
+  const ha=((hh%12)+mm/60)*30, ma=mm*6;
+  const hx=px+Math.sin(ha*Math.PI/180)*r*0.42, hy=py-Math.cos(ha*Math.PI/180)*r*0.42;
+  const mx=px+Math.sin(ma*Math.PI/180)*r*0.62, my=py-Math.cos(ma*Math.PI/180)*r*0.62;
+  const face=nightOn()?"#e8edf4":"#f8fafc";
+  const ink=nightOn()?"#1a2230":"#111827";
   return `<g>
-    <rect x="${p.x}" y="${p.y-30}" width="84" height="50" rx="4" fill="#111820" stroke="${accent}" stroke-width="1.4"/>
-    <rect x="${p.x+4}" y="${p.y-26}" width="76" height="36" rx="2" fill="#17324d"/>
-    <text x="${p.x+42}" y="${p.y-8}" text-anchor="middle" fill="#9ad7ff" font-size="8" font-family="ui-monospace,monospace">${esc(title)}</text>
-    <text${id} x="${p.x+42}" y="${p.y+8}" text-anchor="middle" fill="#e7ecf3" font-size="11" font-family="ui-monospace,monospace">${esc(sub)}</text>
+    <circle cx="${px}" cy="${py}" r="${r+3}" fill="#c5cad3" opacity="0.55"/>
+    <circle cx="${px}" cy="${py}" r="${r}" fill="${face}" stroke="${ink}" stroke-width="2.2"/>
+    <circle cx="${px}" cy="${py}" r="2.2" fill="${ink}"/>
+    <line x1="${px}" y1="${py}" x2="${hx}" y2="${hy}" stroke="${ink}" stroke-width="2.4" stroke-linecap="round"/>
+    <line x1="${px}" y1="${py}" x2="${mx}" y2="${my}" stroke="${ink}" stroke-width="1.5" stroke-linecap="round"/>
   </g>`;
 }
-function coffeeAt(x,y,ox,oy){
+function spherePlant(x,y,z,ox,oy,scale){
+  const s=scale||1;
+  const pot=isoBox(x,y,z,.42*s,.42*s,.28*s,ox,oy,"#c4ccd6","#9aa3b0","#7d8694",pal().stroke);
+  const a=iso(x+.21*s,y+.21*s,z+.28*s+1.05*s,ox,oy);
+  const b=iso(x+.08*s,y+.28*s,z+.28*s+.72*s,ox,oy);
+  const leaf=nightOn()?"#2f9e5b":"#3dbe6d";
+  const leaf2=nightOn()?"#217a45":"#2fa15c";
+  return pot+isoSphere(a.x,a.y,16*s,leaf)+isoSphere(b.x,b.y-4,11*s,leaf2);
+}
+function coffeeBar(x,y,ox,oy){
   const p=pal();
-  const steam=iso(x+.42,y+.22,1.55,ox,oy);
-  const led=iso(x+.55,y+.18,1.15,ox,oy);
-  return isoBox(x-.15,y-.1,0,1.35,.85,.38,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke)+
-    isoBox(x+.15,y+.05,.38,.7,.55,1.05,ox,oy,"#d8dde4","#9aa3ae","#7d8692",p.stroke)+
-    isoBox(x+.28,y+.16,1.43,.42,.32,.22,ox,oy,"#2b3038","#1c2026","#14171c",p.stroke)+
-    `<circle cx="${led.x}" cy="${led.y}" r="3" fill="#ff7a3a" style="animation:blinkLed 1.6s ease-in-out infinite"/>
-     <circle cx="${steam.x}" cy="${steam.y}" r="3" fill="#fff" opacity=".45" style="animation:steam 1.8s linear infinite"/>
-     <circle cx="${steam.x+5}" cy="${steam.y-4}" r="2.4" fill="#fff" opacity=".35" style="animation:steam 1.8s linear .4s infinite"/>`+
-    isoBox(x+.95,y+.28,.38,.28,.28,.22,ox,oy,"#f2f2f2","#d0d0d0","#b8b8b8",p.stroke);
+  const steam=iso(x+.62,y+.28,1.72,ox,oy);
+  const led=iso(x+.78,y+.22,1.22,ox,oy);
+  let html=isoBox(x,y,0,2.35,.72,.42,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  html+=isoBox(x+.22,y+.12,.42,.86,.48,1.08,ox,oy,"#2b3038","#1c2026","#14171c",p.chairS);
+  html+=isoBox(x+.38,y+.22,1.5,.52,.28,.16,ox,oy,"#111418","#0b0d10","#070809",p.chairS);
+  html+=`<circle cx="${led.x}" cy="${led.y}" r="2.6" fill="#ff7a3a" style="animation:blinkLed 1.6s ease-in-out infinite"/>
+    <circle cx="${steam.x}" cy="${steam.y}" r="3.1" fill="#fff" opacity=".5" style="animation:steam 1.7s linear infinite"/>
+    <circle cx="${steam.x+5}" cy="${steam.y-5}" r="2.3" fill="#fff" opacity=".35" style="animation:steam 1.7s linear .35s infinite"/>
+    <circle cx="${steam.x-4}" cy="${steam.y-2}" r="2" fill="#fff" opacity=".3" style="animation:steam 1.7s linear .7s infinite"/>`;
+  const mugs=[["#F4D35E",1.22],["#FF6B8A",1.52],["#4C8DFF",1.82]];
+  mugs.forEach(([c,dx])=>{
+    html+=isoBox(x+dx,y+.28,.42,.28,.28,.22,ox,oy,c,mixHex(c,"#000",0.18),mixHex(c,"#000",0.32),p.stroke);
+  });
+  return html;
 }
-function tvAt(x,y,ox,oy,on){
-  const p=iso(x,y,1.85,ox,oy);
-  const stand=isoBox(x+.35,y+.18,0,.5,.28,.35,ox,oy,"#2a2f38","#1c2026","#14181e", pal().stroke);
-  const glow=on?`<rect x="${p.x-6}" y="${p.y-38}" width="126" height="76" rx="6" fill="#5ad0ff" opacity=".28" style="animation:tvGlow 1.8s ease-in-out infinite"/>`:"";
-  const screen=on?"#12324a":"#0b0e14";
-  const label=on?"BREAK":"standby";
-  return stand+glow+`<g>
-    <rect x="${p.x}" y="${p.y-34}" width="114" height="66" rx="5" fill="#1a1f28" stroke="#3a4454"/>
-    <rect x="${p.x+6}" y="${p.y-28}" width="102" height="54" rx="3" fill="${screen}"/>
-    <text x="${p.x+57}" y="${p.y+4}" text-anchor="middle" fill="${on?"#9be7ff":"#66707c"}" font-size="${on?14:10}" font-family="system-ui,sans-serif" font-weight="700">${label}</text>
+function wallTv(x,y,ox,oy){
+  const p=iso(x,y,2.05,ox,oy);
+  const glow=nightOn()?"#5ad0ff":"#86efac";
+  return `<g>
+    <rect x="${p.x-8}" y="${p.y-52}" width="168" height="108" rx="10" fill="${glow}" opacity=".2" style="animation:tvGlow 2.2s ease-in-out infinite"/>
+    <rect x="${p.x}" y="${p.y-46}" width="152" height="96" rx="8" fill="#111418" stroke="#2a3038" stroke-width="2"/>
+    <rect x="${p.x+6}" y="${p.y-40}" width="140" height="84" rx="4" fill="#0b1220"/>
+    <text x="${p.x+16}" y="${p.y-24}" fill="#86efac" font-size="9" font-family="ui-monospace,monospace">BOOK / MIN</text>
+    <text id="mon-equity" x="${p.x+16}" y="${p.y-6}" fill="#f8fafc" font-size="18" font-weight="750" font-family="system-ui,sans-serif">$${S.equity.toLocaleString("en-US")}</text>
+    <text id="mon-scans" x="${p.x+16}" y="${p.y+12}" fill="#86efac" font-size="10" font-family="ui-monospace,monospace">SCANS ${S.scans} live</text>
+    <path d="M ${p.x+12} ${p.y+30} C ${p.x+32} ${p.y+28}, ${p.x+40} ${p.y+8}, ${p.x+58} ${p.y+14} S ${p.x+90} ${p.y+6}, ${p.x+108} ${p.y+10} S ${p.x+130} ${p.y+22}, ${p.x+138} ${p.y+18} L ${p.x+138} ${p.y+36} L ${p.x+12} ${p.y+36} Z" fill="#22c55e" opacity=".45"/>
+    <path d="M ${p.x+12} ${p.y+30} C ${p.x+32} ${p.y+28}, ${p.x+40} ${p.y+8}, ${p.x+58} ${p.y+14} S ${p.x+90} ${p.y+6}, ${p.x+108} ${p.y+10} S ${p.x+130} ${p.y+22}, ${p.x+138} ${p.y+18}" fill="none" stroke="#4ade80" stroke-width="2"/>
   </g>`;
 }
-function booksAt(x,y,ox,oy){
-  const cols=["#4C8DFF","#E24B3B","#E8A317","#2FA36B","#8B6CFF","#d4783a"];
-  let html=isoBox(x,y,0,1.15,.42,1.7,ox,oy,"#8a6a44","#6e5334","#594228",pal().stroke);
-  cols.forEach((c,i)=>{html+=isoBox(x+.08+.16*(i%5),y+.06,0.12+Math.floor(i/5)*.55,.14,.3,.48,ox,oy,c,c,"#222",pal().stroke)});
-  return html;
+function isoChair(gx,gy,ox,oy,face){
+  const p=pal();
+  const sh=iso(gx+.4,gy+.38,0,ox,oy);
+  const col=isoBox(gx+.28,gy+.26,0,.2,.2,.3,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  const seat=isoBox(gx+.04,gy+.08,.3,.7,.62,.16,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  const bx=gx+.08, by=face<0?gy+.56:gy-.04;
+  const back=isoBox(bx,by,.46,.62,.16,.84,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  return `<ellipse cx="${sh.x}" cy="${sh.y+7}" rx="20" ry="9" fill="${p.shadow}" opacity="${nightOn()?.45:.28}"/>`+col+seat+back;
 }
-function rackAt(x,y,ox,oy){
-  let html=isoBox(x,y,0,.9,.7,2.05,ox,oy,"#2c3340","#1c222c","#151a21",pal().stroke);
-  for(let i=0;i<5;i++){
-    const p=iso(x+.18,y+.12,.35+i*.34,ox,oy);
-    html+=`<rect x="${p.x}" y="${p.y-6}" width="22" height="7" rx="1" fill="#0e141c" stroke="#3a4454"/>
-           <circle cx="${p.x+28}" cy="${p.y-2}" r="2.2" fill="${i%2?"#22e08a":"#ffb020"}" style="animation:blinkLed ${1.2+i*.2}s ease-in-out infinite"/>`;
+function screenArt(x,y,w,h,kind,accent){
+  if(kind==="idle"){
+    return `<rect x="${x+8}" y="${y+h/2-6}" width="${w-16}" height="4" rx="2" fill="#64748b" opacity=".45"/>`;
   }
-  return html;
+  if(kind==="wait"){
+    return `<circle cx="${x+w/2}" cy="${y+h/2}" r="7" fill="#ffb020"/><text x="${x+w/2}" y="${y+h/2+4}" text-anchor="middle" fill="#111" font-size="11" font-weight="800">!</text>`;
+  }
+  if(kind==="chart"){
+    return `<path d="M ${x+6} ${y+h-8} C ${x+18} ${y+h-10}, ${x+24} ${y+10}, ${x+40} ${y+16} S ${x+64} ${y+12}, ${x+w-6} ${y+14} L ${x+w-6} ${y+h-6} L ${x+6} ${y+h-6} Z" fill="${accent}" opacity=".35"/>`;
+  }
+  const lines=[0.78,0.52,0.64,0.4];
+  return lines.map((len,i)=>`<rect x="${x+6}" y="${y+8+i*7}" width="${(w-12)*len}" height="3.2" rx="1.6" fill="#7dd3c0" opacity="${0.9-i*0.12}"/>`).join("");
 }
-
-function shapeAt(agent,gx,gy,ox,oy,fill){
-  const z0=1.28;
-  const head=iso(gx+0.62,gy+0.38,z0+0.95,ox,oy);
-  const shape=agent.shape;
-  if(shape==="cube"){
-    const f=faces(fill);
-    return isoBox(gx+0.18,gy+0.04,z0,1.02,1.02,1.02,ox,oy,f.top,f.left,f.right,f.edge);
-  }
-  if(shape==="pyramid") return isoPyramid(gx+0.16,gy+0.02,z0,1.12,1.12,1.42,ox,oy,fill);
-  if(shape==="cylinder"){
-    const top=iso(gx+0.62,gy+0.4,z0+1.42,ox,oy);
-    const bot=iso(gx+0.62,gy+0.4,z0,ox,oy);
-    return isoCylinder(top.x, top.y, bot.y, 22, 11, fill);
-  }
-  if(shape==="sphere") return isoSphere(head.x, head.y, 27, fill);
-  if(shape==="diamond") return isoDiamond(head.x, head.y, 28, fill);
-  return isoStar(head.x, head.y, 27, fill);
+function monitorAt(x,y,ox,oy,agent){
+  const p=iso(x,y,0.95,ox,oy);
+  const accent=agent.tint||"#4C8DFF";
+  const kind=agent.status==="resting"?"idle":agent.status==="waiting"?"wait":(agent.shape==="cube"||agent.id==="fast"?"chart":"code");
+  return `<g>
+    <rect x="${p.x+18}" y="${p.y+20}" width="8" height="10" fill="#1a1d24"/>
+    <rect x="${p.x}" y="${p.y-22}" width="56" height="42" rx="4" fill="#111418" stroke="${accent}" stroke-width="1.15"/>
+    <rect x="${p.x+3}" y="${p.y-19}" width="50" height="36" rx="2" fill="#0c1522"/>
+    ${screenArt(p.x+3,p.y-19,50,36,kind,accent)}
+  </g>`;
 }
-
-function agentGlyph(agent,ox,oy,selected,gx,gy){
-  gx = gx==null ? (1.55+agent.col*2.2) : gx;
-  gy = gy==null ? (3.15+agent.row*2.35) : gy;
+function shapeOnSeat(agent,gx,gy,ox,oy,fill){
+  const z0=0.5;
+  const head=iso(gx+0.4,gy+0.34,z0+0.92,ox,oy);
+  if(agent.shape==="cube") return isoCubeSoft(gx+0.08,gy+0.06,z0,0.9,ox,oy,fill);
+  if(agent.shape==="pyramid") return isoPyramid(gx+0.06,gy+0.04,z0,0.96,0.96,1.18,ox,oy,fill);
+  if(agent.shape==="cylinder"){
+    const top=iso(gx+0.4,gy+0.34,z0+1.22,ox,oy);
+    const bot=iso(gx+0.4,gy+0.34,z0,ox,oy);
+    return isoCapsule(top.x, top.y, bot.y, 16, 8.5, fill);
+  }
+  if(agent.shape==="sphere") return isoSphere(head.x, head.y, 23, fill);
+  if(agent.shape==="diamond") return isoDiamond(head.x, head.y+2, 22, fill);
+  return isoStar(head.x, head.y+2, 23, fill);
+}
+function statusBubble(cx,cy,agent,selected){
+  if(agent.bubble){
+    const short=agent.bubble.length>32?agent.bubble.slice(0,30)+"…":agent.bubble;
+    return `<g style="animation:sunnyBubble 0.48s ease;transform-origin:${cx}px ${cy-36}px">
+      <rect x="${cx-70}" y="${cy-58}" width="140" height="26" rx="9" fill="#fff" stroke="#d5dae3"/>
+      <text x="${cx}" y="${cy-41}" text-anchor="middle" fill="#111827" font-size="9" font-family="system-ui,sans-serif">${esc(short)}</text>
+    </g>`;
+  }
+  if(agent.status==="waiting"){
+    return `<g>
+      <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#ffb020" stroke="#fff" stroke-width="2"/>
+      <text x="${cx+2}" y="${cy-32}" text-anchor="middle" fill="#111" font-size="13" font-weight="800">!</text>
+    </g>`;
+  }
+  if(selected){
+    return `<g>
+      <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#3b82f6" stroke="#fff" stroke-width="2"/>
+      <path d="M ${cx-3} ${cy-36} l 3.2 3.4 7-7" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>`;
+  }
+  if(agent.status==="working"){
+    return `<g>
+      <rect x="${cx-16}" y="${cy-46}" width="34" height="20" rx="9" fill="#22c55e" stroke="#fff" stroke-width="1.6"/>
+      <circle cx="${cx-6}" cy="${cy-36}" r="2.2" fill="#fff"/>
+      <circle cx="${cx+1}" cy="${cy-36}" r="2.2" fill="#fff"/>
+      <circle cx="${cx+8}" cy="${cy-36}" r="2.2" fill="#fff"/>
+    </g>`;
+  }
+  if(agent.status==="resting"){
+    return `<g>
+      <text x="${cx+10}" y="${cy-38}" fill="#64748b" font-size="11" font-weight="700" style="animation:zzz 1.6s linear infinite">z</text>
+      <text x="${cx+18}" y="${cy-48}" fill="#64748b" font-size="13" font-weight="700" style="animation:zzz 1.6s linear .3s infinite">z</text>
+    </g>`;
+  }
+  if(agent.status==="error"){
+    return `<g>
+      <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#ff4d5e" stroke="#fff" stroke-width="2"/>
+      <text x="${cx+2}" y="${cy-32}" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">!</text>
+    </g>`;
+  }
+  return "";
+}
+function headPoint(gx,gy,ox,oy){return iso(gx+0.4,gy+0.34,1.42,ox,oy)}
+function place(agent){
+  const mates=S.agents.filter(a=>a.floor===agent.floor);
+  const onlyOneRow=mates.every(a=>a.row===mates[0].row);
+  const row=onlyOneRow?1:agent.row;
+  if(row===0) return {gx:DESK.x+0.38+agent.col*1.52, gy:DESK.y-0.9, face:1};
+  return {gx:DESK.x+0.38+agent.col*1.52, gy:DESK.y+DESK.d+0.18, face:-1};
+}
+function drawSeated(agent,ox,oy,selected,gx,gy,face){
   const fill=agent.tint||"#4C8DFF";
-  const head=iso(gx+0.62,gy+0.38,2.35,ox,oy);
-  const label=iso(gx+0.62,gy+0.42,0.02,ox,oy);
-  const p=pal();
-  const dot=statusColor(agent.status);
-  const showBubble=Boolean(agent.bubble||(agent.status==="waiting"&&agent.waitReason));
-  const bubbleText=agent.bubble||agent.waitReason||"";
-  const short=bubbleText.length>34?bubbleText.slice(0,32)+"…":bubbleText;
-  const delay=(agent.col+agent.row*2)*0.16;
-  const labelText=SHORT[agent.id]||agent.name;
-  const lw=Math.max(64, labelText.length*7.2+16);
-  const bubble=showBubble?`<g style="animation:${agent.bubbleAt?"sunnyBubble 0.48s ease":"none"};transform-origin:${head.x}px ${head.y-42}px">
-    <rect x="${head.x-76}" y="${head.y-72}" width="152" height="32" rx="10" fill="${p.labelBg}" stroke="${p.labelStroke}"/>
-    <text x="${head.x}" y="${head.y-51}" text-anchor="middle" fill="${p.text}" font-size="10" font-family="system-ui,sans-serif">${esc(short)}</text>
+  const head=headPoint(gx,gy,ox,oy);
+  const delay=((agent.col||0)+(agent.row||0)*2)*0.18;
+  const name=selected?`<g>
+    <rect x="${head.x-34}" y="${head.y+28}" width="68" height="16" rx="8" fill="${nightOn()?"#12161e":"#fff"}" stroke="${nightOn()?"#2a3342":"#e5e7ef"}"/>
+    <text x="${head.x}" y="${head.y+39}" text-anchor="middle" fill="${pal().text}" font-size="9" font-weight="650" font-family="system-ui,sans-serif">${esc(SHORT[agent.id]||agent.name)}</text>
   </g>`:"";
   return `<g>
-    ${isoBox(gx,gy,0,1.48,1.02,.5,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke)}
-    ${chairAt(gx+.46,gy+.96,ox,oy)}
-    ${monitorAt(gx+.2,gy+.06,1.08,ox,oy,agent.status==="resting"?"idle":"live", (SHORT[agent.id]||agent.name).slice(0,10), fill)}
-    <ellipse cx="${head.x+2}" cy="${label.y+6}" rx="22" ry="9" fill="${nightOn()?"#121820":"#b89a68"}" opacity="0.38"/>
-    <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.6s ease-in-out ${delay}s infinite">
-      ${shapeAt(agent,gx,gy,ox,oy,fill)}
-      <circle cx="${head.x+22}" cy="${head.y-22}" r="5.5" fill="${dot}" stroke="${p.labelBg}" stroke-width="1.6"/>
-      ${selected?`<ellipse cx="${head.x}" cy="${head.y}" rx="36" ry="32" fill="none" stroke="#6b8afd" stroke-width="2.3" opacity="0.95"/>`:""}
+    ${isoChair(gx,gy,ox,oy,face)}
+    <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.8s ease-in-out ${delay}s infinite">
+      ${shapeOnSeat(agent,gx,gy,ox,oy,fill)}
     </g>
-    <rect x="${label.x-lw/2}" y="${label.y+16}" width="${lw}" height="18" rx="9" fill="${p.labelBg}" stroke="${p.labelStroke}" opacity="0.94"/>
-    <text x="${label.x}" y="${label.y+29}" text-anchor="middle" fill="${p.text}" font-size="11" font-weight="650" font-family="system-ui,sans-serif">${esc(labelText)}</text>
-    ${bubble}
+    ${statusBubble(head.x,head.y,agent,selected)}
+    ${name}
   </g>`;
 }
-
-function meetingGlyphs(ox,oy){
-  const seats=[{gx:2.35,gy:3.35,col:0,row:0},{gx:5.15,gy:3.35,col:1,row:0},{gx:2.35,gy:5.55,col:0,row:1},{gx:5.15,gy:5.55,col:1,row:1}];
-  return MEET.map((m,i)=>{
-    const src=S.agents.find(a=>a.id===m.id);
-    const agent={id:m.id,name:m.name,shape:m.shape,tint:src&&src.tint,status:src?src.status:"working",bubble:m.text,bubbleAt:Date.now(),col:seats[i].col,row:seats[i].row};
-    return agentGlyph(agent,ox,oy,S.selectedId===m.id,seats[i].gx,seats[i].gy);
+function emptySlot(gx,gy,ox,oy,face){return isoChair(gx,gy,ox,oy,face)}
+function sharedDesk(ox,oy){
+  const p=pal();
+  const sh=iso(DESK.x+DESK.w/2,DESK.y+DESK.d/2,0,ox,oy);
+  return `<ellipse cx="${sh.x+6}" cy="${sh.y+18}" rx="118" ry="36" fill="${p.shadow}" opacity="${nightOn()?.35:.18}"/>`+
+    isoBox(DESK.x,DESK.y,0,DESK.w,DESK.d,0.52,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+}
+function deskMonitors(agents,ox,oy){
+  return agents.filter(a=>a.status!=="resting").map(a=>{
+    const pl=place(a);
+    const mx=pl.gx+0.12;
+    const my=pl.face>0?DESK.y+0.14:DESK.y+DESK.d-0.52;
+    return monitorAt(mx,my,ox,oy,a);
   }).join("");
 }
-
-function floorSvg(floor){
-  const accent=ACC[floor];
-  const ox=430, oy=148;
-  const p=pal();
+function allDeskChairs(floor,ox,oy){
   const here=S.agents.filter(a=>a.floor===floor);
-  const info=FLOORS.find(f=>f.id===floor);
-  const resting=here.some(a=>a.status==="resting") || (floor===5 && S.agents.some(a=>a.status==="resting"));
-  const f0=iso(0.1,0.55,0,ox,oy),f1=iso(10.45,0.55,0,ox,oy),f2=iso(10.45,8.65,0,ox,oy),f3=iso(0.1,8.65,0,ox,oy);
-  const wH=4.15;
-  const w2=iso(10.45,0.55,wH,ox,oy);
-  const wA=iso(2.55,0.62,2.7,ox,oy),wB=iso(5.05,0.62,2.7,ox,oy),wC=iso(7.55,0.62,2.7,ox,oy);
-  const glass = floor===5 ? `<polygon points="${pts([iso(0.1,0.55,0,ox,oy),iso(0.1,8.65,0,ox,oy),iso(0.1,8.65,wH,ox,oy),iso(0.1,0.55,wH,ox,oy)])}" fill="${p.glass}" stroke="#8ec4ef" opacity="0.85"/>` : "";
-  const extras = (()=>{
-    let html = rugAt(1.55,2.45,7.0,4.85,ox,oy,p.rug);
-    html += coffeeAt(0.5,1.05,ox,oy);
-    html += tvAt(8.45,0.95,ox,oy,resting);
-    html += plantAt(0.4,7.6,0,ox,oy);
-    html += plantAt(9.6,7.4,0,ox,oy);
-    if(floor===4){
-      html += monitorAt(1.1,1.05,2.75,ox,oy,"BOOK SNAP","$"+S.equity.toLocaleString("en-US"),accent,"mon-equity");
-      html += monitorAt(8.05,6.75,2.2,ox,oy,"SCANS",S.scans+" live",accent,"mon-scans");
+  const occupied=new Set();
+  here.forEach(a=>{
+    if(a.status==="resting")return;
+    const pl=place(a);
+    occupied.add(pl.face+":"+a.col);
+  });
+  let html="";
+  for(const face of [1,-1]){
+    for(let col=0;col<4;col++){
+      const gx=DESK.x+0.38+col*1.52;
+      const gy=face>0?DESK.y-0.9:DESK.y+DESK.d+0.18;
+      const key=face+":"+col;
+      if(!occupied.has(key)) html+=emptySlot(gx,gy,ox,oy,face);
     }
-    if(floor===3){
-      html += booksAt(0.4,3.05,ox,oy)+booksAt(0.4,4.5,ox,oy);
-    }
-    if(floor===2){
-      html += rackAt(9.2,3.25,ox,oy);
-    }
-    if(floor===1){
-      html += monitorAt(8.05,6.55,2.15,ox,oy,"COOKIES","5 · ask 1st",accent);
-    }
-    if(floor===5){
-      html += isoBox(3.05,4.05,0,4.2,2.25,.5,ox,oy, nightOn()?"#3a465c":"#d8c09a", nightOn()?"#2a3344":"#c2a87e", nightOn()?"#222a38":"#b3966c", p.stroke);
-      const scr=iso(5.05,0.95,2.65,ox,oy);
-      html += `<g>
-        <rect x="${scr.x-78}" y="${scr.y-30}" width="184" height="62" rx="6" fill="#101820" stroke="${accent}"/>
-        <text x="${scr.x+14}" y="${scr.y-6}" text-anchor="middle" fill="#9ad7ff" font-size="13" font-family="system-ui,sans-serif" font-weight="700">SUMMARY · EOD · DIGEST</text>
-        <text x="${scr.x+14}" y="${scr.y+16}" text-anchor="middle" fill="#e7ecf3" font-size="12" font-family="system-ui,sans-serif">Fake-money team recap</text>
-      </g>`;
-    }
-    return html;
-  })();
-  const people = floor===5 ? meetingGlyphs(ox,oy) : here.map(a=>agentGlyph(a,ox,oy,S.selectedId===a.id)).join("");
-  return `<svg viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(info.name)} floor">
-    <polygon points="${pts([iso(0.1,0.55,wH,ox,oy),w2,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
-    <polygon points="${pts([w2,iso(10.45,8.65,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}"/>
-    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}" stroke="${accent}" stroke-width="1.8"/>
-    <polygon points="${pts([iso(0.1,0.55,0,ox,oy),iso(0.1,8.65,0,ox,oy),iso(0.1,8.65,wH,ox,oy),iso(0.1,0.55,wH,ox,oy)])}" fill="${p.wallC}" stroke="${p.stroke}" opacity="0.95"/>
-    ${glass}
-    <rect x="${wA.x}" y="${wA.y}" width="68" height="40" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
-    <rect x="${wB.x}" y="${wB.y}" width="68" height="40" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
-    <rect x="${wC.x}" y="${wC.y}" width="68" height="40" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
-    ${extras}
-    ${people}
-  </svg>`;
+  }
+  return html;
 }
-
+function loungeNook(floor,ox,oy){
+  const p=pal();
+  const x=9.05,y=6.35,w=2.7,d=2.55,h=2.35;
+  const glass=`
+    <polygon points="${pts([iso(x,y,0,ox,oy),iso(x+w,y,0,ox,oy),iso(x+w,y,h,ox,oy),iso(x,y,h,ox,oy)])}" fill="${p.glass}" stroke="#93c5fd" stroke-width="1.2" opacity="0.9"/>
+    <polygon points="${pts([iso(x+w,y,0,ox,oy),iso(x+w,y+d,0,ox,oy),iso(x+w,y+d,h,ox,oy),iso(x+w,y,h,ox,oy)])}" fill="${p.glass}" stroke="#93c5fd" stroke-width="1.2" opacity="0.75"/>`;
+  let html=isoBox(x,y,0,w,d,0.08,ox,oy,nightOn()?"#223044":"#f4f6fa",p.deskL,p.deskR,p.stroke);
+  html+=isoBox(x+0.25,y+0.7,0.08,0.7,0.7,0.38,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  html+=isoBox(x+1.1,y+0.7,0.08,0.7,0.7,0.38,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  html+=isoBox(x+0.55,y+1.55,0.08,0.85,0.55,0.28,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  html+=spherePlant(x+1.95,y+1.7,0.08,ox,oy,0.72);
+  const rest=S.agents.find(a=>a.floor===floor&&a.status==="resting");
+  if(rest){
+    html+=drawSeated(rest,ox,oy,S.selectedId===rest.id,x+0.35,y+0.55,-1);
+  }
+  return glass+html;
+}
+function railing(ox,oy){
+  const p=pal();
+  const a=iso(0.25,9.35,0,ox,oy), b=iso(12.15,9.35,0,ox,oy);
+  const a2=iso(0.25,9.35,0.7,ox,oy), b2=iso(12.15,9.35,0.7,ox,oy);
+  let html=`<polygon points="${a.x},${a.y+18} ${b.x},${b.y+18} ${b.x},${b.y+78} ${a.x},${a.y+78}" fill="${p.lower}" opacity=".85"/>`;
+  html+=spherePlant(10.6,9.7,-1.15,ox,oy,0.9);
+  html+=isoBox(0.55,9.55,-1.2,1.1,.45,1.5,ox,oy,"#8a6a44","#6e5334","#594228",p.stroke);
+  html+=`<line x1="${a2.x}" y1="${a2.y}" x2="${b2.x}" y2="${b2.y}" stroke="${p.rail}" stroke-width="2.4"/>`;
+  for(let i=0;i<=10;i++){
+    const t=i/10;
+    const x=0.25+t*11.9;
+    const lo=iso(x,9.35,0,ox,oy), hi=iso(x,9.35,0.7,ox,oy);
+    html+=`<line x1="${lo.x}" y1="${lo.y}" x2="${hi.x}" y2="${hi.y}" stroke="${p.rail}" stroke-width="1.6"/>`;
+  }
+  const vac=iso(4.8,9.15,0.02,ox,oy);
+  html+=`<ellipse cx="${vac.x}" cy="${vac.y}" rx="14" ry="7" fill="${nightOn()?"#2a3038":"#e5e7eb"}" stroke="${nightOn()?"#111":"#cbd5e1"}"/>
+         <ellipse cx="${vac.x-2}" cy="${vac.y-1}" rx="5" ry="2.4" fill="#fff" opacity=".35"/>`;
+  return html;
+}
+function roomShell(ox,oy,floor){
+  const p=pal();
+  const accent=ACC[floor];
+  const x0=0.2,y0=0.45,x1=12.2,y1=9.35,wH=3.15;
+  const f0=iso(x0,y0,0,ox,oy),f1=iso(x1,y0,0,ox,oy),f2=iso(x1,y1,0,ox,oy),f3=iso(x0,y1,0,ox,oy);
+  const w0=iso(x0,y0,wH,ox,oy),w1=iso(x1,y0,wH,ox,oy);
+  const label=iso(5.6,0.62,2.35,ox,oy);
+  const clk=iso(2.15,0.58,2.35,ox,oy);
+  let html=`
+    <polygon points="${pts([w0,w1,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
+    <polygon points="${pts([w1,iso(x1,y1,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}" opacity="0.96"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="none" stroke="${nightOn()?accent:"#d7dce6"}" stroke-width="1.4"/>
+    ${railing(ox,oy)}
+    ${coffeeBar(0.45,0.7,ox,oy)}
+    ${spherePlant(4.55,0.72,0,ox,oy,1.05)}
+    ${spherePlant(5.55,0.78,0,ox,oy,0.88)}
+    ${wallClock(clk.x+36,clk.y-8,22)}
+    ${wallTv(8.15,0.62,ox,oy)}
+    <text x="${label.x}" y="${label.y}" fill="${p.mut}" font-size="13" font-family="system-ui,sans-serif" opacity="0.7">Floor ${floor}</text>
+  `;
+  return html;
+}
+function workPeople(floor,ox,oy){
+  const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting");
+  const back=here.filter(a=>place(a).face>0).sort((a,b)=>place(a).gx-place(b).gx);
+  const front=here.filter(a=>place(a).face<0).sort((a,b)=>place(a).gx-place(b).gx);
+  let html=allDeskChairs(floor,ox,oy);
+  back.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
+  html+=sharedDesk(ox,oy);
+  html+=deskMonitors(here,ox,oy);
+  front.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
+  html+=loungeNook(floor,ox,oy);
+  return html;
+}
+function meetAgent(m,i){
+  const src=S.agents.find(a=>a.id===m.id)||{};
+  return {id:m.id,name:m.name,shape:m.shape,tint:src.tint,status:src.status||"working",bubble:m.text,col:i%2,row:Math.floor(i/2)};
+}
+function meetingScene(ox,oy){
+  const p=pal();
+  const x0=0.2,y0=0.45,x1=12.2,y1=9.35,wH=3.15;
+  const f0=iso(x0,y0,0,ox,oy),f1=iso(x1,y0,0,ox,oy),f2=iso(x1,y1,0,ox,oy),f3=iso(x0,y1,0,ox,oy);
+  const glassL=`<polygon points="${pts([iso(x0,y0,0,ox,oy),iso(x0,y1,0,ox,oy),iso(x0,y1,wH,ox,oy),iso(x0,y0,wH,ox,oy)])}" fill="${p.glass}" stroke="#93c5fd" opacity="0.85"/>`;
+  const seats=[
+    {gx:3.35,gy:3.35,face:1},{gx:6.55,gy:3.35,face:1},
+    {gx:3.35,gy:6.25,face:-1},{gx:6.55,gy:6.25,face:-1}
+  ];
+  const table=isoBox(3.15,4.05,0,5.1,2.15,.5,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  const scr=iso(6.1,0.85,2.15,ox,oy);
+  const screen=`<g>
+    <rect x="${scr.x-90}" y="${scr.y-36}" width="210" height="78" rx="8" fill="#0b1220" stroke="${ACC[5]}"/>
+    <text x="${scr.x+16}" y="${scr.y-8}" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700" font-family="system-ui,sans-serif">SUMMARY · EOD · DIGEST</text>
+    <text x="${scr.x+16}" y="${scr.y+16}" text-anchor="middle" fill="#e7ecf3" font-size="12" font-family="system-ui,sans-serif">Fake-money team recap</text>
+  </g>`;
+  const back=MEET.slice(0,2).map((m,i)=>drawSeated(meetAgent(m,i),ox,oy,S.selectedId===m.id,seats[i].gx,seats[i].gy,seats[i].face)).join("");
+  const front=MEET.slice(2).map((m,i)=>drawSeated(meetAgent(m,i+2),ox,oy,S.selectedId===m.id,seats[i+2].gx,seats[i+2].gy,seats[i+2].face)).join("");
+  return `
+    <polygon points="${pts([iso(x0,y0,wH,ox,oy),iso(x1,y0,wH,ox,oy),f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
+    <polygon points="${pts([iso(x1,y0,wH,ox,oy),iso(x1,y1,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}" stroke="#93c5fd" stroke-width="1.6"/>
+    ${glassL}${railing(ox,oy)}${coffeeBar(0.45,0.7,ox,oy)}${spherePlant(10.4,0.8,0,ox,oy,1)}
+    ${back}${table}${screen}${front}
+    ${spherePlant(1.1,7.9,0,ox,oy,0.9)}
+  `;
+}
+function floorSvg(floor){
+  const ox=580, oy=86;
+  const info=FLOORS.find(f=>f.id===floor);
+  const inner=floor===5?meetingScene(ox,oy):roomShell(ox,oy,floor)+workPeople(floor,ox,oy);
+  return `<div class="ofc-cam"><svg viewBox="0 0 1180 820" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(info.name)} floor">${inner}</svg></div>`;
+}
+function applyCam(){
+  document.querySelectorAll(".ofc-cam").forEach(el=>{
+    el.style.transform=`translate(${CAM.x}px,${CAM.y}px) rotate(${CAM.rot}deg) scale(${CAM.z})`;
+  });
+}
 function paintScene(){
   applyTheme();
   document.getElementById("stack").innerHTML=[5,4,3,2,1].map(fid=>`<div class="ofc-fl" data-floor="${fid}">${floorSvg(fid)}</div>`).join("");
   document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";
-  const info=FLOORS.find(f=>f.id===S.floor);
-  document.getElementById("flab").innerHTML=`<b>Floor ${info.id} · ${esc(info.name)}</b><span>${esc(info.blurb)}</span>`;
+  applyCam();
 }
-
 function paintChrome(){
   applyTheme();
-  document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;
+  document.getElementById("clock").textContent=S.clock;
   const c=counts(), w=waiting();
   document.getElementById("pills").innerHTML=`
-    <span class="ofc-pill w">${c.working} working</span>
-    <span class="ofc-pill q">${c.waiting} waiting</span>
-    <span class="ofc-pill e">${c.errors} errors</span>
-    <span class="ofc-pill r">${c.resting} resting</span>`;
+    <span class="ofc-pill w"><i></i>${c.working} working</span>
+    <span class="ofc-pill q"><i></i>${c.waiting} waiting</span>
+    <span class="ofc-pill e"><i></i>${c.errors} errors</span>
+    <span class="ofc-pill r"><i></i>${c.resting} resting</span>`;
   document.getElementById("needs").innerHTML=w.map(a=>`<div class="ofc-chip">
-    <span>${esc(a.name)} · ${esc(a.waitReason)}</span>
+    <span class="who"><em></em><b>${esc(a.name)}</b></span>
+    <span>${esc(a.waitReason)}</span>
     <button type="button" class="ofc-btn quiet" data-view="${a.id}">View</button>
     <button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button>
   </div>`).join("");
@@ -587,44 +751,47 @@ function paintChrome(){
   left.classList.toggle("collapsed", !S.leftOpen);
   left.innerHTML=`<button type="button" class="ofc-collapse" data-tog="left">${S.leftOpen?"⟨ Hide floors":"⟩"}</button>
     <div class="ofc-side-body"><div class="ofc-h">Floors</div>`+FLOORS.map(f=>{
-    const n=f.id===5?4:S.agents.filter(a=>a.floor===f.id&&a.status==="working").length;
-    return `<button type="button" class="ofc-fb ${S.floor===f.id?"on":""}" data-floor="${f.id}"><b>${f.id} · ${esc(f.name)}</b><span>${n} ${f.id===5?"in meeting":"working"} · ${esc(f.blurb)}</span></button>`;
+    const tot=f.id===5?MEET.length:S.agents.filter(a=>a.floor===f.id).length;
+    const n=f.id===5?MEET.length:S.agents.filter(a=>a.floor===f.id&&a.status==="working").length;
+    return `<button type="button" class="ofc-fb ${S.floor===f.id?"on":""}" data-floor="${f.id}"><span class="ofc-fn">${f.id}</span><span class="ofc-ft"><b>${esc(f.name)}<i>${n}/${tot}</i></b><span>${esc(f.blurb)}</span></span></button>`;
   }).join("")+`
     <div class="ofc-h ofc-wait">Waiting on me · ${w.length}</div>
-    ${w.map(a=>`<div class="ofc-waititem"><div class="nm">${esc(a.name)}</div><div class="rs">${esc(a.waitReason)}</div><button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button></div>`).join("")}
+    ${w.map(a=>`<div class="ofc-waititem"><div class="nm">${esc(a.name)}</div><div class="rs">${esc(a.waitReason)}</div><button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button></div>`).join("")||`<div class="ofc-cap">Nothing waiting — nice.</div>`}
     <button type="button" class="ofc-btn quiet" style="width:100%;margin-top:8px" data-tog="fin">Finished · ${S.finished.length}</button>
     ${S.openFinished?`<div style="margin-top:8px">${S.finished.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}
     <button type="button" class="ofc-btn quiet" style="width:100%;margin-top:8px" data-tog="rtn">Routines · ${ROUTINES.length}</button>
     ${S.openRoutines?`<div style="margin-top:8px">${ROUTINES.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}
+    <div class="ofc-feed"><div class="ofc-h">Activity</div>${S.feed.slice(0,8).map(item=>`
+      <div class="ofc-row"><time>${relTime(item.at,S.nowMs)}</time><span>${esc(item.text)}</span></div>`).join("")}</div>
     </div>`;
   const meta=FLOORS.find(f=>f.id===S.floor);
   const onFloor=S.floor===5?MEET.map(m=>{const src=S.agents.find(a=>a.id===m.id)||{};return {id:m.id,name:m.name,task:m.text,status:src.status||"working",helper:false}}):S.agents.filter(a=>a.floor===S.floor);
-  const sel=S.agents.find(a=>a.id===S.selectedId)||S.agents[0];
+  const workN=onFloor.filter(a=>a.status==="working").length;
   const right=document.getElementById("right");
   right.classList.toggle("collapsed", !S.rightOpen);
   right.innerHTML=`<button type="button" class="ofc-collapse" data-tog="right">${S.rightOpen?"Hide details ⟩":"⟨"}</button>
     <div class="ofc-side-body">
-    <div class="ofc-h">Floor ${meta.id} · ${esc(meta.name)}</div>
-    <div class="ofc-cap">${esc(meta.blurb)}</div>
+    <div class="ofc-rhead"><div class="k">${workN} working</div><div class="t">${esc(meta.name)}</div><div class="s">Floor ${meta.id} · ${onFloor.length} bots</div></div>
     ${onFloor.map(a=>`<button type="button" class="ofc-ab ${S.selectedId===a.id?"on":""}" data-pick="${a.id}">
       <b><span class="ofc-dot" style="background:${statusColor(a.status)}"></span>${esc(a.name)}${a.helper?` <span style="color:var(--mut);font-weight:500">desk helper</span>`:""}</b>
       <span>${esc(a.task)}</span>
     </button>`).join("")}
-    <div class="ofc-snap">
-      <div class="lab">Weekly goal · snapshot</div>
-      <p>Cookies this month: 5</p>
-      <p>Improvement path: 12%</p>
-      <p>Team book: ~$2,847 / $3,000</p>
-      <p class="note">Embedded snapshot from Thu Nov 5, 2026 EOD — not live market data. Fake money only. Cookies never convert to usage without asking.</p>
+    <div class="ofc-usage">
+      <div class="uh">Weekly limit <span>Cookies · always-ask</span></div>
+      <div class="up">28%</div>
+      <div class="ofc-bar"><i></i></div>
+      <ul class="ofc-ul">
+        <li><b>Cookies this month</b><span>5</span></li>
+        <li><b>Improvement path</b><span>12%</span></li>
+        <li><b>Team book</b><span>~$2,847 / $3,000</span></li>
+        <li><b>Saver Bot</b><span>usage watch</span></li>
+        <li><b>Self-tune</b><span>overnight</span></li>
+      </ul>
+      <div class="ofc-cap" style="margin-top:8px">Snapshot from Thu Nov 5, 2026 EOD — fake money only. Cookies never convert to usage without asking.</div>
     </div>
-    ${sel?`<div class="ofc-sel"><div class="ofc-cap">Selected</div><div style="font-weight:650">${esc(sel.name)}</div><div class="ofc-cap">${esc(sel.task)}</div></div>`:""}
-    <div class="ofc-feed"><div class="ofc-h">Activity</div>${S.feed.map(item=>`
-      <div class="ofc-row"><time>${relTime(item.at,S.nowMs)}</time><span>${esc(item.text)}</span></div>`).join("")}</div>
     </div>`;
 }
-
 function paint(){paintChrome();paintScene()}
-
 function animateShift(){
   cancelAnimationFrame(raf);
   shiftTgt=(5-S.floor)*20;
@@ -637,27 +804,24 @@ function animateShift(){
   };
   raf=requestAnimationFrame(step);
 }
-
 document.getElementById("office").addEventListener("click",e=>{
   const t=e.target.closest("[data-mode],[data-floor],[data-view],[data-ok],[data-pick],[data-tog]");
   if(!t)return;
   if(t.dataset.mode){
     S.mode=t.dataset.mode;
     if(S.mode==="day"||S.mode==="night") S.theme=S.mode;
-    if(S.mode==="meeting"){S.floor=5}
-    persist(); setTour(); paint(); if(S.mode==="meeting") animateShift();
+    persist(); setTour(); paint();
     return;
   }
-  if(t.dataset.floor){S.floor=+t.dataset.floor; if(S.floor===5) S.mode="meeting"; else if(S.mode==="meeting") S.mode=S.theme; persist(); paint(); animateShift(); return}
+  if(t.dataset.floor){S.floor=+t.dataset.floor; persist(); paint(); animateShift(); return}
   if(t.dataset.view){viewAgent(t.dataset.view); animateShift(); return}
   if(t.dataset.ok){approve(t.dataset.ok); return}
-  if(t.dataset.pick){S.selectedId=t.dataset.pick;const who=S.agents.find(a=>a.id===t.dataset.pick);if(who && S.floor!==5)S.floor=who.floor;paint();animateShift();return}
+  if(t.dataset.pick){S.selectedId=t.dataset.pick;const who=S.agents.find(a=>a.id===t.dataset.pick);if(who)S.floor=who.floor;paint();animateShift();return}
   if(t.dataset.tog==="fin"){S.openFinished=!S.openFinished;paintChrome();return}
   if(t.dataset.tog==="rtn"){S.openRoutines=!S.openRoutines;paintChrome();return}
   if(t.dataset.tog==="left"){S.leftOpen=!S.leftOpen;paintChrome();return}
   if(t.dataset.tog==="right"){S.rightOpen=!S.rightOpen;paintChrome()}
 });
-
 function setTour(){
   clearInterval(tourId);
   if(S.mode!=="tour")return;
@@ -668,8 +832,42 @@ function setTour(){
     paint(); animateShift();
   },4200);
 }
-
-setInterval(()=>{const n=Date.now();S.nowMs=n;S.clock=fmtCT(new Date(n));document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;paintChrome()},30000);
+(function bindCam(){
+  const stage=document.getElementById("stage");
+  let drag=null;
+  stage.addEventListener("contextmenu",e=>e.preventDefault());
+  stage.addEventListener("pointerdown",e=>{
+    if(e.target.closest("[data-pick]")) return;
+    drag={x:e.clientX,y:e.clientY,cx:CAM.x,cy:CAM.y,cr:CAM.rot,btn:e.button};
+    stage.setPointerCapture(e.pointerId);
+  });
+  stage.addEventListener("pointermove",e=>{
+    if(!drag)return;
+    const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
+    if(drag.btn===2 || drag.btn===1){CAM.x=drag.cx+dx;CAM.y=drag.cy+dy}
+    else {CAM.rot=Math.max(-22,Math.min(22,drag.cr+dx*0.12)); CAM.y=drag.cy+dy*0.15}
+    applyCam();
+  });
+  const end=()=>{drag=null};
+  stage.addEventListener("pointerup",end);
+  stage.addEventListener("pointercancel",end);
+  stage.addEventListener("wheel",e=>{
+    e.preventDefault();
+    CAM.z=Math.min(1.9,Math.max(0.55,CAM.z*(e.deltaY>0?0.92:1.09)));
+    applyCam();
+  },{passive:false});
+  window.addEventListener("keydown",e=>{
+    if(["INPUT","TEXTAREA"].includes((e.target||{}).tagName))return;
+    const step=28;
+    if(e.key==="w"||e.key==="W"||e.key==="ArrowUp"){CAM.y+=step;applyCam()}
+    else if(e.key==="s"||e.key==="S"||e.key==="ArrowDown"){CAM.y-=step;applyCam()}
+    else if(e.key==="a"||e.key==="A"||e.key==="ArrowLeft"){CAM.x+=step;applyCam()}
+    else if(e.key==="d"||e.key==="D"||e.key==="ArrowRight"){CAM.x-=step;applyCam()}
+    else if(e.key==="0"||e.key==="r"||e.key==="R"){CAM.x=0;CAM.y=0;CAM.z=1;CAM.rot=0;applyCam()}
+    else if(e.key>="1"&&e.key<="5"){S.floor=+e.key;paint();animateShift()}
+  });
+})();
+setInterval(()=>{const n=Date.now();S.nowMs=n;S.clock=fmtCT(new Date(n));const el=document.getElementById("clock");if(el)el.textContent=S.clock;},30000);
 setInterval(()=>{
   const n=Date.now();
   S.equity=2840+Math.round((n/7000)%16);
@@ -677,15 +875,15 @@ setInterval(()=>{
   const eq=document.getElementById("mon-equity");
   const sc=document.getElementById("mon-scans");
   if(eq) eq.textContent="$"+S.equity.toLocaleString("en-US");
-  if(sc) sc.textContent=S.scans+" live";
+  if(sc) sc.textContent="SCANS "+S.scans+" live";
 },2200);
 setInterval(()=>{const line=AMBIENCE[amb%AMBIENCE.length];amb++;S.feed=[{id:"live-"+Date.now(),text:line,at:Date.now()},...S.feed].slice(0,16);paintChrome()},16000);
-
 paint();
 setTour();
 animateShift();
 })();
+
 </script>
-<script src="nav.js?v=1105d"></script>
+<script src="nav.js?v=1105e"></script>
 </body>
 </html>
