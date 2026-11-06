@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sunny AI · Grok Bot Office</title>
-<link rel="stylesheet" href="sunny.css?v=1105h">
+<link rel="stylesheet" href="sunny.css?v=1105i">
 <style>
 :root{--bg:#07090d;--card:#12161e;--elev:#171c26;--line:#242b36;--mut:#8a94a3;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3;--stage:#0b0f16}
 html,body{height:100%}
@@ -154,7 +154,7 @@ html.office-night .ofc-hint{color:#8a94a3;text-shadow:none}
     <aside class="ofc-side" id="right"></aside>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="vendor/three.min.js"></script>
 <script>
 (function(){
 const TILE=46, RISE=25;
@@ -354,7 +354,7 @@ function isoCubeSoft(x,y,z,s,ox,oy,fill){
 function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 const S={
-  mode:"day", theme:"day", floor:4, agents:seedAgents(), selectedId:"fast",
+  mode:"day", theme:"day", floor:4, agents:applyApproved(seedAgents()), selectedId:"fast",
   clock:fmtCT(new Date()), nowMs:Date.now(), feed:seedFeed(Date.now()),
   finished:["CHAD exit +$53.82","HYPE hard stop −$21.81","SIM-FEED paused","Buildup merged into MAJOR"],
   openFinished:false, openRoutines:false, equity:2847, scans:18, shift:20,
@@ -369,6 +369,17 @@ try{
   if(S.mode==="night") S.theme="night";
   if(S.mode==="meeting"){S.floor=5;S.mode=S.theme}
 }catch(err){}
+const APPROVE_KEY="sunnyOfficeApproved";
+function loadApproved(){try{const v=JSON.parse(localStorage.getItem(APPROVE_KEY)||"[]");return Array.isArray(v)?v.map(String):[]}catch(err){return []}}
+function saveApproved(ids){try{localStorage.setItem(APPROVE_KEY,JSON.stringify([...new Set(ids.map(String))]))}catch(err){}}
+function approvedTask(id){return id==="cookies"?"Cookie ask logged — always-ask stays on":"EOD idea pack filed — no change until you say so"}
+function applyApproved(list){
+  const ids=new Set(loadApproved());
+  return list.map(a=>{
+    if(!ids.has(String(a.id)) || a.status!=="waiting") return a;
+    return {...a, status:"working", waitReason:undefined, task:approvedTask(a.id)};
+  });
+}
 function persist(){try{localStorage.setItem("sunnyOfficeMode",JSON.stringify({mode:S.mode,theme:S.theme}))}catch(err){}}
 
 let shiftCur=(5-S.floor)*20, shiftTgt=shiftCur, amb=0, raf=0, tourId=0;
@@ -391,20 +402,28 @@ function viewAgent(id){
   S.selectedId=id; S.floor=who.floor; persist(); paint();
 }
 function approve(id){
+  id=String(id||"");
+  if(!id) return;
+  let found=false;
   S.agents=S.agents.map(a=>{
-    if(a.id!==id)return a;
+    if(String(a.id)!==id)return a;
+    found=true;
     return {
       ...a, status:"working", waitReason:undefined,
-      task:a.id==="cookies"?"Cookie ask logged — always-ask stays on":"EOD idea pack filed — no change until you say so",
+      task:approvedTask(a.id),
       bubble:a.id==="cookies"?"Thanks — I'll ask before any top-up":"Approved — pack parked",
       bubbleAt:Date.now()
     };
   });
-  const who=S.agents.find(a=>a.id===id);
+  if(!found) return;
+  saveApproved(loadApproved().concat([id]));
+  persist();
+  const who=S.agents.find(a=>String(a.id)===id);
   const label=who?who.name:id;
   S.feed=[{id:"ok-"+Date.now(),text:"Approved "+label+" — back to work",at:Date.now()},...S.feed];
   S.finished=["Approved "+label,...S.finished];
-  paint();
+  try{paintChrome()}catch(err){console.warn(err)}
+  try{paintScene()}catch(err){console.warn(err); useSvgFallback()}
 }
 function pal(){
   const n=nightOn();
@@ -425,6 +444,337 @@ function pal(){
     shadow:"#9aa3b2", lower:"#d5dae3",
     chairT:"#3e4450", chairL:"#2c313a", chairR:"#1c2028", chairS:"#0e1014"
   };
+}
+function wallClock(px, py, r){
+  const parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"2-digit",hour12:false}).formatToParts(new Date());
+  const hh=+(parts.find(p=>p.type==="hour")||{}).value||0;
+  const mm=+(parts.find(p=>p.type==="minute")||{}).value||0;
+  const ha=((hh%12)+mm/60)*30, ma=mm*6;
+  const hx=px+Math.sin(ha*Math.PI/180)*r*0.42, hy=py-Math.cos(ha*Math.PI/180)*r*0.42;
+  const mx=px+Math.sin(ma*Math.PI/180)*r*0.62, my=py-Math.cos(ma*Math.PI/180)*r*0.62;
+  const face=nightOn()?"#e8edf4":"#f8fafc";
+  const ink=nightOn()?"#1a2230":"#111827";
+  return `<g>
+    <circle cx="${px}" cy="${py}" r="${r+3}" fill="#c5cad3" opacity="0.55"/>
+    <circle cx="${px}" cy="${py}" r="${r}" fill="${face}" stroke="${ink}" stroke-width="2.2"/>
+    <circle cx="${px}" cy="${py}" r="2.2" fill="${ink}"/>
+    <line x1="${px}" y1="${py}" x2="${hx}" y2="${hy}" stroke="${ink}" stroke-width="2.4" stroke-linecap="round"/>
+    <line x1="${px}" y1="${py}" x2="${mx}" y2="${my}" stroke="${ink}" stroke-width="1.5" stroke-linecap="round"/>
+  </g>`;
+}
+function spherePlant(x,y,z,ox,oy,scale){
+  const s=scale||1;
+  const pot=isoBox(x,y,z,.42*s,.42*s,.28*s,ox,oy,"#c4ccd6","#9aa3b0","#7d8694",pal().stroke);
+  const a=iso(x+.21*s,y+.21*s,z+.28*s+1.05*s,ox,oy);
+  const b=iso(x+.08*s,y+.28*s,z+.28*s+.72*s,ox,oy);
+  const leaf=nightOn()?"#2f9e5b":"#3dbe6d";
+  const leaf2=nightOn()?"#217a45":"#2fa15c";
+  return pot+isoSphere(a.x,a.y,16*s,leaf)+isoSphere(b.x,b.y-4,11*s,leaf2);
+}
+function coffeeBar(x,y,ox,oy){
+  const p=pal();
+  const steam=iso(x+.58,y+.3,1.85,ox,oy);
+  const led=iso(x+.76,y+.24,1.28,ox,oy);
+  const cup=iso(x+.62,y+.36,0.72,ox,oy);
+  let html=isoBox(x,y,0,2.55,.78,.4,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  html+=isoBox(x+.16,y+.12,.4,.96,.52,1.18,ox,oy,"#2b3038","#1c2026","#14171c",p.chairS);
+  html+=isoBox(x+.34,y+.22,1.58,.58,.3,.18,ox,oy,"#111418","#0b0d10","#070809",p.chairS);
+  html+=isoBox(x+.48,y+.3,.4,.32,.28,.18,ox,oy,"#f4f1ea","#ddd6c8","#c9c0b0",p.stroke);
+  html+=`<circle cx="${led.x}" cy="${led.y}" r="2.7" fill="#ff7a3a" style="animation:blinkLed 1.6s ease-in-out infinite"/>
+    <circle cx="${steam.x}" cy="${steam.y}" r="3.4" fill="#fff" opacity=".55" style="animation:steam 1.7s linear infinite"/>
+    <circle cx="${steam.x+6}" cy="${steam.y-6}" r="2.5" fill="#fff" opacity=".4" style="animation:steam 1.7s linear .35s infinite"/>
+    <circle cx="${steam.x-5}" cy="${steam.y-3}" r="2.1" fill="#fff" opacity=".32" style="animation:steam 1.7s linear .7s infinite"/>
+    <circle cx="${steam.x+2}" cy="${steam.y-11}" r="1.8" fill="#fff" opacity=".25" style="animation:steam 1.7s linear .2s infinite"/>`;
+  const mugs=[["#F4D35E",1.28],["#FF6B8A",1.62],["#4C8DFF",1.96]];
+  mugs.forEach(([c,dx])=>{
+    html+=isoBox(x+dx,y+.3,.4,.3,.3,.24,ox,oy,c,mixHex(c,"#000",0.18),mixHex(c,"#000",0.32),p.stroke);
+  });
+  return html;
+}
+function wallTv(x,y,ox,oy){
+  const p=iso(x,y,2.12,ox,oy);
+  const glow=nightOn()?"#5ad0ff":"#86efac";
+  const bars=[18,28,22,34,30,26];
+  const barHtml=bars.map((h,i)=>`<rect x="${p.x+88+i*9}" y="${p.y+32-h}" width="6" height="${h}" rx="1.5" fill="#4ade80" opacity="${0.35+i*0.08}"/>`).join("");
+  return `<g>
+    <rect x="${p.x-10}" y="${p.y-56}" width="176" height="118" rx="12" fill="${glow}" opacity=".22" style="animation:tvGlow 2.2s ease-in-out infinite"/>
+    <rect x="${p.x}" y="${p.y-50}" width="158" height="104" rx="10" fill="#14171c" stroke="#2a3038" stroke-width="2"/>
+    <rect x="${p.x+7}" y="${p.y-43}" width="144" height="90" rx="5" fill="#071018"/>
+    <text x="${p.x+16}" y="${p.y-26}" fill="#86efac" font-size="9" font-family="ui-monospace,monospace">BOOK / MIN</text>
+    <text id="mon-equity" x="${p.x+16}" y="${p.y-6}" fill="#f8fafc" font-size="20" font-weight="750" font-family="system-ui,sans-serif">$${S.equity.toLocaleString("en-US")}</text>
+    <text id="mon-scans" x="${p.x+16}" y="${p.y+14}" fill="#86efac" font-size="10" font-family="ui-monospace,monospace">SCANS ${S.scans} live</text>
+    <path d="M ${p.x+14} ${p.y+34} C ${p.x+34} ${p.y+32}, ${p.x+42} ${p.y+10}, ${p.x+60} ${p.y+16} S ${p.x+92} ${p.y+8}, ${p.x+110} ${p.y+14} S ${p.x+128} ${p.y+24}, ${p.x+140} ${p.y+20} L ${p.x+140} ${p.y+40} L ${p.x+14} ${p.y+40} Z" fill="#22c55e" opacity=".42"/>
+    <path d="M ${p.x+14} ${p.y+34} C ${p.x+34} ${p.y+32}, ${p.x+42} ${p.y+10}, ${p.x+60} ${p.y+16} S ${p.x+92} ${p.y+8}, ${p.x+110} ${p.y+14} S ${p.x+128} ${p.y+24}, ${p.x+140} ${p.y+20}" fill="none" stroke="#4ade80" stroke-width="2.2"/>
+    ${barHtml}
+  </g>`;
+}
+function isoChair(gx,gy,ox,oy,face){
+  const p=pal();
+  const sh=iso(gx+.42,gy+.4,0,ox,oy);
+  const cushion=iso(gx+.42,gy+.36,0.52,ox,oy);
+  const col=isoBox(gx+.3,gy+.28,0,.22,.22,.28,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  const seat=isoBox(gx+.0,gy+.04,.28,.86,.74,.24,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  const bx=gx+.05, by=face<0?gy+.58:gy-.12;
+  const back=isoBox(bx,by,.46,.76,.22,1.18,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  return `<ellipse cx="${sh.x+1}" cy="${sh.y+10}" rx="26" ry="11" fill="${p.shadow}" opacity="${nightOn()?.48:.26}"/>`+
+    col+back+seat+
+    `<ellipse cx="${cushion.x}" cy="${cushion.y}" rx="16" ry="7" fill="#5a6270" opacity="0.35"/>`;
+}
+function screenArt(x,y,w,h,kind,accent){
+  if(kind==="idle"){
+    return `<rect x="${x+8}" y="${y+h/2-6}" width="${w-16}" height="4" rx="2" fill="#64748b" opacity=".45"/>`;
+  }
+  if(kind==="wait"){
+    return `<circle cx="${x+w/2}" cy="${y+h/2}" r="7" fill="#ffb020"/><text x="${x+w/2}" y="${y+h/2+4}" text-anchor="middle" fill="#111" font-size="11" font-weight="800">!</text>`;
+  }
+  if(kind==="chart"){
+    return `<path d="M ${x+6} ${y+h-8} C ${x+18} ${y+h-10}, ${x+24} ${y+10}, ${x+40} ${y+16} S ${x+64} ${y+12}, ${x+w-6} ${y+14} L ${x+w-6} ${y+h-6} L ${x+6} ${y+h-6} Z" fill="${accent}" opacity=".35"/>`;
+  }
+  const lines=[0.78,0.52,0.64,0.4];
+  return lines.map((len,i)=>`<rect x="${x+6}" y="${y+8+i*7}" width="${(w-12)*len}" height="3.2" rx="1.6" fill="#7dd3c0" opacity="${0.9-i*0.12}"/>`).join("");
+}
+function monitorAt(x,y,ox,oy,agent){
+  const p=iso(x,y,1.08,ox,oy);
+  const accent=agent.tint||"#4C8DFF";
+  const kind=agent.status==="resting"?"idle":agent.status==="waiting"?"wait":(agent.shape==="cube"||agent.id==="fast"||agent.id==="empty"?"chart":"code");
+  return `<g>
+    <rect x="${p.x-4}" y="${p.y-30}" width="72" height="56" rx="8" fill="${accent}" opacity="0.16"/>
+    <rect x="${p.x+22}" y="${p.y+24}" width="9" height="11" rx="1" fill="#1a1d24"/>
+    <rect x="${p.x}" y="${p.y-28}" width="66" height="50" rx="5" fill="#0f1218" stroke="#1f2430" stroke-width="1.4"/>
+    <rect x="${p.x+3}" y="${p.y-25}" width="60" height="44" rx="3" fill="#0a1624"/>
+    ${screenArt(p.x+3,p.y-25,60,44,kind,accent)}
+  </g>`;
+}
+function shapeOnSeat(agent,gx,gy,ox,oy,fill){
+  const z0=0.38;
+  const head=iso(gx+0.42,gy+0.34,z0+0.72,ox,oy);
+  if(agent.shape==="cube") return isoCubeSoft(gx+0.0,gy-0.02,z0,1.16,ox,oy,fill);
+  if(agent.shape==="pyramid") return isoPyramid(gx-0.02,gy-0.04,z0,1.2,1.2,1.36,ox,oy,fill);
+  if(agent.shape==="cylinder"){
+    const top=iso(gx+0.42,gy+0.34,z0+1.42,ox,oy);
+    const bot=iso(gx+0.42,gy+0.34,z0,ox,oy);
+    return isoCapsule(top.x, top.y, bot.y, 21, 11, fill);
+  }
+  if(agent.shape==="sphere") return isoSphere(head.x, head.y, 33, fill);
+  if(agent.shape==="diamond") return isoDiamond(head.x, head.y+2, 28, fill);
+  return isoStar(head.x, head.y+2, 29, fill);
+}
+function statusBubble(cx,cy,agent,selected){
+  if(agent.bubble){
+    const short=agent.bubble.length>32?agent.bubble.slice(0,30)+"…":agent.bubble;
+    return `<g style="animation:sunnyBubble 0.48s ease;transform-origin:${cx}px ${cy-36}px">
+      <rect x="${cx-70}" y="${cy-58}" width="140" height="26" rx="9" fill="#fff" stroke="#d5dae3"/>
+      <text x="${cx}" y="${cy-41}" text-anchor="middle" fill="#111827" font-size="9" font-family="system-ui,sans-serif">${esc(short)}</text>
+    </g>`;
+  }
+  if(agent.status==="waiting"){
+    return `<g>
+      <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#ffb020" stroke="#fff" stroke-width="2"/>
+      <text x="${cx+2}" y="${cy-32}" text-anchor="middle" fill="#111" font-size="13" font-weight="800">!</text>
+    </g>`;
+  }
+  if(selected){
+    return `<g>
+      <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#3b82f6" stroke="#fff" stroke-width="2"/>
+      <path d="M ${cx-3} ${cy-36} l 3.2 3.4 7-7" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>`;
+  }
+  if(agent.status==="working"){
+    return `<g>
+      <rect x="${cx-16}" y="${cy-46}" width="34" height="20" rx="9" fill="#22c55e" stroke="#fff" stroke-width="1.6"/>
+      <circle cx="${cx-6}" cy="${cy-36}" r="2.2" fill="#fff"/>
+      <circle cx="${cx+1}" cy="${cy-36}" r="2.2" fill="#fff"/>
+      <circle cx="${cx+8}" cy="${cy-36}" r="2.2" fill="#fff"/>
+    </g>`;
+  }
+  if(agent.status==="resting"){
+    return `<g>
+      <text x="${cx+10}" y="${cy-38}" fill="#64748b" font-size="11" font-weight="700" style="animation:zzz 1.6s linear infinite">z</text>
+      <text x="${cx+18}" y="${cy-48}" fill="#64748b" font-size="13" font-weight="700" style="animation:zzz 1.6s linear .3s infinite">z</text>
+    </g>`;
+  }
+  if(agent.status==="error"){
+    return `<g>
+      <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#ff4d5e" stroke="#fff" stroke-width="2"/>
+      <text x="${cx+2}" y="${cy-32}" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">!</text>
+    </g>`;
+  }
+  return "";
+}
+function headPoint(gx,gy,ox,oy){return iso(gx+0.42,gy+0.34,1.16,ox,oy)}
+function seatGX(col){return DESK.x+0.3+col*1.42}
+function seatGY(face){return face>0?DESK.y-0.86:DESK.y+DESK.d+0.4}
+function place(agent){
+  const mates=S.agents.filter(a=>a.floor===agent.floor);
+  const onlyOneRow=mates.every(a=>a.row===mates[0].row);
+  const row=onlyOneRow?1:(agent.row===0?1:0);
+  const face=row===0?1:-1;
+  return {gx:seatGX(agent.col), gy:seatGY(face), face};
+}
+function drawSeated(agent,ox,oy,selected,gx,gy,face){
+  const fill=agent.tint||"#4C8DFF";
+  const head=headPoint(gx,gy,ox,oy);
+  const delay=((agent.col||0)+(agent.row||0)*2)*0.18;
+  const name=selected?`<g>
+    <rect x="${head.x-34}" y="${head.y+28}" width="68" height="16" rx="8" fill="${nightOn()?"#12161e":"#fff"}" stroke="${nightOn()?"#2a3342":"#e5e7ef"}"/>
+    <text x="${head.x}" y="${head.y+39}" text-anchor="middle" fill="${pal().text}" font-size="9" font-weight="650" font-family="system-ui,sans-serif">${esc(SHORT[agent.id]||agent.name)}</text>
+  </g>`:"";
+  return `<g>
+    ${isoChair(gx,gy,ox,oy,face)}
+    <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.8s ease-in-out ${delay}s infinite">
+      ${shapeOnSeat(agent,gx,gy,ox,oy,fill)}
+    </g>
+    ${statusBubble(head.x,head.y,agent,selected)}
+    ${name}
+  </g>`;
+}
+function emptySlot(gx,gy,ox,oy,face){return isoChair(gx,gy,ox,oy,face)}
+function sharedDesk(ox,oy){
+  const p=pal();
+  const sh=iso(DESK.x+DESK.w/2,DESK.y+DESK.d/2,0,ox,oy);
+  const lip=isoBox(DESK.x-0.06,DESK.y-0.06,0,DESK.w+0.12,DESK.d+0.12,0.18,ox,oy,p.deskL,mixHex(p.deskL,"#000",0.08),p.deskR,p.stroke);
+  return `<ellipse cx="${sh.x+8}" cy="${sh.y+22}" rx="150" ry="44" fill="${p.shadow}" opacity="${nightOn()?.38:.16}"/>`+
+    lip+isoBox(DESK.x,DESK.y,0.16,DESK.w,DESK.d,0.58,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+}
+function deskMonitors(agents,ox,oy){
+  const seated=agents.filter(a=>a.status!=="resting");
+  let html="";
+  for(const face of [1,-1]){
+    for(let col=0;col<5;col++){
+      const who=seated.find(a=>place(a).face===face && a.col===col);
+      const mx=seatGX(col)+0.1;
+      const my=face>0?DESK.y+0.18:DESK.y+DESK.d-0.62;
+      html+=monitorAt(mx,my,ox,oy,who||{status:"working",tint:"#64748b",shape:"sphere",id:"empty"});
+    }
+  }
+  return html;
+}
+function emptyDeskChairs(floor,ox,oy,wantFace){
+  const here=S.agents.filter(a=>a.floor===floor);
+  const occupied=new Set();
+  here.forEach(a=>{
+    if(a.status==="resting")return;
+    const pl=place(a);
+    occupied.add(pl.face+":"+a.col);
+  });
+  let html="";
+  for(let col=0;col<5;col++){
+    const key=wantFace+":"+col;
+    if(!occupied.has(key)) html+=emptySlot(seatGX(col),seatGY(wantFace),ox,oy,wantFace);
+  }
+  return html;
+}
+function loungeNook(floor,ox,oy){
+  const p=pal();
+  const x=9.08,y=5.35,w=2.7,d=2.55;
+  const couchT=nightOn()?"#ece7df":"#f7f4ef";
+  const couchL=nightOn()?"#cfc8bc":"#e6e0d6";
+  const couchR=nightOn()?"#b7b0a4":"#d4cdc2";
+  let html="";
+  html+=isoBox(x+0.08,y+0.15,0,2.15,0.42,0.72,ox,oy,couchT,couchL,couchR,p.stroke);
+  html+=isoBox(x+0.08,y+0.15,0,0.38,2.05,0.72,ox,oy,couchT,couchL,couchR,p.stroke);
+  html+=isoBox(x+0.18,y+0.32,0,1.95,1.55,0.34,ox,oy,couchT,couchL,couchR,p.stroke);
+  html+=isoBox(x+0.85,y+1.55,0.02,1.05,.7,0.26,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  html+=spherePlant(x+1.95,y+1.85,0,ox,oy,0.78);
+  const rest=S.agents.find(a=>a.floor===floor&&a.status==="resting");
+  if(rest){
+    const gx=x+0.55, gy=y+0.7, fill=rest.tint||"#4AD66A";
+    const head=headPoint(gx,gy,ox,oy);
+    html+=`<g data-pick="${rest.id}" style="cursor:pointer;animation:sunnyBob 3.2s ease-in-out infinite">${shapeOnSeat(rest,gx,gy,ox,oy,fill)}</g>${statusBubble(head.x,head.y,{...rest,status:"resting"},S.selectedId===rest.id)}`;
+  }
+  return html;
+}
+function railing(ox,oy){
+  const p=pal();
+  const a=iso(0.25,9.35,0,ox,oy), b=iso(12.15,9.35,0,ox,oy);
+  const a2=iso(0.25,9.35,0.7,ox,oy), b2=iso(12.15,9.35,0.7,ox,oy);
+  let html=`<polygon points="${a.x},${a.y+14} ${b.x},${b.y+14} ${b.x},${b.y+58} ${a.x},${a.y+58}" fill="${p.lower}" opacity=".55"/>`;
+  html+=`<line x1="${a2.x}" y1="${a2.y}" x2="${b2.x}" y2="${b2.y}" stroke="${p.rail}" stroke-width="2.4"/>`;
+  for(let i=0;i<=10;i++){
+    const t=i/10;
+    const x=0.25+t*11.9;
+    const lo=iso(x,9.35,0,ox,oy), hi=iso(x,9.35,0.7,ox,oy);
+    html+=`<line x1="${lo.x}" y1="${lo.y}" x2="${hi.x}" y2="${hi.y}" stroke="${p.rail}" stroke-width="1.6"/>`;
+  }
+  const vac=iso(4.8,9.15,0.02,ox,oy);
+  html+=`<ellipse cx="${vac.x}" cy="${vac.y}" rx="14" ry="7" fill="${nightOn()?"#2a3038":"#e5e7eb"}" stroke="${nightOn()?"#111":"#cbd5e1"}"/>
+         <ellipse cx="${vac.x-2}" cy="${vac.y-1}" rx="5" ry="2.4" fill="#fff" opacity=".35"/>`;
+  return html;
+}
+function roomShell(ox,oy,floor){
+  const p=pal();
+  const accent=ACC[floor];
+  const x0=0.2,y0=0.45,x1=12.2,y1=9.35,wH=3.15;
+  const f0=iso(x0,y0,0,ox,oy),f1=iso(x1,y0,0,ox,oy),f2=iso(x1,y1,0,ox,oy),f3=iso(x0,y1,0,ox,oy);
+  const w0=iso(x0,y0,wH,ox,oy),w1=iso(x1,y0,wH,ox,oy);
+  const label=iso(5.6,0.62,2.35,ox,oy);
+  const clk=iso(2.15,0.58,2.35,ox,oy);
+  let html=`
+    <polygon points="${pts([w0,w1,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
+    <polygon points="${pts([w1,iso(x1,6.15,wH,ox,oy),iso(x1,6.15,0,ox,oy),f1])}" fill="${p.wallB}" stroke="${p.stroke}" opacity="0.96"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}"/>
+    <ellipse cx="${(f0.x+f2.x)/2}" cy="${(f0.y+f2.y)/2}" rx="250" ry="95" fill="${nightOn()?"#2a3c58":"#ffffff"}" opacity="${nightOn()?0.16:0.32}"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="none" stroke="${nightOn()?accent:"#d7dce6"}" stroke-width="1.2"/>
+    ${railing(ox,oy)}
+    ${coffeeBar(0.45,0.7,ox,oy)}
+    ${spherePlant(4.55,0.72,0,ox,oy,1.05)}
+    ${spherePlant(5.55,0.78,0,ox,oy,0.88)}
+    ${wallClock(clk.x+36,clk.y-10,26)}
+    ${wallTv(7.45,0.58,ox,oy)}
+    <text x="${label.x}" y="${label.y}" fill="${p.mut}" font-size="13" font-family="system-ui,sans-serif" opacity="0.7">Floor ${floor}</text>
+  `;
+  return html;
+}
+function workPeople(floor,ox,oy){
+  const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting");
+  const back=here.filter(a=>place(a).face>0).sort((a,b)=>place(a).gx-place(b).gx);
+  const front=here.filter(a=>place(a).face<0).sort((a,b)=>place(a).gx-place(b).gx);
+  let html=emptyDeskChairs(floor,ox,oy,1);
+  back.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
+  html+=sharedDesk(ox,oy);
+  html+=deskMonitors(here,ox,oy);
+  html+=emptyDeskChairs(floor,ox,oy,-1);
+  front.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
+  html+=loungeNook(floor,ox,oy);
+  return html;
+}
+function meetAgent(m,i){
+  const src=S.agents.find(a=>a.id===m.id)||{};
+  return {id:m.id,name:m.name,shape:m.shape,tint:src.tint,status:src.status||"working",bubble:m.text,col:i%2,row:Math.floor(i/2)};
+}
+function meetingScene(ox,oy){
+  const p=pal();
+  const x0=0.2,y0=0.45,x1=12.2,y1=9.35,wH=3.15;
+  const f0=iso(x0,y0,0,ox,oy),f1=iso(x1,y0,0,ox,oy),f2=iso(x1,y1,0,ox,oy),f3=iso(x0,y1,0,ox,oy);
+  const glassL=`<polygon points="${pts([iso(x0,y0,0,ox,oy),iso(x0,y1,0,ox,oy),iso(x0,y1,wH,ox,oy),iso(x0,y0,wH,ox,oy)])}" fill="${p.glass}" stroke="#93c5fd" opacity="0.85"/>`;
+  const seats=[
+    {gx:3.35,gy:3.35,face:1},{gx:6.55,gy:3.35,face:1},
+    {gx:3.35,gy:6.25,face:-1},{gx:6.55,gy:6.25,face:-1}
+  ];
+  const table=isoBox(3.15,4.05,0,5.1,2.15,.5,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  const scr=iso(6.1,0.85,2.15,ox,oy);
+  const screen=`<g>
+    <rect x="${scr.x-90}" y="${scr.y-36}" width="210" height="78" rx="8" fill="#0b1220" stroke="${ACC[5]}"/>
+    <text x="${scr.x+16}" y="${scr.y-8}" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700" font-family="system-ui,sans-serif">SUMMARY · EOD · DIGEST</text>
+    <text x="${scr.x+16}" y="${scr.y+16}" text-anchor="middle" fill="#e7ecf3" font-size="12" font-family="system-ui,sans-serif">Fake-money team recap</text>
+  </g>`;
+  const back=MEET.slice(0,2).map((m,i)=>drawSeated(meetAgent(m,i),ox,oy,S.selectedId===m.id,seats[i].gx,seats[i].gy,seats[i].face)).join("");
+  const front=MEET.slice(2).map((m,i)=>drawSeated(meetAgent(m,i+2),ox,oy,S.selectedId===m.id,seats[i+2].gx,seats[i+2].gy,seats[i+2].face)).join("");
+  return `
+    <polygon points="${pts([iso(x0,y0,wH,ox,oy),iso(x1,y0,wH,ox,oy),f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
+    <polygon points="${pts([iso(x1,y0,wH,ox,oy),iso(x1,y1,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}" stroke="#93c5fd" stroke-width="1.6"/>
+    ${glassL}${railing(ox,oy)}${coffeeBar(0.45,0.7,ox,oy)}${spherePlant(10.4,0.8,0,ox,oy,1)}
+    ${back}${table}${screen}${front}
+    ${spherePlant(1.1,7.9,0,ox,oy,0.9)}
+  `;
+}
+function floorSvg(floor){
+  const ox=580, oy=86;
+  const info=FLOORS.find(f=>f.id===floor);
+  const inner=floor===5?meetingScene(ox,oy):roomShell(ox,oy,floor)+workPeople(floor,ox,oy);
+  _gid=0;
+  return `<div class="ofc-cam"><svg viewBox="145 52 960 575" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(info.name)} floor">${inner}</svg></div>`;
 }
 function clayMat(color, extra){
   extra = extra||{};
@@ -721,7 +1071,7 @@ function makeCouch(){
 function glassPane(w,h){
   return new THREE.Mesh(
     new THREE.BoxGeometry(w,h,0.04),
-    new THREE.MeshPhysicalMaterial({color:0xb9dcff, transparent:true, opacity:0.22, roughness:0.18, metalness:0.04, transmission:0.4})
+    new THREE.MeshStandardMaterial({color:0xb9dcff, transparent:true, opacity:0.28, roughness:0.18, metalness:0.06})
   );
 }
 
@@ -884,70 +1234,157 @@ function addMeetingFloor(){
   board.position.set(0, 1.9, -5.72); scene.add(board);
 }
 
-function resizeThree(){
-  if(!renderer||!camera)return;
+let svgMode=false;
+function measureStage(){
   const stage=document.getElementById("stage");
+  if(!stage) return {w:0,h:0};
   const r=stage.getBoundingClientRect();
-  const w=Math.max(2, r.width), h=Math.max(2, r.height);
+  const w=Math.max(r.width||0, stage.clientWidth||0);
+  const h=Math.max(r.height||0, stage.clientHeight||0);
+  return {w:Math.round(w), h:Math.round(h)};
+}
+function stageHidden(){
+  return document.documentElement.classList.contains("sa-locked");
+}
+function resizeThree(){
+  if(!renderer||!camera)return false;
+  const {w,h}=measureStage();
+  if(w<16||h<16) return false;
   renderer.setSize(w, h, false);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
   const a=w/h, f=4.72;
   camera.left=-f*a; camera.right=f*a; camera.top=f; camera.bottom=-f;
   camera.updateProjectionMatrix();
   applyCam();
+  if(renderer&&scene&&camera) renderer.render(scene, camera);
+  return true;
+}
+function hookStageResize(){
+  const stage=document.getElementById("stage");
+  if(!stage || stage.dataset.ro==="1") return;
+  stage.dataset.ro="1";
+  if(window.ResizeObserver){
+    const ro=new ResizeObserver(()=>{ if(threeReady && !svgMode) resizeThree(); });
+    ro.observe(stage);
+  }
+  window.addEventListener("resize", ()=>{ if(threeReady && !svgMode) resizeThree(); });
+  const mo=new MutationObserver(()=>{
+    if(!document.documentElement.classList.contains("sa-locked")){
+      requestAnimationFrame(()=>{ if(threeReady && !svgMode) resizeThree(); });
+    }
+  });
+  mo.observe(document.documentElement,{attributes:true,attributeFilter:["class"]});
+}
+function ensureStack(){
+  const stage=document.getElementById("stage");
+  if(!stage) return null;
+  let stack=document.getElementById("stack");
+  if(!stack){
+    stage.innerHTML='<div class="ofc-stack" id="stack"></div>';
+    stack=document.getElementById("stack");
+  }
+  return stack;
+}
+function paintSvgScene(){
+  svgMode=true;
+  applyTheme();
+  const stack=ensureStack();
+  if(!stack) return;
+  stack.innerHTML=[5,4,3,2,1].map(fid=>`<div class="ofc-fl" data-floor="${fid}">${floorSvg(fid)}</div>`).join("");
+  S.shift=(5-S.floor)*20;
+  shiftCur=S.shift; shiftTgt=S.shift;
+  stack.style.transform="translateY(-"+S.shift+"%)";
+  applyCam();
+}
+function useSvgFallback(reason){
+  if(reason) console.warn("Office scene fallback:", reason);
+  svgMode=true;
+  try{ paintSvgScene(); }catch(err){ console.error(err); }
 }
 function initThree(){
-  if(threeReady) return;
-  if(typeof THREE==="undefined"){ console.warn("THREE missing"); return; }
+  if(threeReady || svgMode) return threeReady;
+  if(typeof THREE==="undefined"){ useSvgFallback("THREE missing"); return false; }
   const stage=document.getElementById("stage");
-  renderer=new THREE.WebGLRenderer({antialias:true, alpha:false});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
-  renderer.shadowMap.enabled=true;
-  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  if(THREE.sRGBEncoding) renderer.outputEncoding=THREE.sRGBEncoding;
-  stage.innerHTML="";
-  stage.appendChild(renderer.domElement);
-  scene=new THREE.Scene();
-  camera=new THREE.OrthographicCamera(-10,10,8,-8,0.1,80);
-  threeReady=true;
-  resizeThree();
-  window.addEventListener("resize", resizeThree);
-  if(!looping){ looping=true; (function loop(){
-    requestAnimationFrame(loop);
-    const t=performance.now()/1000;
-    bobbers.forEach(b=>{ if(b.mesh) b.mesh.position.y=b.baseY+Math.sin(t*2.15+b.phase)*0.032; });
-    steams.forEach((s,i)=>{
-      const ph=(t*0.4+i*0.18)%0.5;
-      s.position.y=(s.userData.y0||1.1)+ph;
-      if(s.material) s.material.opacity=0.42*(1-ph/0.5);
-    });
-    if(renderer&&scene&&camera) renderer.render(scene, camera);
-  })(); }
+  if(!stage) return false;
+  try{
+    const canvas=document.createElement("canvas");
+    const gl=canvas.getContext("webgl")||canvas.getContext("experimental-webgl");
+    if(!gl){ useSvgFallback("WebGL unavailable"); return false; }
+    renderer=new THREE.WebGLRenderer({antialias:true, alpha:false, canvas:document.createElement("canvas")});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+    renderer.shadowMap.enabled=true;
+    renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+    if(THREE.sRGBEncoding) renderer.outputEncoding=THREE.sRGBEncoding;
+    renderer.setClearColor(nightOn()?0x0b0f16:0xe8edf3, 1);
+    stage.innerHTML="";
+    stage.appendChild(renderer.domElement);
+    scene=new THREE.Scene();
+    camera=new THREE.OrthographicCamera(-10,10,8,-8,0.1,80);
+    threeReady=true;
+    hookStageResize();
+    resizeThree();
+    if(!looping){ looping=true; (function loop(){
+      requestAnimationFrame(loop);
+      if(svgMode) return;
+      const t=performance.now()/1000;
+      bobbers.forEach(b=>{ if(b.mesh) b.mesh.position.y=b.baseY+Math.sin(t*2.15+b.phase)*0.032; });
+      steams.forEach((s,i)=>{
+        const ph=(t*0.4+i*0.18)%0.5;
+        s.position.y=(s.userData.y0||1.1)+ph;
+        if(s.material) s.material.opacity=0.42*(1-ph/0.5);
+      });
+      if(renderer&&scene&&camera) renderer.render(scene, camera);
+    })(); }
+    [0,60,200,600,1200].forEach(ms=>setTimeout(()=>{ if(threeReady && !svgMode) resizeThree(); }, ms));
+    return true;
+  }catch(err){
+    console.warn(err);
+    useSvgFallback(err && err.message || err);
+    return false;
+  }
 }
 function applyCam(){
-  if(!camera) return;
-  const target=new THREE.Vector3(-CAM.x/90, 0.4, -CAM.y/90);
-  const yaw=0.82 + CAM.rot*Math.PI/180;
-  const pitch=0.58;
-  const dist=17;
-  camera.position.set(
-    target.x + Math.cos(yaw)*Math.cos(pitch)*dist,
-    target.y + Math.sin(pitch)*dist,
-    target.z + Math.sin(yaw)*Math.cos(pitch)*dist
-  );
-  camera.lookAt(target);
-  camera.zoom=CAM.z;
-  camera.updateProjectionMatrix();
+  if(camera){
+    const target=new THREE.Vector3(-CAM.x/90, 0.4, -CAM.y/90);
+    const yaw=0.82 + CAM.rot*Math.PI/180;
+    const pitch=0.58;
+    const dist=17;
+    camera.position.set(
+      target.x + Math.cos(yaw)*Math.cos(pitch)*dist,
+      target.y + Math.sin(pitch)*dist,
+      target.z + Math.sin(yaw)*Math.cos(pitch)*dist
+    );
+    camera.lookAt(target);
+    camera.zoom=CAM.z;
+    camera.updateProjectionMatrix();
+  }
+  document.querySelectorAll(".ofc-cam").forEach(el=>{
+    el.style.transform=`translate(${CAM.x}px,${CAM.y}px) rotate(${CAM.rot}deg) scale(${CAM.z})`;
+  });
 }
 function paintScene(){
   applyTheme();
-  initThree();
-  if(!threeReady) return;
-  disposeScene();
-  scene=new THREE.Scene();
-  buildRoom(S.floor);
-  if(S.floor===5) addMeetingFloor();
-  else addWorkFloor(S.floor);
-  applyCam();
+  if(svgMode || typeof THREE==="undefined"){
+    paintSvgScene();
+    return;
+  }
+  try{
+    if(!initThree()) return;
+    if(!threeReady){ paintSvgScene(); return; }
+    disposeScene();
+    scene=new THREE.Scene();
+    scene.background=hexCol(nightOn()?"#0b0f16":"#e8edf3");
+    if(renderer) renderer.setClearColor(nightOn()?0x0b0f16:0xe8edf3, 1);
+    buildRoom(S.floor);
+    if(S.floor===5) addMeetingFloor();
+    else addWorkFloor(S.floor);
+    applyCam();
+    resizeThree();
+    if(renderer&&scene&&camera) renderer.render(scene, camera);
+  }catch(err){
+    console.warn(err);
+    useSvgFallback(err && err.message || err);
+  }
 }
 function pickBot(ev){
   if(!camera||!renderer) return null;
@@ -1025,10 +1462,20 @@ function paintChrome(){
     </div>
     </div>`;
 }
-function paint(){paintChrome();paintScene()}
-function animateShift(){ paintScene(); }
+function paint(){try{paintChrome()}catch(err){console.warn(err)} try{paintScene()}catch(err){console.warn(err);useSvgFallback(err && err.message || err)} }
+function animateShift(){
+  if(svgMode){
+    shiftTgt=(5-S.floor)*20;
+    shiftCur=shiftTgt; S.shift=shiftTgt;
+    const stack=document.getElementById("stack");
+    if(stack) stack.style.transform="translateY(-"+S.shift+"%)";
+    return;
+  }
+  paintScene();
+}
 document.getElementById("office").addEventListener("click",e=>{
-  const t=e.target.closest("[data-mode],[data-floor],[data-view],[data-ok],[data-pick],[data-tog]");
+  const raw=e.target && e.target.nodeType===3 ? e.target.parentElement : e.target;
+  const t=raw && raw.closest ? raw.closest("[data-mode],[data-floor],[data-view],[data-ok],[data-pick],[data-tog]") : null;
   if(!t)return;
   if(t.dataset.mode){
     S.mode=t.dataset.mode;
@@ -1111,6 +1558,6 @@ animateShift();
 })();
 
 </script>
-<script src="nav.js?v=1105h"></script>
+<script src="nav.js?v=1105i"></script>
 </body>
 </html>
