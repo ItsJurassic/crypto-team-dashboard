@@ -461,14 +461,20 @@ function wallTv(x,y,ox,oy){
     <path d="M ${p.x+12} ${p.y+30} C ${p.x+32} ${p.y+28}, ${p.x+40} ${p.y+8}, ${p.x+58} ${p.y+14} S ${p.x+90} ${p.y+6}, ${p.x+108} ${p.y+10} S ${p.x+130} ${p.y+22}, ${p.x+138} ${p.y+18}" fill="none" stroke="#4ade80" stroke-width="2"/>
   </g>`;
 }
-function isoChair(gx,gy,ox,oy,face){
+function isoChairBase(gx,gy,ox,oy){
   const p=pal();
   const sh=iso(gx+.4,gy+.38,0,ox,oy);
-  const col=isoBox(gx+.28,gy+.26,0,.2,.2,.3,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
-  const seat=isoBox(gx+.04,gy+.08,.3,.7,.62,.16,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
-  const bx=gx+.08, by=face<0?gy+.56:gy-.04;
-  const back=isoBox(bx,by,.46,.62,.16,.84,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
-  return `<ellipse cx="${sh.x}" cy="${sh.y+7}" rx="20" ry="9" fill="${p.shadow}" opacity="${nightOn()?.45:.28}"/>`+col+seat+back;
+  const col=isoBox(gx+.28,gy+.26,0,.22,.22,.3,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  const seat=isoBox(gx+.02,gy+.06,.3,.76,.68,.17,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+  return `<ellipse cx="${sh.x}" cy="${sh.y+7}" rx="20" ry="9" fill="${p.shadow}" opacity="${nightOn()?.45:.28}"/>`+col+seat;
+}
+function isoChairBack(gx,gy,ox,oy,face){
+  const p=pal();
+  const bx=gx+.42, by=face<0?gy+.52:gy-.08;
+  return isoBox(bx,by,.46,.34,.2,.98,ox,oy,p.chairT,p.chairL,p.chairR,p.chairS);
+}
+function isoChair(gx,gy,ox,oy,face){
+  return isoChairBase(gx,gy,ox,oy)+isoChairBack(gx,gy,ox,oy,face);
 }
 function screenArt(x,y,w,h,kind,accent){
   if(kind==="idle"){
@@ -497,16 +503,16 @@ function monitorAt(x,y,ox,oy,agent){
 function shapeOnSeat(agent,gx,gy,ox,oy,fill){
   const z0=0.5;
   const head=iso(gx+0.4,gy+0.34,z0+0.92,ox,oy);
-  if(agent.shape==="cube") return isoCubeSoft(gx+0.08,gy+0.06,z0,0.9,ox,oy,fill);
-  if(agent.shape==="pyramid") return isoPyramid(gx+0.06,gy+0.04,z0,0.96,0.96,1.18,ox,oy,fill);
+  if(agent.shape==="cube") return isoCubeSoft(gx+0.02,gy+0.0,z0,1.08,ox,oy,fill);
+  if(agent.shape==="pyramid") return isoPyramid(gx+0.0,gy-0.02,z0,1.12,1.12,1.32,ox,oy,fill);
   if(agent.shape==="cylinder"){
-    const top=iso(gx+0.4,gy+0.34,z0+1.22,ox,oy);
+    const top=iso(gx+0.4,gy+0.34,z0+1.38,ox,oy);
     const bot=iso(gx+0.4,gy+0.34,z0,ox,oy);
-    return isoCapsule(top.x, top.y, bot.y, 16, 8.5, fill);
+    return isoCapsule(top.x, top.y, bot.y, 19, 10, fill);
   }
-  if(agent.shape==="sphere") return isoSphere(head.x, head.y, 23, fill);
-  if(agent.shape==="diamond") return isoDiamond(head.x, head.y+2, 22, fill);
-  return isoStar(head.x, head.y+2, 23, fill);
+  if(agent.shape==="sphere") return isoSphere(head.x, head.y, 28, fill);
+  if(agent.shape==="diamond") return isoDiamond(head.x, head.y+2, 26, fill);
+  return isoStar(head.x, head.y+2, 27, fill);
 }
 function statusBubble(cx,cy,agent,selected){
   if(agent.bubble){
@@ -554,9 +560,10 @@ function headPoint(gx,gy,ox,oy){return iso(gx+0.4,gy+0.34,1.42,ox,oy)}
 function place(agent){
   const mates=S.agents.filter(a=>a.floor===agent.floor);
   const onlyOneRow=mates.every(a=>a.row===mates[0].row);
-  const row=onlyOneRow?1:agent.row;
-  if(row===0) return {gx:DESK.x+0.38+agent.col*1.52, gy:DESK.y-0.9, face:1};
-  return {gx:DESK.x+0.38+agent.col*1.52, gy:DESK.y+DESK.d+0.18, face:-1};
+  // Single-row floors sit in front. Two-row floors put row-0 leads in front so the cute bots face the camera.
+  const row=onlyOneRow?1:(agent.row===0?1:0);
+  if(row===0) return {gx:DESK.x+0.38+agent.col*1.52, gy:DESK.y-0.88, face:1};
+  return {gx:DESK.x+0.38+agent.col*1.52, gy:DESK.y+DESK.d+0.34, face:-1};
 }
 function drawSeated(agent,ox,oy,selected,gx,gy,face){
   const fill=agent.tint||"#4C8DFF";
@@ -567,10 +574,11 @@ function drawSeated(agent,ox,oy,selected,gx,gy,face){
     <text x="${head.x}" y="${head.y+39}" text-anchor="middle" fill="${pal().text}" font-size="9" font-weight="650" font-family="system-ui,sans-serif">${esc(SHORT[agent.id]||agent.name)}</text>
   </g>`:"";
   return `<g>
-    ${isoChair(gx,gy,ox,oy,face)}
+    ${isoChairBase(gx,gy,ox,oy)}
     <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.8s ease-in-out ${delay}s infinite">
       ${shapeOnSeat(agent,gx,gy,ox,oy,fill)}
     </g>
+    ${isoChairBack(gx,gy,ox,oy,face)}
     ${statusBubble(head.x,head.y,agent,selected)}
     ${name}
   </g>`;
@@ -590,7 +598,7 @@ function deskMonitors(agents,ox,oy){
     return monitorAt(mx,my,ox,oy,a);
   }).join("");
 }
-function allDeskChairs(floor,ox,oy){
+function emptyDeskChairs(floor,ox,oy,wantFace){
   const here=S.agents.filter(a=>a.floor===floor);
   const occupied=new Set();
   here.forEach(a=>{
@@ -599,19 +607,18 @@ function allDeskChairs(floor,ox,oy){
     occupied.add(pl.face+":"+a.col);
   });
   let html="";
-  for(const face of [1,-1]){
-    for(let col=0;col<4;col++){
-      const gx=DESK.x+0.38+col*1.52;
-      const gy=face>0?DESK.y-0.9:DESK.y+DESK.d+0.18;
-      const key=face+":"+col;
-      if(!occupied.has(key)) html+=emptySlot(gx,gy,ox,oy,face);
-    }
+  for(let col=0;col<4;col++){
+    const face=wantFace;
+    const gx=DESK.x+0.38+col*1.52;
+    const gy=face>0?DESK.y-0.9:DESK.y+DESK.d+0.18;
+    const key=face+":"+col;
+    if(!occupied.has(key)) html+=emptySlot(gx,gy,ox,oy,face);
   }
   return html;
 }
 function loungeNook(floor,ox,oy){
   const p=pal();
-  const x=9.05,y=6.35,w=2.7,d=2.55,h=2.35;
+  const x=9.15,y=4.85,w=2.55,d=2.35,h=2.25;
   const glass=`
     <polygon points="${pts([iso(x,y,0,ox,oy),iso(x+w,y,0,ox,oy),iso(x+w,y,h,ox,oy),iso(x,y,h,ox,oy)])}" fill="${p.glass}" stroke="#93c5fd" stroke-width="1.2" opacity="0.9"/>
     <polygon points="${pts([iso(x+w,y,0,ox,oy),iso(x+w,y+d,0,ox,oy),iso(x+w,y+d,h,ox,oy),iso(x+w,y,h,ox,oy)])}" fill="${p.glass}" stroke="#93c5fd" stroke-width="1.2" opacity="0.75"/>`;
@@ -622,7 +629,9 @@ function loungeNook(floor,ox,oy){
   html+=spherePlant(x+1.95,y+1.7,0.08,ox,oy,0.72);
   const rest=S.agents.find(a=>a.floor===floor&&a.status==="resting");
   if(rest){
-    html+=drawSeated(rest,ox,oy,S.selectedId===rest.id,x+0.35,y+0.55,-1);
+    const gx=x+0.42, gy=y+0.78, fill=rest.tint||"#4AD66A";
+    const head=headPoint(gx,gy,ox,oy);
+    html+=`<g data-pick="${rest.id}" style="cursor:pointer;animation:sunnyBob 3s ease-in-out infinite">${shapeOnSeat(rest,gx,gy,ox,oy,fill)}</g>${statusBubble(head.x,head.y,rest,S.selectedId===rest.id)}`;
   }
   return glass+html;
 }
@@ -655,7 +664,7 @@ function roomShell(ox,oy,floor){
   const clk=iso(2.15,0.58,2.35,ox,oy);
   let html=`
     <polygon points="${pts([w0,w1,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
-    <polygon points="${pts([w1,iso(x1,y1,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}" opacity="0.96"/>
+    <polygon points="${pts([w1,iso(x1,6.15,wH,ox,oy),iso(x1,6.15,0,ox,oy),f1])}" fill="${p.wallB}" stroke="${p.stroke}" opacity="0.96"/>
     <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}"/>
     <polygon points="${pts([f0,f1,f2,f3])}" fill="none" stroke="${nightOn()?accent:"#d7dce6"}" stroke-width="1.4"/>
     ${railing(ox,oy)}
@@ -672,10 +681,11 @@ function workPeople(floor,ox,oy){
   const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting");
   const back=here.filter(a=>place(a).face>0).sort((a,b)=>place(a).gx-place(b).gx);
   const front=here.filter(a=>place(a).face<0).sort((a,b)=>place(a).gx-place(b).gx);
-  let html=allDeskChairs(floor,ox,oy);
+  let html=emptyDeskChairs(floor,ox,oy,1);
   back.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
   html+=sharedDesk(ox,oy);
   html+=deskMonitors(here,ox,oy);
+  html+=emptyDeskChairs(floor,ox,oy,-1);
   front.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
   html+=loungeNook(floor,ox,oy);
   return html;
@@ -715,7 +725,7 @@ function floorSvg(floor){
   const ox=580, oy=86;
   const info=FLOORS.find(f=>f.id===floor);
   const inner=floor===5?meetingScene(ox,oy):roomShell(ox,oy,floor)+workPeople(floor,ox,oy);
-  return `<div class="ofc-cam"><svg viewBox="0 0 1180 820" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(info.name)} floor">${inner}</svg></div>`;
+  return `<div class="ofc-cam"><svg viewBox="130 70 1000 620" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(info.name)} floor">${inner}</svg></div>`;
 }
 function applyCam(){
   document.querySelectorAll(".ofc-cam").forEach(el=>{
