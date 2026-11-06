@@ -5,68 +5,96 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sunny AI · Grok Bot Office</title>
-<link rel="stylesheet" href="sunny.css?v=1105office">
+<link rel="stylesheet" href="sunny.css?v=1105c">
 <style>
-:root{--bg:#07090d;--card:#0f131a;--elev:#12161e;--line:#1c222c;--mut:#7b8594;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3}
-.ofc{max-width:1180px;margin:0 auto;padding:10px 12px 16px}
-.ofc .banner{margin-bottom:8px}
-.ofc-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:4px 0 10px}
-.ofc-mark{width:28px;height:28px;border-radius:8px;background:#4C8DFF;display:grid;place-items:center;flex:none}
-.ofc-mark i{width:12px;height:12px;border-radius:50%;background:#fff;display:block}
-.ofc-top h1{margin:0;font-size:18px;font-weight:650;color:var(--t);line-height:1.2}
-.ofc-clock{font-size:12px;color:var(--mut)}
+:root{--bg:#07090d;--card:#12161e;--elev:#171c26;--line:#242b36;--mut:#8a94a3;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3;--stage:#0b0f16}
+html,body{height:100%;}
+html.office-day,html.office-day body{background:#efe6d4!important;color:#2c261c!important}
+html.office-day .snav{background:rgba(247,241,232,.96)!important;border-top-color:#d7c9b4}
+html.office-day .snav a{color:#6b6254!important}
+html.office-day .snav a.on{color:#2c261c!important;background:#e7dcc8}
+html.office-night,html.office-night body{background:#07090d!important}
+.wrap.ofc{max-width:none!important;width:100%;height:100dvh;height:100vh;margin:0;padding:8px 12px calc(72px + env(safe-area-inset-bottom))!important;display:flex;flex-direction:column;gap:6px;box-sizing:border-box;overflow:hidden}
+.ofc .banner{margin:0;flex:none;padding:4px 10px!important;font-size:10px!important;text-align:center}
+.ofc-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;flex:none}
+.ofc-mark{width:26px;height:26px;border-radius:8px;background:#4C8DFF;display:grid;place-items:center;flex:none}
+.ofc-mark i{width:11px;height:11px;border-radius:50%;background:#fff;display:block}
+.ofc-top h1{margin:0;font-size:17px;font-weight:650;color:var(--t);line-height:1.15}
+.ofc-clock{font-size:11px;color:var(--mut)}
 .ofc-live{display:inline-flex;align-items:center;gap:6px;color:var(--g);font-size:12px;font-weight:600}
-.ofc-live b{width:8px;height:8px;border-radius:99px;background:var(--g);display:inline-block}
+.ofc-live b{width:8px;height:8px;border-radius:99px;background:var(--g);display:inline-block;box-shadow:0 0 8px #22e08a}
 .ofc-seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto}
-.ofc-seg button{background:#11151b;color:var(--mut);border:0;border-right:1px solid var(--line);padding:8px 12px;font:600 12px/1 inherit;cursor:pointer;min-height:40px}
+.ofc-seg button{background:var(--elev);color:var(--mut);border:0;border-right:1px solid var(--line);padding:7px 12px;font:600 12px/1 inherit;cursor:pointer;min-height:36px}
 .ofc-seg button:last-child{border-right:0}
 .ofc-seg button.on{background:#1c2533;color:var(--t)}
-.ofc-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
-.ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600}
+.ofc-pills{display:flex;flex-wrap:wrap;gap:6px;flex:none}
+.ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600}
 .ofc-pill.w{background:#10261c;color:#7dffc0}
 .ofc-pill.q{background:#2a1f05;color:#ffcf5c}
 .ofc-pill.e{background:#2a1216;color:#ff8a96}
 .ofc-pill.r{background:#151a21;color:var(--mut)}
-.ofc-needs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
-.ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:#2a1f05;border:1px solid #5a3a00;color:var(--t);font-size:12px}
+.ofc-needs{display:flex;flex-wrap:wrap;gap:6px;flex:none}
+.ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:#2a1f05;border:1px solid #5a3a00;color:var(--t);font-size:12px}
 .ofc-chip button,.ofc-btn{border:1px solid var(--line);background:#6b8afd;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font:600 11px/1 inherit;min-height:32px}
-.ofc-btn.quiet{background:#151a21;color:var(--t)}
-.ofc-grid{display:flex;flex-wrap:wrap;gap:12px}
-.ofc-side{flex:1 1 220px;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
-.ofc-scene{flex:2 1 360px;min-width:0}
-.ofc-h{font-size:15px;font-weight:650;margin:0 0 8px;color:var(--t)}
-.ofc-cap{font-size:12px;color:var(--mut);margin:0 0 8px}
-.ofc-fb,.ofc-ab{display:block;width:100%;text-align:left;margin:0 0 6px;padding:8px;border-radius:8px;border:1px solid var(--line);background:#11151b;color:var(--t);font:inherit;cursor:pointer}
+.ofc-btn.quiet{background:var(--elev);color:var(--t)}
+.ofc-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(196px,22%) minmax(0,1fr) minmax(220px,24%);gap:10px}
+.ofc-grid.l-off{grid-template-columns:40px minmax(0,1fr) minmax(220px,24%)}
+.ofc-grid.r-off{grid-template-columns:minmax(196px,22%) minmax(0,1fr) 40px}
+.ofc-grid.l-off.r-off{grid-template-columns:40px minmax(0,1fr) 40px}
+.ofc-side{min-width:0;min-height:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;overflow:auto;position:relative}
+.ofc-side.collapsed{padding:8px 4px;overflow:hidden}
+.ofc-side.collapsed .ofc-side-body{display:none}
+.ofc-collapse{position:sticky;top:0;z-index:2;width:100%;border:1px solid var(--line);background:var(--elev);color:var(--mut);border-radius:6px;padding:4px;cursor:pointer;font:600 11px/1 inherit;min-height:28px;margin-bottom:8px}
+.ofc-scene{min-width:0;min-height:0;display:flex;flex-direction:column}
+.ofc-h{font-size:14px;font-weight:650;margin:0 0 6px;color:var(--t)}
+.ofc-cap{font-size:11px;color:var(--mut);margin:0 0 6px}
+.ofc-fb,.ofc-ab{display:block;width:100%;text-align:left;margin:0 0 5px;padding:7px 8px;border-radius:8px;border:1px solid var(--line);background:var(--elev);color:var(--t);font:inherit;cursor:pointer}
 .ofc-fb.on,.ofc-ab.on{border-color:#4a5a72;background:#1c2533}
-.ofc-fb b,.ofc-ab b{display:block;font-weight:650;font-size:13px}
+.ofc-fb b,.ofc-ab b{display:block;font-weight:650;font-size:12px}
 .ofc-fb span,.ofc-ab span{display:block;font-size:11px;color:var(--mut);margin-top:2px}
 .ofc-dot{width:8px;height:8px;border-radius:99px;display:inline-block;margin-right:6px;vertical-align:middle}
-.ofc-wait{margin:12px 0 8px}
-.ofc-waititem{margin:0 0 10px}
+.ofc-wait{margin:10px 0 6px}
+.ofc-waititem{margin:0 0 8px}
 .ofc-waititem .nm{font-size:13px;font-weight:600}
 .ofc-waititem .rs{font-size:12px;color:var(--mut);margin:2px 0 6px}
-.ofc-stage{width:100%;aspect-ratio:1.9/1;min-height:280px;overflow:hidden;border-radius:12px;border:1px solid var(--line);background:#0c1016}
-.ofc.night .ofc-stage{background:#06080c}
-.ofc-stack{height:400%;width:100%;will-change:transform}
-.ofc-fl{height:25%;width:100%}
-.ofc-fl svg{width:100%;height:100%;display:block}
-.ofc-snap{margin-top:12px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#152033}
+.ofc-stage{flex:1 1 auto;width:100%;min-height:0;height:100%;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:var(--stage);box-shadow:inset 0 0 80px rgba(0,0,0,.25)}
+.ofc-stack{height:500%;width:100%;will-change:transform}
+.ofc-fl{height:20%;width:100%}
+.ofc-fl svg{width:100%;height:100%;display:block;max-width:none}
+.ofc-snap{margin-top:10px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#152033}
 .ofc-snap .lab{color:#8fb3ff;font-size:11px;font-weight:650;letter-spacing:.04em;text-transform:uppercase}
 .ofc-snap p{margin:6px 0 0;font-size:13px}
 .ofc-snap .note{font-size:11px;color:var(--mut)}
-.ofc-sel{margin-top:12px}
-.ofc-feed{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
-.ofc-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;font-size:13px}
-.ofc-row time{color:var(--mut);min-width:72px;font-size:12px}
-@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.ofc-sel{margin-top:10px}
+.ofc-feed{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.ofc-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;font-size:12px}
+.ofc-row time{color:var(--mut);min-width:64px;font-size:11px}
+html.office-day{--bg:#efe6d4;--card:#f7f1e6;--elev:#efe6d2;--line:#d4c4aa;--mut:#6d6456;--t:#2c261c;--stage:#d9cbb3;--on:#2c261c}
+html.office-day .ofc-seg button{background:#efe6d2;color:#6d6456}
+html.office-day .ofc-seg button.on{background:#e0d2b8;color:#2c261c}
+html.office-day .ofc-pill.w{background:#d7efe3;color:#15744a}
+html.office-day .ofc-pill.q{background:#f6e3b8;color:#8a5a00}
+html.office-day .ofc-pill.e{background:#f5d4d6;color:#a12636}
+html.office-day .ofc-pill.r{background:#e8dfd0;color:#6d6456}
+html.office-day .ofc-chip{background:#f6e3b8;border-color:#c9a45a;color:#2c261c}
+html.office-day .ofc-fb,html.office-day .ofc-ab{background:#efe6d2;color:#2c261c}
+html.office-day .ofc-fb.on,html.office-day .ofc-ab.on{background:#e4d5ba;border-color:#b89a68}
+html.office-day .ofc-snap{background:#efe4cc;border-color:#d4c4aa}
+html.office-day .ofc-snap .lab{color:#3d5a9a}
+html.office-day .banner{background:#ece2c8!important;color:#6a5420!important;border-color:#d4c08a!important}
+@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes sunnyBubble{0%{transform:scale(.72) translateY(8px);opacity:0}62%{transform:scale(1.06) translateY(-2px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}
-@media(max-width:700px){
-  .ofc-grid{flex-direction:column}
-  .ofc-scene{order:-1}
-  .ofc-stage{min-height:280px;aspect-ratio:1.55/1}
+@keyframes tvGlow{0%,100%{opacity:.35}50%{opacity:.7}}
+@keyframes blinkLed{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes steam{0%{transform:translateY(0);opacity:.5}100%{transform:translateY(-10px);opacity:0}}
+@media(max-width:900px){
+  .wrap.ofc{height:auto;min-height:100dvh;overflow:auto;padding:8px 10px 0!important}
+  .ofc-grid,.ofc-grid.l-off,.ofc-grid.r-off,.ofc-grid.l-off.r-off{grid-template-columns:1fr;overflow:visible}
+  .ofc-scene{order:-1;min-height:56vh}
+  .ofc-stage{min-height:56vh;height:56vh}
+  .ofc-side{max-height:none}
   .ofc-seg{margin-left:0;width:100%}
   .ofc-seg button{flex:1}
-  .ofc-top{align-items:flex-start}
 }
 </style>
 </head>
@@ -81,14 +109,15 @@
     </div>
     <span class="ofc-live"><b></b>Live</span>
     <div class="ofc-seg" role="tablist" aria-label="Office mode">
-      <button type="button" data-mode="day" class="on">Day</button>
+      <button type="button" data-mode="day">Day</button>
       <button type="button" data-mode="night">Night</button>
       <button type="button" data-mode="tour">Tour</button>
+      <button type="button" data-mode="meeting">Meeting</button>
     </div>
   </div>
   <div class="ofc-pills" id="pills"></div>
   <div class="ofc-needs" id="needs"></div>
-  <div class="ofc-grid">
+  <div class="ofc-grid" id="grid">
     <aside class="ofc-side" id="left"></aside>
     <div class="ofc-scene">
       <div class="ofc-stage" id="stage">
@@ -97,17 +126,17 @@
     </div>
     <aside class="ofc-side" id="right"></aside>
   </div>
-  <div class="ofc-feed" id="feed"></div>
 </div>
 <script>
 (function(){
 const FLOORS=[
+  {id:5,name:"Meeting",blurb:"Summaries, EOD, digests"},
   {id:4,name:"Trading",blurb:"Fast Crypto, MAJOR, Fake Stocks"},
   {id:3,name:"Market & Review",blurb:"timing.json, coach, macro"},
   {id:2,name:"Desk Ops",blurb:"Sunny, publish, charts"},
   {id:1,name:"Usage & Saver",blurb:"Usage watch, cookies, tune"}
 ];
-const ACC={4:"#4C8DFF",3:"#E8A317",2:"#E24B3B",1:"#2FA36B"};
+const ACC={5:"#8B6CFF",4:"#4C8DFF",3:"#E8A317",2:"#E24B3B",1:"#2FA36B"};
 const ROUTINES=["Evening write-up","Saver usage watch","Nightly self-tune","Cookie scoreboard (always-ask)","Site / chart refresh"];
 const AMBIENCE=[
   "Fast Crypto scanned another REAL-DATA pass",
@@ -116,7 +145,14 @@ const AMBIENCE=[
   "Market & Review refreshed timing.json",
   "Saver Bot glanced at usage",
   "Publish helper queued a slow site refresh",
-  "Entry coach logged a pullback note"
+  "Entry coach logged a pullback note",
+  "Meeting room queued an EOD digest recap"
+];
+const MEET=[
+  {id:"sunny",name:"Sunny",shape:"star",text:"EOD digest: idea pack still needs your OK"},
+  {id:"fast",name:"Fast Crypto",shape:"sphere",text:"SIM-FEED paused — REAL-DATA only"},
+  {id:"review",name:"Market & Review",shape:"cube",text:"timing.json fresh · NFP Friday 7:30 AM CT"},
+  {id:"saver",name:"Saver Bot",shape:"cylinder",text:"Cookies +5 · always-ask before top-ups"}
 ];
 function seedAgents(){return [
   {id:"fast",name:"Fast Crypto",floor:4,status:"working",task:"Scanning REAL-DATA only (SIM-FEED paused)",shape:"sphere",col:0,row:0},
@@ -159,7 +195,7 @@ function relTime(at,now){
   if(sec<86400)return Math.floor(sec/3600)+"h ago";
   return Math.floor(sec/86400)+"d ago";
 }
-function iso(x,y,z,ox,oy){return {x:(x-y)*28+ox,y:(x+y)*16-z*16+oy}}
+function iso(x,y,z,ox,oy){return {x:(x-y)*38+ox,y:(x+y)*21-z*21+oy}}
 function pts(list){return list.map(p=>p.x+","+p.y).join(" ")}
 function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":"#7b8594"}
 function starPath(cx,cy,r){
@@ -169,24 +205,41 @@ function starPath(cx,cy,r){
 }
 function isoBox(x,y,z,w,d,h,ox,oy,top,left,right,stroke){
   const t1=iso(x,y,z+h,ox,oy),t2=iso(x+w,y,z+h,ox,oy),t3=iso(x+w,y+d,z+h,ox,oy),t4=iso(x,y+d,z+h,ox,oy);
-  const l1=iso(x,y,z,ox,oy),l2=iso(x,y+d,z,ox,oy),r1=iso(x+w,y+d,z,ox,oy),r2=iso(x+w,y,z,ox,oy);
+  const l1=iso(x,y,z,ox,oy),l2=iso(x,y+d,z,ox,oy),r1=iso(x+w,y+d,z,ox,oy);
   return `<g>
     <polygon points="${pts([t1,t2,t3,t4])}" fill="${top}" stroke="${stroke}" stroke-width="0.8"/>
     <polygon points="${pts([t1,t4,l2,l1])}" fill="${left}" stroke="${stroke}" stroke-width="0.8"/>
     <polygon points="${pts([t4,t3,r1,l2])}" fill="${right}" stroke="${stroke}" stroke-width="0.8"/>
-    <polygon points="${pts([t2,t3,r1,r2])}" fill="${right}" stroke="${stroke}" stroke-width="0.6" opacity="0.65"/>
   </g>`;
 }
 function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 const S={
-  mode:"day", floor:4, agents:seedAgents(), selectedId:"fast",
+  mode:"day", theme:"day", floor:4, agents:seedAgents(), selectedId:"fast",
   clock:fmtCT(new Date()), nowMs:Date.now(), feed:seedFeed(Date.now()),
   finished:["CHAD exit +$53.82","HYPE hard stop −$21.81","SIM-FEED paused","Buildup merged into MAJOR"],
-  openFinished:false, openRoutines:false, equity:2847, scans:18, shift:0
+  openFinished:false, openRoutines:false, equity:2847, scans:18, shift:20,
+  leftOpen:true, rightOpen:true
 };
-let shiftCur=0, shiftTgt=0, amb=0, raf=0, tourId=0;
+try{
+  const saved=JSON.parse(localStorage.getItem("sunnyOfficeMode")||"{}");
+  if(saved.theme==="day"||saved.theme==="night") S.theme=saved.theme;
+  if(saved.mode==="day"||saved.mode==="night"||saved.mode==="tour"||saved.mode==="meeting") S.mode=saved.mode;
+  if(S.mode==="day") S.theme="day";
+  if(S.mode==="night") S.theme="night";
+  if(S.mode==="meeting") S.floor=5;
+}catch(err){}
+function persist(){try{localStorage.setItem("sunnyOfficeMode",JSON.stringify({mode:S.mode,theme:S.theme}))}catch(err){}}
 
+let shiftCur=(5-S.floor)*20, shiftTgt=shiftCur, amb=0, raf=0, tourId=0;
+
+function nightOn(){return S.theme!=="day"}
+function applyTheme(){
+  document.documentElement.classList.toggle("office-day", !nightOn());
+  document.documentElement.classList.toggle("office-night", nightOn());
+  document.getElementById("office").classList.toggle("night", nightOn());
+  document.getElementById("office").classList.toggle("day", !nightOn());
+}
 function counts(){
   const c={working:0,waiting:0,errors:0,resting:0};
   S.agents.forEach(a=>{if(a.status==="error")c.errors++;else if(c[a.status]!=null)c[a.status]++});
@@ -195,7 +248,7 @@ function counts(){
 function waiting(){return S.agents.filter(a=>a.status==="waiting")}
 function viewAgent(id){
   const who=S.agents.find(a=>a.id===id); if(!who)return;
-  S.selectedId=id; S.floor=who.floor; paint();
+  S.selectedId=id; S.floor=who.floor; if(S.mode==="meeting") S.mode=S.theme; persist(); paint();
 }
 function approve(id){
   S.agents=S.agents.map(a=>{
@@ -214,101 +267,216 @@ function approve(id){
   paint();
 }
 
-function agentGlyph(agent,ox,oy,fill,selected){
-  const gx=2.15+agent.col*1.9, gy=3.05+agent.row*1.95;
-  const head=iso(gx+0.55,gy+0.35,1.35,ox,oy);
-  const label=iso(gx+0.55,gy+0.35,0.08,ox,oy);
+function pal(){
+  const n=nightOn();
+  return n?{
+    floor:"#1a2230", wallA:"#10141c", wallB:"#181e28", wallC:"#0c1016",
+    win:"#2a4a8c", stroke:"#2a3342", woodT:"#3a2a1c", woodL:"#2a1e14", woodR:"#21170f",
+    deskT:"#243044", deskL:"#1a222e", deskR:"#151b24", rug:"#24324a",
+    text:"#e7ecf3", mut:"#8a94a3", glass:"rgba(130,170,230,.18)"
+  }:{
+    floor:"#e4d2b4", wallA:"#f6ead4", wallB:"#ead9bd", wallC:"#f3e6cc",
+    win:"#8ec4ef", stroke:"#c4b193", woodT:"#c48a52", woodL:"#a46e3e", woodR:"#8d5c32",
+    deskT:"#d7c4a4", deskL:"#c3ad8c", deskR:"#b39976", rug:"#c9b18a",
+    text:"#2c261c", mut:"#6d6456", glass:"rgba(255,255,255,.28)"
+  };
+}
+
+function plantAt(x,y,z,ox,oy){
+  const p=iso(x+.22,y+.22,z+1.15,ox,oy);
+  const leaf=nightOn()?"#1d6b3c":"#2fa36b";
+  const leaf2=nightOn()?"#16532e":"#248a58";
+  return isoBox(x,y,z,.44,.44,.32,ox,oy,"#a05a32","#7a4324","#63361c","#4a2814")+
+    `<ellipse cx="${p.x}" cy="${p.y-16}" rx="16" ry="18" fill="${leaf}"/>
+     <ellipse cx="${p.x-11}" cy="${p.y-6}" rx="11" ry="13" fill="${leaf2}"/>
+     <ellipse cx="${p.x+11}" cy="${p.y-8}" rx="10" ry="12" fill="${leaf}"/>`;
+}
+function rugAt(x,y,w,d,ox,oy,fill){
+  const a=iso(x,y,0.02,ox,oy),b=iso(x+w,y,0.02,ox,oy),c=iso(x+w,y+d,0.02,ox,oy),e=iso(x,y+d,0.02,ox,oy);
+  return `<polygon points="${pts([a,b,c,e])}" fill="${fill}" opacity="0.7" stroke="${nightOn()?"#1a2433":"#b89a68"}"/>`;
+}
+function chairAt(x,y,ox,oy){
+  const p=pal();
+  return isoBox(x,y,0,.55,.55,.42,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke)+
+         isoBox(x+.04,y-.08,.42,.47,.16,.46,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke);
+}
+function monitorAt(x,y,z,ox,oy,title,sub,accent){
+  const p=iso(x,y,z,ox,oy);
+  return `<g>
+    <rect x="${p.x}" y="${p.y-28}" width="78" height="46" rx="4" fill="#111820" stroke="${accent}" stroke-width="1.4"/>
+    <rect x="${p.x+4}" y="${p.y-24}" width="70" height="34" rx="2" fill="#17324d"/>
+    <text x="${p.x+39}" y="${p.y-8}" text-anchor="middle" fill="#9ad7ff" font-size="8" font-family="ui-monospace,monospace">${esc(title)}</text>
+    <text x="${p.x+39}" y="${p.y+6}" text-anchor="middle" fill="#e7ecf3" font-size="10" font-family="ui-monospace,monospace">${esc(sub)}</text>
+  </g>`;
+}
+function coffeeAt(x,y,ox,oy){
+  const p=pal();
+  const steam=iso(x+.42,y+.22,1.55,ox,oy);
+  const led=iso(x+.55,y+.18,1.15,ox,oy);
+  return isoBox(x-.15,y-.1,0,1.35,.85,.38,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke)+
+    isoBox(x+.15,y+.05,.38,.7,.55,1.05,ox,oy,"#d8dde4","#9aa3ae","#7d8692",p.stroke)+
+    isoBox(x+.28,y+.16,1.43,.42,.32,.22,ox,oy,"#2b3038","#1c2026","#14171c",p.stroke)+
+    `<circle cx="${led.x}" cy="${led.y}" r="3" fill="#ff7a3a" style="animation:blinkLed 1.6s ease-in-out infinite"/>
+     <circle cx="${steam.x}" cy="${steam.y}" r="3" fill="#fff" opacity=".45" style="animation:steam 1.8s linear infinite"/>
+     <circle cx="${steam.x+5}" cy="${steam.y-4}" r="2.4" fill="#fff" opacity=".35" style="animation:steam 1.8s linear .4s infinite"/>`+
+    isoBox(x+.95,y+.28,.38,.28,.28,.22,ox,oy,"#f2f2f2","#d0d0d0","#b8b8b8",p.stroke);
+}
+function tvAt(x,y,ox,oy,on){
+  const p=iso(x,y,1.85,ox,oy);
+  const stand=isoBox(x+.35,y+.18,0,.5,.28,.35,ox,oy,"#2a2f38","#1c2026","#14181e", pal().stroke);
+  const glow=on?`<rect x="${p.x-6}" y="${p.y-38}" width="118" height="72" rx="6" fill="#5ad0ff" opacity=".28" style="animation:tvGlow 1.8s ease-in-out infinite"/>`:"";
+  const screen=on?"#12324a":"#0b0e14";
+  const label=on?"BREAK":"standby";
+  return stand+glow+`<g>
+    <rect x="${p.x}" y="${p.y-32}" width="106" height="62" rx="5" fill="#1a1f28" stroke="#3a4454"/>
+    <rect x="${p.x+6}" y="${p.y-26}" width="94" height="50" rx="3" fill="${screen}"/>
+    <text x="${p.x+53}" y="${p.y+2}" text-anchor="middle" fill="${on?"#9be7ff":"#66707c"}" font-size="${on?13:10}" font-family="system-ui,sans-serif" font-weight="700">${label}</text>
+  </g>`;
+}
+function booksAt(x,y,ox,oy){
+  const cols=["#4C8DFF","#E24B3B","#E8A317","#2FA36B","#8B6CFF","#d4783a"];
+  let html=isoBox(x,y,0,1.15,.42,1.7,ox,oy,"#8a6a44","#6e5334","#594228",pal().stroke);
+  cols.forEach((c,i)=>{html+=isoBox(x+.08+.16*(i%5),y+.06,0.12+Math.floor(i/5)*.55,.14,.3,.48,ox,oy,c,c,"#222",pal().stroke)});
+  return html;
+}
+function rackAt(x,y,ox,oy){
+  let html=isoBox(x,y,0,.9,.7,2.05,ox,oy,"#2c3340","#1c222c","#151a21",pal().stroke);
+  for(let i=0;i<5;i++){
+    const p=iso(x+.18,y+.12,.35+i*.34,ox,oy);
+    html+=`<rect x="${p.x}" y="${p.y-6}" width="22" height="7" rx="1" fill="#0e141c" stroke="#3a4454"/>
+           <circle cx="${p.x+28}" cy="${p.y-2}" r="2.2" fill="${i%2?"#22e08a":"#ffb020"}" style="animation:blinkLed ${1.2+i*.2}s ease-in-out infinite"/>`;
+  }
+  return html;
+}
+function deskSet(x,y,ox,oy,title,sub,accent){
+  const p=pal();
+  return rugAt(x-.15,y-.1,1.9,1.45,ox,oy,p.rug)+
+    isoBox(x,y,0,1.55,1.05,.46,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke)+
+    chairAt(x+.45,y+.95,ox,oy)+
+    monitorAt(x+.35,y+.15,1.15,ox,oy,title,sub,accent);
+}
+
+function shapeAt(head, gx, gy, ox, oy, fill, shape){
+  if(shape==="sphere"){
+    return `<ellipse cx="${head.x}" cy="${head.y}" rx="20" ry="18" fill="${fill}"/>
+      <ellipse cx="${head.x-5}" cy="${head.y-6}" rx="7" ry="5" fill="#fff" opacity="0.35"/>`;
+  }
+  if(shape==="cube") return isoBox(gx+0.28,gy+0.12,0.9,0.82,0.82,0.82,ox,oy,fill,fill,"#2a3140","#3a4454");
+  if(shape==="pyramid") return `<polygon points="${head.x},${head.y-22} ${head.x+19},${head.y+14} ${head.x-19},${head.y+14}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+  if(shape==="cylinder") return `<rect x="${head.x-14}" y="${head.y-12}" width="28" height="24" fill="${fill}"/>
+      <ellipse cx="${head.x}" cy="${head.y+12}" rx="14" ry="6" fill="${fill}"/>
+      <ellipse cx="${head.x}" cy="${head.y-12}" rx="14" ry="6" fill="${fill}"/>
+      <ellipse cx="${head.x}" cy="${head.y-12}" rx="9" ry="3.4" fill="#fff" opacity="0.25"/>`;
+  if(shape==="diamond") return `<polygon points="${head.x},${head.y-22} ${head.x+16},${head.y} ${head.x},${head.y+22} ${head.x-16},${head.y}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+  return `<polygon points="${starPath(head.x,head.y,20)}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+}
+
+function agentGlyph(agent,ox,oy,fill,selected,gx,gy){
+  gx = gx==null ? (1.85+agent.col*2.15) : gx;
+  gy = gy==null ? (3.35+agent.row*2.15) : gy;
+  const head=iso(gx+0.62,gy+0.38,1.55,ox,oy);
+  const label=iso(gx+0.62,gy+0.38,0.08,ox,oy);
+  const p=pal();
   const dot=statusColor(agent.status);
   const showBubble=Boolean(agent.bubble||(agent.status==="waiting"&&agent.waitReason));
   const bubbleText=agent.bubble||agent.waitReason||"";
-  const short=bubbleText.length>34?bubbleText.slice(0,32)+"…":bubbleText;
+  const short=bubbleText.length>36?bubbleText.slice(0,34)+"…":bubbleText;
   const delay=(agent.col+agent.row*2)*0.16;
-  let shape="";
-  if(agent.shape==="sphere"){
-    shape=`<ellipse cx="${head.x}" cy="${head.y}" rx="16" ry="15" fill="${fill}"/>
-      <ellipse cx="${head.x-4}" cy="${head.y-5}" rx="6" ry="4" fill="#fff" opacity="0.35"/>`;
-  }else if(agent.shape==="cube"){
-    shape=isoBox(gx+0.28,gy+0.12,0.85,0.7,0.7,0.7,ox,oy,fill,fill,"#2a3140","#3a4454");
-  }else if(agent.shape==="pyramid"){
-    shape=`<polygon points="${head.x},${head.y-18} ${head.x+16},${head.y+12} ${head.x-16},${head.y+12}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
-  }else if(agent.shape==="cylinder"){
-    shape=`<rect x="${head.x-12}" y="${head.y-10}" width="24" height="20" fill="${fill}"/>
-      <ellipse cx="${head.x}" cy="${head.y+10}" rx="12" ry="5" fill="${fill}"/>
-      <ellipse cx="${head.x}" cy="${head.y-10}" rx="12" ry="5" fill="${fill}"/>
-      <ellipse cx="${head.x}" cy="${head.y-10}" rx="8" ry="3" fill="#fff" opacity="0.25"/>`;
-  }else if(agent.shape==="diamond"){
-    shape=`<polygon points="${head.x},${head.y-18} ${head.x+14},${head.y} ${head.x},${head.y+18} ${head.x-14},${head.y}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
-  }else{
-    shape=`<polygon points="${starPath(head.x,head.y,17)}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
-  }
-  const bubble=showBubble?`<g style="animation:${agent.bubbleAt?"sunnyBubble 0.48s ease":"none"};transform-origin:${head.x}px ${head.y-28}px">
-    <rect x="${head.x-58}" y="${head.y-52}" width="116" height="28" rx="8" fill="#12161e" stroke="#1c222c"/>
-    <text x="${head.x}" y="${head.y-34}" text-anchor="middle" fill="#e7ecf3" font-size="8" font-family="system-ui,sans-serif">${esc(short)}</text>
+  const bubble=showBubble?`<g style="animation:${agent.bubbleAt?"sunnyBubble 0.48s ease":"none"};transform-origin:${head.x}px ${head.y-34}px">
+    <rect x="${head.x-70}" y="${head.y-60}" width="140" height="30" rx="8" fill="${nightOn()?"#12161e":"#fff8ee"}" stroke="${p.stroke}"/>
+    <text x="${head.x}" y="${head.y-40}" text-anchor="middle" fill="${p.text}" font-size="9" font-family="system-ui,sans-serif">${esc(short)}</text>
   </g>`:"";
   return `<g>
-    ${isoBox(gx,gy,0,1.35,0.95,0.42,ox,oy,"#1a2030","#10141b","#161b24","#1c222c")}
-    <ellipse cx="${head.x}" cy="${label.y+10}" rx="16" ry="6" fill="#1c222c" opacity="0.45"/>
+    ${isoBox(gx,gy,0,1.5,1.05,.48,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke)}
+    ${chairAt(gx+.48,gy+.92,ox,oy)}
+    ${monitorAt(gx+.22,gy+.08,1.05,ox,oy,agent.status==="resting"?"idle":"live", (agent.name.split(" ")[0]||"").slice(0,8), fill)}
+    <ellipse cx="${head.x}" cy="${label.y+12}" rx="18" ry="7" fill="${nightOn()?"#1c222c":"#c4b193"}" opacity="0.45"/>
     <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.6s ease-in-out ${delay}s infinite">
-      ${shape}
-      <circle cx="${head.x+14}" cy="${head.y-14}" r="4.4" fill="${dot}" stroke="#12161e" stroke-width="1.4"/>
-      ${selected?`<circle cx="${head.x}" cy="${head.y}" r="22" fill="none" stroke="#6b8afd" stroke-width="2" opacity="0.9"/>`:""}
+      ${shapeAt(head,gx,gy,ox,oy,fill,agent.shape)}
+      <circle cx="${head.x+16}" cy="${head.y-16}" r="5" fill="${dot}" stroke="${nightOn()?"#12161e":"#fff8ee"}" stroke-width="1.4"/>
+      ${selected?`<circle cx="${head.x}" cy="${head.y}" r="26" fill="none" stroke="#6b8afd" stroke-width="2.2" opacity="0.95"/>`:""}
     </g>
-    <text x="${label.x}" y="${label.y+22}" text-anchor="middle" fill="#9aa3b2" font-size="9" font-family="system-ui,sans-serif">${esc(agent.name)}</text>
+    <text x="${label.x}" y="${label.y+26}" text-anchor="middle" fill="${p.mut}" font-size="11" font-family="system-ui,sans-serif">${esc(agent.name)}</text>
     ${bubble}
   </g>`;
 }
-function floorSvg(floor,night){
+
+function meetingGlyphs(ox,oy,accent){
+  const seats=[{gx:2.5,gy:3.55,col:0,row:0},{gx:5.15,gy:3.55,col:1,row:0},{gx:2.5,gy:5.55,col:0,row:1},{gx:5.15,gy:5.55,col:1,row:1}];
+  return MEET.map((m,i)=>{
+    const src=S.agents.find(a=>a.id===m.id);
+    const agent={id:m.id,name:m.name,shape:m.shape,status:src?src.status:"working",bubble:m.text,bubbleAt:Date.now(),col:seats[i].col,row:seats[i].row};
+    return agentGlyph(agent,ox,oy,accent,S.selectedId===m.id,seats[i].gx,seats[i].gy);
+  }).join("");
+}
+
+function floorSvg(floor){
   const accent=ACC[floor];
-  const ox=455, oy=night?78:70;
+  const ox=510, oy=nightOn()?86:78;
+  const p=pal();
   const here=S.agents.filter(a=>a.floor===floor);
   const info=FLOORS.find(f=>f.id===floor);
-  const floorFill=night?"#161b24":"#12171f";
-  const wallA=night?"#0a0c10":"#161b24";
-  const wallB=night?"#141820":"#1a2030";
-  const win=night?"#2a4a8c":"#1e3358";
-  const f0=iso(0.4,1.3,0,ox,oy),f1=iso(9.4,1.3,0,ox,oy),f2=iso(9.4,7.4,0,ox,oy),f3=iso(0.4,7.4,0,ox,oy);
-  const w2=iso(9.4,1.3,3.6,ox,oy);
-  const showMonitors=floor===4||floor===1;
-  const mon=showMonitors?(()=>{
-    const p=iso(1.1,1.4,2.6,ox,oy), q=iso(8.15,6.5,2.2,ox,oy);
-    const t1=floor===4?"BOOK SNAP":"COOKIES";
-    const t2=floor===4?("$"+S.equity.toLocaleString("en-US")):"5 · 12%";
-    const t3=floor===4?(S.scans+" scans"):"ask 1st";
-    return `<g>
-      <rect x="${p.x}" y="${p.y}" width="70" height="40" rx="4" fill="#4C8DFF"/>
-      <text x="${p.x+35}" y="${p.y+17}" text-anchor="middle" fill="#fff" font-size="9" font-family="system-ui,sans-serif">${t1}</text>
-      <text x="${p.x+35}" y="${p.y+32}" text-anchor="middle" fill="#fff" font-size="11" font-family="ui-monospace,monospace">${t2}</text>
-      <rect x="${q.x}" y="${q.y-28}" width="64" height="34" rx="4" fill="#12161e" stroke="${accent}"/>
-      <text x="${q.x+32}" y="${q.y-8}" text-anchor="middle" fill="#e7ecf3" font-size="10" font-family="ui-monospace,monospace">${t3}</text>
-    </g>`;
-  })():"";
-  const lamp=iso(8.6,2.1,0.9,ox,oy), post=iso(8.6,2.1,0.2,ox,oy);
-  const wA=iso(3.2,1.35,2.4,ox,oy),wB=iso(5.4,1.35,2.4,ox,oy),wC=iso(7.4,1.35,2.4,ox,oy);
-  return `<svg viewBox="0 0 920 480" role="img" aria-label="${esc(info.name)} floor">
-    <polygon points="${pts([iso(0.4,1.3,3.6,ox,oy),w2,f1,f0])}" fill="${wallA}" stroke="#1c222c"/>
-    <polygon points="${pts([w2,iso(9.4,7.4,3.6,ox,oy),f2,f1])}" fill="${wallB}" stroke="#1c222c"/>
-    <polygon points="${pts([f0,f1,f2,f3])}" fill="${floorFill}" stroke="${accent}" stroke-width="1.2"/>
-    <polygon points="${pts([iso(0.4,1.3,0,ox,oy),iso(0.4,7.4,0,ox,oy),iso(0.4,7.4,3.6,ox,oy),iso(0.4,1.3,3.6,ox,oy)])}" fill="${night?"#0a0c10":"#151a21"}" stroke="#1c222c" opacity="0.9"/>
-    <rect x="${wA.x}" y="${wA.y}" width="54" height="32" rx="3" fill="${win}" stroke="#2a3140"/>
-    <rect x="${wB.x}" y="${wB.y}" width="54" height="32" rx="3" fill="${win}" stroke="#2a3140"/>
-    <rect x="${wC.x}" y="${wC.y}" width="54" height="32" rx="3" fill="${win}" stroke="#2a3140"/>
-    ${mon}
-    <circle cx="${lamp.x}" cy="${lamp.y}" r="11" fill="#22e08a" opacity="0.85"/>
-    <rect x="${post.x-2}" y="${post.y}" width="4" height="14" fill="#1a7a4c"/>
-    <text x="24" y="36" fill="${accent}" font-size="18" font-family="system-ui,sans-serif" font-weight="600">Floor ${floor} · ${esc(info.name)}</text>
-    <text x="24" y="56" fill="#7b8594" font-size="12" font-family="system-ui,sans-serif">${esc(info.blurb)}</text>
-    ${here.map(a=>agentGlyph(a,ox,oy,accent,S.selectedId===a.id)).join("")}
+  const resting=here.some(a=>a.status==="resting") || (floor===5 && S.agents.some(a=>a.status==="resting"));
+  const f0=iso(0.15,0.7,0,ox,oy),f1=iso(10.35,0.7,0,ox,oy),f2=iso(10.35,8.55,0,ox,oy),f3=iso(0.15,8.55,0,ox,oy);
+  const wH=3.9;
+  const w2=iso(10.35,0.7,wH,ox,oy);
+  const wA=iso(2.6,0.78,2.55,ox,oy),wB=iso(5.05,0.78,2.55,ox,oy),wC=iso(7.5,0.78,2.55,ox,oy);
+  const glass = floor===5 ? `<polygon points="${pts([iso(0.15,0.7,0,ox,oy),iso(0.15,8.55,0,ox,oy),iso(0.15,8.55,wH,ox,oy),iso(0.15,0.7,wH,ox,oy)])}" fill="${p.glass}" stroke="#8ec4ef" opacity="0.85"/>` : "";
+  const extras = (()=>{
+    let html = rugAt(1.7,2.6,6.6,4.6,ox,oy,p.rug);
+    html += coffeeAt(0.55,1.15,ox,oy);
+    html += tvAt(8.35,1.05,ox,oy,resting);
+    html += plantAt(0.45,7.55,0,ox,oy);
+    html += plantAt(9.55,7.35,0,ox,oy);
+    if(floor===4){
+      html += monitorAt(1.15,1.15,2.7,ox,oy,"BOOK SNAP","$"+S.equity.toLocaleString("en-US"),accent);
+      html += monitorAt(8.0,6.7,2.15,ox,oy,"SCANS",S.scans+" live",accent);
+    }
+    if(floor===3){
+      html += booksAt(0.45,3.1,ox,oy)+booksAt(0.45,4.5,ox,oy);
+    }
+    if(floor===2){
+      html += rackAt(9.15,3.3,ox,oy);
+    }
+    if(floor===1){
+      html += monitorAt(8.0,6.55,2.1,ox,oy,"COOKIES","5 · ask 1st",accent);
+    }
+    if(floor===5){
+      html += isoBox(3.15,4.15,0,4.05,2.15,.46,ox,oy, nightOn()?"#3a465c":"#d8c09a", nightOn()?"#2a3344":"#c2a87e", nightOn()?"#222a38":"#b3966c", p.stroke);
+      const scr=iso(5.1,1.05,2.55,ox,oy);
+      html += `<g>
+        <rect x="${scr.x-70}" y="${scr.y-28}" width="168" height="58" rx="6" fill="#101820" stroke="${accent}"/>
+        <text x="${scr.x+14}" y="${scr.y-6}" text-anchor="middle" fill="#9ad7ff" font-size="12" font-family="system-ui,sans-serif" font-weight="700">SUMMARY · EOD · DIGEST</text>
+        <text x="${scr.x+14}" y="${scr.y+14}" text-anchor="middle" fill="#e7ecf3" font-size="11" font-family="system-ui,sans-serif">Fake-money team recap</text>
+      </g>`;
+    }
+    return html;
+  })();
+  const people = floor===5 ? meetingGlyphs(ox,oy,accent) : here.map(a=>agentGlyph(a,ox,oy,accent,S.selectedId===a.id)).join("");
+  return `<svg viewBox="40 0 980 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(info.name)} floor">
+    <polygon points="${pts([iso(0.15,0.7,wH,ox,oy),w2,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
+    <polygon points="${pts([w2,iso(10.35,8.55,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}" stroke="${accent}" stroke-width="1.6"/>
+    <polygon points="${pts([iso(0.15,0.7,0,ox,oy),iso(0.15,8.55,0,ox,oy),iso(0.15,8.55,wH,ox,oy),iso(0.15,0.7,wH,ox,oy)])}" fill="${p.wallC}" stroke="${p.stroke}" opacity="0.95"/>
+    ${glass}
+    <rect x="${wA.x}" y="${wA.y}" width="62" height="36" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
+    <rect x="${wB.x}" y="${wB.y}" width="62" height="36" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
+    <rect x="${wC.x}" y="${wC.y}" width="62" height="36" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
+    ${extras}
+    <text x="56" y="38" fill="${accent}" font-size="22" font-family="system-ui,sans-serif" font-weight="700">Floor ${floor} · ${esc(info.name)}</text>
+    <text x="56" y="60" fill="${p.mut}" font-size="14" font-family="system-ui,sans-serif">${esc(info.blurb)}</text>
+    ${people}
   </svg>`;
 }
 
 function paintScene(){
-  const night=S.mode==="night";
-  document.getElementById("office").classList.toggle("night", night);
-  document.getElementById("stack").innerHTML=[4,3,2,1].map(fid=>`<div class="ofc-fl" data-floor="${fid}">${floorSvg(fid,night)}</div>`).join("");
+  applyTheme();
+  document.getElementById("stack").innerHTML=[5,4,3,2,1].map(fid=>`<div class="ofc-fl" data-floor="${fid}">${floorSvg(fid)}</div>`).join("");
   document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";
 }
 
 function paintChrome(){
+  applyTheme();
   document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;
   const c=counts(), w=waiting();
   document.getElementById("pills").innerHTML=`
@@ -322,25 +490,34 @@ function paintChrome(){
     <button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button>
   </div>`).join("");
   document.querySelectorAll(".ofc-seg button").forEach(b=>b.classList.toggle("on", b.dataset.mode===S.mode));
+  const grid=document.getElementById("grid");
+  grid.classList.toggle("l-off", !S.leftOpen);
+  grid.classList.toggle("r-off", !S.rightOpen);
   const left=document.getElementById("left");
-  left.innerHTML=`<div class="ofc-h">Floors</div>`+FLOORS.map(f=>{
-    const n=S.agents.filter(a=>a.floor===f.id&&a.status==="working").length;
-    return `<button type="button" class="ofc-fb ${S.floor===f.id?"on":""}" data-floor="${f.id}"><b>${f.id} · ${esc(f.name)}</b><span>${n} working · ${esc(f.blurb)}</span></button>`;
+  left.classList.toggle("collapsed", !S.leftOpen);
+  left.innerHTML=`<button type="button" class="ofc-collapse" data-tog="left">${S.leftOpen?"⟨ Hide floors":"⟩"}</button>
+    <div class="ofc-side-body"><div class="ofc-h">Floors</div>`+FLOORS.map(f=>{
+    const n=f.id===5?4:S.agents.filter(a=>a.floor===f.id&&a.status==="working").length;
+    return `<button type="button" class="ofc-fb ${S.floor===f.id?"on":""}" data-floor="${f.id}"><b>${f.id} · ${esc(f.name)}</b><span>${n} ${f.id===5?"in meeting":"working"} · ${esc(f.blurb)}</span></button>`;
   }).join("")+`
     <div class="ofc-h ofc-wait">Waiting on me · ${w.length}</div>
     ${w.map(a=>`<div class="ofc-waititem"><div class="nm">${esc(a.name)}</div><div class="rs">${esc(a.waitReason)}</div><button type="button" class="ofc-btn" data-ok="${a.id}">Approve</button></div>`).join("")}
     <button type="button" class="ofc-btn quiet" style="width:100%;margin-top:8px" data-tog="fin">Finished · ${S.finished.length}</button>
     ${S.openFinished?`<div style="margin-top:8px">${S.finished.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}
     <button type="button" class="ofc-btn quiet" style="width:100%;margin-top:8px" data-tog="rtn">Routines · ${ROUTINES.length}</button>
-    ${S.openRoutines?`<div style="margin-top:8px">${ROUTINES.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}`;
+    ${S.openRoutines?`<div style="margin-top:8px">${ROUTINES.map(item=>`<div class="ofc-cap">${esc(item)}</div>`).join("")}</div>`:""}
+    </div>`;
   const meta=FLOORS.find(f=>f.id===S.floor);
-  const onFloor=S.agents.filter(a=>a.floor===S.floor);
+  const onFloor=S.floor===5?MEET.map(m=>{const src=S.agents.find(a=>a.id===m.id)||{};return {id:m.id,name:m.name,task:m.text,status:src.status||"working",helper:false}}):S.agents.filter(a=>a.floor===S.floor);
   const sel=S.agents.find(a=>a.id===S.selectedId)||S.agents[0];
-  document.getElementById("right").innerHTML=`
+  const right=document.getElementById("right");
+  right.classList.toggle("collapsed", !S.rightOpen);
+  right.innerHTML=`<button type="button" class="ofc-collapse" data-tog="right">${S.rightOpen?"Hide details ⟩":"⟨"}</button>
+    <div class="ofc-side-body">
     <div class="ofc-h">Floor ${meta.id} · ${esc(meta.name)}</div>
     <div class="ofc-cap">${esc(meta.blurb)}</div>
     ${onFloor.map(a=>`<button type="button" class="ofc-ab ${S.selectedId===a.id?"on":""}" data-pick="${a.id}">
-      <b><span class="ofc-dot" style="background:${statusColor(a.status)}"></span>${esc(a.name)}${a.helper?` <span style="color:#7b8594;font-weight:500">desk helper</span>`:""}</b>
+      <b><span class="ofc-dot" style="background:${statusColor(a.status)}"></span>${esc(a.name)}${a.helper?` <span style="color:var(--mut);font-weight:500">desk helper</span>`:""}</b>
       <span>${esc(a.task)}</span>
     </button>`).join("")}
     <div class="ofc-snap">
@@ -350,16 +527,17 @@ function paintChrome(){
       <p>Team book: ~$2,847 / $3,000</p>
       <p class="note">Embedded snapshot from Thu Nov 5, 2026 EOD — not live market data. Fake money only. Cookies never convert to usage without asking.</p>
     </div>
-    ${sel?`<div class="ofc-sel"><div class="ofc-cap">Selected</div><div style="font-weight:650">${esc(sel.name)}</div><div class="ofc-cap">${esc(sel.task)}</div></div>`:""}`;
-  document.getElementById("feed").innerHTML=`<div class="ofc-h">Activity</div>`+S.feed.map(item=>`
-    <div class="ofc-row"><time>${relTime(item.at,S.nowMs)}</time><span>${esc(item.text)}</span></div>`).join("");
+    ${sel?`<div class="ofc-sel"><div class="ofc-cap">Selected</div><div style="font-weight:650">${esc(sel.name)}</div><div class="ofc-cap">${esc(sel.task)}</div></div>`:""}
+    <div class="ofc-feed"><div class="ofc-h">Activity</div>${S.feed.map(item=>`
+      <div class="ofc-row"><time>${relTime(item.at,S.nowMs)}</time><span>${esc(item.text)}</span></div>`).join("")}</div>
+    </div>`;
 }
 
 function paint(){paintChrome();paintScene()}
 
 function animateShift(){
   cancelAnimationFrame(raf);
-  shiftTgt=(4-S.floor)*25;
+  shiftTgt=(5-S.floor)*20;
   const step=()=>{
     const next=shiftCur+(shiftTgt-shiftCur)*0.16;
     if(Math.abs(shiftTgt-next)<0.08){shiftCur=shiftTgt;S.shift=shiftTgt;document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";return}
@@ -373,19 +551,32 @@ function animateShift(){
 document.getElementById("office").addEventListener("click",e=>{
   const t=e.target.closest("[data-mode],[data-floor],[data-view],[data-ok],[data-pick],[data-tog]");
   if(!t)return;
-  if(t.dataset.mode){S.mode=t.dataset.mode;setTour();paint();return}
-  if(t.dataset.floor){S.floor=+t.dataset.floor;paint();animateShift();return}
-  if(t.dataset.view){viewAgent(t.dataset.view);animateShift();return}
-  if(t.dataset.ok){approve(t.dataset.ok);return}
-  if(t.dataset.pick){S.selectedId=t.dataset.pick;const who=S.agents.find(a=>a.id===t.dataset.pick);if(who)S.floor=who.floor;paint();animateShift();return}
+  if(t.dataset.mode){
+    S.mode=t.dataset.mode;
+    if(S.mode==="day"||S.mode==="night") S.theme=S.mode;
+    if(S.mode==="meeting"){S.floor=5}
+    persist(); setTour(); paint(); if(S.mode==="meeting") animateShift();
+    return;
+  }
+  if(t.dataset.floor){S.floor=+t.dataset.floor; if(S.floor===5) S.mode="meeting"; else if(S.mode==="meeting") S.mode=S.theme; persist(); paint(); animateShift(); return}
+  if(t.dataset.view){viewAgent(t.dataset.view); animateShift(); return}
+  if(t.dataset.ok){approve(t.dataset.ok); return}
+  if(t.dataset.pick){S.selectedId=t.dataset.pick;const who=S.agents.find(a=>a.id===t.dataset.pick);if(who && S.floor!==5)S.floor=who.floor;paint();animateShift();return}
   if(t.dataset.tog==="fin"){S.openFinished=!S.openFinished;paintChrome();return}
-  if(t.dataset.tog==="rtn"){S.openRoutines=!S.openRoutines;paintChrome()}
+  if(t.dataset.tog==="rtn"){S.openRoutines=!S.openRoutines;paintChrome();return}
+  if(t.dataset.tog==="left"){S.leftOpen=!S.leftOpen;paintChrome();return}
+  if(t.dataset.tog==="right"){S.rightOpen=!S.rightOpen;paintChrome()}
 });
 
 function setTour(){
   clearInterval(tourId);
   if(S.mode!=="tour")return;
-  tourId=setInterval(()=>{S.floor=S.floor===1?4:(S.floor-1);paint();animateShift()},4200);
+  tourId=setInterval(()=>{
+    const order=[5,4,3,2,1];
+    const i=order.indexOf(S.floor);
+    S.floor=order[(i<0?0:i+1)%order.length];
+    paint(); animateShift();
+  },4200);
 }
 
 setInterval(()=>{const n=Date.now();S.nowMs=n;S.clock=fmtCT(new Date(n));document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;paintChrome()},30000);
@@ -394,8 +585,9 @@ setInterval(()=>{const line=AMBIENCE[amb%AMBIENCE.length];amb++;S.feed=[{id:"liv
 
 paint();
 setTour();
+animateShift();
 })();
 </script>
-<script src="nav.js?v=1105office"></script>
+<script src="nav.js?v=1105c"></script>
 </body>
 </html>
