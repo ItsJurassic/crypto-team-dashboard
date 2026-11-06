@@ -5,9 +5,9 @@ const J=async u=>{try{return await (await fetch(u+"?"+Date.now())).json()}catch(
 const [d,sc,sh,cg,st,stt]=await Promise.all([J("data/dashboard.json"),J("team/scorecard.json"),J("team/shadow.json"),J("team/cg.json"),J("data/stocks.json"),J("team/shadow_trades.json")]);
 const $$=n=>n==null||isNaN(n)?"—":(n<0?"-$":"$")+Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const A=[];const b=d&&d.bank;
-if(b){const L=b.lanes||{},S=L.SOLANA||{},M=L.MAJOR||{},ms=b.start/2;
- A.push({n:"Sunny AI · SOLANA",t:"quick",start:ms,pl:(S.net||0)+(S.pnl_open||0),fees:(S.trade_fees||0)+(S.slippage||0)+(S.failed_costs||0),banked:S.banked||0,note:"shares the $2,000 Sunny AI account with MAJOR ($1,000 each)"});
- A.push({n:"Sunny AI · MAJOR",t:"lt",start:ms,pl:(M.net||0)+(M.pnl_open||0),fees:(M.trade_fees||0)+(M.slippage||0)+(M.failed_costs||0),banked:M.banked||0});}
+if(b){const L=b.lanes||{},S=L.SOLANA||{},M=L.MAJOR||{},msSol=1000,msMaj=(b.start||3000)-msSol; // Nov 5: Buildup ~$1k folded into MAJOR; shared crypto start $3k
+ A.push({n:"Sunny AI · SOLANA",t:"quick",start:msSol,pl:(S.net||0)+(S.pnl_open||0),fees:(S.trade_fees||0)+(S.slippage||0)+(S.failed_costs||0),banked:S.banked||0,note:"shares Sunny AI crypto book with MAJOR; SOLANA sleeve $1,000"});
+ A.push({n:"Sunny AI · MAJOR",t:"lt",start:msMaj,pl:(M.net||0)+(M.pnl_open||0),fees:(M.trade_fees||0)+(M.slippage||0)+(M.failed_costs||0),banked:M.banked||0,note:"Slow Crypto — includes retired Buildup sleeve merged Nov 5"});}
 if(false&&sc)A.push({n:"Seedling · fast side",t:"lt",start:500/* Oct 30 3:40 PM CT reset: $500 fast (scorecard start_balance is stale) */,eq:sc.equity,fees:null,banked:null,note:"20% bank rule not applied"});
 if(false&&sh){const px={};(cg||[]).forEach(c=>px[(c.symbol||"").toUpperCase()]=c.current_price);
  const parts=[sh.buildup,sh.steady_base,sh.strategy_sleeve].filter(x=>x&&typeof x=="object");let eq=null,ok=false;
