@@ -354,7 +354,7 @@ function isoCubeSoft(x,y,z,s,ox,oy,fill){
 function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 const S={
-  mode:"day", theme:"day", floor:4, agents:applyApproved(seedAgents()), selectedId:"fast",
+  mode:"day", theme:"day", floor:4, agents:seedAgents(), selectedId:"fast",
   clock:fmtCT(new Date()), nowMs:Date.now(), feed:seedFeed(Date.now()),
   finished:["CHAD exit +$53.82","HYPE hard stop −$21.81","SIM-FEED paused","Buildup merged into MAJOR"],
   openFinished:false, openRoutines:false, equity:2847, scans:18, shift:20,
@@ -370,8 +370,8 @@ try{
   if(S.mode==="meeting"){S.floor=5;S.mode=S.theme}
 }catch(err){}
 const APPROVE_KEY="sunnyOfficeApproved";
-function loadApproved(){try{const v=JSON.parse(localStorage.getItem(APPROVE_KEY)||"[]");return Array.isArray(v)?v.map(String):[]}catch(err){return []}}
-function saveApproved(ids){try{localStorage.setItem(APPROVE_KEY,JSON.stringify([...new Set(ids.map(String))]))}catch(err){}}
+function loadApproved(){try{const v=JSON.parse(localStorage.getItem("sunnyOfficeApproved")||"[]");return Array.isArray(v)?v.map(String):[]}catch(err){return []}}
+function saveApproved(ids){try{localStorage.setItem("sunnyOfficeApproved",JSON.stringify([...new Set(ids.map(String))]))}catch(err){}}
 function approvedTask(id){return id==="cookies"?"Cookie ask logged — always-ask stays on":"EOD idea pack filed — no change until you say so"}
 function applyApproved(list){
   const ids=new Set(loadApproved());
@@ -381,6 +381,7 @@ function applyApproved(list){
   });
 }
 function persist(){try{localStorage.setItem("sunnyOfficeMode",JSON.stringify({mode:S.mode,theme:S.theme}))}catch(err){}}
+S.agents=applyApproved(S.agents);
 
 let shiftCur=(5-S.floor)*20, shiftTgt=shiftCur, amb=0, raf=0, tourId=0;
 
