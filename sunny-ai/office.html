@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sunny AI · Grok Bot Office</title>
-<link rel="stylesheet" href="sunny.css?v=1105c">
+<link rel="stylesheet" href="sunny.css?v=1105d">
 <style>
 :root{--bg:#07090d;--card:#12161e;--elev:#171c26;--line:#242b36;--mut:#8a94a3;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3;--stage:#0b0f16}
 html,body{height:100%;}
@@ -24,9 +24,9 @@ html.office-night,html.office-night body{background:#07090d!important}
 .ofc-live{display:inline-flex;align-items:center;gap:6px;color:var(--g);font-size:12px;font-weight:600}
 .ofc-live b{width:8px;height:8px;border-radius:99px;background:var(--g);display:inline-block;box-shadow:0 0 8px #22e08a}
 .ofc-seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto}
-.ofc-seg button{background:var(--elev);color:var(--mut);border:0;border-right:1px solid var(--line);padding:7px 12px;font:600 12px/1 inherit;cursor:pointer;min-height:36px}
-.ofc-seg button:last-child{border-right:0}
-.ofc-seg button.on{background:#1c2533;color:var(--t)}
+.ofc-seg button{background:var(--elev)!important;color:var(--mut)!important;border:0!important;border-right:1px solid var(--line)!important;border-radius:0!important;padding:7px 12px!important;font:600 12px/1 inherit!important;cursor:pointer;min-height:36px}
+.ofc-seg button:last-child{border-right:0!important}
+.ofc-seg button.on{background:#1c2533!important;color:var(--t)!important}
 .ofc-pills{display:flex;flex-wrap:wrap;gap:6px;flex:none}
 .ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600}
 .ofc-pill.w{background:#10261c;color:#7dffc0}
@@ -35,32 +35,35 @@ html.office-night,html.office-night body{background:#07090d!important}
 .ofc-pill.r{background:#151a21;color:var(--mut)}
 .ofc-needs{display:flex;flex-wrap:wrap;gap:6px;flex:none}
 .ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:#2a1f05;border:1px solid #5a3a00;color:var(--t);font-size:12px}
-.ofc-chip button,.ofc-btn{border:1px solid var(--line);background:#6b8afd;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font:600 11px/1 inherit;min-height:32px}
-.ofc-btn.quiet{background:var(--elev);color:var(--t)}
-.ofc-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(196px,22%) minmax(0,1fr) minmax(220px,24%);gap:10px}
-.ofc-grid.l-off{grid-template-columns:40px minmax(0,1fr) minmax(220px,24%)}
-.ofc-grid.r-off{grid-template-columns:minmax(196px,22%) minmax(0,1fr) 40px}
+.ofc-chip button,.ofc-btn{border:1px solid transparent!important;background:#6b8afd!important;color:#fff!important;border-radius:8px!important;padding:4px 10px!important;cursor:pointer;font:600 11px/1 inherit!important;min-height:32px}
+.ofc-btn.quiet{background:var(--elev)!important;color:var(--t)!important;border:1px solid var(--line)!important}
+.ofc-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(188px,19%) minmax(0,1fr) minmax(210px,22%);gap:10px}
+.ofc-grid.l-off{grid-template-columns:40px minmax(0,1fr) minmax(210px,22%)}
+.ofc-grid.r-off{grid-template-columns:minmax(188px,19%) minmax(0,1fr) 40px}
 .ofc-grid.l-off.r-off{grid-template-columns:40px minmax(0,1fr) 40px}
-.ofc-side{min-width:0;min-height:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;overflow:auto;position:relative}
+.ofc-side{min-width:0;min-height:0;background:var(--card)!important;border:1px solid var(--line);border-radius:12px;padding:10px;overflow:auto;position:relative}
 .ofc-side.collapsed{padding:8px 4px;overflow:hidden}
 .ofc-side.collapsed .ofc-side-body{display:none}
-.ofc-collapse{position:sticky;top:0;z-index:2;width:100%;border:1px solid var(--line);background:var(--elev);color:var(--mut);border-radius:6px;padding:4px;cursor:pointer;font:600 11px/1 inherit;min-height:28px;margin-bottom:8px}
-.ofc-scene{min-width:0;min-height:0;display:flex;flex-direction:column}
+.ofc-collapse{position:sticky;top:0;z-index:2;width:100%;border:1px solid var(--line)!important;background:var(--elev)!important;color:var(--mut)!important;border-radius:6px!important;padding:4px!important;cursor:pointer;font:600 11px/1 inherit!important;min-height:28px;margin-bottom:8px}
+.ofc-scene{min-width:0;min-height:0;display:flex;flex-direction:column;position:relative}
+.ofc-flab{position:absolute;left:18px;top:14px;z-index:3;pointer-events:none;max-width:70%}
+.ofc-flab b{display:block;font-size:22px;font-weight:750;color:var(--t);letter-spacing:-.02em;text-shadow:0 1px 0 rgba(255,255,255,.25)}
+.ofc-flab span{display:block;font-size:13px;color:var(--mut);margin-top:2px}
 .ofc-h{font-size:14px;font-weight:650;margin:0 0 6px;color:var(--t)}
 .ofc-cap{font-size:11px;color:var(--mut);margin:0 0 6px}
-.ofc-fb,.ofc-ab{display:block;width:100%;text-align:left;margin:0 0 5px;padding:7px 8px;border-radius:8px;border:1px solid var(--line);background:var(--elev);color:var(--t);font:inherit;cursor:pointer}
-.ofc-fb.on,.ofc-ab.on{border-color:#4a5a72;background:#1c2533}
-.ofc-fb b,.ofc-ab b{display:block;font-weight:650;font-size:12px}
-.ofc-fb span,.ofc-ab span{display:block;font-size:11px;color:var(--mut);margin-top:2px}
+.ofc-fb,.ofc-ab{display:block;width:100%;text-align:left;margin:0 0 5px;padding:8px 10px!important;border-radius:10px!important;border:1px solid var(--line)!important;background:var(--elev)!important;color:var(--t)!important;font:inherit!important;cursor:pointer}
+.ofc-fb.on,.ofc-ab.on{border-color:#4a5a72!important;background:#1c2533!important;color:var(--t)!important}
+.ofc-fb b,.ofc-ab b{display:block;font-weight:650;font-size:12px;color:inherit}
+.ofc-fb span,.ofc-ab span{display:block;font-size:11px;color:var(--mut)!important;margin-top:2px;white-space:normal}
 .ofc-dot{width:8px;height:8px;border-radius:99px;display:inline-block;margin-right:6px;vertical-align:middle}
 .ofc-wait{margin:10px 0 6px}
 .ofc-waititem{margin:0 0 8px}
 .ofc-waititem .nm{font-size:13px;font-weight:600}
 .ofc-waititem .rs{font-size:12px;color:var(--mut);margin:2px 0 6px}
-.ofc-stage{flex:1 1 auto;width:100%;min-height:0;height:100%;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:var(--stage);box-shadow:inset 0 0 80px rgba(0,0,0,.25)}
+.ofc-stage{flex:1 1 auto;width:100%;min-height:0;height:100%;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--stage);box-shadow:inset 0 0 80px rgba(0,0,0,.25)}
 .ofc-stack{height:500%;width:100%;will-change:transform}
 .ofc-fl{height:20%;width:100%}
-.ofc-fl svg{width:100%;height:100%;display:block;max-width:none}
+.ofc-fl svg{width:100%!important;height:100%!important;display:block;max-width:none!important}
 .ofc-snap{margin-top:10px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#152033}
 .ofc-snap .lab{color:#8fb3ff;font-size:11px;font-weight:650;letter-spacing:.04em;text-transform:uppercase}
 .ofc-snap p{margin:6px 0 0;font-size:13px}
@@ -70,19 +73,22 @@ html.office-night,html.office-night body{background:#07090d!important}
 .ofc-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;font-size:12px}
 .ofc-row time{color:var(--mut);min-width:64px;font-size:11px}
 html.office-day{--bg:#efe6d4;--card:#f7f1e6;--elev:#efe6d2;--line:#d4c4aa;--mut:#6d6456;--t:#2c261c;--stage:#d9cbb3;--on:#2c261c}
-html.office-day .ofc-seg button{background:#efe6d2;color:#6d6456}
-html.office-day .ofc-seg button.on{background:#e0d2b8;color:#2c261c}
+html.office-day .ofc-seg button{background:#efe6d2!important;color:#5c5648!important}
+html.office-day .ofc-seg button.on{background:#e0d2b8!important;color:#2c261c!important}
 html.office-day .ofc-pill.w{background:#d7efe3;color:#15744a}
 html.office-day .ofc-pill.q{background:#f6e3b8;color:#8a5a00}
 html.office-day .ofc-pill.e{background:#f5d4d6;color:#a12636}
 html.office-day .ofc-pill.r{background:#e8dfd0;color:#6d6456}
 html.office-day .ofc-chip{background:#f6e3b8;border-color:#c9a45a;color:#2c261c}
-html.office-day .ofc-fb,html.office-day .ofc-ab{background:#efe6d2;color:#2c261c}
-html.office-day .ofc-fb.on,html.office-day .ofc-ab.on{background:#e4d5ba;border-color:#b89a68}
+html.office-day .ofc-fb,html.office-day .ofc-ab{background:#efe6d2!important;color:#2c261c!important;border-color:#d4c4aa!important}
+html.office-day .ofc-fb.on,html.office-day .ofc-ab.on{background:#e8d5b0!important;border-color:#b89a68!important;color:#2c261c!important}
+html.office-day .ofc-fb span,html.office-day .ofc-ab span{color:#6d6456!important}
+html.office-day .ofc-collapse,html.office-day .ofc-btn.quiet{background:#efe6d2!important;color:#2c261c!important;border-color:#d4c4aa!important}
 html.office-day .ofc-snap{background:#efe4cc;border-color:#d4c4aa}
 html.office-day .ofc-snap .lab{color:#3d5a9a}
 html.office-day .banner{background:#ece2c8!important;color:#6a5420!important;border-color:#d4c08a!important}
-@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+html.office-day .ofc-flab b{text-shadow:0 1px 0 rgba(255,255,255,.55)}
+@keyframes sunnyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes sunnyBubble{0%{transform:scale(.72) translateY(8px);opacity:0}62%{transform:scale(1.06) translateY(-2px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}
 @keyframes tvGlow{0%,100%{opacity:.35}50%{opacity:.7}}
 @keyframes blinkLed{0%,100%{opacity:1}50%{opacity:.25}}
@@ -90,8 +96,8 @@ html.office-day .banner{background:#ece2c8!important;color:#6a5420!important;bor
 @media(max-width:900px){
   .wrap.ofc{height:auto;min-height:100dvh;overflow:auto;padding:8px 10px 0!important}
   .ofc-grid,.ofc-grid.l-off,.ofc-grid.r-off,.ofc-grid.l-off.r-off{grid-template-columns:1fr;overflow:visible}
-  .ofc-scene{order:-1;min-height:56vh}
-  .ofc-stage{min-height:56vh;height:56vh}
+  .ofc-scene{order:-1;min-height:62vh}
+  .ofc-stage{min-height:62vh;height:62vh}
   .ofc-side{max-height:none}
   .ofc-seg{margin-left:0;width:100%}
   .ofc-seg button{flex:1}
@@ -120,6 +126,7 @@ html.office-day .banner{background:#ece2c8!important;color:#6a5420!important;bor
   <div class="ofc-grid" id="grid">
     <aside class="ofc-side" id="left"></aside>
     <div class="ofc-scene">
+      <div class="ofc-flab" id="flab"></div>
       <div class="ofc-stage" id="stage">
         <div class="ofc-stack" id="stack"></div>
       </div>
@@ -129,6 +136,7 @@ html.office-day .banner{background:#ece2c8!important;color:#6a5420!important;bor
 </div>
 <script>
 (function(){
+const TILE=48, RISE=26;
 const FLOORS=[
   {id:5,name:"Meeting",blurb:"Summaries, EOD, digests"},
   {id:4,name:"Trading",blurb:"Fast Crypto, MAJOR, Fake Stocks"},
@@ -137,6 +145,12 @@ const FLOORS=[
   {id:1,name:"Usage & Saver",blurb:"Usage watch, cookies, tune"}
 ];
 const ACC={5:"#8B6CFF",4:"#4C8DFF",3:"#E8A317",2:"#E24B3B",1:"#2FA36B"};
+const SHORT={
+  fast:"Fast Crypto",major:"MAJOR",stocks:"Fake Stocks",scan:"Scan",risk:"Risk",
+  stops:"Stops",watch:"Watch",review:"Review",coach:"Coach",macro:"Macro",
+  digest:"Digest",sunny:"Sunny",publish:"Publish",charts:"Charts",eod:"EOD ideas",
+  saver:"Saver Bot",tune:"Self-tune",cookies:"Cookies",usageh:"Usage"
+};
 const ROUTINES=["Evening write-up","Saver usage watch","Nightly self-tune","Cookie scoreboard (always-ask)","Site / chart refresh"];
 const AMBIENCE=[
   "Fast Crypto scanned another REAL-DATA pass",
@@ -155,25 +169,25 @@ const MEET=[
   {id:"saver",name:"Saver Bot",shape:"cylinder",text:"Cookies +5 · always-ask before top-ups"}
 ];
 function seedAgents(){return [
-  {id:"fast",name:"Fast Crypto",floor:4,status:"working",task:"Scanning REAL-DATA only (SIM-FEED paused)",shape:"sphere",col:0,row:0},
-  {id:"major",name:"Slow Crypto / MAJOR",floor:4,status:"working",task:"Holding cluster; trade as usual after NFP",shape:"cube",col:1,row:0},
-  {id:"stocks",name:"Fake Stocks",floor:4,status:"working",task:"NVDA + watchlist, fake-money book",shape:"diamond",col:2,row:0},
-  {id:"scan",name:"Scan helper",floor:4,status:"working",task:"Desk helper · REAL-DATA tape",shape:"cylinder",col:3,row:0,helper:true},
-  {id:"risk",name:"Risk shadow",floor:4,status:"working",task:"Desk helper · stop and cluster checks",shape:"pyramid",col:0,row:1,helper:true},
-  {id:"stops",name:"Stop desk",floor:4,status:"resting",task:"Desk helper · no live stop fire",shape:"star",col:1,row:1,helper:true},
-  {id:"watch",name:"Watchlist helper",floor:4,status:"working",task:"Desk helper · NVDA / majors tape",shape:"sphere",col:2,row:1,helper:true},
-  {id:"review",name:"Market & Review",floor:3,status:"working",task:"timing.json + daily digests",shape:"cube",col:0,row:0},
-  {id:"coach",name:"Entry coach",floor:3,status:"working",task:"Pullback / spike notes",shape:"pyramid",col:1,row:0},
-  {id:"macro",name:"Macro / NFP",floor:3,status:"working",task:"Friday 7:30 AM CT NFP watch",shape:"cylinder",col:2,row:0},
-  {id:"digest",name:"Digest helper",floor:3,status:"resting",task:"Desk helper · next digest queued",shape:"diamond",col:3,row:0,helper:true},
-  {id:"sunny",name:"Sunny",floor:2,status:"working",task:"Coordinator · EOD + cookies",shape:"star",col:0,row:0},
-  {id:"publish",name:"Publish helper",floor:2,status:"working",task:"Desk helper · site sync",shape:"sphere",col:1,row:0,helper:true},
-  {id:"charts",name:"Chart refresh",floor:2,status:"working",task:"Desk helper · slow refresh on purpose",shape:"cube",col:2,row:0,helper:true},
-  {id:"eod",name:"EOD ideas",floor:2,status:"waiting",task:"EOD idea pack needs your OK",shape:"diamond",col:3,row:0,waitReason:"EOD idea pack needs your OK"},
-  {id:"saver",name:"Saver Bot",floor:1,status:"working",task:"Usage watch",shape:"cylinder",col:0,row:0},
-  {id:"tune",name:"Nightly self-tune",floor:1,status:"resting",task:"Rests until overnight tune",shape:"pyramid",col:1,row:0},
-  {id:"cookies",name:"Cookie scoreboard",floor:1,status:"waiting",task:"Cookie→usage top-up always-ask",shape:"star",col:2,row:0,waitReason:"Cookie→usage top-up always-ask"},
-  {id:"usageh",name:"Usage desk",floor:1,status:"working",task:"Desk helper · plan/limits glance",shape:"sphere",col:3,row:0,helper:true}
+  {id:"fast",name:"Fast Crypto",floor:4,status:"working",task:"Scanning REAL-DATA only (SIM-FEED paused)",shape:"sphere",tint:"#3D8BFF",col:0,row:0},
+  {id:"major",name:"Slow Crypto / MAJOR",floor:4,status:"working",task:"Holding cluster; trade as usual after NFP",shape:"cube",tint:"#FF9F1C",col:1,row:0},
+  {id:"stocks",name:"Fake Stocks",floor:4,status:"working",task:"NVDA + watchlist, fake-money book",shape:"diamond",tint:"#9B6BFF",col:2,row:0},
+  {id:"scan",name:"Scan helper",floor:4,status:"working",task:"Desk helper · REAL-DATA tape",shape:"cylinder",tint:"#2EC4B6",col:3,row:0,helper:true},
+  {id:"risk",name:"Risk shadow",floor:4,status:"working",task:"Desk helper · stop and cluster checks",shape:"pyramid",tint:"#E84855",col:0,row:1,helper:true},
+  {id:"stops",name:"Stop desk",floor:4,status:"resting",task:"Desk helper · no live stop fire",shape:"star",tint:"#F4D35E",col:1,row:1,helper:true},
+  {id:"watch",name:"Watchlist helper",floor:4,status:"working",task:"Desk helper · NVDA / majors tape",shape:"sphere",tint:"#4AD66A",col:2,row:1,helper:true},
+  {id:"review",name:"Market & Review",floor:3,status:"working",task:"timing.json + daily digests",shape:"cube",tint:"#5B8DEF",col:0,row:0},
+  {id:"coach",name:"Entry coach",floor:3,status:"working",task:"Pullback / spike notes",shape:"pyramid",tint:"#F77F00",col:1,row:0},
+  {id:"macro",name:"Macro / NFP",floor:3,status:"working",task:"Friday 7:30 AM CT NFP watch",shape:"cylinder",tint:"#7B6CFF",col:2,row:0},
+  {id:"digest",name:"Digest helper",floor:3,status:"resting",task:"Desk helper · next digest queued",shape:"diamond",tint:"#E85D8C",col:3,row:0,helper:true},
+  {id:"sunny",name:"Sunny",floor:2,status:"working",task:"Coordinator · EOD + cookies",shape:"star",tint:"#FFB703",col:0,row:0},
+  {id:"publish",name:"Publish helper",floor:2,status:"working",task:"Desk helper · site sync",shape:"sphere",tint:"#4CC9F0",col:1,row:0,helper:true},
+  {id:"charts",name:"Chart refresh",floor:2,status:"working",task:"Desk helper · slow refresh on purpose",shape:"cube",tint:"#4895EF",col:2,row:0,helper:true},
+  {id:"eod",name:"EOD ideas",floor:2,status:"waiting",task:"EOD idea pack needs your OK",shape:"diamond",tint:"#EF476F",col:3,row:0,waitReason:"EOD idea pack needs your OK"},
+  {id:"saver",name:"Saver Bot",floor:1,status:"working",task:"Usage watch",shape:"cylinder",tint:"#06D6A0",col:0,row:0},
+  {id:"tune",name:"Nightly self-tune",floor:1,status:"resting",task:"Rests until overnight tune",shape:"pyramid",tint:"#C77DFF",col:1,row:0},
+  {id:"cookies",name:"Cookie scoreboard",floor:1,status:"waiting",task:"Cookie→usage top-up always-ask",shape:"star",tint:"#FF6B35",col:2,row:0,waitReason:"Cookie→usage top-up always-ask"},
+  {id:"usageh",name:"Usage desk",floor:1,status:"working",task:"Desk helper · plan/limits glance",shape:"sphere",tint:"#80ED99",col:3,row:0,helper:true}
 ]}
 function seedFeed(now){return [
   {id:"f1",text:"SIM-FEED paused — SOLANA buys REAL-DATA only until win rate > 40%",at:now-42*60000},
@@ -195,22 +209,94 @@ function relTime(at,now){
   if(sec<86400)return Math.floor(sec/3600)+"h ago";
   return Math.floor(sec/86400)+"d ago";
 }
-function iso(x,y,z,ox,oy){return {x:(x-y)*38+ox,y:(x+y)*21-z*21+oy}}
+function iso(x,y,z,ox,oy){return {x:(x-y)*TILE+ox,y:(x+y)*RISE-z*RISE+oy}}
 function pts(list){return list.map(p=>p.x+","+p.y).join(" ")}
 function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":"#7b8594"}
-function starPath(cx,cy,r){
-  const bits=[];
-  for(let i=0;i<10;i++){const rad=i%2===0?r:r*0.42;const a=-Math.PI/2+(i*Math.PI)/5;bits.push(cx+Math.cos(a)*rad+","+(cy+Math.sin(a)*rad))}
-  return bits.join(" ");
+function mixHex(hex,other,t){
+  const parse=h=>{h=String(h).replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
+  const a=parse(hex),b=parse(other);
+  return "#"+a.map((v,i)=>Math.round(v+(b[i]-v)*t).toString(16).padStart(2,"0")).join("");
+}
+function faces(fill){
+  return {
+    top:mixHex(fill,"#ffffff",0.34),
+    left:mixHex(fill,"#000000",0.16),
+    right:mixHex(fill,"#000000",0.38),
+    deep:mixHex(fill,"#000000",0.5),
+    edge:mixHex(fill,"#1a120c",0.52),
+    mid:fill
+  };
 }
 function isoBox(x,y,z,w,d,h,ox,oy,top,left,right,stroke){
   const t1=iso(x,y,z+h,ox,oy),t2=iso(x+w,y,z+h,ox,oy),t3=iso(x+w,y+d,z+h,ox,oy),t4=iso(x,y+d,z+h,ox,oy);
   const l1=iso(x,y,z,ox,oy),l2=iso(x,y+d,z,ox,oy),r1=iso(x+w,y+d,z,ox,oy);
   return `<g>
-    <polygon points="${pts([t1,t2,t3,t4])}" fill="${top}" stroke="${stroke}" stroke-width="0.8"/>
-    <polygon points="${pts([t1,t4,l2,l1])}" fill="${left}" stroke="${stroke}" stroke-width="0.8"/>
-    <polygon points="${pts([t4,t3,r1,l2])}" fill="${right}" stroke="${stroke}" stroke-width="0.8"/>
+    <polygon points="${pts([t1,t2,t3,t4])}" fill="${top}" stroke="${stroke}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${pts([t1,t4,l2,l1])}" fill="${left}" stroke="${stroke}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${pts([t4,t3,r1,l2])}" fill="${right}" stroke="${stroke}" stroke-width="0.85" stroke-linejoin="round"/>
   </g>`;
+}
+function isoPyramid(x,y,z,w,d,h,ox,oy,fill){
+  const f=faces(fill);
+  const apex=iso(x+w/2,y+d/2,z+h,ox,oy);
+  const nw=iso(x,y,z,ox,oy), ne=iso(x+w,y,z,ox,oy);
+  const se=iso(x+w,y+d,z,ox,oy), sw=iso(x,y+d,z,ox,oy);
+  return `<g>
+    <polygon points="${pts([apex,nw,sw])}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>
+    <polygon points="${pts([apex,sw,se])}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>
+    <polygon points="${pts([apex,ne,nw])}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>
+  </g>`;
+}
+function isoSphere(cx,cy,r,fill){
+  const f=faces(fill);
+  return `<g>
+    <ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*0.94}" fill="${f.right}"/>
+    <ellipse cx="${cx-r*0.07}" cy="${cy-r*0.06}" rx="${r*0.9}" ry="${r*0.86}" fill="${fill}"/>
+    <ellipse cx="${cx}" cy="${cy+r*0.28}" rx="${r*0.72}" ry="${r*0.5}" fill="${f.deep}" opacity="0.22"/>
+    <ellipse cx="${cx-r*0.34}" cy="${cy-r*0.4}" rx="${r*0.38}" ry="${r*0.26}" fill="#fff" opacity="0.48"/>
+    <ellipse cx="${cx-r*0.18}" cy="${cy-r*0.22}" rx="${r*0.16}" ry="${r*0.1}" fill="#fff" opacity="0.38"/>
+  </g>`;
+}
+function isoCylinder(cx,yTop,yBot,rx,ry,fill){
+  const f=faces(fill);
+  return `<g>
+    <path d="M ${cx-rx} ${yTop} L ${cx-rx} ${yBot} A ${rx} ${ry} 0 0 0 ${cx+rx} ${yBot} L ${cx+rx} ${yTop} A ${rx} ${ry} 0 0 1 ${cx-rx} ${yTop}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.8"/>
+    <ellipse cx="${cx}" cy="${yBot}" rx="${rx}" ry="${ry}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.6"/>
+    <ellipse cx="${cx}" cy="${yTop}" rx="${rx}" ry="${ry}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.85"/>
+    <ellipse cx="${cx-rx*0.22}" cy="${yTop-ry*0.12}" rx="${rx*0.42}" ry="${ry*0.32}" fill="#fff" opacity="0.34"/>
+  </g>`;
+}
+function isoDiamond(cx,cy,r,fill){
+  const f=faces(fill);
+  const top={x:cx,y:cy-r*1.22}, bot={x:cx,y:cy+r*1.18};
+  const L={x:cx-r*0.98,y:cy+r*0.1}, R={x:cx+r*0.98,y:cy+r*0.1};
+  const fm={x:cx+r*0.04,y:cy+r*0.32};
+  return `<g>
+    <polygon points="${top.x},${top.y} ${L.x},${L.y} ${fm.x},${fm.y}" fill="${f.left}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${top.x},${top.y} ${fm.x},${fm.y} ${R.x},${R.y}" fill="${f.top}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${L.x},${L.y} ${bot.x},${bot.y} ${fm.x},${fm.y}" fill="${f.right}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${fm.x},${fm.y} ${bot.x},${bot.y} ${R.x},${R.y}" fill="${f.deep}" stroke="${f.edge}" stroke-width="0.85" stroke-linejoin="round"/>
+    <polygon points="${top.x},${top.y} ${cx-r*0.22},${cy-r*0.2} ${cx+r*0.28},${cy-r*0.12}" fill="#fff" opacity="0.3"/>
+  </g>`;
+}
+function isoStar(cx,cy,r,fill){
+  const f=faces(fill);
+  const dx=8, dy=7, front=[], back=[];
+  for(let i=0;i<10;i++){
+    const rad=i%2===0?r:r*0.4;
+    const a=-Math.PI/2+(i*Math.PI)/5;
+    const x=cx+Math.cos(a)*rad, y=cy+Math.sin(a)*rad;
+    front.push({x,y}); back.push({x:x+dx,y:y+dy});
+  }
+  let html="<g>";
+  for(let i=0;i<10;i++){
+    const a=front[i], b=front[(i+1)%10], c=back[(i+1)%10], d=back[i];
+    html+=`<polygon points="${a.x},${a.y} ${b.x},${b.y} ${c.x},${c.y} ${d.x},${d.y}" fill="${i%2?f.right:f.left}" stroke="${f.edge}" stroke-width="0.35"/>`;
+  }
+  html+=`<polygon points="${back.map(p=>p.x+","+p.y).join(" ")}" fill="${f.deep}"/>`;
+  html+=`<polygon points="${front.map(p=>p.x+","+p.y).join(" ")}" fill="${f.mid}" stroke="${f.edge}" stroke-width="0.9" stroke-linejoin="round"/>`;
+  html+=`<ellipse cx="${cx-r*0.12}" cy="${cy-r*0.22}" rx="${r*0.22}" ry="${r*0.12}" fill="#fff" opacity="0.28"/>`;
+  return html+"</g>";
 }
 function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
@@ -273,12 +359,14 @@ function pal(){
     floor:"#1a2230", wallA:"#10141c", wallB:"#181e28", wallC:"#0c1016",
     win:"#2a4a8c", stroke:"#2a3342", woodT:"#3a2a1c", woodL:"#2a1e14", woodR:"#21170f",
     deskT:"#243044", deskL:"#1a222e", deskR:"#151b24", rug:"#24324a",
-    text:"#e7ecf3", mut:"#8a94a3", glass:"rgba(130,170,230,.18)"
+    text:"#e7ecf3", mut:"#8a94a3", glass:"rgba(130,170,230,.18)",
+    labelBg:"#12161e", labelStroke:"#2a3342"
   }:{
     floor:"#e4d2b4", wallA:"#f6ead4", wallB:"#ead9bd", wallC:"#f3e6cc",
     win:"#8ec4ef", stroke:"#c4b193", woodT:"#c48a52", woodL:"#a46e3e", woodR:"#8d5c32",
     deskT:"#d7c4a4", deskL:"#c3ad8c", deskR:"#b39976", rug:"#c9b18a",
-    text:"#2c261c", mut:"#6d6456", glass:"rgba(255,255,255,.28)"
+    text:"#2c261c", mut:"#6d6456", glass:"rgba(255,255,255,.28)",
+    labelBg:"#fff8ee", labelStroke:"#c4b193"
   };
 }
 
@@ -297,16 +385,17 @@ function rugAt(x,y,w,d,ox,oy,fill){
 }
 function chairAt(x,y,ox,oy){
   const p=pal();
-  return isoBox(x,y,0,.55,.55,.42,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke)+
-         isoBox(x+.04,y-.08,.42,.47,.16,.46,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke);
+  return isoBox(x,y,0,.58,.58,.44,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke)+
+         isoBox(x+.05,y-.1,.44,.48,.18,.5,ox,oy,p.woodT,p.woodL,p.woodR,p.stroke);
 }
-function monitorAt(x,y,z,ox,oy,title,sub,accent){
+function monitorAt(x,y,z,ox,oy,title,sub,accent,tid){
   const p=iso(x,y,z,ox,oy);
+  const id=tid?` id="${tid}"`:"";
   return `<g>
-    <rect x="${p.x}" y="${p.y-28}" width="78" height="46" rx="4" fill="#111820" stroke="${accent}" stroke-width="1.4"/>
-    <rect x="${p.x+4}" y="${p.y-24}" width="70" height="34" rx="2" fill="#17324d"/>
-    <text x="${p.x+39}" y="${p.y-8}" text-anchor="middle" fill="#9ad7ff" font-size="8" font-family="ui-monospace,monospace">${esc(title)}</text>
-    <text x="${p.x+39}" y="${p.y+6}" text-anchor="middle" fill="#e7ecf3" font-size="10" font-family="ui-monospace,monospace">${esc(sub)}</text>
+    <rect x="${p.x}" y="${p.y-30}" width="84" height="50" rx="4" fill="#111820" stroke="${accent}" stroke-width="1.4"/>
+    <rect x="${p.x+4}" y="${p.y-26}" width="76" height="36" rx="2" fill="#17324d"/>
+    <text x="${p.x+42}" y="${p.y-8}" text-anchor="middle" fill="#9ad7ff" font-size="8" font-family="ui-monospace,monospace">${esc(title)}</text>
+    <text${id} x="${p.x+42}" y="${p.y+8}" text-anchor="middle" fill="#e7ecf3" font-size="11" font-family="ui-monospace,monospace">${esc(sub)}</text>
   </g>`;
 }
 function coffeeAt(x,y,ox,oy){
@@ -324,13 +413,13 @@ function coffeeAt(x,y,ox,oy){
 function tvAt(x,y,ox,oy,on){
   const p=iso(x,y,1.85,ox,oy);
   const stand=isoBox(x+.35,y+.18,0,.5,.28,.35,ox,oy,"#2a2f38","#1c2026","#14181e", pal().stroke);
-  const glow=on?`<rect x="${p.x-6}" y="${p.y-38}" width="118" height="72" rx="6" fill="#5ad0ff" opacity=".28" style="animation:tvGlow 1.8s ease-in-out infinite"/>`:"";
+  const glow=on?`<rect x="${p.x-6}" y="${p.y-38}" width="126" height="76" rx="6" fill="#5ad0ff" opacity=".28" style="animation:tvGlow 1.8s ease-in-out infinite"/>`:"";
   const screen=on?"#12324a":"#0b0e14";
   const label=on?"BREAK":"standby";
   return stand+glow+`<g>
-    <rect x="${p.x}" y="${p.y-32}" width="106" height="62" rx="5" fill="#1a1f28" stroke="#3a4454"/>
-    <rect x="${p.x+6}" y="${p.y-26}" width="94" height="50" rx="3" fill="${screen}"/>
-    <text x="${p.x+53}" y="${p.y+2}" text-anchor="middle" fill="${on?"#9be7ff":"#66707c"}" font-size="${on?13:10}" font-family="system-ui,sans-serif" font-weight="700">${label}</text>
+    <rect x="${p.x}" y="${p.y-34}" width="114" height="66" rx="5" fill="#1a1f28" stroke="#3a4454"/>
+    <rect x="${p.x+6}" y="${p.y-28}" width="102" height="54" rx="3" fill="${screen}"/>
+    <text x="${p.x+57}" y="${p.y+4}" text-anchor="middle" fill="${on?"#9be7ff":"#66707c"}" font-size="${on?14:10}" font-family="system-ui,sans-serif" font-weight="700">${label}</text>
   </g>`;
 }
 function booksAt(x,y,ox,oy){
@@ -348,123 +437,122 @@ function rackAt(x,y,ox,oy){
   }
   return html;
 }
-function deskSet(x,y,ox,oy,title,sub,accent){
-  const p=pal();
-  return rugAt(x-.15,y-.1,1.9,1.45,ox,oy,p.rug)+
-    isoBox(x,y,0,1.55,1.05,.46,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke)+
-    chairAt(x+.45,y+.95,ox,oy)+
-    monitorAt(x+.35,y+.15,1.15,ox,oy,title,sub,accent);
-}
 
-function shapeAt(head, gx, gy, ox, oy, fill, shape){
-  if(shape==="sphere"){
-    return `<ellipse cx="${head.x}" cy="${head.y}" rx="20" ry="18" fill="${fill}"/>
-      <ellipse cx="${head.x-5}" cy="${head.y-6}" rx="7" ry="5" fill="#fff" opacity="0.35"/>`;
+function shapeAt(agent,gx,gy,ox,oy,fill){
+  const z0=1.28;
+  const head=iso(gx+0.62,gy+0.38,z0+0.95,ox,oy);
+  const shape=agent.shape;
+  if(shape==="cube"){
+    const f=faces(fill);
+    return isoBox(gx+0.18,gy+0.04,z0,1.02,1.02,1.02,ox,oy,f.top,f.left,f.right,f.edge);
   }
-  if(shape==="cube") return isoBox(gx+0.28,gy+0.12,0.9,0.82,0.82,0.82,ox,oy,fill,fill,"#2a3140","#3a4454");
-  if(shape==="pyramid") return `<polygon points="${head.x},${head.y-22} ${head.x+19},${head.y+14} ${head.x-19},${head.y+14}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
-  if(shape==="cylinder") return `<rect x="${head.x-14}" y="${head.y-12}" width="28" height="24" fill="${fill}"/>
-      <ellipse cx="${head.x}" cy="${head.y+12}" rx="14" ry="6" fill="${fill}"/>
-      <ellipse cx="${head.x}" cy="${head.y-12}" rx="14" ry="6" fill="${fill}"/>
-      <ellipse cx="${head.x}" cy="${head.y-12}" rx="9" ry="3.4" fill="#fff" opacity="0.25"/>`;
-  if(shape==="diamond") return `<polygon points="${head.x},${head.y-22} ${head.x+16},${head.y} ${head.x},${head.y+22} ${head.x-16},${head.y}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
-  return `<polygon points="${starPath(head.x,head.y,20)}" fill="${fill}" stroke="#3a4454" stroke-width="0.8"/>`;
+  if(shape==="pyramid") return isoPyramid(gx+0.16,gy+0.02,z0,1.12,1.12,1.42,ox,oy,fill);
+  if(shape==="cylinder"){
+    const top=iso(gx+0.62,gy+0.4,z0+1.42,ox,oy);
+    const bot=iso(gx+0.62,gy+0.4,z0,ox,oy);
+    return isoCylinder(top.x, top.y, bot.y, 22, 11, fill);
+  }
+  if(shape==="sphere") return isoSphere(head.x, head.y, 27, fill);
+  if(shape==="diamond") return isoDiamond(head.x, head.y, 28, fill);
+  return isoStar(head.x, head.y, 27, fill);
 }
 
-function agentGlyph(agent,ox,oy,fill,selected,gx,gy){
-  gx = gx==null ? (1.85+agent.col*2.15) : gx;
-  gy = gy==null ? (3.35+agent.row*2.15) : gy;
-  const head=iso(gx+0.62,gy+0.38,1.55,ox,oy);
-  const label=iso(gx+0.62,gy+0.38,0.08,ox,oy);
+function agentGlyph(agent,ox,oy,selected,gx,gy){
+  gx = gx==null ? (1.55+agent.col*2.2) : gx;
+  gy = gy==null ? (3.15+agent.row*2.35) : gy;
+  const fill=agent.tint||"#4C8DFF";
+  const head=iso(gx+0.62,gy+0.38,2.35,ox,oy);
+  const label=iso(gx+0.62,gy+0.42,0.02,ox,oy);
   const p=pal();
   const dot=statusColor(agent.status);
   const showBubble=Boolean(agent.bubble||(agent.status==="waiting"&&agent.waitReason));
   const bubbleText=agent.bubble||agent.waitReason||"";
-  const short=bubbleText.length>36?bubbleText.slice(0,34)+"…":bubbleText;
+  const short=bubbleText.length>34?bubbleText.slice(0,32)+"…":bubbleText;
   const delay=(agent.col+agent.row*2)*0.16;
-  const bubble=showBubble?`<g style="animation:${agent.bubbleAt?"sunnyBubble 0.48s ease":"none"};transform-origin:${head.x}px ${head.y-34}px">
-    <rect x="${head.x-70}" y="${head.y-60}" width="140" height="30" rx="8" fill="${nightOn()?"#12161e":"#fff8ee"}" stroke="${p.stroke}"/>
-    <text x="${head.x}" y="${head.y-40}" text-anchor="middle" fill="${p.text}" font-size="9" font-family="system-ui,sans-serif">${esc(short)}</text>
+  const labelText=SHORT[agent.id]||agent.name;
+  const lw=Math.max(64, labelText.length*7.2+16);
+  const bubble=showBubble?`<g style="animation:${agent.bubbleAt?"sunnyBubble 0.48s ease":"none"};transform-origin:${head.x}px ${head.y-42}px">
+    <rect x="${head.x-76}" y="${head.y-72}" width="152" height="32" rx="10" fill="${p.labelBg}" stroke="${p.labelStroke}"/>
+    <text x="${head.x}" y="${head.y-51}" text-anchor="middle" fill="${p.text}" font-size="10" font-family="system-ui,sans-serif">${esc(short)}</text>
   </g>`:"";
   return `<g>
-    ${isoBox(gx,gy,0,1.5,1.05,.48,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke)}
-    ${chairAt(gx+.48,gy+.92,ox,oy)}
-    ${monitorAt(gx+.22,gy+.08,1.05,ox,oy,agent.status==="resting"?"idle":"live", (agent.name.split(" ")[0]||"").slice(0,8), fill)}
-    <ellipse cx="${head.x}" cy="${label.y+12}" rx="18" ry="7" fill="${nightOn()?"#1c222c":"#c4b193"}" opacity="0.45"/>
+    ${isoBox(gx,gy,0,1.48,1.02,.5,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke)}
+    ${chairAt(gx+.46,gy+.96,ox,oy)}
+    ${monitorAt(gx+.2,gy+.06,1.08,ox,oy,agent.status==="resting"?"idle":"live", (SHORT[agent.id]||agent.name).slice(0,10), fill)}
+    <ellipse cx="${head.x+2}" cy="${label.y+6}" rx="22" ry="9" fill="${nightOn()?"#121820":"#b89a68"}" opacity="0.38"/>
     <g data-pick="${agent.id}" style="cursor:pointer;animation:sunnyBob 2.6s ease-in-out ${delay}s infinite">
-      ${shapeAt(head,gx,gy,ox,oy,fill,agent.shape)}
-      <circle cx="${head.x+16}" cy="${head.y-16}" r="5" fill="${dot}" stroke="${nightOn()?"#12161e":"#fff8ee"}" stroke-width="1.4"/>
-      ${selected?`<circle cx="${head.x}" cy="${head.y}" r="26" fill="none" stroke="#6b8afd" stroke-width="2.2" opacity="0.95"/>`:""}
+      ${shapeAt(agent,gx,gy,ox,oy,fill)}
+      <circle cx="${head.x+22}" cy="${head.y-22}" r="5.5" fill="${dot}" stroke="${p.labelBg}" stroke-width="1.6"/>
+      ${selected?`<ellipse cx="${head.x}" cy="${head.y}" rx="36" ry="32" fill="none" stroke="#6b8afd" stroke-width="2.3" opacity="0.95"/>`:""}
     </g>
-    <text x="${label.x}" y="${label.y+26}" text-anchor="middle" fill="${p.mut}" font-size="11" font-family="system-ui,sans-serif">${esc(agent.name)}</text>
+    <rect x="${label.x-lw/2}" y="${label.y+16}" width="${lw}" height="18" rx="9" fill="${p.labelBg}" stroke="${p.labelStroke}" opacity="0.94"/>
+    <text x="${label.x}" y="${label.y+29}" text-anchor="middle" fill="${p.text}" font-size="11" font-weight="650" font-family="system-ui,sans-serif">${esc(labelText)}</text>
     ${bubble}
   </g>`;
 }
 
-function meetingGlyphs(ox,oy,accent){
-  const seats=[{gx:2.5,gy:3.55,col:0,row:0},{gx:5.15,gy:3.55,col:1,row:0},{gx:2.5,gy:5.55,col:0,row:1},{gx:5.15,gy:5.55,col:1,row:1}];
+function meetingGlyphs(ox,oy){
+  const seats=[{gx:2.35,gy:3.35,col:0,row:0},{gx:5.15,gy:3.35,col:1,row:0},{gx:2.35,gy:5.55,col:0,row:1},{gx:5.15,gy:5.55,col:1,row:1}];
   return MEET.map((m,i)=>{
     const src=S.agents.find(a=>a.id===m.id);
-    const agent={id:m.id,name:m.name,shape:m.shape,status:src?src.status:"working",bubble:m.text,bubbleAt:Date.now(),col:seats[i].col,row:seats[i].row};
-    return agentGlyph(agent,ox,oy,accent,S.selectedId===m.id,seats[i].gx,seats[i].gy);
+    const agent={id:m.id,name:m.name,shape:m.shape,tint:src&&src.tint,status:src?src.status:"working",bubble:m.text,bubbleAt:Date.now(),col:seats[i].col,row:seats[i].row};
+    return agentGlyph(agent,ox,oy,S.selectedId===m.id,seats[i].gx,seats[i].gy);
   }).join("");
 }
 
 function floorSvg(floor){
   const accent=ACC[floor];
-  const ox=510, oy=nightOn()?86:78;
+  const ox=430, oy=148;
   const p=pal();
   const here=S.agents.filter(a=>a.floor===floor);
   const info=FLOORS.find(f=>f.id===floor);
   const resting=here.some(a=>a.status==="resting") || (floor===5 && S.agents.some(a=>a.status==="resting"));
-  const f0=iso(0.15,0.7,0,ox,oy),f1=iso(10.35,0.7,0,ox,oy),f2=iso(10.35,8.55,0,ox,oy),f3=iso(0.15,8.55,0,ox,oy);
-  const wH=3.9;
-  const w2=iso(10.35,0.7,wH,ox,oy);
-  const wA=iso(2.6,0.78,2.55,ox,oy),wB=iso(5.05,0.78,2.55,ox,oy),wC=iso(7.5,0.78,2.55,ox,oy);
-  const glass = floor===5 ? `<polygon points="${pts([iso(0.15,0.7,0,ox,oy),iso(0.15,8.55,0,ox,oy),iso(0.15,8.55,wH,ox,oy),iso(0.15,0.7,wH,ox,oy)])}" fill="${p.glass}" stroke="#8ec4ef" opacity="0.85"/>` : "";
+  const f0=iso(0.1,0.55,0,ox,oy),f1=iso(10.45,0.55,0,ox,oy),f2=iso(10.45,8.65,0,ox,oy),f3=iso(0.1,8.65,0,ox,oy);
+  const wH=4.15;
+  const w2=iso(10.45,0.55,wH,ox,oy);
+  const wA=iso(2.55,0.62,2.7,ox,oy),wB=iso(5.05,0.62,2.7,ox,oy),wC=iso(7.55,0.62,2.7,ox,oy);
+  const glass = floor===5 ? `<polygon points="${pts([iso(0.1,0.55,0,ox,oy),iso(0.1,8.65,0,ox,oy),iso(0.1,8.65,wH,ox,oy),iso(0.1,0.55,wH,ox,oy)])}" fill="${p.glass}" stroke="#8ec4ef" opacity="0.85"/>` : "";
   const extras = (()=>{
-    let html = rugAt(1.7,2.6,6.6,4.6,ox,oy,p.rug);
-    html += coffeeAt(0.55,1.15,ox,oy);
-    html += tvAt(8.35,1.05,ox,oy,resting);
-    html += plantAt(0.45,7.55,0,ox,oy);
-    html += plantAt(9.55,7.35,0,ox,oy);
+    let html = rugAt(1.55,2.45,7.0,4.85,ox,oy,p.rug);
+    html += coffeeAt(0.5,1.05,ox,oy);
+    html += tvAt(8.45,0.95,ox,oy,resting);
+    html += plantAt(0.4,7.6,0,ox,oy);
+    html += plantAt(9.6,7.4,0,ox,oy);
     if(floor===4){
-      html += monitorAt(1.15,1.15,2.7,ox,oy,"BOOK SNAP","$"+S.equity.toLocaleString("en-US"),accent);
-      html += monitorAt(8.0,6.7,2.15,ox,oy,"SCANS",S.scans+" live",accent);
+      html += monitorAt(1.1,1.05,2.75,ox,oy,"BOOK SNAP","$"+S.equity.toLocaleString("en-US"),accent,"mon-equity");
+      html += monitorAt(8.05,6.75,2.2,ox,oy,"SCANS",S.scans+" live",accent,"mon-scans");
     }
     if(floor===3){
-      html += booksAt(0.45,3.1,ox,oy)+booksAt(0.45,4.5,ox,oy);
+      html += booksAt(0.4,3.05,ox,oy)+booksAt(0.4,4.5,ox,oy);
     }
     if(floor===2){
-      html += rackAt(9.15,3.3,ox,oy);
+      html += rackAt(9.2,3.25,ox,oy);
     }
     if(floor===1){
-      html += monitorAt(8.0,6.55,2.1,ox,oy,"COOKIES","5 · ask 1st",accent);
+      html += monitorAt(8.05,6.55,2.15,ox,oy,"COOKIES","5 · ask 1st",accent);
     }
     if(floor===5){
-      html += isoBox(3.15,4.15,0,4.05,2.15,.46,ox,oy, nightOn()?"#3a465c":"#d8c09a", nightOn()?"#2a3344":"#c2a87e", nightOn()?"#222a38":"#b3966c", p.stroke);
-      const scr=iso(5.1,1.05,2.55,ox,oy);
+      html += isoBox(3.05,4.05,0,4.2,2.25,.5,ox,oy, nightOn()?"#3a465c":"#d8c09a", nightOn()?"#2a3344":"#c2a87e", nightOn()?"#222a38":"#b3966c", p.stroke);
+      const scr=iso(5.05,0.95,2.65,ox,oy);
       html += `<g>
-        <rect x="${scr.x-70}" y="${scr.y-28}" width="168" height="58" rx="6" fill="#101820" stroke="${accent}"/>
-        <text x="${scr.x+14}" y="${scr.y-6}" text-anchor="middle" fill="#9ad7ff" font-size="12" font-family="system-ui,sans-serif" font-weight="700">SUMMARY · EOD · DIGEST</text>
-        <text x="${scr.x+14}" y="${scr.y+14}" text-anchor="middle" fill="#e7ecf3" font-size="11" font-family="system-ui,sans-serif">Fake-money team recap</text>
+        <rect x="${scr.x-78}" y="${scr.y-30}" width="184" height="62" rx="6" fill="#101820" stroke="${accent}"/>
+        <text x="${scr.x+14}" y="${scr.y-6}" text-anchor="middle" fill="#9ad7ff" font-size="13" font-family="system-ui,sans-serif" font-weight="700">SUMMARY · EOD · DIGEST</text>
+        <text x="${scr.x+14}" y="${scr.y+16}" text-anchor="middle" fill="#e7ecf3" font-size="12" font-family="system-ui,sans-serif">Fake-money team recap</text>
       </g>`;
     }
     return html;
   })();
-  const people = floor===5 ? meetingGlyphs(ox,oy,accent) : here.map(a=>agentGlyph(a,ox,oy,accent,S.selectedId===a.id)).join("");
-  return `<svg viewBox="40 0 980 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(info.name)} floor">
-    <polygon points="${pts([iso(0.15,0.7,wH,ox,oy),w2,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
-    <polygon points="${pts([w2,iso(10.35,8.55,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}"/>
-    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}" stroke="${accent}" stroke-width="1.6"/>
-    <polygon points="${pts([iso(0.15,0.7,0,ox,oy),iso(0.15,8.55,0,ox,oy),iso(0.15,8.55,wH,ox,oy),iso(0.15,0.7,wH,ox,oy)])}" fill="${p.wallC}" stroke="${p.stroke}" opacity="0.95"/>
+  const people = floor===5 ? meetingGlyphs(ox,oy) : here.map(a=>agentGlyph(a,ox,oy,S.selectedId===a.id)).join("");
+  return `<svg viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(info.name)} floor">
+    <polygon points="${pts([iso(0.1,0.55,wH,ox,oy),w2,f1,f0])}" fill="${p.wallA}" stroke="${p.stroke}"/>
+    <polygon points="${pts([w2,iso(10.45,8.65,wH,ox,oy),f2,f1])}" fill="${p.wallB}" stroke="${p.stroke}"/>
+    <polygon points="${pts([f0,f1,f2,f3])}" fill="${p.floor}" stroke="${accent}" stroke-width="1.8"/>
+    <polygon points="${pts([iso(0.1,0.55,0,ox,oy),iso(0.1,8.65,0,ox,oy),iso(0.1,8.65,wH,ox,oy),iso(0.1,0.55,wH,ox,oy)])}" fill="${p.wallC}" stroke="${p.stroke}" opacity="0.95"/>
     ${glass}
-    <rect x="${wA.x}" y="${wA.y}" width="62" height="36" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
-    <rect x="${wB.x}" y="${wB.y}" width="62" height="36" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
-    <rect x="${wC.x}" y="${wC.y}" width="62" height="36" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
+    <rect x="${wA.x}" y="${wA.y}" width="68" height="40" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
+    <rect x="${wB.x}" y="${wB.y}" width="68" height="40" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
+    <rect x="${wC.x}" y="${wC.y}" width="68" height="40" rx="3" fill="${p.win}" stroke="${p.stroke}"/>
     ${extras}
-    <text x="56" y="38" fill="${accent}" font-size="22" font-family="system-ui,sans-serif" font-weight="700">Floor ${floor} · ${esc(info.name)}</text>
-    <text x="56" y="60" fill="${p.mut}" font-size="14" font-family="system-ui,sans-serif">${esc(info.blurb)}</text>
     ${people}
   </svg>`;
 }
@@ -473,6 +561,8 @@ function paintScene(){
   applyTheme();
   document.getElementById("stack").innerHTML=[5,4,3,2,1].map(fid=>`<div class="ofc-fl" data-floor="${fid}">${floorSvg(fid)}</div>`).join("");
   document.getElementById("stack").style.transform="translateY(-"+S.shift+"%)";
+  const info=FLOORS.find(f=>f.id===S.floor);
+  document.getElementById("flab").innerHTML=`<b>Floor ${info.id} · ${esc(info.name)}</b><span>${esc(info.blurb)}</span>`;
 }
 
 function paintChrome(){
@@ -580,7 +670,15 @@ function setTour(){
 }
 
 setInterval(()=>{const n=Date.now();S.nowMs=n;S.clock=fmtCT(new Date(n));document.getElementById("clock").textContent="Sunny AI team desk · "+S.clock;paintChrome()},30000);
-setInterval(()=>{const n=Date.now();S.equity=2840+Math.round((n/7000)%16);S.scans=14+Math.round((n/4000)%19);paintScene()},2200);
+setInterval(()=>{
+  const n=Date.now();
+  S.equity=2840+Math.round((n/7000)%16);
+  S.scans=14+Math.round((n/4000)%19);
+  const eq=document.getElementById("mon-equity");
+  const sc=document.getElementById("mon-scans");
+  if(eq) eq.textContent="$"+S.equity.toLocaleString("en-US");
+  if(sc) sc.textContent=S.scans+" live";
+},2200);
 setInterval(()=>{const line=AMBIENCE[amb%AMBIENCE.length];amb++;S.feed=[{id:"live-"+Date.now(),text:line,at:Date.now()},...S.feed].slice(0,16);paintChrome()},16000);
 
 paint();
@@ -588,6 +686,6 @@ setTour();
 animateShift();
 })();
 </script>
-<script src="nav.js?v=1105c"></script>
+<script src="nav.js?v=1105d"></script>
 </body>
 </html>
