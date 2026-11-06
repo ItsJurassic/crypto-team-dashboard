@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sunny AI · Grok Bot Office</title>
-<link rel="stylesheet" href="sunny.css?v=1105i">
+<link rel="stylesheet" href="sunny.css?v=1105j">
 <style>
 :root{--bg:#07090d;--card:#12161e;--elev:#171c26;--line:#242b36;--mut:#8a94a3;--t:#e7ecf3;--g:#22e08a;--warn:#ffb020;--r:#ff4d5e;--acc:#4C8DFF;--on:#e7ecf3;--stage:#0b0f16}
 html,body{height:100%}
@@ -30,7 +30,7 @@ html.office-night,html.office-night body{background:#07090d!important}
 .ofc-pills{display:flex;flex-wrap:wrap;gap:6px;flex:none;z-index:4}
 .ofc-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;background:var(--elev);color:var(--t)}
 .ofc-pill i{width:7px;height:7px;border-radius:99px;display:inline-block}
-.ofc-pill.w i{background:#22e08a}.ofc-pill.q i{background:#ffb020}.ofc-pill.e i{background:#ff4d5e}.ofc-pill.r i{background:#94a3b8}
+.ofc-pill.w i{background:#22e08a}.ofc-pill.q i{background:#ffb020}.ofc-pill.e i{background:#ff4d5e}.ofc-pill.r i{background:#94a3b8}.ofc-pill.i i{background:#3b82f6}
 .ofc-needs{display:flex;flex-wrap:wrap;gap:6px;flex:none;justify-content:center;z-index:5}
 .ofc-chip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:var(--t);font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .ofc-chip .who{display:flex;align-items:center;gap:8px}
@@ -149,7 +149,7 @@ html.office-night .ofc-hint{color:#8a94a3;text-shadow:none}
       <div class="ofc-stage" id="stage">
         <div class="ofc-stack" id="stack"></div>
       </div>
-      <div class="ofc-hint">Drag rotate · right-drag / WASD move · Scroll zoom · 1–5 floors</div>
+      <div class="ofc-hint">Blue ✓ = done / idle (walking) · ··· working · ! needs you · z resting · Drag to look around</div>
     </div>
     <aside class="ofc-side" id="right"></aside>
   </div>
@@ -194,22 +194,22 @@ function seedAgents(){return [
   {id:"fast",name:"Fast Crypto",floor:4,status:"working",task:"Scanning REAL-DATA only (SIM-FEED paused)",shape:"sphere",tint:"#3D8BFF",col:0,row:0},
   {id:"major",name:"Slow Crypto / MAJOR",floor:4,status:"working",task:"Holding cluster; trade as usual after NFP",shape:"cube",tint:"#FF8A1C",col:1,row:0},
   {id:"stocks",name:"Fake Stocks",floor:4,status:"working",task:"NVDA + watchlist, fake-money book",shape:"diamond",tint:"#9B6BFF",col:2,row:0},
-  {id:"scan",name:"Scan helper",floor:4,status:"working",task:"Desk helper · REAL-DATA tape",shape:"cylinder",tint:"#2EC4B6",col:3,row:0,helper:true},
+  {id:"scan",name:"Scan helper",floor:4,status:"idle",task:"Scan pass finished — walking the floor",shape:"cylinder",tint:"#2EC4B6",col:3,row:0,helper:true},
   {id:"risk",name:"Risk shadow",floor:4,status:"working",task:"Desk helper · stop and cluster checks",shape:"pyramid",tint:"#E84855",col:0,row:1,helper:true},
   {id:"stops",name:"Stop desk",floor:4,status:"resting",task:"Desk helper · no live stop fire",shape:"star",tint:"#F4D35E",col:1,row:1,helper:true},
-  {id:"watch",name:"Watchlist helper",floor:4,status:"working",task:"Desk helper · NVDA / majors tape",shape:"sphere",tint:"#4AD66A",col:2,row:1,helper:true},
+  {id:"watch",name:"Watchlist helper",floor:4,status:"idle",task:"Watchlist is current — stretching its legs",shape:"sphere",tint:"#4AD66A",col:2,row:1,helper:true},
   {id:"review",name:"Market & Review",floor:3,status:"working",task:"timing.json + daily digests",shape:"cube",tint:"#5B8DEF",col:0,row:0},
   {id:"coach",name:"Entry coach",floor:3,status:"working",task:"Pullback / spike notes",shape:"pyramid",tint:"#F77F00",col:1,row:0},
   {id:"macro",name:"Macro / NFP",floor:3,status:"working",task:"Friday 7:30 AM CT NFP watch",shape:"cylinder",tint:"#7B6CFF",col:2,row:0},
   {id:"digest",name:"Digest helper",floor:3,status:"resting",task:"Desk helper · next digest queued",shape:"diamond",tint:"#E85D8C",col:3,row:0,helper:true},
   {id:"sunny",name:"Sunny",floor:2,status:"working",task:"Coordinator · EOD + cookies",shape:"star",tint:"#FFB703",col:0,row:0},
   {id:"publish",name:"Publish helper",floor:2,status:"working",task:"Desk helper · site sync",shape:"sphere",tint:"#4CC9F0",col:1,row:0,helper:true},
-  {id:"charts",name:"Chart refresh",floor:2,status:"working",task:"Desk helper · slow refresh on purpose",shape:"cube",tint:"#4895EF",col:2,row:0,helper:true},
+  {id:"charts",name:"Chart refresh",floor:2,status:"idle",task:"Charts refreshed — taking a lap",shape:"cube",tint:"#4895EF",col:2,row:0,helper:true},
   {id:"eod",name:"EOD ideas",floor:2,status:"waiting",task:"EOD idea pack needs your OK",shape:"diamond",tint:"#EF476F",col:3,row:0,waitReason:"EOD idea pack needs your OK"},
   {id:"saver",name:"Saver Bot",floor:1,status:"working",task:"Usage watch",shape:"cylinder",tint:"#06D6A0",col:0,row:0},
   {id:"tune",name:"Nightly self-tune",floor:1,status:"resting",task:"Rests until overnight tune",shape:"pyramid",tint:"#C77DFF",col:1,row:0},
   {id:"cookies",name:"Cookie scoreboard",floor:1,status:"waiting",task:"Cookie→usage top-up always-ask",shape:"star",tint:"#FF6B35",col:2,row:0,waitReason:"Cookie→usage top-up always-ask"},
-  {id:"usageh",name:"Usage desk",floor:1,status:"working",task:"Desk helper · plan/limits glance",shape:"sphere",tint:"#80ED99",col:3,row:0,helper:true}
+  {id:"usageh",name:"Usage desk",floor:1,status:"idle",task:"Usage glance done — wandering the office",shape:"sphere",tint:"#80ED99",col:3,row:0,helper:true}
 ]}
 function seedFeed(now){return [
   {id:"f1",text:"SIM-FEED paused — SOLANA buys REAL-DATA only until win rate > 40%",at:now-42*60000},
@@ -233,7 +233,17 @@ function relTime(at,now){
 }
 function iso(x,y,z,ox,oy){return {x:(x-y)*TILE+ox,y:(x+y)*RISE-z*RISE+oy}}
 function pts(list){return list.map(p=>p.x+","+p.y).join(" ")}
-function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":"#94a3b8"}
+function isIdle(s){s=typeof s==="string"?s:(s&&s.status);return s==="idle"||s==="done"}
+function statusColor(s){return s==="working"?"#22e08a":s==="waiting"?"#ffb020":s==="error"?"#ff4d5e":isIdle(s)?"#3b82f6":"#94a3b8"}
+function statusCaption(a){
+  if(!a) return "";
+  if(isIdle(a.status)) return "Done · idle — the blue ✓ means this bot finished and is walking the office";
+  if(a.status==="working") return "Working at the desk · ···";
+  if(a.status==="waiting") return "Needs you · ! — waiting for Approve";
+  if(a.status==="resting") return "Resting in the lounge · z";
+  if(a.status==="error") return "Something broke · needs a look";
+  return a.task||"";
+}
 function mixHex(hex,other,t){
   const parse=h=>{h=String(h).replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
   const a=parse(hex),b=parse(other);
@@ -377,7 +387,7 @@ function applyApproved(list){
   const ids=new Set(loadApproved());
   return list.map(a=>{
     if(!ids.has(String(a.id)) || a.status!=="waiting") return a;
-    return {...a, status:"working", waitReason:undefined, task:approvedTask(a.id)};
+    return {...a, status:"idle", waitReason:undefined, task:approvedTask(a.id)};
   });
 }
 function persist(){try{localStorage.setItem("sunnyOfficeMode",JSON.stringify({mode:S.mode,theme:S.theme}))}catch(err){}}
@@ -393,8 +403,12 @@ function applyTheme(){
   document.getElementById("office").classList.toggle("day", !nightOn());
 }
 function counts(){
-  const c={working:0,waiting:0,errors:0,resting:0};
-  S.agents.forEach(a=>{if(a.status==="error")c.errors++;else if(c[a.status]!=null)c[a.status]++});
+  const c={working:0,waiting:0,errors:0,resting:0,idle:0};
+  S.agents.forEach(a=>{
+    if(a.status==="error") c.errors++;
+    else if(isIdle(a.status)) c.idle++;
+    else if(c[a.status]!=null) c[a.status]++;
+  });
   return c;
 }
 function waiting(){return S.agents.filter(a=>a.status==="waiting")}
@@ -410,10 +424,8 @@ function approve(id){
     if(String(a.id)!==id)return a;
     found=true;
     return {
-      ...a, status:"working", waitReason:undefined,
-      task:approvedTask(a.id),
-      bubble:a.id==="cookies"?"Thanks — I'll ask before any top-up":"Approved — pack parked",
-      bubbleAt:Date.now()
+      ...a, status:"idle", waitReason:undefined,
+      task:approvedTask(a.id)
     };
   });
   if(!found) return;
@@ -421,7 +433,7 @@ function approve(id){
   persist();
   const who=S.agents.find(a=>String(a.id)===id);
   const label=who?who.name:id;
-  S.feed=[{id:"ok-"+Date.now(),text:"Approved "+label+" — back to work",at:Date.now()},...S.feed];
+  S.feed=[{id:"ok-"+Date.now(),text:"Approved "+label+" — done, taking a walk",at:Date.now()},...S.feed];
   S.finished=["Approved "+label,...S.finished];
   try{paintChrome()}catch(err){console.warn(err)}
   try{paintScene()}catch(err){console.warn(err); useSvgFallback()}
@@ -477,8 +489,8 @@ function coffeeBar(x,y,ox,oy){
   const steam=iso(x+.58,y+.3,1.85,ox,oy);
   const led=iso(x+.76,y+.24,1.28,ox,oy);
   const cup=iso(x+.62,y+.36,0.72,ox,oy);
-  let html=isoBox(x,y,0,2.55,.78,.4,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
-  html+=isoBox(x+.16,y+.12,.4,.96,.52,1.18,ox,oy,"#2b3038","#1c2026","#14171c",p.chairS);
+  let html=isoBox(x,y,0,2.55,.78,.82,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
+  html+=isoBox(x+.16,y+.12,.82,.96,.52,1.18,ox,oy,"#2b3038","#1c2026","#14171c",p.chairS);
   html+=isoBox(x+.34,y+.22,1.58,.58,.3,.18,ox,oy,"#111418","#0b0d10","#070809",p.chairS);
   html+=isoBox(x+.48,y+.3,.4,.32,.28,.18,ox,oy,"#f4f1ea","#ddd6c8","#c9c0b0",p.stroke);
   html+=`<circle cx="${led.x}" cy="${led.y}" r="2.7" fill="#ff7a3a" style="animation:blinkLed 1.6s ease-in-out infinite"/>
@@ -574,7 +586,7 @@ function statusBubble(cx,cy,agent,selected){
       <text x="${cx+2}" y="${cy-32}" text-anchor="middle" fill="#111" font-size="13" font-weight="800">!</text>
     </g>`;
   }
-  if(selected){
+  if(isIdle(agent.status)){
     return `<g>
       <circle cx="${cx+2}" cy="${cy-36}" r="11" fill="#3b82f6" stroke="#fff" stroke-width="2"/>
       <path d="M ${cx-3} ${cy-36} l 3.2 3.4 7-7" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
@@ -638,10 +650,10 @@ function sharedDesk(ox,oy){
     lip+isoBox(DESK.x,DESK.y,0.16,DESK.w,DESK.d,0.58,ox,oy,p.deskT,p.deskL,p.deskR,p.stroke);
 }
 function deskMonitors(agents,ox,oy){
-  const seated=agents.filter(a=>a.status!=="resting");
+  const seated=agents.filter(a=>a.status!=="resting" && !isIdle(a.status));
   let html="";
   for(const face of [1,-1]){
-    for(let col=0;col<5;col++){
+    for(let col=0;col<4;col++){
       const who=seated.find(a=>place(a).face===face && a.col===col);
       const mx=seatGX(col)+0.1;
       const my=face>0?DESK.y+0.18:DESK.y+DESK.d-0.62;
@@ -654,12 +666,12 @@ function emptyDeskChairs(floor,ox,oy,wantFace){
   const here=S.agents.filter(a=>a.floor===floor);
   const occupied=new Set();
   here.forEach(a=>{
-    if(a.status==="resting")return;
+    if(a.status==="resting" || isIdle(a.status))return;
     const pl=place(a);
     occupied.add(pl.face+":"+a.col);
   });
   let html="";
-  for(let col=0;col<5;col++){
+  for(let col=0;col<4;col++){
     const key=wantFace+":"+col;
     if(!occupied.has(key)) html+=emptySlot(seatGX(col),seatGY(wantFace),ox,oy,wantFace);
   }
@@ -727,7 +739,8 @@ function roomShell(ox,oy,floor){
   return html;
 }
 function workPeople(floor,ox,oy){
-  const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting");
+  const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting" && !isIdle(a.status));
+  const walkers=S.agents.filter(a=>a.floor===floor && isIdle(a.status));
   const back=here.filter(a=>place(a).face>0).sort((a,b)=>place(a).gx-place(b).gx);
   const front=here.filter(a=>place(a).face<0).sort((a,b)=>place(a).gx-place(b).gx);
   let html=emptyDeskChairs(floor,ox,oy,1);
@@ -736,6 +749,11 @@ function workPeople(floor,ox,oy){
   html+=deskMonitors(here,ox,oy);
   html+=emptyDeskChairs(floor,ox,oy,-1);
   front.forEach(a=>{const pl=place(a);html+=drawSeated(a,ox,oy,S.selectedId===a.id,pl.gx,pl.gy,pl.face)});
+  walkers.forEach((a,i)=>{
+    const gx=DESK.x-1.35+(i%3)*2.4, gy=DESK.y+DESK.d+1.35+(i%2)*0.35;
+    const head=headPoint(gx,gy,ox,oy);
+    html+=`<g data-pick="${a.id}" style="cursor:pointer;animation:sunnyBob 1.1s ease-in-out ${i*0.2}s infinite">${shapeOnSeat(a,gx,gy,ox,oy,a.tint||"#4C8DFF")}</g>${statusBubble(head.x,head.y,a,S.selectedId===a.id)}`;
+  });
   html+=loungeNook(floor,ox,oy);
   return html;
 }
@@ -790,8 +808,36 @@ function clayMat(color, extra){
 function hexCol(h){ return new THREE.Color(h); }
 
 let renderer, scene, camera, tvCanvas, tvCtx, tvTex;
-let bobbers=[], steams=[], pickables=[];
-let threeReady=false, looping=false;
+let bobbers=[], steams=[], pickables=[], walkers=[];
+let threeReady=false, looping=false, lastTick=0;
+const WALK_PATH=[
+  {x:-5.15,z: 3.40},{x:-2.10,z: 3.50},{x: 2.20,z: 3.50},{x: 4.45,z: 3.25},
+  {x: 4.55,z: 0.05},{x: 4.45,z:-3.20},{x: 2.10,z:-3.40},{x:-2.10,z:-3.40},
+  {x:-5.15,z:-3.20},{x:-5.35,z: 0.05}
+];
+function pathLen(){
+  let n=0;
+  for(let i=0;i<WALK_PATH.length;i++){
+    const a=WALK_PATH[i], b=WALK_PATH[(i+1)%WALK_PATH.length];
+    n+=Math.hypot(b.x-a.x,b.z-a.z);
+  }
+  return n;
+}
+const WALK_LEN=pathLen();
+function posOnPath(dist){
+  let d=((dist%WALK_LEN)+WALK_LEN)%WALK_LEN;
+  for(let i=0;i<WALK_PATH.length;i++){
+    const a=WALK_PATH[i], b=WALK_PATH[(i+1)%WALK_PATH.length];
+    const seg=Math.hypot(b.x-a.x,b.z-a.z)||0.001;
+    if(d<=seg){
+      const t=d/seg;
+      return {x:a.x+(b.x-a.x)*t, z:a.z+(b.z-a.z)*t, dx:b.x-a.x, dz:b.z-a.z};
+    }
+    d-=seg;
+  }
+  const a=WALK_PATH[0];
+  return {x:a.x,z:a.z,dx:1,dz:0};
+}
 
 function starGeo(){
   const sh=new THREE.Shape();
@@ -827,7 +873,11 @@ function makeBotMesh(shape, tint){
     g.add(capT, capB);
     mesh=g;
   }else if(shape==="pyramid"){
-    mesh=new THREE.Mesh(new THREE.ConeGeometry(0.48, 0.92, 4), mat);
+    const g=new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.40, 0.62, 4), mat));
+    const tip=new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 10), mat);
+    tip.position.y=0.31; g.add(tip);
+    mesh=g;
   }else if(shape==="diamond"){
     mesh=new THREE.Mesh(new THREE.OctahedronGeometry(0.48), mat);
   }else{
@@ -859,7 +909,7 @@ function bubbleSprite(agent, selected){
     ctx.beginPath(); ctx.arc(128,64,34,0,Math.PI*2); ctx.fillStyle="#ffb020";
     ctx.shadowColor="rgba(0,0,0,.2)"; ctx.shadowBlur=8; ctx.fill();
     ctx.shadowBlur=0; ctx.fillStyle="#111"; ctx.font="800 40px system-ui"; ctx.textAlign="center"; ctx.fillText("!",128,78);
-  }else if(selected){
+  }else if(isIdle(agent.status)){
     ctx.beginPath(); ctx.arc(128,64,34,0,Math.PI*2); ctx.fillStyle="#3b82f6";
     ctx.shadowColor="rgba(0,0,0,.2)"; ctx.shadowBlur=8; ctx.fill();
     ctx.shadowBlur=0; ctx.strokeStyle="#fff"; ctx.lineWidth=8; ctx.lineCap="round"; ctx.lineJoin="round";
@@ -900,10 +950,10 @@ function makeChair(){
   }
   const col=new THREE.Mesh(new THREE.CylinderGeometry(0.055,0.07,0.26,12), mat);
   col.position.y=0.21; g.add(col);
-  const seat=new THREE.Mesh(new THREE.BoxGeometry(0.84, 0.2, 0.76), matTop);
-  seat.position.y=0.41; g.add(seat);
-  const back=new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.42, 0.98, 22, 1, false, 0, Math.PI), mat);
-  back.position.set(0, 0.88, 0.34);
+  const seat=new THREE.Mesh(new THREE.BoxGeometry(0.82, 0.16, 0.74), matTop);
+  seat.position.y=0.42; g.add(seat);
+  const back=new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.88, 0.12), mat);
+  back.position.set(0, 0.90, 0.33);
   g.add(back);
   const armG=clayMat("#252a33",{roughness:0.5});
   [-0.42,0.42].forEach(x=>{
@@ -933,6 +983,29 @@ function seatBot(agent, selected, face){
   bobbers.push({mesh:bot, baseY:bot.position.y, phase:(agent.col||0)*0.9+(agent.row||0)});
   pickables.push(root);
   enableShadow(root);
+  return root;
+}
+function walkBot(agent, selected){
+  const root=new THREE.Group();
+  const bot=makeBotMesh(agent.shape, agent.tint||"#4C8DFF");
+  const box=new THREE.Box3().setFromObject(bot);
+  bot.position.y=0.06-box.min.y;
+  root.add(bot);
+  const sh=new THREE.Mesh(new THREE.CircleGeometry(0.32, 20), new THREE.MeshBasicMaterial({color:0x000000, transparent:true, opacity:nightOn()?0.32:0.14}));
+  sh.rotation.x=-Math.PI/2; sh.position.y=0.012; root.add(sh);
+  const bub=bubbleSprite(agent, selected);
+  bub.position.y=1.22;
+  root.add(bub);
+  root.userData.agentId=agent.id;
+  pickables.push(root);
+  const seed=(agent.col||0)*2.7+(agent.row||0)*4.1+(agent.id||"").length*1.3;
+  const dist=agent._walkDist!=null?agent._walkDist:(seed*1.9)%WALK_LEN;
+  walkers.push({mesh:root, bot, botBaseY:bot.position.y, phase:seed, agentId:agent.id, dist});
+  enableShadow(root);
+  sh.castShadow=false;
+  const here=posOnPath(dist);
+  root.position.set(here.x, 0, here.z);
+  root.rotation.y=Math.atan2(here.dx, here.dz);
   return root;
 }
 function makeMonitor(tint){
@@ -966,37 +1039,35 @@ function makePlant(scale){
 function makeCoffee(){
   const g=new THREE.Group();
   const p=pal();
-  const board=new THREE.Mesh(new THREE.BoxGeometry(2.15,0.3,0.62), clayMat(p.deskT,{roughness:0.4}));
-  board.position.y=0.15; g.add(board);
-  const mach=new THREE.Mesh(new THREE.BoxGeometry(0.62,0.78,0.42), clayMat("#1a1e24",{roughness:0.35}));
-  mach.position.set(-0.52,0.69,0); g.add(mach);
+  const cab=new THREE.Mesh(new THREE.BoxGeometry(2.22,0.72,0.72), clayMat(p.deskL,{roughness:0.46}));
+  cab.position.y=0.36; g.add(cab);
+  const board=new THREE.Mesh(new THREE.BoxGeometry(2.32,0.08,0.80), clayMat(p.deskT,{roughness:0.38}));
+  board.position.y=0.76; g.add(board);
+  const mach=new THREE.Mesh(new THREE.BoxGeometry(0.62,0.72,0.42), clayMat("#1a1e24",{roughness:0.35}));
+  mach.position.set(-0.52,1.16,0); g.add(mach);
   const tank=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.42,0.28), clayMat("#9ad0ef",{roughness:0.15, metalness:0.2, transparent:true, opacity:0.55}));
-  tank.position.set(-0.72,0.68,0.02); g.add(tank);
+  tank.position.set(-0.72,1.16,0.02); g.add(tank);
   const spout=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.06,0.22), clayMat("#111418"));
-  spout.position.set(-0.38,0.52,0.22); g.add(spout);
+  spout.position.set(-0.38,0.98,0.22); g.add(spout);
   const tray=new THREE.Mesh(new THREE.BoxGeometry(0.28,0.04,0.22), clayMat("#111418"));
-  tray.position.set(-0.38,0.34,0.18); g.add(tray);
+  tray.position.set(-0.38,0.82,0.18); g.add(tray);
   const drip=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.08,0.1,12), clayMat("#f4f1ea"));
-  drip.position.set(-0.38,0.4,0.2); g.add(drip);
+  drip.position.set(-0.38,0.88,0.2); g.add(drip);
   const top=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.09,0.26), clayMat("#0f1216"));
-  top.position.set(-0.5,1.12,0); g.add(top);
+  top.position.set(-0.5,1.56,0); g.add(top);
   const led=new THREE.Mesh(new THREE.SphereGeometry(0.03,8,8), new THREE.MeshBasicMaterial({color:0xff7a3a}));
-  led.position.set(-0.28,0.95,0.22); g.add(led);
-  const mugs=[["#F4D35E",0.12],["#FF6B8A",0.4],["#4C8DFF",0.68],["#22c55e",0.96],["#fb923c",1.24]];
+  led.position.set(-0.28,1.42,0.22); g.add(led);
+  const mugs=[["#F4D35E",0.12],["#FF6B8A",0.42],["#4C8DFF",0.72],["#22c55e",1.02]];
   mugs.forEach(([c,x])=>{
     const m=new THREE.Mesh(new THREE.CylinderGeometry(0.09,0.1,0.14,14), clayMat(c,{roughness:0.35}));
-    m.position.set(x,0.37,0.12); g.add(m);
+    m.position.set(x,0.87,0.12); g.add(m);
     const handle=new THREE.Mesh(new THREE.TorusGeometry(0.055,0.012,6,10,Math.PI), clayMat(c));
-    handle.rotation.y=Math.PI/2; handle.position.set(x+0.11,0.38,0.12); g.add(handle);
+    handle.rotation.y=Math.PI/2; handle.position.set(x+0.11,0.88,0.12); g.add(handle);
   });
-  [[-0.05,0.18],[-0.22,0.18]].forEach(([x,z])=>{
-    const cup=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.055,0.07,12), clayMat("#fff6ea"));
-    cup.position.set(x,0.34,z); g.add(cup);
-  });
-  for(let i=0;i<7;i++){
-    const s=new THREE.Mesh(new THREE.SphereGeometry(0.032+i*0.006, 10, 8), new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.42}));
-    s.position.set(-0.42,1.18+i*0.07,0.12);
-    s.userData.y0=1.16+i*0.05;
+  for(let i=0;i<6;i++){
+    const s=new THREE.Mesh(new THREE.SphereGeometry(0.028+i*0.005, 10, 8), new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.42}));
+    s.position.set(-0.42,1.64+i*0.07,0.12);
+    s.userData.y0=1.62+i*0.05;
     g.add(s); steams.push(s);
   }
   enableShadow(g);
@@ -1076,8 +1147,8 @@ function glassPane(w,h){
   );
 }
 
-function seatX(col){ return -3.15 + col*1.58; }
-function seatZ(face){ return face>0 ? -2.28 : 2.28; }
+function seatX(col){ return -2.55 + col*1.68; }
+function seatZ(face){ return face>0 ? -2.18 : 2.18; }
 function place3(agent){
   const mates=S.agents.filter(a=>a.floor===agent.floor);
   const onlyOneRow=mates.every(a=>a.row===mates[0].row);
@@ -1087,7 +1158,7 @@ function place3(agent){
 }
 
 function disposeScene(){
-  bobbers=[]; steams=[]; pickables=[];
+  bobbers=[]; steams=[]; pickables=[]; walkers=[];
   if(!scene) return;
   while(scene.children.length){
     const obj=scene.children[0];
@@ -1156,10 +1227,11 @@ function buildRoom(floor){
 
 function addWorkFloor(floor){
   const p=pal();
-  const desk=new THREE.Mesh(new THREE.BoxGeometry(8.4, 0.72, 3.05), clayMat(p.deskT));
+  const desk=new THREE.Mesh(new THREE.BoxGeometry(7.4, 0.72, 2.85), clayMat(p.deskT));
   desk.position.set(0, 0.36, 0); enableShadow(desk); desk.receiveShadow=true; scene.add(desk);
 
-  const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting");
+  const here=S.agents.filter(a=>a.floor===floor && a.status!=="resting" && !isIdle(a.status));
+  const stroll=S.agents.filter(a=>a.floor===floor && isIdle(a.status));
   const occupied=new Set();
   here.forEach(a=>{
     const pl=place3(a);
@@ -1168,8 +1240,9 @@ function addWorkFloor(floor){
     bot.position.set(pl.x, 0, pl.z);
     scene.add(bot);
   });
+  stroll.forEach(a=> scene.add(walkBot(a, S.selectedId===a.id)));
   for(const face of [1,-1]){
-    for(let col=0;col<5;col++){
+    for(let col=0;col<4;col++){
       if(occupied.has(face+":"+col)) continue;
       const ch=makeChair();
       const twist=face>0?Math.PI+0.32:-0.38;
@@ -1179,10 +1252,10 @@ function addWorkFloor(floor){
     }
   }
   for(const face of [1,-1]){
-    for(let col=0;col<5;col++){
+    for(let col=0;col<4;col++){
       const who=here.find(a=>place3(a).face===face && a.col===col);
       const mon=makeMonitor(who?who.tint:"#64748b");
-      const z=face>0? -1.22 : 1.22;
+      const z=face>0? -1.12 : 1.12;
       mon.position.set(seatX(col), 0.72, z);
       mon.rotation.y=face>0?0:Math.PI;
       scene.add(mon);
@@ -1324,11 +1397,24 @@ function initThree(){
     threeReady=true;
     hookStageResize();
     resizeThree();
-    if(!looping){ looping=true; (function loop(){
+    if(!looping){ looping=true; lastTick=performance.now(); (function loop(){
       requestAnimationFrame(loop);
       if(svgMode) return;
-      const t=performance.now()/1000;
+      const now=performance.now();
+      const t=now/1000;
+      const dt=Math.min(0.05, (now-(lastTick||now))/1000);
+      lastTick=now;
       bobbers.forEach(b=>{ if(b.mesh) b.mesh.position.y=b.baseY+Math.sin(t*2.15+b.phase)*0.032; });
+      walkers.forEach(w=>{
+        if(!w.mesh) return;
+        w.dist=(w.dist||0)+dt*1.15;
+        const here=posOnPath(w.dist);
+        w.mesh.position.set(here.x, 0, here.z);
+        if(Math.abs(here.dx)+Math.abs(here.dz)>0.001) w.mesh.rotation.y=Math.atan2(here.dx, here.dz);
+        if(w.bot) w.bot.position.y=w.botBaseY+Math.abs(Math.sin(t*9.4+w.phase))*0.055;
+        const ag=S.agents.find(a=>a.id===w.agentId);
+        if(ag){ ag._walkDist=w.dist; ag._wx=here.x; ag._wz=here.z; }
+      });
       steams.forEach((s,i)=>{
         const ph=(t*0.4+i*0.18)%0.5;
         s.position.y=(s.userData.y0||1.1)+ph;
@@ -1406,6 +1492,7 @@ function paintChrome(){
   const c=counts(), w=waiting();
   document.getElementById("pills").innerHTML=`
     <span class="ofc-pill w"><i></i>${c.working} working</span>
+    <span class="ofc-pill i"><i></i>${c.idle} idle</span>
     <span class="ofc-pill q"><i></i>${c.waiting} waiting</span>
     <span class="ofc-pill e"><i></i>${c.errors} errors</span>
     <span class="ofc-pill r"><i></i>${c.resting} resting</span>`;
@@ -1444,9 +1531,13 @@ function paintChrome(){
   right.innerHTML=`<button type="button" class="ofc-collapse" data-tog="right">${S.rightOpen?"Hide details ⟩":"⟨"}</button>
     <div class="ofc-side-body">
     <div class="ofc-rhead"><div class="k">${workN} working</div><div class="t">${esc(meta.name)}</div><div class="s">Floor ${meta.id} · ${onFloor.length} bots</div></div>
+    ${(function(){
+      const sel=onFloor.find(a=>a.id===S.selectedId)||S.agents.find(a=>a.id===S.selectedId);
+      return sel?`<div class="ofc-waititem" style="margin-bottom:10px"><div class="nm">${esc(sel.name)}</div><div class="rs">${esc(statusCaption(sel))}</div></div>`:"";
+    })()}
     ${onFloor.map(a=>`<button type="button" class="ofc-ab ${S.selectedId===a.id?"on":""}" data-pick="${a.id}">
       <b><span class="ofc-dot" style="background:${statusColor(a.status)}"></span>${esc(a.name)}${a.helper?` <span style="color:var(--mut);font-weight:500">desk helper</span>`:""}</b>
-      <span>${esc(a.task)}</span>
+      <span>${esc(isIdle(a.status)?"Done · walking the office":a.status==="working"?"Working at the desk":a.status==="waiting"?"Needs you":a.status==="resting"?"Resting in the lounge":a.task)}</span>
     </button>`).join("")}
     <div class="ofc-usage">
       <div class="uh">Weekly limit <span>Cookies · always-ask</span></div>
@@ -1553,12 +1644,26 @@ setInterval(()=>{
   if(typeof drawTV==="function") drawTV();
 },2200);
 setInterval(()=>{const line=AMBIENCE[amb%AMBIENCE.length];amb++;S.feed=[{id:"live-"+Date.now(),text:line,at:Date.now()},...S.feed].slice(0,16);paintChrome()},16000);
+setInterval(()=>{
+  const helpers=S.agents.filter(a=>a.helper && a.status==="working");
+  const wander=S.agents.filter(a=>a.helper && isIdle(a.status));
+  let changed=false;
+  if(helpers.length && Math.random()<0.55){
+    const a=helpers[Math.floor(Math.random()*helpers.length)];
+    a.status="idle"; a.task="Task wrapped — walking the office"; changed=true;
+  }
+  if(wander.length && Math.random()<0.5){
+    const a=wander[Math.floor(Math.random()*wander.length)];
+    a.status="working"; a.task="Back at the desk"; changed=true;
+  }
+  if(changed) paint();
+},18000);
 paint();
 setTour();
 animateShift();
 })();
 
 </script>
-<script src="nav.js?v=1105i"></script>
+<script src="nav.js?v=1105j"></script>
 </body>
 </html>
