@@ -7,17 +7,26 @@ window.laneChart=function(el,d){
     (async()=>{const J=async u=>{try{return await (await fetch(u+"?"+Date.now())).json()}catch(e){return null}};el._sc=await J("data/stocks_curve.json");el._sk=await J("data/stocks.json");el._sd=await J("team/scorecard.json");el._d&&laneChart(el,el._d)})();
     bind(el)}
   el._d=d;el.querySelectorAll(".lct button").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));
-  const LC=d.lane_curve||[],S=d.start||1000,H2=S/2,sk=el._sk||{},sd=el._sd||{};
+  const SOL_START=1000,MAJ_START=2000,STK_START=1000,CRYPTO_START=3000,TEAM_START=4000;
+  const MAJ_MERGE=Date.parse("2026-11-05T20:29:06-06:00")/1000; // Buildup folded into MAJOR; start becomes $2,000
+  const LC=d.lane_curve||[],sk=el._sk||{},sd=el._sd||{};
   const sc=(el._sc||[]).concat(sk.curve||[]).filter((p,i,a)=>p&&a.findIndex(q=>q[0]==p[0])==i).sort((a,b)=>a[0]-b[0]);
   const at=(c,t,dflt)=>{let v=dflt;for(const p of c){if(p[0]<=t)v=p[1];else break}return v};
+  const stocksNow=(sk,curve)=>{const last=(Array.isArray(curve)&&curve.length)?curve[curve.length-1]:null;const tu=sk&&sk.updated?Date.parse(sk.updated)/1000:NaN;if(sk&&sk.equity!=null&&last&&tu&&tu>=last[0]-60)return +sk.equity;if(last)return +last[1];if(sk&&sk.equity!=null)return +sk.equity;return (sk&&sk.start)!=null?+sk.start:STK_START};
   let pts,base,lab;
-  if(tab=="MAJOR"||tab=="SOLANA"){const i=tab=="SOLANA"?1:2;pts=LC.map(p=>[p[0],H2+p[i]]);base=H2;lab=tab+" equity"}
-  else if(tab=="STOCKS"){pts=sc.map(p=>[p[0],p[1]]);base=sk.start||1000;lab="Long-term Stocks equity"}
+  if(tab=="MAJOR"||tab=="SOLANA"){
+    const i=tab=="SOLANA"?1:2, startAt=t=>tab=="SOLANA"?SOL_START:(t>=MAJ_MERGE?MAJ_START:1000);
+    pts=LC.map(p=>[p[0],startAt(p[0])+(p[i]||0)]);
+    const solPl=(d.lanes&&d.lanes.SOLANA&&d.lanes.SOLANA.pnl!=null)?+d.lanes.SOLANA.pnl:(pts.length&&tab=="SOLANA"?pts[pts.length-1][1]-SOL_START:0);
+    if(pts.length&&tab=="SOLANA")pts[pts.length-1]=[pts[pts.length-1][0],SOL_START+solPl];
+    if(pts.length&&tab=="MAJOR"&&d.equity!=null)pts[pts.length-1]=[pts[pts.length-1][0],+d.equity-(SOL_START+solPl)];
+    base=tab=="SOLANA"?SOL_START:MAJ_START;lab=(tab=="MAJOR"?"Slow Crypto (MAJOR)":"Fast Crypto (SOLANA)")+" equity"}
+  else if(tab=="STOCKS"){pts=sc.map(p=>[p[0],p[1]]);const eq=stocksNow(sk,sc);if(pts.length)pts[pts.length-1]=[pts[pts.length-1][0],eq];else if(eq!=null)pts=[[Date.now()/1000,eq]];base=(sk.start!=null)?+sk.start:STK_START;lab="Long-term Stocks equity"}
   else if(tab=="SEEDLING"){const A=(window.__ACC||[]).filter(a=>/Seedling/.test(a.n)),st=A.reduce((x,a)=>x+a.start,0)||1000,eq=A.length?A.reduce((x,a)=>x+a.eq,0):(sd.equity||st),c=d.curve||[];pts=c.length?[[c[0][0],st],[c[c.length-1][0],eq]]:[];base=st;lab="Seedling equity (start → now; no stored history)"}
-  else{const A=window.__ACC||[],oth=A.filter(a=>!/Sunny AI/.test(a.n)),seS=oth.filter(a=>/Seedling/.test(a.n)).reduce((x,a)=>x+a.start,0),seE=oth.filter(a=>/Seedling/.test(a.n)).reduce((x,a)=>x+a.eq,0),ks=sk.start||1000,c=d.curve||[];
-    pts=c.map((p,i)=>[p[0],p[1]+at(sc,p[0],ks)+(i==c.length-1?seE:seS)]);base=S+ks+seS;lab="All fake money equity"}
+  else{const ks=(sk.start!=null)?+sk.start:STK_START,c=d.curve||[],eqStock=stocksNow(sk,sc),cryptoNow=(d.equity!=null)?+d.equity:(c.length?c[c.length-1][1]:CRYPTO_START);
+    pts=c.map(p=>[p[0],p[1]+at(sc,p[0],ks)]);if(pts.length)pts[pts.length-1]=[pts[pts.length-1][0],cryptoNow+eqStock];base=TEAM_START;lab="All fake money equity"}
   el._p=pts;el._base=base;el._lab=lab;el._tab=tab;
-  el.querySelector(".lcn").textContent=tab=="Total"?"Total curve = Sunny AI history + stock desk history. Three lanes at $1,000 each: SOLANA, MAJOR, Fake Stocks.":tab=="STOCKS"?"Stock equity history is recorded each cycle from Oct 30, 2:10 PM CT.":tab=="SEEDLING"?"":"Lane series recorded each cycle. Before the first MAJOR fill (Oct 29, 10:03 AM CT) all P/L was SOLANA (backfilled); the 10:03–10:56 AM CT stretch was not reconstructed.";
+  el.querySelector(".lcn").textContent=tab=="Total"?"Total curve = Sunny AI history + stock desk history. Three lanes: Fast Crypto (SOLANA) $1,000, Slow Crypto (MAJOR) $2,000, Fake Stocks $1,000 = $4,000 start.":tab=="STOCKS"?"Stock equity history is recorded each cycle from Oct 30, 2:10 PM CT. Fake Stocks start is $1,000.":tab=="SEEDLING"?"":"Lane series recorded each cycle. Fast Crypto (SOLANA) start is $1,000; Slow Crypto (MAJOR) start is $2,000 (includes Buildup merged Nov 5). Before the first MAJOR fill (Oct 29, 10:03 AM CT) all P/L was SOLANA (backfilled); the 10:03–10:56 AM CT stretch was not reconstructed.";
   draw(el);
   function draw(el){
     const pts=el._p,base=el._base,c=el.querySelector(".lcc"),r=c.getBoundingClientRect(),dpr=devicePixelRatio||1,W=Math.max(200,r.width),H=r.height||220;
