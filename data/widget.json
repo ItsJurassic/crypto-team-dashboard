@@ -5,16 +5,16 @@
  "reason": "Desk data is private. Open the dashboard and sign in.",
  "prices": {
   "BTC": {
-   "price": 76889,
-   "chg24": -4.73876
+   "price": 62934,
+   "chg24": -0.31623
   },
   "ETH": {
-   "price": 2227.98,
-   "chg24": -4.52423
+   "price": 1779.18,
+   "chg24": 0.65383
   }
  },
- "prices_as_of": "8:56 AM CT",
- "updated": "Nov 19, 2026, 8:02 AM CT",
+ "prices_as_of": "12:25 PM CT",
+ "updated": "Nov 19, 2026, 12:25 PM CT",
  "url": "https://itsjurassic.github.io/crypto-team-dashboard/sunny-ai/seedling.html",
  "public_prices_only": true
 }
