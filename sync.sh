@@ -48,6 +48,21 @@ for sub, bot in [("historian", "Sequoia (Market Historian)"), ("scholar", "Owl (
         png = f"{d}/{f[:-3]}.png"
         lessons.append({"title": t.group(1).strip() if t else m.group(2), "date": m.group(1), "bot": bot,
                         "summary": (paras[0][:400] if paras else ""), "image": png if os.path.exists(png) else None, "file": rel})
+# Automatic trade-journal post-mortems (losing/failed fake-money trades)
+pmd = "/workspace/algo-review/postmortems/lessons"
+if os.path.isdir(pmd):
+    for f in sorted(os.listdir(pmd)):
+        m = re.match(r"(\d{4}-\d\d-\d\d)-(.+)\.md$", f)
+        rel = f"postmortems/{f}"
+        if not m or rel in known: continue
+        raw = open(f"{pmd}/{f}").read()
+        txt = re.sub(r"\A---\s*\n.*?\n---\s*\n", "", raw, flags=re.S)
+        t = re.search(r"^#\s+(.+)$", txt, re.M)
+        paras = [p.strip() for p in re.split(r"\n\s*\n", txt) if p.strip() and not p.strip().startswith(("#", "*", "|", "!", "-"))]
+        mk = "stocks" if re.search(r"^market:\s*['\"]?stocks?", raw, re.M|re.I) else "crypto"
+        lessons.append({"title": t.group(1).strip() if t else m.group(2), "date": m.group(1),
+                        "bot": "Sunny (Trade Journal)", "summary": (paras[0][:500] if paras else ""),
+                        "image": None, "file": rel, "market": "Stocks" if mk=="stocks" else "Crypto"})
 for l in lessons:
     k = l.get("image")
     if k and os.path.isabs(str(k)) and os.path.exists(k):
