@@ -5,12 +5,12 @@
 const SB_URL="https://lpqkhjucbgrhvtbhyvhg.supabase.co", SB_KEY="sb_publishable_3pGuphBA2r1morkdevREag_ICwfnKQa", HOME="https://itsjurassic.github.io/crypto-team-dashboard/sunny-ai/";
 const css=document.createElement("style");
 css.textContent=`html.sa-locked body>*:not(#sa-login){display:none!important}
-#sa-login{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:#0e1116;padding:20px;font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#d9dee5}
-#sa-login .bx{width:100%;max-width:360px;background:#151a21;border:1px solid #252c36;border-radius:10px;padding:22px}
-#sa-login h1{font-size:18px;margin:0 0 4px;font-weight:650}#sa-login p{color:#8a94a3;font-size:12.5px;margin:0 0 14px}
-#sa-login input{width:100%;box-sizing:border-box;background:#0e1116;border:1px solid #2d3542;border-radius:7px;color:#d9dee5;padding:11px 12px;font:inherit;font-size:16px;margin-bottom:10px}
-#sa-login button{width:100%;background:#6b8afd;color:#fff;border:0;border-radius:7px;padding:11px;font:600 14px inherit;cursor:pointer}#sa-login button:disabled{opacity:.6}
-#sa-login .msg{font-size:12.5px;margin-top:10px;min-height:18px}#sa-login .pb{font-size:10.5px;color:#d4a24c;text-align:center;margin-top:14px;letter-spacing:.04em}
+#sa-login{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:radial-gradient(800px 400px at 50% 0%,rgba(228,192,122,.12),transparent 55%),#080a0e;padding:20px;font:14px/1.45 Outfit,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eceef3}
+#sa-login .bx{width:100%;max-width:380px;background:#12151c;border:1px solid #2a2e37;border-radius:18px;padding:26px 22px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+#sa-login h1{font-size:22px;margin:0 0 4px;font-weight:650;letter-spacing:-.03em}#sa-login p{color:#9aa1ad;font-size:13px;margin:0 0 16px}
+#sa-login input{width:100%;box-sizing:border-box;background:#080a0e;border:1px solid #2d3542;border-radius:10px;color:#eceef3;padding:12px 12px;font:inherit;font-size:16px;margin-bottom:10px}
+#sa-login button{width:100%;background:#e0b15a!important;color:#1a1206!important;border:0!important;border-radius:10px!important;padding:12px!important;font:650 15px Outfit,Inter,sans-serif!important;cursor:pointer;min-height:48px}#sa-login button:disabled{opacity:.6}
+#sa-login .msg{font-size:13px;margin-top:10px;min-height:18px}#sa-login .pb{font-size:11px;color:#e4c07a;text-align:center;margin-top:16px;letter-spacing:.08em;font-weight:600}
 #sa-stale{position:sticky;top:0;z-index:70;background:#3a2a10;color:#f5c26b;border-bottom:1px solid #7a5a1e;padding:7px 12px;font:12.5px -apple-system,BlinkMacSystemFont,sans-serif}#sa-stale a{color:#fff}
 #sa-out{position:fixed;top:8px;right:10px;z-index:60;background:#151a21;border:1px solid #252c36;color:#8a94a3;border-radius:6px;padding:4px 9px;font:500 11px -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer}`;
 document.head.appendChild(css); document.documentElement.classList.add("sa-locked");
@@ -45,7 +45,7 @@ const signed={};async function fix(img){const s=img.getAttribute("src")||"";cons
   if(signed[k])img.src=signed[k]}
 new MutationObserver(ms=>ms.forEach(m=>{(m.type=="attributes"?[m.target]:[...m.addedNodes]).forEach(n=>{if(n.nodeType!=1)return;if(n.tagName=="IMG")fix(n);n.querySelectorAll&&n.querySelectorAll("img").forEach(fix)})})).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["src"]});
 function login(msg){if(document.getElementById("sa-login"))return;const d=document.createElement("div");d.id="sa-login";
-  d.innerHTML=`<div class=bx><h1>Sunny AI</h1><p>Sign in to view the fake money trading desk.</p>
+  d.innerHTML=`<div class=bx><h1>Sunny AI</h1><p>Sign in to view the paper trading desk. Fake money only — no real money, wallets, or exchanges.</p>
   <form><input type=email name=email required autocomplete=username placeholder="Email"><input type=password name=password required autocomplete=current-password placeholder="Password"><button>Sign in</button></form><div class=msg>${msg||""}</div><div class=pb>FAKE MONEY ONLY</div></div>`;
   document.body.appendChild(d);const f=d.querySelector("form"),b=d.querySelector("button"),mm=d.querySelector(".msg");
   f.onsubmit=async e=>{e.preventDefault();b.disabled=true;mm.style.color="#8a94a3";mm.textContent="Signing in…";

@@ -133,7 +133,7 @@ function renderTrades(rows){
         <span class="home-status ${ok?"":"fail"}">${esc(st)}</span>
         <span class="home-row-amt">${pnl}</span>
       </div>
-      <div class="home-row-sub m">${esc(when(t.time))}${t.price? " · "+esc(String(t.price)) : ""}${t.reason? " · "+esc(String(t.reason).slice(0,160)) : ""}</div>
+      <div class="home-row-sub m">${esc(when(t.time))}${t.price? " · "+esc((isFinite(+t.price)?money(+t.price, +t.price>=100?2:4):String(t.price))) : ""}${t.reason? " · "+esc(String(t.reason).slice(0,160)) : ""}</div>
     </li>`;
   }).join("")}</ul>`;
 }
@@ -183,8 +183,9 @@ async function load(){
     renderTrades(collectTrades(d,sk));
     renderLessons(lessons||[]);
     renderPlaybook(playbook||[]);
-    const stamps=[d&&d.updated,sk&&sk.updated].filter(Boolean).sort();
-    $("asof").textContent=stamps.length?"As of "+when(stamps[stamps.length-1]):"Paper desk";
+    const stamps=[d&&d.updated,sk&&sk.updated].filter(Boolean);
+    const latest=stamps.length?stamps.reduce((a,b)=>ts(b)>ts(a)?b:a):null;
+    $("asof").textContent=latest?"As of "+when(latest):"Paper desk";
     document.body.dataset.homeReady="1";
   }catch(e){
     $("asof").textContent="Could not load the latest paper figures";
