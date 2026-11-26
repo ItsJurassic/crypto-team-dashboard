@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Outfit:wght@400;500;600;700&display=swap");
 /* Sunny AI shared theme - restrained fintech dark. PAPER / SIMULATED ONLY. */
 :root{--bg:#0e1116;--card:#151a21;--line:#252c36;--mut:#8a94a3;--t:#d9dee5;--g:#3fb68b;--r:#e5636f;--acc:#6b8afd;--amber:#d4a24c}
 html,body{background:var(--bg)!important;color:var(--t)!important}
@@ -182,3 +183,109 @@ button:hover,.lb:hover{background:#2a2f3a!important}
 td,th{padding:9px 8px!important;border-bottom:1px solid var(--line)!important}tr:hover td{background:rgba(255,255,255,.02)!important}
 a{color:var(--acc)!important}a.back{color:var(--mut)!important}
 .met,.ln{border-radius:14px!important}
+
+
+/* === Nov 26, 2026 inner-page theme, matches the homepage. PAPER / FAKE MONEY ONLY === */
+html:not(.office-day):not(.office-night){
+  --bg:#080a0e;--card:#12151c;--card2:#161920;--line:#2a2e37;--mut:#9aa1ad;--t:#eceef3;
+  --g:#3dd68c;--r:#e07a7f;--acc:#c4b08a;--amber:#e4c07a;
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.18);
+  --font:Outfit,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+html:not(.office-day):not(.office-night) body{
+  background:
+    radial-gradient(1000px 520px at 8% -8%, rgba(228,192,122,.11), transparent 58%),
+    radial-gradient(820px 480px at 100% 0%, rgba(99,124,255,.09), transparent 52%),
+    #080a0e !important;
+  color:#eceef3 !important;
+  font-family:var(--font)!important;
+  font-size:14px!important;
+  line-height:1.55!important;
+  letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+}
+html:not(.office-day):not(.office-night) body:not(.home) .wrap{
+  max-width:1120px!important;
+  padding:18px 18px 28px!important;
+}
+@media(max-width:700px){
+  html:not(.office-day):not(.office-night) body:not(.home) .wrap{padding:14px 14px 20px!important}
+}
+.page-top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:16px 0 8px}
+.page-brand{display:flex;align-items:center;gap:12px;min-width:0}
+.page-brand h1,.wrap>h1{
+  font-family:Outfit,Inter,sans-serif!important;
+  font-size:clamp(22px,5vw,28px)!important;
+  font-weight:650!important;
+  letter-spacing:-.04em!important;
+  margin:0!important;
+  color:#f4f6fa!important;
+  line-height:1.15;
+}
+.page-brand p{margin:2px 0 0;color:var(--mut)!important;font-size:13.5px;font-weight:500}
+.page-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(160deg,#f0d089,#c4923a 55%,#8a5a18);display:grid;place-items:center;box-shadow:0 8px 24px rgba(196,146,58,.28);flex:none;text-decoration:none!important}
+.page-mark i{width:16px;height:16px;border-radius:50%;background:#fff6de;box-shadow:0 0 0 3px rgba(255,246,222,.25);display:block}
+.eq,.big,.pct,.met b,.ln b,.actot .acv,body.stk .eq{
+  font-family:var(--mono)!important;
+  font-variant-numeric:tabular-nums;
+  font-weight:600!important;
+  letter-spacing:-.03em!important;
+}
+html:not(.office-day):not(.office-night) .banner{
+  background:rgba(228,192,122,.08)!important;
+  color:#e4c07a!important;
+  border:1px solid rgba(228,192,122,.25)!important;
+  border-radius:14px!important;
+  padding:10px 14px!important;
+  font-size:11.5px!important;
+  font-weight:600!important;
+  letter-spacing:.08em!important;
+  text-align:center;
+  white-space:normal!important;
+  line-height:1.45!important;
+  box-shadow:none!important;
+}
+@media(max-width:700px){
+  html:not(.office-day):not(.office-night) .banner{letter-spacing:.04em!important;font-size:10.5px!important}
+}
+html:not(.office-day):not(.office-night) .card{
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015)),var(--card)!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:18px!important;
+  padding:20px 20px!important;
+  margin-top:14px!important;
+  box-shadow:var(--shadow)!important;
+}
+@media(max-width:700px){
+  html:not(.office-day):not(.office-night) .card{padding:16px!important;margin-top:12px!important;border-radius:16px!important}
+}
+.hd{font-family:Outfit,Inter,sans-serif!important;font-size:12px!important;letter-spacing:.02em!important;text-transform:none!important;font-weight:600!important;color:var(--mut)!important}
+.met,.ln{background:#161920!important;border:1px solid var(--line)!important;border-radius:14px!important}
+button,.lb,select,.chips button{
+  border-radius:999px!important;
+  background:#161920!important;
+  border:1px solid var(--line)!important;
+  color:var(--t)!important;
+  font-family:Outfit,Inter,sans-serif!important;
+  font-weight:600!important;
+}
+.lb.on,button.on,.chips button.on{background:rgba(228,192,122,.16)!important;border-color:rgba(228,192,122,.4)!important;color:#f0d089!important}
+.tag,.mult,.pill{border-radius:999px!important}
+.snav{background:rgba(8,10,14,.92)!important;border-color:rgba(255,255,255,.06)!important}
+.snav a.on{background:rgba(228,192,122,.12)!important;color:#f4f6fa!important}
+.snav a.on svg{stroke:#e4c07a}
+a.back{display:inline-flex;align-items:center;min-height:40px;margin:4px 0 0;font-weight:600;font-size:13px!important}
+.ls{background:#161920;border:1px solid var(--line);border-radius:16px;padding:14px}
+.ls h3{font-family:Outfit,Inter,sans-serif;font-size:16px;letter-spacing:-.02em;margin:0 0 4px}
+pre,code,table{font-variant-numeric:tabular-nums}
+pre{font-family:var(--mono);font-size:12.5px;line-height:1.5;color:#d5dae3}
+#sa-out{background:#161920!important;border:1px solid var(--line)!important;border-radius:999px!important;color:var(--mut)!important;font-family:Outfit,Inter,sans-serif!important}
+.page-note{color:var(--mut);font-size:13.5px;line-height:1.5;margin:0 0 4px;max-width:62ch}
+.page-foot{text-align:center;font-size:12.5px;line-height:1.5;max-width:62ch;margin:16px auto 10px;color:var(--mut)}
+.ag{background:#161920!important;border-radius:14px!important}
+.sbox,.srow,.actot,.acgrp{background:#161920!important;border-radius:14px!important}
+@media(max-width:700px){
+  .page-brand h1,.wrap>h1{font-size:24px!important}
+  .eq,.big{font-size:clamp(28px,10vw,40px)!important}
+}
